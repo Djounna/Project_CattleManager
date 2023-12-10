@@ -1,4 +1,5 @@
-﻿using CM.Backend.Domain.CowDetails;
+﻿using CM.Backend.Domain.Alerts;
+using CM.Backend.Domain.CowDetails;
 using CM.Backend.Domain.Cows;
 using CM.Backend.Domain.Externals;
 using CM.Backend.Domain.Infrastructures;
@@ -29,4 +30,6 @@ public class CMContext : DbContext
     public DbSet<Intervention> Interventions { get; set; }
     public DbSet<MilkProduction> MilkProductions { get; set; }
     public DbSet<Milking> Milkings { get; set; }
+
+    public DbSet<Alert> Alerts { get; set; }
 }
