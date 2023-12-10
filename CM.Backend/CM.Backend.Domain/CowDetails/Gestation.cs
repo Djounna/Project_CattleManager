@@ -1,16 +1,11 @@
-﻿using CM.Backend.Domain.Cows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.Cows;
 
 namespace CM.Backend.Domain.CowDetails;
-public class Gestation
+public class Gestation : BaseEntity
 {
-    public int GestationId { get; set; }
     public int CowId { get; set; }
-    public Cow Cow { get; set; }
+    public virtual Cow Cow { get; set; }
 
     public string Status { get; set; }
     public DateOnly StartDate { get; set; }

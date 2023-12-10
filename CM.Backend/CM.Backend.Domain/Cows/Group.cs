@@ -1,8 +1,9 @@
-﻿namespace CM.Backend.Domain.Cows;
-public class Group
+﻿using CM.Backend.Domain.Base;
+
+namespace CM.Backend.Domain.Cows;
+public class Group : BaseEntity
 {
-    public int GroupId { get; set; }
     public string Name { get; set; }
 
-    public ICollection<Cow> Cows { get; } = new List<Cow>();
+    public virtual ICollection<Cow> Cows { get; } = new List<Cow>();
 }

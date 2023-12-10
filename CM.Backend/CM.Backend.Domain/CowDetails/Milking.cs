@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CM.Backend.Domain.Base;
 
 namespace CM.Backend.Domain.CowDetails;
-public class Milking
+public class Milking : BaseEntity
 {
-    public int MilkingId { get; set; }
+    public int MilkProductionId { get; set; }
+    public virtual MilkProduction MilkProduction { get; set; }
+
+    public DateOnly Date { get; set; }
+    public int Volume { get; set; }     
 }

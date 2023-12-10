@@ -1,7 +1,11 @@
-﻿namespace CM.Backend.Domain.Cows;
-public class Cow
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.CowDetails;
+using CM.Backend.Domain.Infrastructures;
+using CM.Backend.Domain.Jobs;
+
+namespace CM.Backend.Domain.Cows;
+public class Cow : BaseEntity
 {
-    public int CowId { get; set; }
     public string Identifier { get; set; }
     public string Name { get; set; }
 
@@ -11,14 +15,14 @@ public class Cow
     public bool Sex { get; set; }
 
     public int? PenId { get; set; }
-    public Pen Pen { get; set; }
+    public virtual Pen Pen { get; set; }
 
     public int? GroupId { get; set; }
-    public Group Group { get; set; }
+    public virtual Group Group { get; set; }
 
-    public ICollection<Job> Jobs { get; } = new List<Job>();
-    public ICollection<Intervention> Interventions { get; } = new List<Intervention>();
-    public ICollection<Gestation> Gestations { get; } = new List<Gestation>();
+    public virtual ICollection<Job> Jobs { get; } = new List<Job>();
+    public virtual ICollection<Intervention> Interventions { get; } = new List<Intervention>();
+    public virtual ICollection<Gestation> Gestations { get; } = new List<Gestation>();
 
 
 }

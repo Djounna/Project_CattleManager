@@ -1,16 +1,11 @@
-﻿using CM.Backend.Domain.Cows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.Cows;
 
 namespace CM.Backend.Domain.CowDetails;
-public class MilkProduction
+public class MilkProduction : BaseEntity
 {
-    public int MilkProductionId { get; set; }
     public int CowId { get; set; }
-    public Cow Cow { get; set; }
+    public virtual Cow Cow { get; set; }
 
     public double WeeklyProduction { get; set; }
     public double MonthlyProduction { get; set; }
@@ -18,5 +13,5 @@ public class MilkProduction
     public double TotalQuantity { get; set; }
     public double TotalDays { get; set; }
 
-    public ICollection<Milking> Milkings { get; } = new List<Milking>();
+    public virtual ICollection<Milking> Milkings { get; } = new List<Milking>();
 }

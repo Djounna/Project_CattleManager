@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.Cows;
+using CM.Backend.Domain.Jobs;
 
 namespace CM.Backend.Domain.Infrastructures;
-internal class Pen
+public class Pen : BaseEntity
 {
+    public string Name { get; set; }
+    public int Area { get; set; }
+    public int Size { get; set; }
+
+    public virtual ICollection<Cow> Cows { get; } = new List<Cow>();
+    public virtual ICollection<Job> Jobs { get; } = new List<Job>();
 }

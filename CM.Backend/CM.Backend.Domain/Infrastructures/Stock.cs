@@ -1,4 +1,9 @@
-﻿namespace CM.Backend.Domain.Infrastructures;
-public class Stock
+﻿using CM.Backend.Domain.Base;
+
+namespace CM.Backend.Domain.Infrastructures;
+public class Stock : BaseEntity
 {
+    public string Name; 
+
+
 }
