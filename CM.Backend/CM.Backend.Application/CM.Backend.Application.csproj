@@ -6,4 +6,26 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CM.Backend.Domain\CM.Backend.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Cow\" />
+    <Folder Include="Services\Job\" />
+    <Folder Include="Services\Group\" />
+    <Folder Include="Services\Intervention\" />
+    <Folder Include="Services\Milking\" />
+    <Folder Include="Services\Gestation\" />
+    <Folder Include="Services\Stock\" />
+    <Folder Include="Services\Pen\" />
+    <Folder Include="Services\Worker\" />
+  </ItemGroup>
+
 </Project>
