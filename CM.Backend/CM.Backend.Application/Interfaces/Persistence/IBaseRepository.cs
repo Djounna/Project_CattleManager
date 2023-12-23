@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace CM.Backend.Application.Interfaces.Persistence;
 public interface IBaseRepository<T> where T : class 
 {
-    Task<T> GetById(int id, CancellationToken cancellationToken = default);
-    Task<IReadOnlyList<T>> GetList(CancellationToken cancellationToken = default);
-    Task<T> Create(T entity, CancellationToken cancellationToken = default);
-    Task<T> Update(T entity, CancellationToken cancellationToken = default);
-    Task Delete(int id, CancellationToken cancellationToken = default);
+    T GetById(int id); //,CancellationToken cancellationToken = default
+    IEnumerable<T> GetList();//CancellationToken cancellationToken = default
+    T Create(T entity);//, CancellationToken cancellationToken = default
+    T Update(T entity);// , CancellationToken cancellationToken = default
+    void Delete(T entity);//, CancellationToken cancellationToken = default
+    void Save();
 }

@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CM.Backend.Application\CM.Backend.Application.csproj" />
     <ProjectReference Include="..\CM.Backend.Domain\CM.Backend.Domain.csproj" />
   </ItemGroup>
 
