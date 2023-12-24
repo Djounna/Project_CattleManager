@@ -13,7 +13,7 @@ public class Alert : BaseEntity
     public virtual Cow? Cow { get; set; }
 
     public int PenId { get; set; }
-    public virtual Pen? Pen { get; set }
+    public virtual Pen? Pen { get; set; }
 
 
 }

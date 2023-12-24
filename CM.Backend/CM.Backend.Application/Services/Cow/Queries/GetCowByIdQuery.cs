@@ -20,6 +20,6 @@ public class GetCowByIdQueryHandler : IRequestHandler<GetCowByIdQuery, CowDto>
 
     public async Task<CowDto> Handle(GetCowByIdQuery request, CancellationToken cancellationToken)
     {
-       return await _cowRepository.GetById(request.id, cancellationToken);
+       return _mapper.Map<CowDto>(_cowRepository.GetById(request.id)); // , cancellationToken
     }
 }
