@@ -13,23 +13,23 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         _context = context;
     }
 
-    public virtual async Task<IEnumerable<T>> GetList()
+    public virtual IEnumerable<T> GetList()
     {
-        return await _context.Set<T>().ToListAsync();
+        return _context.Set<T>().ToList();
     }
 
-    public virtual async Task<T> GetById(int id)
+    public virtual T GetById(int id)
     {
-        return await _context.Set<T>().FindAsync(id);
+        return  _context.Set<T>().Find(id);
     }
 
-    public virtual async Task<T> Create(T entity)
+    public virtual T Create(T entity)
     {
-        await _context.Set<T>().AddAsync(entity);
+         _context.Set<T>().Add(entity);
         return entity;
     }
 
-    public virtual async Task<T> Update(T entity)
+    public virtual T Update(T entity)
     {
         return _context.Set<T>().Update(entity).Entity;
     }

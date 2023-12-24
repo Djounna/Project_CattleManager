@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CM.Backend.Application.Interfaces.Persistence;
+using CM.Backend.Domain.CowDetails;
+using CM.Backend.Persistence.EF;
 
 namespace CM.Backend.Persistence.SQL.Repositories;
-internal class GestationRepository
+public class GestationRepository : BaseRepository<Gestation>, IGestationRepository
 {
+    public GestationRepository(CMContext context): base(context){}
 }
