@@ -45,6 +45,6 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 
     public virtual void Save()
     {
-        _context.SaveChangesAsync();
+        _context.SaveChanges();
     }
 }

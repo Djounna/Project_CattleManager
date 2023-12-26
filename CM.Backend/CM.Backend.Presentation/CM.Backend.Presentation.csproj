@@ -17,14 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\CowDetails\" />
-    <Folder Include="Controllers\Cows\" />
-    <Folder Include="Controllers\Externals\" />
-    <Folder Include="Controllers\Infrastructures\" />
-    <Folder Include="Controllers\Jobs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CM.Backend.Application\CM.Backend.Application.csproj" />
     <ProjectReference Include="..\CM.Backend.Persistence\CM.Backend.Persistence.csproj" />
   </ItemGroup>

@@ -1,18 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using CM.Backend.Application.Models.Notifications;
-using CM.Backend.Application.Services.Alert.Queries;
-using CM.Backend.Application.Services.Alert.Commands;
+using CM.Backend.Application.Services.Cow.Queries;
+using CM.Backend.Application.Services.Cow.Commands;
+using CM.Backend.Application.Models.Cows;
 
-namespace CM.Backend.Presentation.Controllers.Alerts;
+namespace CM.Backend.Presentation.Controllers.Cows;
 
 [ApiController]
 [Produces("application/json")]
 [Route("api/[controller]")]
 
-public class AlertController : ControllerBase
+public class CowController : ControllerBase
 {
     public readonly IMediator _mediator;
 
@@ -20,34 +18,34 @@ public class AlertController : ControllerBase
     /// Constructor
     /// </summary>
     /// <param name="mediator"></param>
-    public AlertController(IMediator mediator)
+    public CowController(IMediator mediator)
     {
         _mediator = mediator;  
     }
 
     /// <summary>
-    /// Get Alert By Id 
+    /// Get Cow By Id 
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns></returns>
     [HttpGet("{id}")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> GetById(int id)
+    public async Task<ActionResult<CowDto>> GetById(int id)
     {
-        return Ok(await _mediator.Send(new GetAlertByIdQuery(id)));
+        return Ok(await _mediator.Send(new GetCowByIdQuery(id)));
     }
 
     /// <summary>
-    /// Get All Alerts
+    /// Get All Cows
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<AlertDto>>> GetList()
+    public async Task<ActionResult<IEnumerable<CowDto>>> GetList()
     {
-        return Ok(await _mediator.Send(new GetAlertsQuery()));
+        return Ok(await _mediator.Send(new GetCowsQuery()));
     }
 
     /// <summary>
@@ -58,9 +56,9 @@ public class AlertController : ControllerBase
     [HttpPost]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> Create([FromBody]AlertDto dto)
+    public async Task<ActionResult<CowDto>> Create([FromBody]CowDto dto)
     {
-        return Ok(await _mediator.Send(new CreateAlertCommand(dto)));
+        return Ok(await _mediator.Send(new CreateCowCommand(dto)));
     }
 
     /// <summary>
@@ -71,9 +69,9 @@ public class AlertController : ControllerBase
     [HttpPut]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> Update([FromBody]AlertDto dto)
+    public async Task<ActionResult<CowDto>> Update([FromBody]CowDto dto)
     {
-        return Ok(await _mediator.Send(new UpdateAlertCommand(dto)));
+        return Ok(await _mediator.Send(new UpdateCowCommand(dto)));
     }
 
     /// <summary>
@@ -86,7 +84,7 @@ public class AlertController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> Delete(int id)
     {
-        await _mediator.Send(new DeleteAlertCommand(id));
+        await _mediator.Send(new DeleteCowCommand(id));
         return Ok();
     }
 }

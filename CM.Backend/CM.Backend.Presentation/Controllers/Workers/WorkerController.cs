@@ -1,18 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using CM.Backend.Application.Models.Notifications;
-using CM.Backend.Application.Services.Alert.Queries;
-using CM.Backend.Application.Services.Alert.Commands;
+using CM.Backend.Application.Services.Worker.Queries;
+using CM.Backend.Application.Services.Worker.Commands;
+using CM.Backend.Application.Models.Workers;
 
-namespace CM.Backend.Presentation.Controllers.Alerts;
+namespace CM.Backend.Presentation.Controllers.Workers;
 
 [ApiController]
 [Produces("application/json")]
 [Route("api/[controller]")]
 
-public class AlertController : ControllerBase
+public class WorkerController : ControllerBase
 {
     public readonly IMediator _mediator;
 
@@ -20,34 +18,34 @@ public class AlertController : ControllerBase
     /// Constructor
     /// </summary>
     /// <param name="mediator"></param>
-    public AlertController(IMediator mediator)
+    public WorkerController(IMediator mediator)
     {
         _mediator = mediator;  
     }
 
     /// <summary>
-    /// Get Alert By Id 
+    /// Get Worker By Id 
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns></returns>
     [HttpGet("{id}")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> GetById(int id)
+    public async Task<ActionResult<WorkerDto>> GetById(int id)
     {
-        return Ok(await _mediator.Send(new GetAlertByIdQuery(id)));
+        return Ok(await _mediator.Send(new GetWorkerByIdQuery(id)));
     }
 
     /// <summary>
-    /// Get All Alerts
+    /// Get All Workers
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<AlertDto>>> GetList()
+    public async Task<ActionResult<IEnumerable<WorkerDto>>> GetList()
     {
-        return Ok(await _mediator.Send(new GetAlertsQuery()));
+        return Ok(await _mediator.Send(new GetWorkersQuery()));
     }
 
     /// <summary>
@@ -58,9 +56,9 @@ public class AlertController : ControllerBase
     [HttpPost]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> Create([FromBody]AlertDto dto)
+    public async Task<ActionResult<WorkerDto>> Create([FromBody]WorkerDto dto)
     {
-        return Ok(await _mediator.Send(new CreateAlertCommand(dto)));
+        return Ok(await _mediator.Send(new CreateWorkerCommand(dto)));
     }
 
     /// <summary>
@@ -71,9 +69,9 @@ public class AlertController : ControllerBase
     [HttpPut]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<AlertDto>> Update([FromBody]AlertDto dto)
+    public async Task<ActionResult<WorkerDto>> Update([FromBody]WorkerDto dto)
     {
-        return Ok(await _mediator.Send(new UpdateAlertCommand(dto)));
+        return Ok(await _mediator.Send(new UpdateWorkerCommand(dto)));
     }
 
     /// <summary>
@@ -86,7 +84,7 @@ public class AlertController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> Delete(int id)
     {
-        await _mediator.Send(new DeleteAlertCommand(id));
+        await _mediator.Send(new DeleteWorkerCommand(id));
         return Ok();
     }
 }
