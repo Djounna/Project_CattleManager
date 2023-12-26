@@ -11,6 +11,6 @@ public interface IBaseRepository<T> where T : class
     IEnumerable<T> GetList();//CancellationToken cancellationToken = default
     T Create(T entity);//, CancellationToken cancellationToken = default
     T Update(T entity);// , CancellationToken cancellationToken = default
-    void Delete(T entity);//, CancellationToken cancellationToken = default
+    void Delete(int id);//, CancellationToken cancellationToken = default
     void Save();
 }

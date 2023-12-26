@@ -18,23 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Cow\Commands\" />
     <Folder Include="Services\Gestation\Commands\" />
     <Folder Include="Services\Gestation\Queries\" />
-    <Folder Include="Services\Group\Commands\" />
-    <Folder Include="Services\Group\Queries\" />
     <Folder Include="Services\Intervention\Commands\" />
     <Folder Include="Services\Intervention\Queries\" />
-    <Folder Include="Services\Job\Commands\" />
-    <Folder Include="Services\Job\Queries\" />
     <Folder Include="Services\Milking\Commands\" />
     <Folder Include="Services\Milking\Queries\" />
-    <Folder Include="Services\Pen\Commands\" />
-    <Folder Include="Services\Pen\Queries\" />
     <Folder Include="Services\Stock\Commands\" />
     <Folder Include="Services\Stock\Queries\" />
-    <Folder Include="Services\Worker\Commands\" />
-    <Folder Include="Services\Worker\Queries\" />
   </ItemGroup>
 
 </Project>

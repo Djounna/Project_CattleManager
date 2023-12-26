@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using CM.Backend.Application.Interfaces.Persistence;
+using CM.Backend.Application.Models.Cows;
+using MediatR;
+
+namespace CM.Backend.Application.Services.Cow.Queries;
+public record GetCowsQuery() : IRequest<CowDto>;
+
+public class GetCowsQueryHandler : IRequestHandler<GetCowsQuery, CowDto>
+{
+    private readonly ICowRepository _cowRepository;
+    private readonly IMapper _mapper;
+
+    public GetCowsQueryHandler(ICowRepository cowRepository, IMapper mapper)
+    {
+        _cowRepository = cowRepository;
+        _mapper = mapper;
+    }
+
+    public async Task<CowDto> Handle(GetCowsQuery request, CancellationToken cancellationToken)
+    {
+       return _mapper.Map<CowDto>(_cowRepository.GetList()); // , cancellationToken
+    }
+}

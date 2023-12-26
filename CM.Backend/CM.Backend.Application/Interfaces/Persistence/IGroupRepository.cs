@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using CM.Backend.Domain.Cows;
 
 namespace CM.Backend.Application.Interfaces.Persistence;
 public  interface IGroupRepository : IBaseRepository<Group>
