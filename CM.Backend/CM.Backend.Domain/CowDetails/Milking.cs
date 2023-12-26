@@ -7,5 +7,5 @@ public class Milking : BaseEntity
     public virtual MilkProduction MilkProduction { get; set; }
 
     public DateOnly Date { get; set; }
-    public int Volume { get; set; }     
+    public double Volume { get; set; }     
 }

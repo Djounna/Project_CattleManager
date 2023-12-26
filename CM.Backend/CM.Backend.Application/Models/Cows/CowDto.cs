@@ -8,6 +8,11 @@ namespace CM.Backend.Application.Models.Cows;
 public class CowDto
 {
     /// <summary>
+    /// Id
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
     /// Identifier
     /// </summary>
     public string Identifier { get; set; }
@@ -45,7 +50,7 @@ public class CowDto
     /// <summary>
     /// Pen
     /// </summary>
-    public PenDto Pen { get; set; }
+    //public PenDto Pen { get; set; }
 
     /// <summary>
     /// GroupId
@@ -55,5 +60,5 @@ public class CowDto
     /// <summary>
     /// Group
     /// </summary>
-    public GroupDto Group { get; set; }
+    //public GroupDto Group { get; set; }
 }

@@ -3,7 +3,6 @@
 namespace CM.Backend.Domain.Infrastructures;
 public class Stock : BaseEntity
 {
-    public string Name; 
-
-
+    public string Type;
+    public int Volume;
 }

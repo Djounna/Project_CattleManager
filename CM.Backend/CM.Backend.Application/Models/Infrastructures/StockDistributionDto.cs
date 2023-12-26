@@ -1,28 +1,28 @@
 ﻿namespace CM.Backend.Application.Models.Infrastructures;
 
 /// <summary>
-/// Pen Dto
+/// StockDistribution Dto
 /// </summary>
-public class PenDto
+public class StockDistributionDto
 {
     /// <summary>
     /// Id
     /// </summary>
-
     public int Id { get; set; }
 
     /// <summary>
-    /// Name
+    /// Daily Volume
     /// </summary>
-    public string Name { get; set; }
+    public int DailyVolume { get; set; }
 
     /// <summary>
-    /// Area
+    /// Stock Id
     /// </summary>
-    public int Area { get; set; }
+    public int StockId { get; set; }
 
     /// <summary>
-    /// Size
+    /// Pen Id
     /// </summary>
-    public int Size { get; set; }
+    public int PenId { get; set; }
+
 }

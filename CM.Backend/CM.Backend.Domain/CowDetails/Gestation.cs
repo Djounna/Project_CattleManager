@@ -10,5 +10,4 @@ public class Gestation : BaseEntity
     public string Status { get; set; }
     public DateOnly StartDate { get; set; }
     public DateOnly? CalvingDate { get; set; }
-
 }
