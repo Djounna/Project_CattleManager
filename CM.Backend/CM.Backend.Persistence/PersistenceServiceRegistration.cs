@@ -4,15 +4,16 @@ using CM.Backend.Persistence.EF;
 using CM.Backend.Persistence.SQL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace CM.Backend.Persistence;
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfigurationProvider configuration)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<CMContext>(options => options.UseSqlServer("test"));
+        services.AddDbContext<CMContext>(options => options.UseSqlServer(configuration.GetConnectionString("CMConnectionString")));
 
-        services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+        //services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
         services.AddScoped<IAlertRepository, AlertRepository>();
         services.AddScoped<ICowRepository, CowRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();

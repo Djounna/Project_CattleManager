@@ -1,12 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using MediatR;
 
 namespace CM.Backend.Application;
 public static class ApplicationServiceRegistration
@@ -18,5 +11,4 @@ public static class ApplicationServiceRegistration
 
         return services;
     }
-
 }

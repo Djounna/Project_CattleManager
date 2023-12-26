@@ -1,7 +1,8 @@
-﻿using CM.Backend.Domain.Jobs;
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.Jobs;
 
 namespace CM.Backend.Domain.Workers;
-public class Worker
+public class Worker: BaseEntity
 {
     public int Id { get; set; }
     public string Name { get; set; }

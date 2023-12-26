@@ -34,9 +34,13 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         return _context.Set<T>().Update(entity).Entity;
     }
 
-    public virtual void Delete(T entity)
+    public virtual void Delete(int id)
     {
+        var entity = _context.Set<T>().Find(id);
+
+        if (entity != null) { 
         _context.Set<T>().Remove(entity);
+        }
     }
 
     public virtual void Save()

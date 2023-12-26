@@ -1,7 +1,8 @@
-﻿using CM.Backend.Domain.Workers;
+﻿using CM.Backend.Domain.Base;
+using CM.Backend.Domain.Workers;
 
 namespace CM.Backend.Domain.Jobs;
-public class WorkerJob
+public class WorkerJob : BaseEntity
 {
     public int WorkerId { get; set; }
     public virtual Worker Worker { get; set; }

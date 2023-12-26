@@ -11,6 +11,7 @@ namespace CM.Backend.Persistence.EF;
 
 public class CMContext : DbContext
 {
+    public CMContext() { }
     public CMContext(DbContextOptions<CMContext> options) : base(options) { }
 
     public DbSet<Cow> Cows { get; set; }
@@ -32,4 +33,9 @@ public class CMContext : DbContext
     public DbSet<Milking> Milkings { get; set; }
 
     public DbSet<Alert> Alerts { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=LAPTOP-R3GDQJIT;Database=CattleManager;Trusted_Connection=True;TrustServerCertificate=True");
+    }
 }

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using MediatR;
-using CM.Backend.Application.Models.Cows;
-using CM.Backend.Application.Services.Cow.Queries;
+using Microsoft.AspNetCore.Http;
+using CM.Backend.Application.Models.Notifications;
+using CM.Backend.Application.Services.Alert.Queries;
+using CM.Backend.Application.Services.Alert.Commands;
 
 namespace CM.Backend.Presentation.Controllers.Alerts;
 
@@ -24,25 +26,67 @@ public class AlertController : ControllerBase
     }
 
     /// <summary>
-    /// Get Cow By Id 
+    /// Get Alert By Id 
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns></returns>
     [HttpGet("{id}")]
+    [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<CowDto>> GetById(int id)
+    public async Task<ActionResult<AlertDto>> GetById(int id)
     {
-        return Ok(await _mediator.Send(new GetCowByIdQuery(id)));
+        return Ok(await _mediator.Send(new GetAlertByIdQuery(id)));
     }
 
     /// <summary>
-    /// Get All Cows
+    /// Get All Alerts
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+    [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<CowDto>> GetAll(int id)
+    public async Task<ActionResult<IEnumerable<AlertDto>>> GetAll()
     {
-        return Ok(await _mediator.Send(new GetCowByIdQuery(id)));
+        return Ok(await _mediator.Send(new GetAlertsQuery()));
+    }
+
+    /// <summary>
+    /// Create a cow
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<AlertDto>> Create([FromBody]AlertDto dto)
+    {
+        return Ok(await _mediator.Send(new CreateAlertCommand(dto)));
+    }
+
+    /// <summary>
+    /// Update a cow 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<AlertDto>> Update([FromBody]AlertDto dto)
+    {
+        return Ok(await _mediator.Send(new UpdateAlertCommand(dto)));
+    }
+
+    /// <summary>
+    /// Delete a cow
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult> Delete(int id)
+    {
+        await _mediator.Send(new DeleteAlertCommand(id));
+        return Ok();
     }
 }
