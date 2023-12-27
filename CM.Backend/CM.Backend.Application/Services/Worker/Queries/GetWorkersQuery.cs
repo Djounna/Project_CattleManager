@@ -4,9 +4,9 @@ using CM.Backend.Application.Interfaces.Persistence;
 using CM.Backend.Application.Models.Workers;
 
 namespace CM.Backend.Application.Services.Worker.Queries;
-public record GetWorkersQuery() : IRequest<WorkerDto>;
+public record GetWorkersQuery() : IRequest<IList<WorkerDto>>;
 
-public class GetWorkersQueryHandler : IRequestHandler<GetWorkersQuery, WorkerDto>
+public class GetWorkersQueryHandler : IRequestHandler<GetWorkersQuery, IList<WorkerDto>>
 {
     private readonly IWorkerRepository _workerRepository;
     private readonly IMapper _mapper;
@@ -17,8 +17,8 @@ public class GetWorkersQueryHandler : IRequestHandler<GetWorkersQuery, WorkerDto
         _mapper = mapper;
     }
 
-    public async Task<WorkerDto> Handle(GetWorkersQuery request, CancellationToken cancellationToken)
+    public async Task<IList<WorkerDto>> Handle(GetWorkersQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<WorkerDto>(_workerRepository.GetList()); // , cancellationToken
+       return _mapper.Map<IList<WorkerDto>>(_workerRepository.GetList()); // , cancellationToken
     }
 }

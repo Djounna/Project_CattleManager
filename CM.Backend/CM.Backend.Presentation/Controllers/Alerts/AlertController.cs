@@ -11,7 +11,6 @@ namespace CM.Backend.Presentation.Controllers.Alerts;
 [ApiController]
 [Produces("application/json")]
 [Route("api/[controller]")]
-
 public class AlertController : ControllerBase
 {
     public readonly IMediator _mediator;
@@ -26,11 +25,25 @@ public class AlertController : ControllerBase
     }
 
     /// <summary>
+    /// Get All Alerts
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [Authorize("read:events")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<AlertDto>>> GetList()
+    {
+        return Ok(await _mediator.Send(new GetAlertsQuery()));
+    }
+    
+    /// <summary>
     /// Get Alert By Id 
     /// </summary>
     /// <param name="id">Id</param>
     /// <returns></returns>
     [HttpGet("{id}")]
+    [Authorize("read:events")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AlertDto>> GetById(int id)
@@ -39,23 +52,12 @@ public class AlertController : ControllerBase
     }
 
     /// <summary>
-    /// Get All Alerts
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [ProducesDefaultResponseType]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<AlertDto>>> GetList()
-    {
-        return Ok(await _mediator.Send(new GetAlertsQuery()));
-    }
-
-    /// <summary>
-    /// Create a cow
+    /// Create an alert
     /// </summary>
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPost]
+    [Authorize("write:events")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AlertDto>> Create([FromBody]AlertDto dto)
@@ -64,11 +66,12 @@ public class AlertController : ControllerBase
     }
 
     /// <summary>
-    /// Update a cow 
+    /// Update an alert 
     /// </summary>
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut]
+    [Authorize("write:events")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AlertDto>> Update([FromBody]AlertDto dto)
@@ -77,11 +80,12 @@ public class AlertController : ControllerBase
     }
 
     /// <summary>
-    /// Delete a cow
+    /// Delete an alert
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete]
+    [Authorize("write:events")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> Delete(int id)

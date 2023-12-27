@@ -18,14 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Gestation\Commands\" />
-    <Folder Include="Services\Gestation\Queries\" />
-    <Folder Include="Services\Intervention\Commands\" />
-    <Folder Include="Services\Intervention\Queries\" />
     <Folder Include="Services\Milking\Commands\" />
     <Folder Include="Services\Milking\Queries\" />
-    <Folder Include="Services\Stock\Commands\" />
-    <Folder Include="Services\Stock\Queries\" />
   </ItemGroup>
 
 </Project>

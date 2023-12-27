@@ -4,9 +4,9 @@ using CM.Backend.Application.Interfaces.Persistence;
 using CM.Backend.Application.Models.Cows;
 
 namespace CM.Backend.Application.Services.Group.Queries;
-public record GetGroupsQuery() : IRequest<GroupDto>;
+public record GetGroupsQuery() : IRequest<IList<GroupDto>>;
 
-public class GetGroupsQueryHandler : IRequestHandler<GetGroupsQuery, GroupDto>
+public class GetGroupsQueryHandler : IRequestHandler<GetGroupsQuery, IList<GroupDto>>
 {
     private readonly IGroupRepository _groupRepository;
     private readonly IMapper _mapper;
@@ -17,8 +17,8 @@ public class GetGroupsQueryHandler : IRequestHandler<GetGroupsQuery, GroupDto>
         _mapper = mapper;
     }
 
-    public async Task<GroupDto> Handle(GetGroupsQuery request, CancellationToken cancellationToken)
+    public async Task<IList<GroupDto>> Handle(GetGroupsQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<GroupDto>(_groupRepository.GetList()); // , cancellationToken
+       return _mapper.Map<IList<GroupDto>>(_groupRepository.GetList()); // , cancellationToken
     }
 }

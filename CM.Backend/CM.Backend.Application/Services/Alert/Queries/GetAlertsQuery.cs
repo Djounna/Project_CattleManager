@@ -4,9 +4,9 @@ using CM.Backend.Application.Interfaces.Persistence;
 using CM.Backend.Application.Models.Notifications;
 
 namespace CM.Backend.Application.Services.Alert.Queries;
-public record GetAlertsQuery() : IRequest<AlertDto>;
+public record GetAlertsQuery() : IRequest<IList<AlertDto>>;
 
-public class GetAlertsQueryHandler : IRequestHandler<GetAlertsQuery, AlertDto>
+public class GetAlertsQueryHandler : IRequestHandler<GetAlertsQuery, IList<AlertDto>>
 {
     private readonly IAlertRepository _alertRepository;
     private readonly IMapper _mapper;
@@ -17,8 +17,8 @@ public class GetAlertsQueryHandler : IRequestHandler<GetAlertsQuery, AlertDto>
         _mapper = mapper;
     }
 
-    public async Task<AlertDto> Handle(GetAlertsQuery request, CancellationToken cancellationToken)
+    public async Task<IList<AlertDto>> Handle(GetAlertsQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<AlertDto>(_alertRepository.GetList()); // , cancellationToken
+       return _mapper.Map<IList<AlertDto>>(_alertRepository.GetList()); // , cancellationToken
     }
 }
