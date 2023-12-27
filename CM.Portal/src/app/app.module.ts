@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, AuthButtonComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     AppRoutingModule,
     AuthModule.forRoot({
