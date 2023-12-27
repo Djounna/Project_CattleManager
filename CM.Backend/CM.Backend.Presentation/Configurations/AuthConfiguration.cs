@@ -1,6 +1,8 @@
 ﻿using CM.Backend.Presentation.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace CM.Backend.Presentation.Configurations;
 
@@ -12,15 +14,15 @@ public static class AuthConfiguration
         var domain = configuration["Auth0:Domain"];
         var audience = configuration["Auth0:Audience"];
 
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
-            options.Authority = domain;
-            options.Audience = audience;
-        });
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    options.Authority = domain;
+                    options.Audience = audience;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
+                });
 
         services.AddAuthorization(options =>
         {
