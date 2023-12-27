@@ -15,12 +15,10 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(configuration);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-//builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerConfig();
 
 
@@ -35,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseStaticFiles(); // TO DO: to check, comes from Auth0 guide
+//app.UseStaticFiles(); // Needed if you want to customize the swagger UI page
 
 app.UseAuthentication();
 app.UseAuthorization();
