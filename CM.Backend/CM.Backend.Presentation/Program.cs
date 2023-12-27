@@ -1,9 +1,13 @@
 using CM.Backend.Application;
 using CM.Backend.Persistence;
+using CM.Backend.Presentation.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
+
+// Add JwtBearer Authentication
+builder.Services.AddAuthenticationJwtBearer(configuration);
 
 // Add Application Services
 builder.Services.AddApplicationServices();
@@ -29,6 +33,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//app.UseStaticFiles(); // TO DO: to check, comes from Auth0 guide
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
