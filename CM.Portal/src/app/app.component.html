@@ -1,3 +1,31 @@
-<app-auth-button></app-auth-button>
+<app-toolbar></app-toolbar>
 
-<router-outlet></router-outlet>
+<!-- <div class="main" >
+    <aside>
+        <app-sidenav></app-sidenav>
+    </aside>
+    <div>
+        <div class="main-content">
+            <app-auth-button></app-auth-button>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div> -->
+
+<div class="main">
+<mat-sidenav-container autosize style="height:100%">
+    <mat-sidenav [opened]="true" mode="side">
+        <aside class="sidenav">
+            <app-sidenav></app-sidenav>
+        </aside>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+</div>

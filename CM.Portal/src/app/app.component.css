@@ -1,0 +1,11 @@
+.main{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    margin: 0 3rem 0 3rem;
+}
+
+.main-content{
+    height: 100%;
+    padding: 2rem 1rem 2rem 1rem;
+}
