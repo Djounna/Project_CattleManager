@@ -1,10 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using CM.Backend.Application.Interfaces.Persistence;
 
 namespace CM.Backend.Application.Services.Stock.Commands;
-internal class DeleteStockCommand
+public record DeleteStockCommand(int id) : IRequest;
+
+public class DeleteStockCommandHandler : IRequestHandler<DeleteStockCommand>
 {
+    private readonly IStockRepository _stockRepository;
+
+    public DeleteStockCommandHandler(IStockRepository stockRepository)
+    {
+        _stockRepository = stockRepository;
+    }
+
+    public async Task Handle(DeleteStockCommand request, CancellationToken cancellationToken)
+    {
+        _stockRepository.Delete(request.id);
+        _stockRepository.Save();
+    }
 }
+

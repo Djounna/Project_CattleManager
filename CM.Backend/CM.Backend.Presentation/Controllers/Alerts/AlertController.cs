@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using CM.Backend.Application.Models.Notifications;
 using CM.Backend.Application.Services.Alert.Queries;
 using CM.Backend.Application.Services.Alert.Commands;
