@@ -7,5 +7,5 @@ public class RecurringJob : BaseEntity
     public string Description { get; set; }
     public int Length { get; set; }
 
-    public virtual ICollection<Job> Jobs { get; set; }
+    public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
 }

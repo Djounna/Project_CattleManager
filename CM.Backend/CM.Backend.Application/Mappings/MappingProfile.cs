@@ -5,6 +5,7 @@ using CM.Backend.Application.Models.Externals;
 using CM.Backend.Application.Models.Infrastructures;
 using CM.Backend.Application.Models.Jobs;
 using CM.Backend.Application.Models.Notifications;
+using CM.Backend.Application.Models.Users;
 using CM.Backend.Application.Models.Workers;
 using CM.Backend.Domain.Alerts;
 using CM.Backend.Domain.CowDetails;
@@ -12,6 +13,7 @@ using CM.Backend.Domain.Cows;
 using CM.Backend.Domain.Externals;
 using CM.Backend.Domain.Infrastructures;
 using CM.Backend.Domain.Jobs;
+using CM.Backend.Domain.Users;
 using CM.Backend.Domain.Workers;
 
 namespace CM.Backend.Application.Mappings;
@@ -21,7 +23,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Cow, CowDto>().ReverseMap();
         CreateMap<Job, JobDto>().ReverseMap();
-        CreateMap<Worker, WorkerDto>().ReverseMap();
         CreateMap<Group, GroupDto>().ReverseMap();
         CreateMap<Pen, PenDto>().ReverseMap();
         CreateMap<Stock, StockDto>().ReverseMap();
@@ -33,6 +34,9 @@ public class MappingProfile : Profile
         CreateMap<MilkProduction, MilkProductionDto>().ReverseMap();
         CreateMap<Milking, MilkingDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();
+        CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<Role, RoleDto>().ReverseMap();
+        CreateMap<Worker, WorkerDto>().ReverseMap();
     }
     
     //public MappingProfile()

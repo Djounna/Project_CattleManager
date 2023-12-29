@@ -1,4 +1,5 @@
 using CM.Backend.Application;
+using CM.Backend.Infrastructure;
 using CM.Backend.Persistence;
 using CM.Backend.Presentation.Configurations;
 
@@ -13,6 +14,8 @@ builder.Services.AddAuthenticationJwtBearer(configuration);
 builder.Services.AddApplicationServices();
 // Add Persistence Services
 builder.Services.AddPersistenceServices(configuration);
+// Add Infrastructure Services
+builder.Services.AddInfrastructureServices(configuration);
 
 // Add services to the container.
 builder.Services.AddControllers();

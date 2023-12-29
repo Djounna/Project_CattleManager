@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CM.Backend.Application\CM.Backend.Application.csproj" />
+    <ProjectReference Include="..\CM.Backend.Infrastructure\CM.Backend.Infrastructure.csproj" />
     <ProjectReference Include="..\CM.Backend.Persistence\CM.Backend.Persistence.csproj" />
   </ItemGroup>
 
