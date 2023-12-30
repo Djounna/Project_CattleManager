@@ -38,6 +38,14 @@ public static class AuthConfiguration
                 policy => policy.Requirements.Add(new HasScopeRequirement("read:infrastructures", domain)));
             options.AddPolicy("write:infrastructures",
                 policy => policy.Requirements.Add(new HasScopeRequirement("write:infrastructures", domain)));
+            options.AddPolicy("read:users",
+                policy => policy.Requirements.Add(new HasScopeRequirement("read:users", domain)));
+            options.AddPolicy("write:users",
+                policy => policy.Requirements.Add(new HasScopeRequirement("write:users", domain)));
+            options.AddPolicy("read:events",
+                policy => policy.Requirements.Add(new HasScopeRequirement("read:events", domain)));
+            options.AddPolicy("write:events",
+                policy => policy.Requirements.Add(new HasScopeRequirement("write:events", domain)));
         });
 
         services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();

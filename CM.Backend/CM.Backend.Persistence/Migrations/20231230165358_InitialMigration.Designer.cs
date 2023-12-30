@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CM.Backend.Persistence.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20231226164630_InitialMigration")]
+    [Migration("20231230165358_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -24,6 +24,27 @@ namespace CM.Backend.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CM.Backend.Application.Models.Users.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
 
             modelBuilder.Entity("CM.Backend.Domain.Alerts.Alert", b =>
                 {
@@ -372,19 +393,19 @@ namespace CM.Backend.Persistence.Migrations
                     b.Property<int>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkerId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("JobId");
 
-                    b.HasIndex("WorkerId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("WorkerJobs");
                 });
 
-            modelBuilder.Entity("CM.Backend.Domain.Workers.Worker", b =>
+            modelBuilder.Entity("CM.Backend.Domain.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -392,16 +413,26 @@ namespace CM.Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AuthId")
+                    b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("IdAuth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Workers");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CM.Backend.Domain.Alerts.Alert", b =>
@@ -515,15 +546,31 @@ namespace CM.Backend.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CM.Backend.Domain.Workers.Worker", "Worker")
+                    b.HasOne("CM.Backend.Domain.Users.User", "User")
                         .WithMany("WorkerJobs")
-                        .HasForeignKey("WorkerId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Job");
 
-                    b.Navigation("Worker");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CM.Backend.Domain.Users.User", b =>
+                {
+                    b.HasOne("CM.Backend.Application.Models.Users.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("CM.Backend.Application.Models.Users.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.MilkProduction", b =>
@@ -567,7 +614,7 @@ namespace CM.Backend.Persistence.Migrations
                     b.Navigation("Jobs");
                 });
 
-            modelBuilder.Entity("CM.Backend.Domain.Workers.Worker", b =>
+            modelBuilder.Entity("CM.Backend.Domain.Users.User", b =>
                 {
                     b.Navigation("WorkerJobs");
                 });

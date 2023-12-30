@@ -22,13 +22,13 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IMilkingRepository, MilkingRepository>();
         services.AddScoped<IMilkProductionRepository, MilkProductionRepository>();
         services.AddScoped<IIntervenantRepository, IntervenantRepository>();
-        services.AddScoped<IWorkerRepository, WorkerRepository>();
         services.AddScoped<IJobRepository, JobRepository>();
         services.AddScoped<IRecurringJobRepository, RecurringJobRepository>();
         services.AddScoped<IWorkerJobRepository, WorkerJobRepository>();
         services.AddScoped<IPenRepository, PenRepository>();
         services.AddScoped<IStockRepository, StockRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        //services.AddScoped<IWorkerRepository, WorkerRepository>();
 
         return services;
     }

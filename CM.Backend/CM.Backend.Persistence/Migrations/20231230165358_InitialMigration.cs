@@ -70,6 +70,20 @@ namespace CM.Backend.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Stocks",
                 columns: table => new
                 {
@@ -79,20 +93,6 @@ namespace CM.Backend.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stocks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Workers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AuthId = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Workers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +123,28 @@ namespace CM.Backend.Persistence.Migrations
                         column: x => x.PenId,
                         principalTable: "Pens",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdAuth = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,7 +287,7 @@ namespace CM.Backend.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WorkerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     JobId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -278,9 +300,9 @@ namespace CM.Backend.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkerJobs_Workers_WorkerId",
-                        column: x => x.WorkerId,
-                        principalTable: "Workers",
+                        name: "FK_WorkerJobs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -367,14 +389,23 @@ namespace CM.Backend.Persistence.Migrations
                 column: "CowId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WorkerJobs_JobId",
                 table: "WorkerJobs",
                 column: "JobId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkerJobs_WorkerId",
+                name: "IX_WorkerJobs_UserId",
                 table: "WorkerJobs",
-                column: "WorkerId");
+                column: "UserId");
+
+
+            migrationBuilder.Sql("Insert Into dbo.Roles(Name, Description)" +
+                "Values('Manager', 'Manager'), ('Worker', 'Worker')");
         }
 
         /// <inheritdoc />
@@ -408,13 +439,16 @@ namespace CM.Backend.Persistence.Migrations
                 name: "Jobs");
 
             migrationBuilder.DropTable(
-                name: "Workers");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Cows");
 
             migrationBuilder.DropTable(
                 name: "RecurringJobs");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Groups");

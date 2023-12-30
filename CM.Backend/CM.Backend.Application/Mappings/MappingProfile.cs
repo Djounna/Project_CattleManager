@@ -6,7 +6,6 @@ using CM.Backend.Application.Models.Infrastructures;
 using CM.Backend.Application.Models.Jobs;
 using CM.Backend.Application.Models.Notifications;
 using CM.Backend.Application.Models.Users;
-using CM.Backend.Application.Models.Workers;
 using CM.Backend.Domain.Alerts;
 using CM.Backend.Domain.CowDetails;
 using CM.Backend.Domain.Cows;
@@ -14,7 +13,6 @@ using CM.Backend.Domain.Externals;
 using CM.Backend.Domain.Infrastructures;
 using CM.Backend.Domain.Jobs;
 using CM.Backend.Domain.Users;
-using CM.Backend.Domain.Workers;
 
 namespace CM.Backend.Application.Mappings;
 public class MappingProfile : Profile
@@ -37,7 +35,7 @@ public class MappingProfile : Profile
         CreateMap<User, UserDto>().ReverseMap();
         CreateMap<User, UserAuth>().ReverseMap();
         CreateMap<Role, RoleDto>().ReverseMap();
-        CreateMap<Worker, WorkerDto>().ReverseMap();
+        //CreateMap<Worker, WorkerDto>().ReverseMap();
     }
     
     //public MappingProfile()

@@ -1,10 +1,11 @@
-﻿using CM.Backend.Domain.Alerts;
+﻿using CM.Backend.Application.Models.Users;
+using CM.Backend.Domain.Alerts;
 using CM.Backend.Domain.CowDetails;
 using CM.Backend.Domain.Cows;
 using CM.Backend.Domain.Externals;
 using CM.Backend.Domain.Infrastructures;
 using CM.Backend.Domain.Jobs;
-using CM.Backend.Domain.Workers;
+using CM.Backend.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace CM.Backend.Persistence.EF;
@@ -24,7 +25,10 @@ public class CMContext : DbContext
     public DbSet<RecurringJob> RecurringJobs { get; set; }
     public DbSet<WorkerJob> WorkerJobs { get; set; }
 
-    public DbSet<Worker> Workers { get; set; }
+    //public DbSet<Worker> Workers { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+
     public DbSet<Intervenant> Intervenants { get; set; }
 
     public DbSet<Gestation> Gestations { get; set; }

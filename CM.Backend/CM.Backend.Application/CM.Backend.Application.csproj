@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Enums\" />
     <Folder Include="Services\Milking\Commands\" />
     <Folder Include="Services\Milking\Queries\" />
   </ItemGroup>
