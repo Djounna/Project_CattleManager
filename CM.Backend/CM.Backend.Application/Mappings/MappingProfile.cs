@@ -35,6 +35,7 @@ public class MappingProfile : Profile
         CreateMap<Milking, MilkingDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();
         CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<User, UserAuth>().ReverseMap();
         CreateMap<Role, RoleDto>().ReverseMap();
         CreateMap<Worker, WorkerDto>().ReverseMap();
     }

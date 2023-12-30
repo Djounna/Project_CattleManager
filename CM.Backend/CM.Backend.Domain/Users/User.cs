@@ -5,9 +5,9 @@ using CM.Backend.Domain.Jobs;
 namespace CM.Backend.Domain.Users;
 public class User: BaseEntity
 {
-    public string UserName { get; set; }
+    public string Username { get; set; }
     public string Email { get; set; }
-    public string AuthId { get; set; }
+    public string IdAuth { get; set; }
 
     public int RoleId { get; set; }
     public virtual Role Role { get; set; }

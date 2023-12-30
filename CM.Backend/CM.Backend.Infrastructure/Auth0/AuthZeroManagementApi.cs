@@ -43,7 +43,7 @@ public class AuthZeroManagementApi : IUserManagementService
         return tokenData;
     }
 
-    public async Task<UserAuth> CreateUser(UserAuth userInput, CancellationToken cancellationToken)
+    public async Task<UserAuth> CreateUser(UserInput userInput, CancellationToken cancellationToken)
     {
         var token = await GetToken();
         var accessToken = token.access_token;
@@ -143,7 +143,7 @@ public class AuthZeroManagementApi : IUserManagementService
         }
     }
 
-    public async Task<bool> AssignRole(User user, Role role, CancellationToken cancellation)
+    public async Task<bool> AssignRole(User user, string role, CancellationToken cancellation)
     {
         var token = await GetToken();
         var accessToken = token.access_token;
@@ -154,14 +154,14 @@ public class AuthZeroManagementApi : IUserManagementService
 
         List<UserRole> lst = await GetAllRoles(cancellation);
         //Role role = await GetRoleInDb(user, cancellation);
-        var result = lst.Find(c => c.name == role.Name);
+        var result = lst.Find(c => c.name == role);
 
         string[] tab = {result.id};
         AssignRolesRequest rolesRequest = new AssignRolesRequest(tab);
 
         var json = JsonConvert.SerializeObject(rolesRequest);
 
-        var response = await _httpClient.PostAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + user.AuthId + "/roles", new StringContent(json, Encoding.UTF8, "application/json"), cancellation);
+        var response = await _httpClient.PostAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + user.IdAuth + "/roles", new StringContent(json, Encoding.UTF8, "application/json"), cancellation);
 
         if (!response.IsSuccessStatusCode)
         {
