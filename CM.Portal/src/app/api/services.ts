@@ -4,4 +4,4 @@ export { GroupService } from './services/group.service';
 export { JobService } from './services/job.service';
 export { PenService } from './services/pen.service';
 export { StockService } from './services/stock.service';
-export { WorkerService } from './services/worker.service';
+export { UserManagementService } from './services/user-management.service';

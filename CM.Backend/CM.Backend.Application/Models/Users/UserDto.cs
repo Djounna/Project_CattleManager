@@ -1,14 +1,14 @@
 ﻿namespace CM.Backend.Application.Models.Users;
 
 /// <summary>
-/// user Dto
+/// User Dto
 /// </summary>
 public class UserDto
 {
     /// <summary>
     /// UserName
     /// </summary>
-    public string UserName { get; set; }
+    public string Username { get; set; }
 
     /// <summary>
     /// Email

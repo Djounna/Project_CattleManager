@@ -7,4 +7,4 @@ export { JobDto } from './models/job-dto';
 export { PenDto } from './models/pen-dto';
 export { ProblemDetails } from './models/problem-details';
 export { StockDto } from './models/stock-dto';
-export { WorkerDto } from './models/worker-dto';
+export { UserInput } from './models/user-input';

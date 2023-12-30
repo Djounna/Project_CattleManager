@@ -10,7 +10,7 @@ import { GroupService } from './services/group.service';
 import { JobService } from './services/job.service';
 import { PenService } from './services/pen.service';
 import { StockService } from './services/stock.service';
-import { WorkerService } from './services/worker.service';
+import { UserManagementService } from './services/user-management.service';
 
 /**
  * Module that provides all services and configuration.
@@ -26,7 +26,7 @@ import { WorkerService } from './services/worker.service';
     JobService,
     PenService,
     StockService,
-    WorkerService,
+    UserManagementService,
     ApiConfiguration
   ],
 })
