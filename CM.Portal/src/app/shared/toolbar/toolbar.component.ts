@@ -6,8 +6,6 @@ import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   selector: 'app-toolbar',
-  standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MenubarModule],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })

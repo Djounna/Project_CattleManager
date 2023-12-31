@@ -3,3 +3,13 @@
 @import "primeng/resources/primeng.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex-row{
+    display:flex;
+    flex-direction: row;
+}
+
+.flex-column{
+    display:flex;
+    flex-direction: column;
+}

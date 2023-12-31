@@ -1,0 +1,58 @@
+<div style="margin:3rem; display:flex; flex-direction:row">
+
+    <div style="margin:1rem;">
+        <p-dataView #dv [value]="Groups">
+            <ng-template pTemplate="list" let-groups>
+                <div class="grid grid-nogutter">
+                    <div class="col-12" *ngFor="let item of groups; let first = first">
+                        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                            <img widt="100" height="60" class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" [src]="'../../../../../assets/images/cattle/Bull_Adult_Black.jpg'" />
+                            <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                                    <div class="text-2xl font-bold text-900">{{ item.name }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView> 
+    </div>
+
+    <app-cows-list-view [Cows]="Cows"></app-cows-list-view>
+    <!-- <div style="margin: 1rem;">
+        <p-tabView>
+            <p-tabPanel header="List View">
+                <p-table [value]="Cows" [tableStyle]="{ 'min-width': '50rem'}">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Name</th>
+                            <th>Race</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-cow>
+                        <tr>
+                            <td>{{cow.identifier}}</td>
+                            <td>{{cow.name}}</td>
+                            <td>{{cow.race}}</td>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+
+            <p-tabPanel header="Card View" >
+                <div style="display:flex; flex-direction: row;">
+                    <div *ngFor="let cow of Cows" >
+                        <p-card header="{{cow.name}}" subheader="{{cow.identifier}}">
+                            <p> test test test</p>
+                        </p-card>
+                    </div>
+                </div> 
+            </p-tabPanel>
+        </p-tabView>
+    </div> -->
+
+</div>

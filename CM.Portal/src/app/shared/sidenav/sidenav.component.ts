@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { PanelMenuModule } from 'primeng/panelmenu';
-import { MenuModule } from 'primeng/menu'
 
 @Component({
     selector: 'app-sidenav',
-    standalone: true,
-    imports: [PanelMenuModule, MenuModule],
     templateUrl: './sidenav.component.html',
     styleUrl: './sidenav.component.css'
 })
@@ -46,12 +42,13 @@ export class SidenavComponent implements OnInit {
                 ]
             },
             {
-                label: 'Animals',
+                label: 'Cattle',
                 icon: 'pi pi-fw pi-pencil',
                 items:[
                     {
-                        label: 'Cows',
+                        label: 'All',
                         icon: 'pi pi-fw pi-pencil',
+                        routerLink: '/cows'
                     },
                     {
                         label: 'Groups',
