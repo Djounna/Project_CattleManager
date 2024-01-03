@@ -24,7 +24,7 @@
 
             <p-tabPanel header="Card View" >
                 <div style="display:flex; flex-direction: row;">
-                    <div *NgFor="let cow of Cows" >
+                    <div *ngFor="let cow of Cows" >
                         <p-card header="{{cow.name}}" subheader="{{cow.identifier}}">
                             <p> test test test</p>
                         </p-card>

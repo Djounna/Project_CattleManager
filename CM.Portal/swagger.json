@@ -1345,6 +1345,14 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imgLink": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
