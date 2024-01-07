@@ -27,6 +27,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Import the HTTP interceptor from the Auth0 Angular SDK
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { CattleState } from './state/cattle/cattle.state';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent, CowsPageComponent, AuthButtonComponent],
@@ -51,6 +53,9 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
         MenuModule,
         // Routing configuration
         AppRoutingModule,
+
+        //State Mgmt
+        NgxsModule.forRoot([CattleState]),
 
         //API Service
         HttpClientModule,

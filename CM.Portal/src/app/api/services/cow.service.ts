@@ -15,6 +15,18 @@ import { CowDto } from '../models/cow-dto';
   providedIn: 'root',
 })
 export class CowService extends BaseService {
+  apiGroupGet() {
+      throw new Error("Method not implemented.");
+  }
+  apiGroupPost(payload: any) {
+      throw new Error("Method not implemented.");
+  }
+  apiGroupPut(payload: any) {
+      throw new Error("Method not implemented.");
+  }
+  apiGroupDelete(arg0: { id: number; }) {
+      throw new Error("Method not implemented.");
+  }
   constructor(
     config: ApiConfiguration,
     http: HttpClient

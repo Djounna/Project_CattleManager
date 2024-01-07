@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { append, patch, removeItem, updateItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { CowDto, GroupDto } from "../../api/models";
 import { CowService, GroupService } from "../../api/services";
-import { Cows } from "./cattle.actions";
+import { Cows, Groups } from "./cattle.actions";
 
 export interface CattleStateModel{
     Cows : CowDto[],
@@ -18,14 +18,28 @@ export interface CattleStateModel{
         Groups: [] ,
     }
 })
+
 @Injectable()
 export class CattleState{
     constructor(private cowService: CowService, groupService: GroupService){}
 
+    @Selector()
+    static cows(cattleState:CattleStateModel){
+        return cattleState.Cows;
+    }
+
+    @Selector()
+    static groups(cattleState:CattleStateModel){
+        return cattleState.Groups;
+    }
+
+
+    /// Cows Actions
     @Action(Cows.GetAll)
     getAllCows(ctx: StateContext<CattleStateModel>){
         return this.cowService.apiCowGet().pipe(tap(cows=>{
-            ctx.patchState({Cows : cows})
+            debugger;
+            ctx.patchState({Cows : cows});
             })
         );
     }
@@ -58,5 +72,45 @@ export class CattleState{
                 ctx.setState(patch<CattleStateModel>({Cows : removeItem<CowDto>(c => c.id === action.id)}))
             })
         );
+    }
+    
+    /// Groups Actions
+    @Action(Groups.GetAll)
+    getAllGroups(ctx: StateContext<CattleStateModel>){
+        return this.cowService.apiGroupGet()
+        // .pipe(tap(groups=>{
+        //     ctx.patchState({Groups : groups})
+        //     })
+        // );
+    }
+
+    @Action(Groups.Create)
+    createGroup(ctx: StateContext<CattleStateModel>, action: Groups.Create){
+        return this.cowService.apiGroupPost(action.payload)
+        // .pipe(
+        //     tap(newGroup=>{
+        //         ctx.setState(patch<CattleStateModel>({Groups: append<GroupDto>([newGroup])}))
+        //     })
+        // );
+    }
+
+    @Action(Groups.Update)
+    updateGroup(ctx: StateContext<CattleStateModel>, action:Groups.Update){
+        return this.cowService.apiGroupPut(action.payload)
+        // .pipe(
+        //     tap(updatedGroup=>{
+        //         ctx.setState(patch<CattleStateModel>({Groups: updateItem<GroupDto>(c => c.id === updatedGroup.id, updatedGroup)}))
+        //     })
+        // );
+    }
+
+    @Action(Groups.Delete)
+    deleteGroup(ctx: StateContext<CattleStateModel>, action: Groups.Delete){
+        return this.cowService.apiGroupDelete({id : action.id})
+        // .pipe(
+        //     tap(deleted =>{
+        //         ctx.setState(patch<CattleStateModel>({Groups : removeItem<GroupDto>(c => c.id === action.id)}))
+        //     })
+        // );
     }
 }
