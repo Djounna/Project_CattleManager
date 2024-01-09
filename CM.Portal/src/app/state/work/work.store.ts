@@ -11,6 +11,7 @@ import { WorkStateModel } from "./work.state";
     name:'work',
     defaults:{
         Jobs : [],
+        Workers : []
     }
 })
 

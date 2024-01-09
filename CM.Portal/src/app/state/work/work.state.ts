@@ -1,7 +1,7 @@
 
-import { JobDto } from "../../api/models";
+import { JobDto, UserDto } from "../../api/models";
 
 export interface WorkStateModel{
     Jobs: JobDto[],
-    //Workers : UserDto[]
+    Workers : UserDto[]
 }
