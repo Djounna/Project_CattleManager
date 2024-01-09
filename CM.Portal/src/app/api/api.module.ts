@@ -11,6 +11,7 @@ import { JobService } from './services/job.service';
 import { PenService } from './services/pen.service';
 import { StockService } from './services/stock.service';
 import { UserManagementService } from './services/user-management.service';
+import { WorkerService } from './services/worker.service';
 
 /**
  * Module that provides all services and configuration.
@@ -27,6 +28,7 @@ import { UserManagementService } from './services/user-management.service';
     PenService,
     StockService,
     UserManagementService,
+    WorkerService,
     ApiConfiguration
   ],
 })

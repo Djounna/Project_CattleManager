@@ -6,4 +6,9 @@ namespace CM.Backend.Persistence.SQL.Repositories;
 public class UserRepository : BaseRepository<User>, IUserRepository
 {
     public UserRepository(CMContext context): base(context){}
+    
+    public IEnumerable<User> GetListWorkers()
+    {
+        return _context.Users.Where(u => u.Role.Name == "Worker");
+    }
 }

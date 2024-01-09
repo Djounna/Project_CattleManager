@@ -3,4 +3,5 @@
 namespace CM.Backend.Application.Interfaces.Persistence;
 public interface IUserRepository : IBaseRepository<User>
 {
+    IEnumerable<User> GetListWorkers();
 }
