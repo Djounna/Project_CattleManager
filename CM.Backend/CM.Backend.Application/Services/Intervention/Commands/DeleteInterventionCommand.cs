@@ -1,10 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using CM.Backend.Application.Interfaces.Persistence;
 
 namespace CM.Backend.Application.Services.Intervention.Commands;
-internal class DeleteInterventionCommand
+public record DeleteInterventionCommand(int id) : IRequest;
+
+public class DeleteInterventionCommandHandler : IRequestHandler<DeleteInterventionCommand>
 {
+    private readonly IInterventionRepository _interventionRepository;
+
+    public DeleteInterventionCommandHandler(IInterventionRepository interventionRepository)
+    {
+        _interventionRepository = interventionRepository;
+    }
+
+    public async Task Handle(DeleteInterventionCommand request, CancellationToken cancellationToken)
+    {
+        _interventionRepository.Delete(request.id);
+        _interventionRepository.Save();
+    }
 }
+

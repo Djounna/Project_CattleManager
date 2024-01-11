@@ -1,4 +1,3 @@
-
 import { JobDto, UserDto } from "../../api/models";
 
 export interface WorkStateModel{
