@@ -19,5 +19,7 @@
         </p-dataView> 
     </div> -->
 
-    <app-cows-list-view *ngIf="!!Cows" [Cows]="Cows"></app-cows-list-view>
+    <app-cows-list-view *ngIf="Cows.length > 0" [Cows]="Cows"></app-cows-list-view>
 </div>
+
+<p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>

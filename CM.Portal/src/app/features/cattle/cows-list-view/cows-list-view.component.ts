@@ -8,8 +8,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cows-list-view',
-  standalone: true,
-  imports: [ CommonModule, TableModule, TabViewModule, CardModule],
   templateUrl: './cows-list-view.component.html',
   styleUrl: './cows-list-view.component.css'
 })

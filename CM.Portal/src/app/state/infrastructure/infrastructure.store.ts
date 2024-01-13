@@ -9,7 +9,7 @@ import { Pens, Stocks } from "./infrastructure.action";
 import { Groups } from "../cattle/cattle.actions";
 
 @State<InfrastructureStateModel>({
-    name:'cattle',
+    name:'infrastructure',
     defaults:{
         Pens : [],
         Stocks: [] ,

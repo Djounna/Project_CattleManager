@@ -85,6 +85,11 @@ export class SidenavComponent implements OnInit {
                 icon: 'pi pi-fw pi-user',
                 items: [
                     {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-user-plus',
+                        routerLink: '/workers'
+                    },
+                    {
                         label: 'New',
                         icon: 'pi pi-fw pi-user-plus'
                     },

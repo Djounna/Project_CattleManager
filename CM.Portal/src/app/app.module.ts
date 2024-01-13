@@ -9,29 +9,46 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthButtonComponent } from './auth-button/auth-button.component';
-import { SidenavComponent } from './shared/sidenav/sidenav.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+
+// Import the ApiModule generatred by Ng-OpenApi-gen
+import { ApiModule } from './api/api.module';
+// Import the injector module and the HTTP client module from Angular
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// Import the HTTP interceptor from the Auth0 Angular SDK
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+
+// PrimeNgModules
 import { TableModule } from 'primeng/table';
-import { CowsPageComponent } from './screens/cows/cows-page/cows-page.component';
 import { TabViewModule } from  'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { MenubarModule } from 'primeng/menubar';
-import { MenuModule } from 'primeng/menu'
+import { MenuModule } from 'primeng/menu';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
+// Shared components
+import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+// Screens components
+import { CowsPageComponent } from './screens/cows/cows-page/cows-page.component';
+// Features components
 import { CowsListViewComponent } from "./features/cattle/cows-list-view/cows-list-view.component";
-import { ApiModule } from './api/api.module';
 
-// Import the injector module and the HTTP client module from Angular
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Import the HTTP interceptor from the Auth0 Angular SDK
-import { AuthHttpInterceptor } from '@auth0/auth0-angular';
-import { CattleState } from './state/cattle/cattle.state';
+// Ngxs Store and states
 import { NgxsModule } from '@ngxs/store';
+import { CattleState } from './state/cattle/cattle.store';
+import { InfrastructureState } from './state/infrastructure/infrastructure.store';
+import { WorkState } from './state/work/work.store';
+import { WorkersListViewComponent } from './features/work/workers-list-view/workers-list-view.component';
+import { WorkersPageComponent } from './screens/work/workers-page/workers-page.component';
 
 @NgModule({
-    declarations: [AppComponent, ToolbarComponent, SidenavComponent, CowsPageComponent, AuthButtonComponent],
+    declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
+        WorkersPageComponent, CowsPageComponent,
+        CowsListViewComponent, WorkersListViewComponent 
+    ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }],
     bootstrap: [AppComponent],
     imports: [
@@ -51,11 +68,12 @@ import { NgxsModule } from '@ngxs/store';
         DataViewModule,
         MenubarModule,
         MenuModule,
+        ProgressSpinnerModule,
         // Routing configuration
         AppRoutingModule,
 
         //State Mgmt
-        NgxsModule.forRoot([CattleState]),
+        NgxsModule.forRoot([CattleState, WorkState, InfrastructureState]),
 
         //API Service
         HttpClientModule,
@@ -90,7 +108,8 @@ import { NgxsModule } from '@ngxs/store';
                 ]
             }
         }),
-        CowsListViewComponent,
+        // CowsListViewComponent,
+        // WorkersListViewComponent,
     ]
 })
 export class AppModule {}

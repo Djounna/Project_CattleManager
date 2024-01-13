@@ -1,0 +1,32 @@
+<div style="margin: 1rem;">
+        <p-tabView>
+            <p-tabPanel header="List View">
+                <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-worker>
+                        
+                        <tr>
+                            <td>{{worker.username}}</td>
+                            <td>exemple</td>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+
+            <p-tabPanel header="Card View" >
+                <div style="display:flex; flex-direction: row;">
+                    <div *ngFor="let worker of Workers" >
+                        <p-card header="{{worker.username}}">
+                            <p> test test test</p>
+                        </p-card>
+                    </div>
+                </div> 
+            </p-tabPanel>
+        </p-tabView>
+    </div>

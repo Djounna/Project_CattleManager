@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { State, Selector, Action, StateContext } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { JobDto } from "../../api/models";
-import { JobService } from "../../api/services";
-import { Jobs } from "./work.actions";
+import { JobDto, UserDto } from "../../api/models";
+import { JobService, WorkerService } from "../../api/services";
+import { Jobs, Workers } from "./work.actions";
 import { WorkStateModel } from "./work.state";
 
 @State<WorkStateModel>({
@@ -17,11 +17,16 @@ import { WorkStateModel } from "./work.state";
 
 @Injectable()
 export class WorkState{
-    constructor(private jobService: JobService){}
+    constructor(private jobService: JobService, private workerService: WorkerService){}
 
     @Selector()
     static jobs(cattleState:WorkStateModel){
         return cattleState.Jobs;
+    }
+
+    @Selector()
+    static workers(cattleState:WorkStateModel){
+        return cattleState.Workers;
     }
 
 
@@ -29,7 +34,6 @@ export class WorkState{
     @Action(Jobs.GetAll)
     getAllJobs(ctx: StateContext<WorkStateModel>){
         return this.jobService.apiJobGet().pipe(tap(jobs=>{
-            debugger;
             ctx.patchState({Jobs : jobs});
             })
         );
@@ -64,4 +68,44 @@ export class WorkState{
             })
         );
     }
+
+    /// Workers Actions
+    @Action(Workers.GetAll)
+    getAllWorkers(ctx: StateContext<WorkStateModel>){
+        return this.workerService.apiWorkerGet().pipe(tap(workers=>{
+            debugger;
+            ctx.patchState({Workers : workers});
+            })
+        );
+    }
+
+    // @Action(Workers.Create)
+    // createWorker(ctx: StateContext<WorkStateModel>, action: Workers.Create){
+    //     return this.workerService.apiWorkerPost(action.payload)
+    //     .pipe(
+    //         tap(newWorker=>{
+    //             ctx.setState(patch<WorkStateModel>({Workers: append<UserDto>([newWorker])}))
+    //         })
+    //     );
+    // }
+
+    // @Action(Workers.Update)
+    // updateWorker(ctx: StateContext<WorkStateModel>, action:Workers.Update){
+    //     return this.workerService.apiWorkerPut(action.payload)
+    //     .pipe(
+    //         tap(updatedWorker=>{
+    //             ctx.setState(patch<WorkStateModel>({Workers: updateItem<UserDto>(c => c.id === updatedWorker.id, updatedWorker)}))
+    //         })
+    //     );
+    // }
+
+    // @Action(Workers.Delete)
+    // deleteWorker(ctx: StateContext<WorkStateModel>, action: Workers.Delete){
+    //     return this.workerService.apiWorkerDelete({id : action.id}).
+    //     pipe(
+    //         tap(deleted =>{
+    //             ctx.setState(patch<WorkStateModel>({Workers : removeItem<UserDto>(c => c.id === action.id)}))
+    //         })
+    //     );
+    // }
 }
