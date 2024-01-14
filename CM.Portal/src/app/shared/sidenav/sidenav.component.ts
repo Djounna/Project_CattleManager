@@ -24,20 +24,20 @@ export class SidenavComponent implements OnInit {
                 ]
             },
             {
-                label: 'Schedule',
+                label: 'Tasks',
                 icon: 'pi pi-fw pi-pencil',
                 items: [
                     {
-                        label: 'Calendar',
-                        icon: 'pi pi-fw pi-align-left',
-                    },
-                    {
-                        label: 'All tasks',
+                        label: 'All',
                         icon: 'pi pi-fw pi-align-left',
                     },
                     {
                         label: 'By Worker',
                         icon: 'pi pi-fw pi-align-right',
+                    },
+                    {
+                        label: 'Calendar',
+                        icon: 'pi pi-fw pi-align-left',
                     },
                 ]
             },

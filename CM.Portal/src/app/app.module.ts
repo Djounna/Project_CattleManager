@@ -25,6 +25,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+// Material
+import { MatCardModule} from '@angular/material/card';
 
 // Shared components
 import { AuthButtonComponent } from './auth-button/auth-button.component';
@@ -43,11 +45,13 @@ import { InfrastructureState } from './state/infrastructure/infrastructure.store
 import { WorkState } from './state/work/work.store';
 import { WorkersListViewComponent } from './features/work/workers-list-view/workers-list-view.component';
 import { WorkersPageComponent } from './screens/work/workers-page/workers-page.component';
+import { CowCardComponent } from './features/cattle/cow-card/cow-card.component';
+import { GroupCardComponent } from './features/cattle/group-card/group-card.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
         WorkersPageComponent, CowsPageComponent,
-        CowsListViewComponent, WorkersListViewComponent 
+        CowsListViewComponent, WorkersListViewComponent, CowCardComponent, GroupCardComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }],
     bootstrap: [AppComponent],
@@ -56,6 +60,7 @@ import { WorkersPageComponent } from './screens/work/workers-page/workers-page.c
         BrowserAnimationsModule,
         CommonModule,
         // material
+        MatCardModule,
         MatSidenavModule,
         // primeNg
         SidebarModule,

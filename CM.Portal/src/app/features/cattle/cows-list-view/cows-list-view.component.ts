@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { Table, TableModule } from 'primeng/table';
-import { TabViewModule } from 'primeng/tabview';
+import { Table } from 'primeng/table';
 import { CowDto } from '../../../api/models';
-import { CommonModule } from '@angular/common';
 
 
 @Component({
