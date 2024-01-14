@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { CowDto } from '../../../api/models';
 import { CommonModule } from '@angular/common';
@@ -14,4 +14,11 @@ import { CommonModule } from '@angular/common';
 export class CowsListViewComponent {
   @Input() Cows : CowDto[] = []
 
+  applyFilterGlobal(event: any) {
+    return event.target.value;
+  }
+
+  clear(table: Table) {
+        table.clear();
+    }
 }

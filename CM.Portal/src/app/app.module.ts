@@ -87,7 +87,7 @@ import { WorkersPageComponent } from './screens/work/workers-page/workers-page.c
                 //  Request this audience at user authentication time
                 audience: 'https://CM.WebApi',
                 //  Request this scope at user authentication time
-                scope: 'read:cows',
+                scope: 'read:cows read:jobs read:infrastructures',
             },
             httpInterceptor: {
                     allowedList: [
@@ -101,15 +101,13 @@ import { WorkersPageComponent } from './screens/work/workers-page/workers-page.c
                             audience: 'https://CM.WebApi',
 
                             // The attached token should have these scopes
-                            scope: 'read:cows'
+                            scope: 'read:cows read:jobs read:infrastructures'
                             }
                         }
                     }
                 ]
             }
         }),
-        // CowsListViewComponent,
-        // WorkersListViewComponent,
     ]
 })
 export class AppModule {}

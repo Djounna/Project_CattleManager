@@ -1,13 +1,49 @@
 <div style="margin: 1rem;">
         <p-tabView>
             <p-tabPanel header="List View">
-                <p-table [value]="Cows" [tableStyle]="{ 'min-width': '50rem'}">
+                <p-table #dt 
+                    [value]="Cows" 
+                    styleClass="p-datatable-striped" 
+                    [tableStyle]="{ 'min-width': '50rem'}" 
+                    [globalFilterFields]="['identifier','name', 'status']" 
+                    >
+
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
+                            <span class="p-input-icon-left ml-auto">
+                                <i class="pi pi-search"></i>
+                                <input pInputText #textInput type="text" 
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                            </span>
+                        </div>
+                    </ng-template>
 
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Identifiant</th>
                             <th>Name</th>
-                            <th>Race</th>
+                            <th>Race
+                                <!-- <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="header">
+                                        <div class="px-3 pt-3 pb-0">
+                                            <span class="font-bold">Agent Picker</span>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="inline-block vertical-align-middle">
+                                                    <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
+                                                    <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter> -->
+
+
+                            </th>
                             <th>Naissance</th>
                             <th>Groupe</th>
                         </tr>
@@ -21,6 +57,7 @@
                             <td>{{cow.race}}</td>
                             <td>{{cow.birthDate}}</td>
                             <td>exemple</td>
+                        </tr>
                     </ng-template>
 
                 </p-table>
