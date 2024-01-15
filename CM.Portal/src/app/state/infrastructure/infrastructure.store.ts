@@ -35,7 +35,6 @@ export class InfrastructureState{
     @Action(Pens.GetAll)
     getAllPens(ctx: StateContext<InfrastructureStateModel>){
         return this.penService.apiPenGet().pipe(tap(pens=>{
-            debugger;
             ctx.patchState({Pens : pens});
             })
         );

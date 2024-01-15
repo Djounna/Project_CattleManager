@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
@@ -47,13 +47,17 @@ import { WorkersListViewComponent } from './features/work/workers-list-view/work
 import { WorkersPageComponent } from './screens/work/workers-page/workers-page.component';
 import { CowCardComponent } from './features/cattle/cow-card/cow-card.component';
 import { GroupCardComponent } from './features/cattle/group-card/group-card.component';
+import { AlertListComponent } from './features/alerts/alert-list/alert-list.component';
+import { DashboardComponent } from './screens/dashboard/dashboard.component';
+import { JobListViewComponent } from './features/work/job-list-view/job-list-view.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
-        WorkersPageComponent, CowsPageComponent,
-        CowsListViewComponent, WorkersListViewComponent, CowCardComponent, GroupCardComponent
+        WorkersPageComponent, CowsPageComponent, DashboardComponent,
+        CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent,
+        AlertListComponent, JobListViewComponent
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,

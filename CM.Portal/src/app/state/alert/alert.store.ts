@@ -8,7 +8,7 @@ import { Alerts } from "./alert.action";
 import { AlertStateModel } from "./alert.state";
 
 @State<AlertStateModel>({
-    name:'cattle',
+    name:'alerts',
     defaults:{
         Alerts : [],
     }
@@ -19,7 +19,7 @@ export class AlertState{
     constructor(private alertService: AlertService){}
 
     @Selector()
-    static cows(alertState:AlertStateModel){
+    static alerts(alertState:AlertStateModel){
         return alertState.Alerts;
     }
 
@@ -27,7 +27,6 @@ export class AlertState{
     @Action(Alerts.GetAll)
     getAllAlerts(ctx: StateContext<AlertStateModel>){
         return this.alertService.apiAlertGet().pipe(tap(alerts=>{
-            debugger;
             ctx.patchState({Alerts : alerts});
             })
         );

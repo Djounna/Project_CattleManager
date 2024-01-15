@@ -11,18 +11,17 @@ import { Workers } from '../../../state/work/work.actions';
   templateUrl: './workers-page.component.html',
   styleUrl: './workers-page.component.css'
 })
-export class WorkersPageComponent extends BaseComponent implements OnInit {
+export class WorkersPageComponent extends BaseComponent{
 
   @Select(WorkState.workers) Workers$! : Observable<UserDto[]>
   public Workers : UserDto[] = [];
 
-  ngOnInit(): void{
+  override ngOnInit(): void{
 
     this.displayLoader = true;
 
     this.Workers$.pipe(takeUntil(this.$Destroyed)).subscribe({
       next:(workers) => {
-        debugger;
         this.Workers = workers;
         this.displayLoader = false
       }

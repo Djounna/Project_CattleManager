@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { Subject } from "rxjs";
 
@@ -6,12 +6,14 @@ import { Subject } from "rxjs";
     selector: 'app-base',
     template: `<div> base works!!  </div>`
 })
-export class BaseComponent implements OnDestroy {
+export class BaseComponent implements OnInit, OnDestroy {
 
     constructor(protected store: Store){}
 
     protected $Destroyed : Subject<void> = new Subject<void>();
     protected displayLoader : boolean = false;
+
+    ngOnInit(): void{}
 
     ngOnDestroy(): void {
         this.$Destroyed.next();

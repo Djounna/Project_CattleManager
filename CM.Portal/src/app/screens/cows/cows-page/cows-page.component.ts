@@ -11,14 +11,14 @@ import { BaseComponent } from '../../../shared/base-component.component';
   templateUrl: './cows-page.component.html',
   styleUrl: './cows-page.component.css'
 })
-export class CowsPageComponent extends BaseComponent implements OnInit{
+export class CowsPageComponent extends BaseComponent{
 
   @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
   public Cows : CowDto[] = []
   @Select(CattleState.groups) Groups$! : Observable<GroupDto[]>
   public Groups: GroupDto[] = [];
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
 
     this.displayLoader = true;
 

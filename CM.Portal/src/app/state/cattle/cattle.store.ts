@@ -34,7 +34,6 @@ export class CattleState{
     @Action(Cows.GetAll)
     getAllCows(ctx: StateContext<CattleStateModel>){
         return this.cowService.apiCowGet().pipe(tap(cows=>{
-            debugger;
             ctx.patchState({Cows : cows});
             })
         );

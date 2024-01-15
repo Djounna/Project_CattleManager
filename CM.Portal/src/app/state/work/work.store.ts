@@ -73,7 +73,6 @@ export class WorkState{
     @Action(Workers.GetAll)
     getAllWorkers(ctx: StateContext<WorkStateModel>){
         return this.workerService.apiWorkerGet().pipe(tap(workers=>{
-            debugger;
             ctx.patchState({Workers : workers});
             })
         );

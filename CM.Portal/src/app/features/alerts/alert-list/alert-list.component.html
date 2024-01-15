@@ -1,0 +1,23 @@
+<div style="margin: 1rem;">
+    <p-tabView>
+        <p-tabPanel header="Alerts">
+            <p-table [value]="Alerts" [tableStyle]="{ 'min-width': '20rem'}">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-alert>
+                    <tr>
+                        <td>{{alert.title}}</td>
+                        <td>{{alert.description}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-tabPanel>
+    </p-tabView>
+</div>

@@ -1,6 +1,6 @@
 <div style="margin: 1rem;">
         <p-tabView>
-            <p-tabPanel header="List View">
+            <p-tabPanel header="Workers list">
                 <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
 
                     <ng-template pTemplate="header">
@@ -10,16 +10,15 @@
                     </ng-template>
 
                     <ng-template pTemplate="body" let-worker>
-                        
                         <tr>
                             <td>{{worker.username}}</td>
-                            <td>exemple</td>
+                        </tr>
                     </ng-template>
 
                 </p-table>
             </p-tabPanel>
 
-            <p-tabPanel header="Card View" >
+            <!-- <p-tabPanel header="Workers cards" >
                 <div style="display:flex; flex-direction: row;">
                     <div *ngFor="let worker of Workers" >
                         <p-card header="{{worker.username}}">
@@ -27,6 +26,6 @@
                         </p-card>
                     </div>
                 </div> 
-            </p-tabPanel>
+            </p-tabPanel> -->
         </p-tabView>
     </div>

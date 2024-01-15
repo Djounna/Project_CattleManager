@@ -1,18 +1,18 @@
 <app-toolbar></app-toolbar>
 
 <div class="main">
-<mat-sidenav-container autosize style="height:100%">
-    <mat-sidenav [opened]="true" mode="side">
-        <aside class="sidenav">
-            <app-sidenav></app-sidenav>
-        </aside>
-    </mat-sidenav>
+    <mat-sidenav-container autosize style="height:100%">
+        <mat-sidenav [opened]="true" mode="side">
+            <aside class="sidenav">
+                <app-sidenav></app-sidenav>
+            </aside>
+        </mat-sidenav>
 
-    <mat-sidenav-content>
-        <div class="main-content">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+        <mat-sidenav-content>
+            <div class="main-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 
 </div>
