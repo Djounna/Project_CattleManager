@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Selector, Action, StateContext, State } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { CowDto, GroupDto } from "../../api/models";
-import { CowService, GroupService } from "../../api/services";
-import { Cows, Groups } from "./cattle.actions";
+import { CowDto, GestationDto, GroupDto, InterventionDto } from "../../api/models";
+import { CowService, GestationService, GroupService, InterventionService } from "../../api/services";
+import { Cows, Gestations, Groups, Interventions } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 
 @State<CattleStateModel>({
@@ -19,7 +19,7 @@ import { CattleStateModel } from "./cattle.state";
 
 @Injectable()
 export class CattleState{
-    constructor(private cowService: CowService, private groupService: GroupService){}
+    constructor(private cowService: CowService, private groupService: GroupService, private gestationService: GestationService, private interventionService: InterventionService){}
 
     @Selector()
     static cows(cattleState:CattleStateModel){

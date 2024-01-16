@@ -1,4 +1,4 @@
-import { CowDto, GroupDto } from "../../api/models";
+import { CowDto, GestationDto, GroupDto, InterventionDto } from "../../api/models";
 
 export interface CattleStateModel{
     Cows : CowDto[],

@@ -39,3 +39,46 @@ export namespace Groups{
         constructor(public id: number){}
     }
 }
+
+export namespace Gestations{
+    export class Create{
+        static readonly type = '[Gestations] Create Gestation'
+        constructor(public payload : any){}
+    }
+
+    export class Update{
+        static readonly type = '[Gestations] Update Gestation'
+        constructor(public payload : any){}
+    }
+
+    export class GetAll{
+        static readonly type ='[Gestations] Get All Gestations'
+    }
+
+    export class Delete{
+        static readonly type = '[Gestations] Delete Gestation'
+        constructor(public id: number){}
+    }
+}
+
+
+export namespace Interventions{
+    export class Create{
+        static readonly type = '[Interventions] Create Intervention'
+        constructor(public payload : any){}
+    }
+
+    export class Update{
+        static readonly type = '[Interventions] Update Intervention'
+        constructor(public payload : any){}
+    }
+
+    export class GetAll{
+        static readonly type ='[Interventions] Get All Interventions'
+    }
+
+    export class Delete{
+        static readonly type = '[Interventions] Delete Intervention'
+        constructor(public id: number){}
+    }
+}
