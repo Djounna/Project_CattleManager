@@ -12,6 +12,8 @@ import { CattleStateModel } from "./cattle.state";
     defaults:{
         Cows : [],
         Groups: [] ,
+        Gestations: [],
+        Interventions : [],
     }
 })
 
@@ -29,6 +31,15 @@ export class CattleState{
         return cattleState.Groups;
     }
 
+    @Selector()
+    static gestations(cattleState:CattleStateModel){
+        return cattleState.Gestations;
+    }
+
+    @Selector()
+    static interventions(cattleState:CattleStateModel){
+        return cattleState.Interventions;
+    }
 
     /// Cows Actions
     @Action(Cows.GetAll)
@@ -105,6 +116,88 @@ export class CattleState{
         .pipe(
             tap(deleted =>{
                 ctx.setState(patch<CattleStateModel>({Groups : removeItem<GroupDto>(c => c.id === action.id)}))
+            })
+        );
+    }
+
+
+    /// Gestations Actions
+    @Action(Gestations.GetAll)
+    getAllGestations(ctx: StateContext<CattleStateModel>){
+        return this.gestationService.apiGestationGet()
+        .pipe(tap(gestations=>{
+            ctx.patchState({Gestations : gestations})
+            })
+        );
+    }
+
+    @Action(Gestations.Create)
+    createGestation(ctx: StateContext<CattleStateModel>, action: Gestations.Create){
+        return this.gestationService.apiGestationPost(action.payload)
+        .pipe(
+            tap(newGestation=>{
+                ctx.setState(patch<CattleStateModel>({Gestations: append<GestationDto>([newGestation])}))
+            })
+        );
+    }
+
+    @Action(Gestations.Update)
+    updateGestation(ctx: StateContext<CattleStateModel>, action:Gestations.Update){
+        return this.gestationService.apiGestationPut(action.payload)
+        .pipe(
+            tap(updatedGestation=>{
+                ctx.setState(patch<CattleStateModel>({Gestations: updateItem<GestationDto>(c => c.id === updatedGestation.id, updatedGestation)}))
+            })
+        );
+    }
+
+    @Action(Gestations.Delete)
+    deleteGestation(ctx: StateContext<CattleStateModel>, action: Gestations.Delete){
+        return this.gestationService.apiGestationDelete({id : action.id})
+        .pipe(
+            tap(deleted =>{
+                ctx.setState(patch<CattleStateModel>({Gestations : removeItem<GestationDto>(c => c.id === action.id)}))
+            })
+        );
+    }
+
+
+    /// Interventions Actions
+    @Action(Interventions.GetAll)
+    getAllInterventions(ctx: StateContext<CattleStateModel>){
+        return this.interventionService.apiInterventionGet()
+        .pipe(tap(interventions=>{
+            ctx.patchState({Interventions : interventions})
+            })
+        );
+    }
+
+    @Action(Interventions.Create)
+    createIntervention(ctx: StateContext<CattleStateModel>, action: Interventions.Create){
+        return this.interventionService.apiInterventionPost(action.payload)
+        .pipe(
+            tap(newIntervention=>{
+                ctx.setState(patch<CattleStateModel>({Interventions: append<InterventionDto>([newIntervention])}))
+            })
+        );
+    }
+
+    @Action(Interventions.Update)
+    updateIntervention(ctx: StateContext<CattleStateModel>, action:Interventions.Update){
+        return this.interventionService.apiInterventionPut(action.payload)
+        .pipe(
+            tap(updatedIntervention=>{
+                ctx.setState(patch<CattleStateModel>({Interventions: updateItem<InterventionDto>(c => c.id === updatedIntervention.id, updatedIntervention)}))
+            })
+        );
+    }
+
+    @Action(Interventions.Delete)
+    deleteIntervention(ctx: StateContext<CattleStateModel>, action: Interventions.Delete){
+        return this.interventionService.apiInterventionDelete({id : action.id})
+        .pipe(
+            tap(deleted =>{
+                ctx.setState(patch<CattleStateModel>({Interventions : removeItem<InterventionDto>(c => c.id === action.id)}))
             })
         );
     }

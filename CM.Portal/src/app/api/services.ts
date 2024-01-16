@@ -1,7 +1,12 @@
 export { AlertService } from './services/alert.service';
 export { CowService } from './services/cow.service';
+export { GestationService } from './services/gestation.service';
 export { GroupService } from './services/group.service';
+export { IntervenantService } from './services/intervenant.service';
+export { InterventionService } from './services/intervention.service';
 export { JobService } from './services/job.service';
+export { MilkingService } from './services/milking.service';
+export { MilkProductionService } from './services/milk-production.service';
 export { PenService } from './services/pen.service';
 export { StockService } from './services/stock.service';
 export { UserManagementService } from './services/user-management.service';

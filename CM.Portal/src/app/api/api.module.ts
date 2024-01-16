@@ -6,8 +6,13 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AlertService } from './services/alert.service';
 import { CowService } from './services/cow.service';
+import { GestationService } from './services/gestation.service';
 import { GroupService } from './services/group.service';
+import { IntervenantService } from './services/intervenant.service';
+import { InterventionService } from './services/intervention.service';
 import { JobService } from './services/job.service';
+import { MilkingService } from './services/milking.service';
+import { MilkProductionService } from './services/milk-production.service';
 import { PenService } from './services/pen.service';
 import { StockService } from './services/stock.service';
 import { UserManagementService } from './services/user-management.service';
@@ -23,8 +28,13 @@ import { WorkerService } from './services/worker.service';
   providers: [
     AlertService,
     CowService,
+    GestationService,
     GroupService,
+    IntervenantService,
+    InterventionService,
     JobService,
+    MilkingService,
+    MilkProductionService,
     PenService,
     StockService,
     UserManagementService,
