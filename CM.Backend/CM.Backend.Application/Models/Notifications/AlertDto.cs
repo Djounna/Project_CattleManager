@@ -9,14 +9,21 @@ public class AlertDto
     /// Id
     /// </summary>
     public int Id { get; set; }
+
     /// <summary>
     /// Title
     /// </summary>
     public string Title { get; set; }
+
     /// <summary>
     /// Description
     /// </summary>
     public string Description { get; set; }
+
+    /// <summary>
+    /// Level 
+    /// </summary>
+    public string Level { get; set; }
 
     /// <summary>
     /// Cow Id

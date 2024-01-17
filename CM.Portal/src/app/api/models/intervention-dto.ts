@@ -7,4 +7,6 @@ export interface InterventionDto {
   description?: null | string;
   id?: number;
   intervenantId?: number;
+  status?: null | string;
+  type?: null | string;
 }

@@ -2237,6 +2237,10 @@
             "type": "string",
             "nullable": true
           },
+          "level": {
+            "type": "string",
+            "nullable": true
+          },
           "cowId": {
             "type": "integer",
             "format": "int32",
@@ -2419,6 +2423,14 @@
           "intervenantId": {
             "type": "integer",
             "format": "int32"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
           },
           "date": {
             "$ref": "#/components/schemas/DateOnly"
