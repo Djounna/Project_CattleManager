@@ -2449,7 +2449,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "name": {
+          "title": {
             "type": "string",
             "nullable": true
           },
@@ -2463,7 +2463,8 @@
           },
           "length": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "recurringJobId": {
             "type": "integer",

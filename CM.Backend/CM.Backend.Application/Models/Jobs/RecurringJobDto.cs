@@ -13,7 +13,7 @@ public class RecurringJobDto
     /// <summary>
     /// Name
     /// </summary>
-    public string Name { get; set; }
+    public string Title { get; set; }
 
     /// <summary>
     /// Description
@@ -23,5 +23,5 @@ public class RecurringJobDto
     /// <summary>
     /// Excpected length (in hours)
     /// </summary>
-    public int Length { get; set; }
+    public int? Length { get; set; }
 }

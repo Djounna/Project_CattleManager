@@ -12,7 +12,7 @@ public class JobDto
     /// <summary>
     /// Name
     /// </summary>
-    public string Name { get; set; }
+    public string Title { get; set; }
     /// <summary>
     /// Description
     /// </summary>
@@ -24,7 +24,7 @@ public class JobDto
     /// <summary>
     /// Excpected length (in hours)
     /// </summary>
-    public int Length { get; set; }
+    public int? Length { get; set; }
     /// <summary>
     /// Recurring Job Id
     /// </summary>

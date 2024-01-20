@@ -5,11 +5,11 @@ using CM.Backend.Domain.Infrastructures;
 namespace CM.Backend.Domain.Jobs;
 public class Job : BaseEntity
 {
-    public string Name { get; set; }
+    public string Title { get; set; }
     public string Description { get; set; }
     public string Status { get; set; }
 
-    public int Length { get; set; }
+    public int? Length { get; set; }
     public int? RecurringJobId { get; set; }
     public virtual RecurringJob RecurringJob { get; set; }
     public int? PenId { get; set; }
