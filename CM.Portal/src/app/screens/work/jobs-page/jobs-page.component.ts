@@ -34,7 +34,6 @@ export class JobsPageComponent extends BaseComponent {
     finalize(() => this.displayLoader = false))
     .subscribe({
       next:(jobs) => {
-        debugger;
         this.Jobs = jobs;
         this.displayLoader = false
       }
@@ -45,7 +44,6 @@ export class JobsPageComponent extends BaseComponent {
     finalize(() => this.displayLoader = false))
     .subscribe({
       next:(cows) => {
-        debugger;
         this.Cows = cows;
       }
     });
@@ -54,7 +52,6 @@ export class JobsPageComponent extends BaseComponent {
     takeUntil(this.$Destroyed))
     .subscribe({
       next:(pens) => {
-        debugger;
         this.Pens = pens;
       }
     });
@@ -67,14 +64,19 @@ export class JobsPageComponent extends BaseComponent {
   // Test
   createJobDialog(): void {
     const dialogRef = this.dialog.open(CreateJobDialogComponent, {
-      height: '300px',
-      width: '300px',
+      height: '400px',
+      width: '700px',
       data: {Cows: this.Cows, Pens: this.Pens},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       debugger;
-      this.store.dispatch(new Jobs.Create({body:result}));
+      if(result == null)
+        return;
+      this.store.dispatch(new Jobs.Create({body:result})).subscribe({
+        next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
+        error:() => this.toastError("Une erreur s'est produite")
+      });
     });
   }
 }

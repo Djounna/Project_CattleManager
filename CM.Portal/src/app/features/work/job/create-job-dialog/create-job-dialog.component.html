@@ -1,29 +1,36 @@
 <div>
     <form  [formGroup]="jobForm">
-        <div class="form_base">
-            <mat-form-field>
-                <mat-label>Titre</mat-label>
-                <input matInput id="title" type="text" formControlName="title">
-            </mat-form-field>
-            <!-- <label for="title">Titre</label>
-            <input type="text" pInputText formControlName="name"> -->
-            <mat-form-field>
-                <mat-label>Description</mat-label>
-                <input matInput id="description" type="text" formControlName="description">
-            </mat-form-field>
-            <!-- <label for="description">Description</label>
-            <input type="text" pInputText formControlName="description"> -->
-            <mat-form-field>
-                <mat-label>Durée</mat-label>
-                <input matInput id="length" type="number" formControlName="length">
-            </mat-form-field>
-            <!-- <label for="length">Durée</label>
-            <input type="number" pInputText formControlName="length"> -->
+        <div class="flex flex-row">
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="title">Titre</label>
+                    <input pInputText id="title" formControlName="title" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="description">Description</label>
+                    <textarea rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="length">Durée</label>
+                    <p-inputNumber inputId="integeronly" formControlName="length"> </p-inputNumber>
+                </div>
+            </div>
+
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="pen">Enclos</label>
+                    <p-dropdown 
+                        [options]="data.Pens" formControlName="pen" optionLabel="name" 
+                        [showClear]="true" placeholder="Choisissez un enclos">
+                    </p-dropdown>
+                </div>
+            </div>
+            
         </div>
-        
+
         <div class="flex-row justify-content-end">
-            <p-button label="Annuler" (click)="OnCancel()"></p-button>
-            <p-button label="Confirmer" (click)="OnCreate()"></p-button>
+            <p-button label="Annuler" [text]="true" severity="warning" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [text]="true" [disabled]="!jobForm.valid" (click)="OnCreate()"></p-button>
         </div>
 
     </form>

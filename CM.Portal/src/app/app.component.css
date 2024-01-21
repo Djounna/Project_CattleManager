@@ -8,5 +8,6 @@
 .main-content{
     flex-grow: 1;
     height: 100%;
-    padding: 2rem 1rem 2rem 1rem;
+    width: 100%;
+    padding: 1rem;
 }

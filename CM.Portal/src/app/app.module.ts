@@ -54,6 +54,9 @@ import { InterventionListComponent } from './features/cattle/intervention/interv
 import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
 import { AlertState } from './state/alert/alert.store';
 import { MilkingState } from './state/milking/milking.store';
+import { DividerModule } from 'primeng/divider';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -61,7 +64,7 @@ import { MilkingState } from './state/milking/milking.store';
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -73,7 +76,8 @@ import { MilkingState } from './state/milking/milking.store';
         // primeNg
         SidebarModule,
         PanelMenuModule,
-
+        DividerModule,
+        ToastModule,
         ButtonModule,
         TableModule,
         TabViewModule,
@@ -121,6 +125,6 @@ import { MilkingState } from './state/milking/milking.store';
                 ]
             }
         }),
-    ]
+    ],
 })
 export class AppModule {}
