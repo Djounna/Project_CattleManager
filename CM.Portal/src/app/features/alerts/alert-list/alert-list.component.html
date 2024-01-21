@@ -11,7 +11,7 @@
                 </ng-template>
 
                 <ng-template pTemplate="body" let-alert>
-                    <tr>
+                    <tr [ngStyle]="{'background-color' : alert.level === 'urgent' ? 'var(yellow-400)' : 'var(yellow-50)'}">
                         <td>{{alert.title}}</td>
                         <td>{{alert.description}}</td>
                     </tr>

@@ -50,12 +50,16 @@ import { GroupCardComponent } from './features/cattle/group-card/group-card.comp
 import { AlertListComponent } from './features/alerts/alert-list/alert-list.component';
 import { DashboardComponent } from './screens/dashboard/dashboard.component';
 import { JobListViewComponent } from './features/work/job-list-view/job-list-view.component';
+import { InterventionListComponent } from './features/cattle/intervention/intervention-list/intervention-list.component';
+import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
+import { AlertState } from './state/alert/alert.store';
+import { MilkingState } from './state/milking/milking.store';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
-        WorkersPageComponent, CowsPageComponent, DashboardComponent,
+        WorkersPageComponent, CowsPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent,
-        AlertListComponent, JobListViewComponent
+        AlertListComponent, JobListViewComponent, InterventionListComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard],
     bootstrap: [AppComponent],
@@ -82,7 +86,7 @@ import { JobListViewComponent } from './features/work/job-list-view/job-list-vie
         AppRoutingModule,
 
         //State Mgmt
-        NgxsModule.forRoot([CattleState, WorkState, InfrastructureState]),
+        NgxsModule.forRoot([AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
 
         //API Service
         HttpClientModule,
@@ -96,7 +100,7 @@ import { JobListViewComponent } from './features/work/job-list-view/job-list-vie
                 //  Request this audience at user authentication time
                 audience: 'https://CM.WebApi',
                 //  Request this scope at user authentication time
-                scope: 'read:cows read:jobs read:infrastructures',
+                scope: 'read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures',
             },
             httpInterceptor: {
                     allowedList: [
@@ -110,7 +114,7 @@ import { JobListViewComponent } from './features/work/job-list-view/job-list-vie
                             audience: 'https://CM.WebApi',
 
                             // The attached token should have these scopes
-                            scope: 'read:cows read:jobs read:infrastructures'
+                            scope: 'read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures'
                             }
                         }
                     }

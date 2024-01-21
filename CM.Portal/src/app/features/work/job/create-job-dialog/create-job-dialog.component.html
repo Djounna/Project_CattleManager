@@ -1,0 +1,30 @@
+<div>
+    <form  [formGroup]="jobForm">
+        <div class="form_base">
+            <mat-form-field>
+                <mat-label>Titre</mat-label>
+                <input matInput id="title" type="text" formControlName="title">
+            </mat-form-field>
+            <!-- <label for="title">Titre</label>
+            <input type="text" pInputText formControlName="name"> -->
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput id="description" type="text" formControlName="description">
+            </mat-form-field>
+            <!-- <label for="description">Description</label>
+            <input type="text" pInputText formControlName="description"> -->
+            <mat-form-field>
+                <mat-label>Durée</mat-label>
+                <input matInput id="length" type="number" formControlName="length">
+            </mat-form-field>
+            <!-- <label for="length">Durée</label>
+            <input type="number" pInputText formControlName="length"> -->
+        </div>
+        
+        <div class="flex-row justify-content-end">
+            <p-button label="Annuler" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" (click)="OnCreate()"></p-button>
+        </div>
+
+    </form>
+</div>

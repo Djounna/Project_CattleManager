@@ -1,0 +1,25 @@
+<div style="margin: 1rem;">
+    <p-tabView>
+        <p-tabPanel header="Interventions">
+            <p-table [value]="Interventions" [tableStyle]="{ 'min-width': '20rem'}">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-intervention>
+                    <tr>
+                        <td>{{intervention.cowId}}</td>
+                        <td>{{intervention.type}}</td>
+                        <td>{{intervention.date}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-tabPanel>
+    </p-tabView>
+</div>
