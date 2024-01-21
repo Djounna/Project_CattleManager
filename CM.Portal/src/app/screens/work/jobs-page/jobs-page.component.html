@@ -1,0 +1,9 @@
+<div style="margin:3rem; display:flex; flex-direction:row">
+    <app-job-list-view *ngIf="Jobs.length > 0" [Jobs]="Jobs"></app-job-list-view>
+</div>
+
+<div>
+    <p-button label="Créer" (click)="createJobDialog()" ></p-button> 
+</div>
+
+<p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>

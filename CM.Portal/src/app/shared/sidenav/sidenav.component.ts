@@ -30,6 +30,7 @@ export class SidenavComponent implements OnInit {
                     {
                         label: 'All',
                         icon: 'pi pi-fw pi-align-left',
+                        routerLink:'/jobs'
                     },
                     {
                         label: 'By Worker',

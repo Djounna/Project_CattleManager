@@ -1,5 +1,9 @@
 <div style="margin:3rem; display:flex; flex-direction:row">
-    <app-workers-list-view *ngIf="Workers.length > 0" [Workers]="Workers"></app-workers-list-view>
+    @if(Workers.length > 0){
+        <app-workers-list-view *ngIf="Workers.length > 0" [Workers]="Workers"></app-workers-list-view>
+    }
+    @else{
+        <p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>
+    }
 </div>
 
-<p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>

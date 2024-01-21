@@ -21,12 +21,12 @@ export class InfrastructureState{
     constructor(private penService: PenService, private stockService: StockService){}
 
     @Selector()
-    static cows(cattleState:InfrastructureStateModel){
+    static pens(cattleState:InfrastructureStateModel){
         return cattleState.Pens;
     }
 
     @Selector()
-    static groups(cattleState:InfrastructureStateModel){
+    static stocks(cattleState:InfrastructureStateModel){
         return cattleState.Stocks;
     }
 

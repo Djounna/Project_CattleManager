@@ -44,6 +44,7 @@ export class WorkState{
         return this.jobService.apiJobPost(action.payload)
         .pipe(
             tap(newJob=>{
+                debugger;
                 ctx.setState(patch<WorkStateModel>({Jobs: append<JobDto>([newJob])}))
             })
         );

@@ -8,17 +8,17 @@ public record GetJobsQuery() : IRequest<IList<JobDto>>;
 
 public class GetJobsQueryHandler : IRequestHandler<GetJobsQuery, IList<JobDto>>
 {
-    private readonly IJobRepository _alertRepository;
+    private readonly IJobRepository _jobRepository;
     private readonly IMapper _mapper;
 
-    public GetJobsQueryHandler(IJobRepository alertRepository, IMapper mapper)
+    public GetJobsQueryHandler(IJobRepository jobRepository, IMapper mapper)
     {
-        _alertRepository = alertRepository;
+        _jobRepository = jobRepository;
         _mapper = mapper;
     }
 
     public async Task<IList<JobDto>> Handle(GetJobsQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<IList<JobDto>>(_alertRepository.GetList()); // , cancellationToken
+       return _mapper.Map<IList<JobDto>>(_jobRepository.GetList()); // , cancellationToken
     }
 }

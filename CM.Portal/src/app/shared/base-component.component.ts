@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngxs/store";
 import { Subject } from "rxjs";
 
@@ -8,7 +9,7 @@ import { Subject } from "rxjs";
 })
 export class BaseComponent implements OnInit, OnDestroy {
 
-    constructor(protected store: Store){}
+    constructor(protected store: Store, protected dialog: MatDialog){}
 
     protected $Destroyed : Subject<void> = new Subject<void>();
     protected displayLoader : boolean = false;
