@@ -1,27 +1,25 @@
-<div>
-    <p-tabView>
-        <p-tabPanel header="Jobs list">
-            <p-table [value]="Jobs" [tableStyle]="{ 'min-width': '30rem'}">
+<div class="panel_border">
+    <p-panel header="Tâches">
+        <p-table [value]="Jobs" [tableStyle]="{ 'min-width': '30rem'}">
 
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Titre</th>
-                        <th>Description</th>
-                        <th>Durée</th>
-                        <th>Statut</th>
-                    </tr>
-                </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Durée</th>
+                    <th>Statut</th>
+                </tr>
+            </ng-template>
 
-                <ng-template pTemplate="body" let-job>
-                    <tr>
-                        <td>{{job.title}}</td>
-                        <td>{{job.description}}</td>
-                        <td>{{job.length}}</td>
-                        <td>{{job.status}}</td>
-                    </tr>
-                </ng-template>
+            <ng-template pTemplate="body" let-job>
+                <tr>
+                    <td>{{job.title}}</td>
+                    <td>{{job.description}}</td>
+                    <td>{{job.length}}</td>
+                    <td>{{job.status}}</td>
+                </tr>
+            </ng-template>
 
-            </p-table>
-        </p-tabPanel>
-    </p-tabView>
+        </p-table>
+    </p-panel>
 </div>

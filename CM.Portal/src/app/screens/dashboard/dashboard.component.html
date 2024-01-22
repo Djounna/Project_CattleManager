@@ -1,4 +1,21 @@
-<div class="flex-row">
-    <app-job-list-view [Jobs]="Jobs" class="flex-grow-2" ></app-job-list-view>
-    <app-alert-list [Alerts]="Alerts" class="flex-grow-1"></app-alert-list>
+<div style="margin-right:3rem; margin-left:3rem; margin-bottom:1rem; margin-top:1rem; display:flex; flex-direction:column">
+
+    <div class="flex flex-row justify-content-between gap-5">
+        <div class="flex flex-column flex-grow-2">
+            <div class="flex flex-row justify-content-between align-content-center">
+                <h1>Dashboard</h1>
+            </div>
+            <p-divider></p-divider>
+            <div class="flex flex-column gap-2">
+                <app-job-list-view [Jobs]="Jobs" class="flex-grow-2" ></app-job-list-view>
+            </div>
+        </div>
+
+        <p-divider layout="vertical"></p-divider>
+
+        <div class="fles flex-column gap-3">
+            <app-alert-list [Alerts]="Alerts"></app-alert-list>
+            <app-gestations-list [Gestations]="Gestations"></app-gestations-list>
+        </div>
+    </div>
 </div>

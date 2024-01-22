@@ -56,13 +56,15 @@ import { AlertState } from './state/alert/alert.store';
 import { MilkingState } from './state/milking/milking.store';
 import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
+import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
+import { GestationsListComponent } from './features/cattle/gestation/gestations-list/gestations-list.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
         WorkersPageComponent, CowsPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent,
-        AlertListComponent, JobListViewComponent, InterventionListComponent
+        AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent,
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService],
     bootstrap: [AppComponent],
@@ -86,6 +88,7 @@ import { MessageService } from 'primeng/api';
         MenubarModule,
         MenuModule,
         ProgressSpinnerModule,
+        PanelModule,
         // Routing configuration
         AppRoutingModule,
 
