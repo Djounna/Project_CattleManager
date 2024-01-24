@@ -2,23 +2,19 @@
 
     <div class="flex flex-row justify-content-between align-content-center">
         <h1>Bétail</h1>
-        <div class="flex flex-row justify-content-end gap-2">
-            <p-button label="Ajouter groupe"></p-button> 
-            <p-button label="Ajouter animal "></p-button> 
+        <div class="flex flex-row justify-content-end gap-3">
+            <!-- <p-button label="Ajouter groupe"></p-button>  -->
+            <p-button label="Ajouter animal" (click)="createCowDialog()"></p-button> 
         </div>
     </div>
 
     <p-divider></p-divider>
 
-    <p-panel header = Groupes>
-        <div class="flex flex-row m-2" *ngIf="Groups.length > 0">
-            <div class="m-1" *ngFor="let group of Groups">
-                <app-group-card [Group]="group"></app-group-card>
-            </div>
-        </div>
-    </p-panel>
+    <div class="gap-4">
+        <!-- <app-group-card-view [Groups]="Groups"></app-group-card-view> -->
+        <app-cows-list-view [Cows]="Cows"></app-cows-list-view>
+    </div>
 
-    <app-cows-list-view *ngIf="Cows.length > 0" [Cows]="Cows"></app-cows-list-view>
 </div>
 
 <p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>

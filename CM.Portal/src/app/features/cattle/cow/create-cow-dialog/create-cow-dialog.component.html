@@ -1,0 +1,37 @@
+<div>
+    <form  [formGroup]="cowForm">
+        <div class="flex flex-row">
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="identifier">Identifiant</label>
+                    <input pInputText id="identifier" formControlName="identifier" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="name">Nom</label>
+                    <input pInputText id="name" formControlName="name" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="birthdate">Date de naissance</label>
+                    <p-calendar formControlName="birthdate"></p-calendar>
+                </div>
+            </div>
+
+            <!-- <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="pen">Enclos</label>
+                    <p-dropdown 
+                        [options]="data.Pens" formControlName="pen" optionLabel="name" 
+                        [showClear]="true" placeholder="Choisissez un enclos">
+                    </p-dropdown>
+                </div>
+            </div> -->
+            
+        </div>
+
+        <div class="flex-row justify-content-end">
+            <p-button label="Annuler" [text]="true" severity="warning" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [text]="true" [disabled]="!cowForm.valid" (click)="OnCreate()"></p-button>
+        </div>
+
+    </form>
+</div>

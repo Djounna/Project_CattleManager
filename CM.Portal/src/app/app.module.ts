@@ -28,6 +28,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 // Material
 import { MatCardModule} from '@angular/material/card';
 
+
 // Shared components
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
@@ -59,12 +60,27 @@ import { ToastModule } from 'primeng/toast';
 import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
 import { GestationsListComponent } from './features/cattle/gestation/gestations-list/gestations-list.component';
+import { GroupCardViewComponent } from './features/cattle/group-card-view/group-card-view.component';
+import { GroupPageComponent } from './screens/cattle/group-page/group-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CreateJobDialogComponent } from './features/work/job/create-job-dialog/create-job-dialog.component';
+import { CreateCowDialogComponent } from './features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
-        WorkersPageComponent, CowsPageComponent, DashboardComponent, JobsPageComponent,
-        CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent,
+        WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
+        CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent,
+        CreateJobDialogComponent, CreateCowDialogComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService],
     bootstrap: [AppComponent],
@@ -72,14 +88,29 @@ import { GestationsListComponent } from './features/cattle/gestation/gestations-
         BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         // material
         MatCardModule,
         MatSidenavModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
         // primeNg
+        ButtonModule,
+        InputTextModule,
+        InputTextareaModule,
+        InputNumberModule,
+        DropdownModule,
         SidebarModule,
         PanelMenuModule,
         DividerModule,
         ToastModule,
+        CalendarModule,
         ButtonModule,
         TableModule,
         TabViewModule,
@@ -107,7 +138,7 @@ import { GestationsListComponent } from './features/cattle/gestation/gestations-
                 //  Request this audience at user authentication time
                 audience: 'https://CM.WebApi',
                 //  Request this scope at user authentication time
-                scope: 'read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures',
+                scope: 'read:events write:events read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures',
             },
             httpInterceptor: {
                     allowedList: [
@@ -121,7 +152,7 @@ import { GestationsListComponent } from './features/cattle/gestation/gestations-
                             audience: 'https://CM.WebApi',
 
                             // The attached token should have these scopes
-                            scope: 'read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures'
+                            scope: 'read:events write:events read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures'
                             }
                         }
                     }

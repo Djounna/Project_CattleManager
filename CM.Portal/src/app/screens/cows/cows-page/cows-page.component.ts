@@ -5,6 +5,7 @@ import { Select } from '@ngxs/store';
 import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
+import { CreateCowDialogComponent } from '../../../features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
 
 @Component({
   selector: 'app-cows-page',
@@ -31,5 +32,22 @@ export class CowsPageComponent extends BaseComponent{
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
+  }
+  
+  createCowDialog(): void {
+    const dialogRef = this.dialog.open(CreateCowDialogComponent, {
+      height: '400px',
+      width: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      debugger;
+      if(result == null)
+        return;
+      this.store.dispatch(new Cows.Create({body:result})).subscribe({
+        next:() => this.toastSuccess("l'animal a été créé avec succès"),
+        error:() => this.toastError("Une erreur s'est produite")
+      });
+    });
   }
 }

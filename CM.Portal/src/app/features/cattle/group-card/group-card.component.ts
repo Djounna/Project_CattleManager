@@ -8,5 +8,5 @@ import { GroupDto } from '../../../api/models';
 })
 export class GroupCardComponent {
 
-  @Input() Group! : GroupDto
+  @Input() Group : GroupDto | undefined;
 }

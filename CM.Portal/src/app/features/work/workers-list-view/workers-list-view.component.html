@@ -1,31 +1,19 @@
 <div class="panel_border">
-        <p-tabView>
-            <p-tabPanel header="Workers list">
-                <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
+    <p-panel header="Workers list">
+        <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
 
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+            <th>Name</th>
+        </tr>
+        </ng-template>
 
-                    <ng-template pTemplate="body" let-worker>
-                        <tr>
-                            <td>{{worker.username}}</td>
-                        </tr>
-                    </ng-template>
+        <ng-template pTemplate="body" let-worker>
+            <tr>
+                <td>{{worker.username}}</td>
+            </tr>
+        </ng-template>
 
-                </p-table>
-            </p-tabPanel>
-
-            <!-- <p-tabPanel header="Workers cards" >
-                <div style="display:flex; flex-direction: row;">
-                    <div *ngFor="let worker of Workers" >
-                        <p-card header="{{worker.username}}">
-                            <p> test test test</p>
-                        </p-card>
-                    </div>
-                </div> 
-            </p-tabPanel> -->
-        </p-tabView>
-    </div>
+        </p-table>
+    </p-panel>
+</div>

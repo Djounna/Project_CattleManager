@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { GroupDto } from '../../../api/models';
 
 @Component({
   selector: 'app-cows-card-view',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './cows-card-view.component.css'
 })
 export class CowsCardViewComponent {
-
+  @Input() Groups : GroupDto[] = [];
 }

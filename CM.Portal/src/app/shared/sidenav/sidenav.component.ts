@@ -54,6 +54,7 @@ export class SidenavComponent implements OnInit {
                     {
                         label: 'Groups',
                         icon: 'pi pi-fw pi-pencil',
+                        routerLink: '/groups'
                     }
                 ]
             },
