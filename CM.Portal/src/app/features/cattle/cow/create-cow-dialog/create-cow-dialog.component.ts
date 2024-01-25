@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CowDto, PenDto, JobDto } from '../../../../api/models';
-import { jobStatus } from '../../../../models/enums/workEnums';
-import { CreateJobDialogComponent } from '../../../work/job/create-job-dialog/create-job-dialog.component';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CowDto } from '../../../../api/models';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { races } from '../../../../models/enums/races';
+import { genders } from '../../../../models/enums/genders';
 
 @Component({
   selector: 'app-create-cow-dialog',
@@ -14,15 +14,19 @@ export class CreateCowDialogComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<CreateJobDialogComponent>,
+    public dialogRef: DynamicDialogRef,
   ){}
 
   public newCow : CowDto | undefined;
+  public races : string[] = Object.values(races);
+  public genders : string[] = Object.values(genders);
 
   cowForm = this.formBuilder.group({
     identifier:['', Validators.required],
     name:['', Validators.required],
     birthdate:['',Validators.required],
+    race:[''],
+    sex:['']
   })
 
   OnCreate(): void {
@@ -31,6 +35,9 @@ export class CreateCowDialogComponent {
       id : 0,
       identifier : this.cowForm.value.identifier, 
       name : this.cowForm.value.name,
+      race : this.cowForm.value.race,
+      sex : this.cowForm.value.sex
+
     }
     this.dialogRef.close(this.newCow);
   }

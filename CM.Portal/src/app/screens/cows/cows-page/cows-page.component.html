@@ -8,6 +8,11 @@
         </div>
     </div>
 
+    <p-dialog [(visible)]="displayLoader" [style]="{width: '49vw'}">
+    <p-progressSpinner></p-progressSpinner>
+    <p>test</p>
+    </p-dialog>
+
     <p-divider></p-divider>
 
     <div class="gap-4">
@@ -17,4 +22,3 @@
 
 </div>
 
-<p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>

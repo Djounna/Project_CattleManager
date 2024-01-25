@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { DialogService } from "primeng/dynamicdialog";
 import { Store } from "@ngxs/store";
 import { MessageService } from "primeng/api";
 import { Subject } from "rxjs";
@@ -7,13 +8,14 @@ import { Subject } from "rxjs";
 @Component({
     selector: 'app-base',
     template: `<div> base works!!  </div>`,
-    providers: [MessageService]
+    providers: [MessageService, DialogService]
 })
 export class BaseComponent implements OnInit, OnDestroy {
 
     constructor(
         protected store: Store, 
         protected dialog: MatDialog,
+        protected dialogService: DialogService,
         protected messageService: MessageService 
         ){}
 

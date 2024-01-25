@@ -28,9 +28,9 @@
             
         </div>
 
-        <div class="flex-row justify-content-end">
-            <p-button label="Annuler" [text]="true" severity="warning" (click)="OnCancel()"></p-button>
-            <p-button label="Confirmer" [text]="true" [disabled]="!jobForm.valid" (click)="OnCreate()"></p-button>
+        <div class="flex-row justify-content-end m-2 gap-2">
+            <p-button label="Annuler" [raised]="true" severity="warning" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [raised]="true" severity="primary" [disabled]="!jobForm.valid" (click)="OnCreate()"></p-button>
         </div>
 
     </form>

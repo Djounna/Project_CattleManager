@@ -23,25 +23,29 @@ export class CowsPageComponent extends BaseComponent{
 
   override ngOnInit(): void {
 
+    this.displayLoader = true;
+
     this.Data$.pipe(
       takeUntil(this.$Destroyed),
       tap(([c,g]) =>{
         this.Cows = c;
         this.Groups = g;
-        })).subscribe();
+        })).subscribe({
+          next:(res) => this.displayLoader = false,
+          error:(err) => this.displayLoader = false
+        });
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
   }
   
   createCowDialog(): void {
-    const dialogRef = this.dialog.open(CreateCowDialogComponent, {
+    const dialogRef = this.dialogService.open(CreateCowDialogComponent, {
       height: '400px',
       width: '700px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      debugger;
+    dialogRef.onClose.subscribe(result => {
       if(result == null)
         return;
       this.store.dispatch(new Cows.Create({body:result})).subscribe({

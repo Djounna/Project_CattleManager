@@ -74,6 +74,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CreateJobDialogComponent } from './features/work/job/create-job-dialog/create-job-dialog.component';
 import { CreateCowDialogComponent } from './features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -82,7 +85,7 @@ import { CalendarModule } from 'primeng/calendar';
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent,
         CreateJobDialogComponent, CreateCowDialogComponent
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -104,6 +107,7 @@ import { CalendarModule } from 'primeng/calendar';
         ButtonModule,
         InputTextModule,
         InputTextareaModule,
+        RadioButtonModule,
         InputNumberModule,
         DropdownModule,
         SidebarModule,
@@ -120,6 +124,8 @@ import { CalendarModule } from 'primeng/calendar';
         MenuModule,
         ProgressSpinnerModule,
         PanelModule,
+        DialogModule,
+        DynamicDialogModule,
         // Routing configuration
         AppRoutingModule,
 

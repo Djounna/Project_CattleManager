@@ -61,7 +61,6 @@ export class JobsPageComponent extends BaseComponent {
     this.store.dispatch(new Pens.GetAll());
   }
 
-  // Test
   createJobDialog(): void {
     const dialogRef = this.dialog.open(CreateJobDialogComponent, {
       height: '400px',
