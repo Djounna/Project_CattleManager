@@ -26,19 +26,17 @@ export class CreateCowDialogComponent {
     name:['', Validators.required],
     birthdate:['',Validators.required],
     race:[''],
-    sex:['']
+    gender:['']
   })
 
   OnCreate(): void {
-    debugger
     this.newCow = {
       id : 0,
       identifier : this.cowForm.value.identifier, 
       name : this.cowForm.value.name,
       race : this.cowForm.value.race,
-      sex : this.cowForm.value.sex
-
-    }
+      gender : this.cowForm.value.gender
+    };
     this.dialogRef.close(this.newCow);
   }
 

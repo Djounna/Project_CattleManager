@@ -11,8 +11,7 @@ public class Cow : BaseEntity
 
     public DateOnly BirthDate { get; set; }
     public string Race { get; set; }
-    public string Status { get; set; }
-    public string Sex { get; set; }
+    public string Gender { get; set; }
 
     public int? PenId { get; set; }
     public virtual Pen Pen { get; set; }

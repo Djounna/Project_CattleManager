@@ -2276,11 +2276,7 @@
             "type": "string",
             "nullable": true
           },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "sex": {
+          "gender": {
             "type": "string",
             "nullable": true
           },

@@ -167,7 +167,6 @@ export class JobService extends BaseService {
   }
 ): Observable<JobDto> {
 
-  debugger;
     return this.apiJobPost$Response(params).pipe(
       map((r: StrictHttpResponse<JobDto>) => r.body as JobDto)
     );

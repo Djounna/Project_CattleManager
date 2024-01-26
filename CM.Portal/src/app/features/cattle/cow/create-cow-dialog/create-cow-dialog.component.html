@@ -20,7 +20,7 @@
                 <div class="flex flex-column gap-2">
                     <label for="">sex</label>
                         <div *ngFor="let gender of genders" class="field-checkbox">
-                            <p-radioButton [inputId]="gender" [value]="gender" formControlName="sex"></p-radioButton>
+                            <p-radioButton [inputId]="gender" [value]="gender" formControlName="gender"></p-radioButton>
                             <label [for]="gender" class="ml-2">{{ gender }}</label>
     </div>
                 </div>

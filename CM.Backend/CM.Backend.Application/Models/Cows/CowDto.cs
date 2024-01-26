@@ -33,14 +33,9 @@ public class CowDto
     public string Race { get; set; }
 
     /// <summary>
-    /// Status
+    /// Gender
     /// </summary>
-    public string Status { get; set; }
-
-    /// <summary>
-    /// Sex
-    /// </summary>
-    public string Sex { get; set; }
+    public string Gender { get; set; }
 
     /// <summary>
     /// PenId
