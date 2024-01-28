@@ -78,13 +78,17 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { JobDetailsListComponent } from './features/work/job-details-list/job-details-list.component';
+import { GroupDatagridComponent } from './features/groups/group-datagrid/group-datagrid.component';
+import { PenDatagridComponent } from './features/pens/pen-datagrid/pen-datagrid.component';
+import { PicklistToolComponent } from './features/shared/picklist-tool/picklist-tool.component';
+import { PickListModule } from 'primeng/picklist';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
-        CreateJobDialogComponent, CreateCowDialogComponent
+        CreateJobDialogComponent, CreateCowDialogComponent, GroupDatagridComponent, PenDatagridComponent, PicklistToolComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
@@ -120,13 +124,14 @@ import { JobDetailsListComponent } from './features/work/job-details-list/job-de
         TableModule,
         TabViewModule,
         CardModule,
-        DataViewModule,
         MenubarModule,
         MenuModule,
         ProgressSpinnerModule,
         PanelModule,
         DialogModule,
         DynamicDialogModule,
+        DataViewModule,
+        PickListModule,
         // Routing configuration
         AppRoutingModule,
 

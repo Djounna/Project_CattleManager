@@ -1,0 +1,16 @@
+<p-pickList [source]="sourceGroup" [target]="targetGroup" sourceHeader="Available" targetHeader="Selected" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
+    [targetStyle]="{ height: '30rem' }" filterBy="identifier" sourceFilterPlaceholder="Chercher par identifiant" targetFilterPlaceholder="Chercher par identifiant" breakpoint="1400px">
+    <ng-template let-cow pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+            <div class="flex-1 flex flex-column gap-2">
+                <span class="font-bold">{{ cow.identifier }}</span>
+                <div class="flex align-products-center gap-2">
+                    <i class="pi pi-tag text-sm"></i>
+                    <span>{{ cow.name }}</span>
+                </div>
+            </div>
+            <span class="font-bold text-900">{{ '$' + cow.race }}</span>
+        </div>
+    </ng-template>
+</p-pickList>
+
