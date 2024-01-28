@@ -13,7 +13,7 @@ export class SidenavComponent implements OnInit {
     ngOnInit() {
         this.items = [
             {
-                label:'Home',
+                label:'Acceuil',
                 icon: 'pi pi-fw pi-pencil',
                 items:[
                     {
@@ -24,113 +24,71 @@ export class SidenavComponent implements OnInit {
                 ]
             },
             {
-                label: 'Tasks',
+                label: 'Tâches',
                 icon: 'pi pi-fw pi-pencil',
                 items: [
                     {
-                        label: 'All',
+                        label: 'Liste',
                         icon: 'pi pi-fw pi-align-left',
                         routerLink:'/jobs'
                     },
                     {
-                        label: 'By Worker',
+                        label: 'Par travailleur',
                         icon: 'pi pi-fw pi-align-right',
                     },
                     {
-                        label: 'Calendar',
+                        label: 'Par enclos',
                         icon: 'pi pi-fw pi-align-left',
-                    },
+                    }
                 ]
             },
             {
-                label: 'Cattle',
+                label: 'Bétail',
                 icon: 'pi pi-fw pi-pencil',
                 items:[
                     {
-                        label: 'All',
+                        label: 'Liste',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: '/cows'
                     },
                     {
-                        label: 'Groups',
+                        label: 'Groupes',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: '/groups'
                     }
                 ]
             },
-            // {
-            //     label: 'Tasks',
-            //     icon: 'pi pi-fw pi-file',
-            //     items: [
-            //         {
-            //             label: 'New',
-            //             icon: 'pi pi-fw pi-plus',
-            //             items: [
-            //                 {
-            //                     label: 'Task',
-            //                     icon: 'pi pi-fw pi-bookmark'
-            //                 },
-            //                 {
-            //                     label: 'RecurringTask',
-            //                     icon: 'pi pi-fw pi-video'
-            //                 }
-            //             ]
-            //         },
-            //         {
-            //             label: 'Assign',
-            //             icon: 'pi pi-fw pi-trash'
-            //         },
-            //     ]
-            // },
             {
-                label: 'Workers',
-                icon: 'pi pi-fw pi-user',
+                label: 'Enclos',
+                icon: 'pi pi-fw pi-calendar',
                 items: [
                     {
-                        label: 'List',
-                        icon: 'pi pi-fw pi-user-plus',
-                        routerLink: '/workers'
-                    },
-                    {
-                        label: 'New',
-                        icon: 'pi pi-fw pi-user-plus'
-                    },
-                    {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-user-minus'
+                        label: 'Liste',
+                        icon: 'pi pi-fw pi-pencil',
                     },
                 ]
             },
             {
-                label: 'Pens',
+                label: 'Stocks',
                 icon: 'pi pi-fw pi-calendar',
                 items: [
                     {
-                        label: 'Edit',
+                        label: 'Liste',
                         icon: 'pi pi-fw pi-pencil',
-                        items: [
-                            {
-                                label: 'Save',
-                                icon: 'pi pi-fw pi-calendar-plus'
-                            },
-                            {
-                                label: 'Delete',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            }
-                        ]
                     },
-                    {
-                        label: 'Archieve',
-                        icon: 'pi pi-fw pi-calendar-times',
-                        items: [
-                            {
-                                label: 'Remove',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            }
-                        ]
-                    }
                 ]
-            }
+            },
+            {
+                label: 'Travailleurs',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Liste',
+                        icon: 'pi pi-fw pi-user-plus',
+                        routerLink: '/workers'
+                    },
+                ]
+            },
         ];
     }
 }
