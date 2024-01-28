@@ -13,7 +13,7 @@ public class WorkerJobDto
     /// <summary>
     /// Worker Id
     /// </summary>
-    public int WorkerId { get; set; }
+    public int UserId { get; set; }
     //public virtual Worker Worker { get; set; }
 
     /// <summary>

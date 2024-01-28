@@ -43,4 +43,9 @@ export namespace Jobs{
         static readonly type = '[Jobs] Delete Job'
         constructor(public id: number){}
     }
+
+    export class Assign{
+        static readonly type = '[Jobs] Assign Job'
+        constructor(public payload : any){}
+    }
 }

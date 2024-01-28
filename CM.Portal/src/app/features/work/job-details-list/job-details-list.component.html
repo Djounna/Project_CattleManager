@@ -26,7 +26,7 @@
                     </td>
                     <td>
                         <div *ngFor="let worker of job.workers">
-                            {{worker.name}}, 
+                            {{worker.username}}, 
                         </div>
                     </td>
                     <td>
@@ -42,7 +42,7 @@
                     </td>
                     <td class="flex flex-row justify-content-center gap-2">
                         <p-button icon="pi pi-user" [rounded]="true" [text]="true" [raised]="true" 
-                        pTooltip="Assigner un utilisateur"></p-button>
+                        pTooltip="Assigner un utilisateur" (click)="assignJobDialog(job)"></p-button>
                         <p-button icon="pi pi-user" [rounded]="true" [text]="true" [raised]="true"
                         pTooltip="Modifier"></p-button>
                         <p-button icon="pi pi-user" [rounded]="true" [text]="true" [raised]="true"

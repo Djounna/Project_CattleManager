@@ -3,5 +3,5 @@
 export interface WorkerJobDto {
   id?: number;
   jobId?: number;
-  workerId?: number;
+  userId?: number;
 }

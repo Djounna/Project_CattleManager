@@ -1,1 +1,22 @@
-<p>assign-job-dialog works!</p>
+<div>
+    <div *ngIf="data.Job?.workers" class="form_base gap-2">
+        <div class="flex flex-column gap-2">
+            <span>Travailleurs : </span>
+            <span *ngFor="let worker of data.Job?.workers">{{worker.username}}</span>
+        </div>
+    </div>
+    <div class="form_base gap-2">
+        <div class="flex flex-column gap-2">
+            <label for="worker">Travailleur</label>
+            <p-dropdown 
+                [options]="data.Workers" [(ngModel)]="selectedWorker" optionLabel="username" 
+                [showClear]="true" placeholder="Choisissez un travailleur">
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div class="flex-row justify-content-end m-2 gap-2">
+        <p-button label="Annuler" [raised]="true" severity="warning" (click)="OnCancel()"></p-button>
+        <p-button label="Confirmer" [raised]="true" severity="primary" (click)="OnConfirm()"></p-button> </div>
+
+</div>

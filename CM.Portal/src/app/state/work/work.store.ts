@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { State, Selector, Action, StateContext } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { JobDto, UserDto } from "../../api/models";
-import { JobService, WorkerService } from "../../api/services";
+import { JobDto, UserDto, WorkerJobDto } from "../../api/models";
+import { JobService, WorkerJobService, WorkerService } from "../../api/services";
 import { Jobs, Workers } from "./work.actions";
 import { WorkStateModel } from "./work.state";
 
@@ -18,7 +18,11 @@ import { WorkStateModel } from "./work.state";
 
 @Injectable()
 export class WorkState{
-    constructor(private jobService: JobService, private workerService: WorkerService){}
+    constructor(
+        private jobService: JobService, 
+        private workerJobService: WorkerJobService, 
+        private workerService: WorkerService
+        ){}
 
     @Selector()
     static jobs(cattleState:WorkStateModel){
@@ -79,6 +83,16 @@ export class WorkState{
         pipe(
             tap(deleted =>{
                 ctx.setState(patch<WorkStateModel>({Jobs : removeItem<JobDto>(c => c.id === action.id)}))
+            })
+        );
+    }
+
+    @Action(Jobs.Assign)
+    assignJob(ctx: StateContext<WorkStateModel>, action: Jobs.Assign){
+        return this.workerJobService.apiWorkerJobApiWorkerJobAssignJobPost(action.payload).
+        pipe(
+            tap(updated =>{
+                ctx.setState(patch<WorkStateModel>({Jobs : updateItem<WorkerJobDto>(c => c.id === updated.id, updated)}))
             })
         );
     }
