@@ -7,10 +7,7 @@
 
     <p-divider></p-divider>
 
-    <app-job-list-view *ngIf="Jobs.length > 0" [Jobs]="Jobs"></app-job-list-view>
+    <app-job-details-list [JobsDetails]="JobsDetails"></app-job-details-list>
 
 </div>
-
-
-<p-progressSpinner *ngIf="displayLoader === true"></p-progressSpinner>
 <p-toast></p-toast>

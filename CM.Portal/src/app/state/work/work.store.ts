@@ -11,6 +11,7 @@ import { WorkStateModel } from "./work.state";
     name:'work',
     defaults:{
         Jobs : [],
+        JobsDetails: [],
         Workers : []
     }
 })
@@ -25,6 +26,11 @@ export class WorkState{
     }
 
     @Selector()
+    static jobsDetails(cattleState:WorkStateModel){
+        return cattleState.JobsDetails;
+    }
+
+    @Selector()
     static workers(cattleState:WorkStateModel){
         return cattleState.Workers;
     }
@@ -35,6 +41,14 @@ export class WorkState{
     getAllJobs(ctx: StateContext<WorkStateModel>){
         return this.jobService.apiJobGet().pipe(tap(jobs=>{
             ctx.patchState({Jobs : jobs});
+            })
+        );
+    }
+
+    @Action(Jobs.GetAllDetails)
+    getAllJobsDetails(ctx: StateContext<WorkStateModel>){
+        return this.jobService.apiJobDetailsGet().pipe(tap(jobs=>{
+            ctx.patchState({JobsDetails : jobs});
             })
         );
     }

@@ -6,6 +6,11 @@
 public class UserDto
 {
     /// <summary>
+    /// Id
+    /// </summary>
+    public int Id { get; set; } 
+
+    /// <summary>
     /// UserName
     /// </summary>
     public string Username { get; set; }

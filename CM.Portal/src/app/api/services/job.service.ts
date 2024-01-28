@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { JobDetailsDto } from '../models/job-details-dto';
 import { JobDto } from '../models/job-dto';
 
 @Injectable({
@@ -220,6 +221,54 @@ export class JobService extends BaseService {
 
     return this.apiJobDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation apiJobDetailsGet
+   */
+  static readonly ApiJobDetailsGetPath = '/api/Job/details';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiJobDetailsGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiJobDetailsGet$Response(params?: {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<JobDetailsDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, JobService.ApiJobDetailsGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<JobDetailsDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiJobDetailsGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiJobDetailsGet(params?: {
+    context?: HttpContext
+  }
+): Observable<Array<JobDetailsDto>> {
+
+    return this.apiJobDetailsGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<JobDetailsDto>>) => r.body as Array<JobDetailsDto>)
     );
   }
 

@@ -25,5 +25,4 @@ public class CreateJobCommandHandler : IRequestHandler<CreateJobCommand, JobDto>
 
         return _mapper.Map<JobDto>(result);
     }
-        
 }

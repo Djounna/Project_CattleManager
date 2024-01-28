@@ -77,12 +77,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { JobDetailsListComponent } from './features/work/job-details-list/job-details-list.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
-        AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent,
+        AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
         CreateJobDialogComponent, CreateCowDialogComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],

@@ -24,4 +24,9 @@ public class RecurringJobDto
     /// Excpected length (in hours)
     /// </summary>
     public int? Length { get; set; }
+
+    /// <summary>
+    /// Pen Id 
+    /// </summary>
+    public int? PenId { get; set; } 
 }

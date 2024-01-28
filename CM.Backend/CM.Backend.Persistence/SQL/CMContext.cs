@@ -7,6 +7,7 @@ using CM.Backend.Domain.Infrastructures;
 using CM.Backend.Domain.Jobs;
 using CM.Backend.Domain.Users;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 namespace CM.Backend.Persistence.EF;
 
@@ -42,4 +43,11 @@ public class CMContext : DbContext
     {
         optionsBuilder.UseSqlServer("Server=LAPTOP-R3GDQJIT;Database=CattleManager;Trusted_Connection=True;TrustServerCertificate=True");
     }
+
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
+    //    base.OnModelCreating(modelBuilder);
+    //    modelBuilder.Entity<Job>()
+    //            .Property(e => e.Title).IsRequired();
+    //}
 }

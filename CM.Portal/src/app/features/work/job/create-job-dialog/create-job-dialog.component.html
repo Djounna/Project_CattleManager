@@ -24,8 +24,15 @@
                         [showClear]="true" placeholder="Choisissez un enclos">
                     </p-dropdown>
                 </div>
+                <div class="flex flex-column gap-2">
+                    <label for="cow">Animal</label>
+                    <p-dropdown 
+                        [options]="data.Cows" formControlName="cow" optionLabel="identifier" 
+                        [showClear]="true" placeholder="Choisissez un animal"
+                        [filter]="true" filterBy="identifier">
+                    </p-dropdown>
+                </div>
             </div>
-            
         </div>
 
         <div class="flex-row justify-content-end m-2 gap-2">

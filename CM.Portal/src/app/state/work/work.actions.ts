@@ -35,6 +35,10 @@ export namespace Jobs{
         static readonly type ='[Jobs] Get All Jobs'
     }
 
+    export class GetAllDetails{
+        static readonly type ='[Jobs] Get All Jobs Details'
+    }
+
     export class Delete{
         static readonly type = '[Jobs] Delete Job'
         constructor(public id: number){}

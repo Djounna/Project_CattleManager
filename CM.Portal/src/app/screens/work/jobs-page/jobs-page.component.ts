@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, finalize, takeUntil } from 'rxjs';
-import { CowDto, JobDto, PenDto } from '../../../api/models';
+import { Observable, combineLatest, finalize, takeUntil, tap } from 'rxjs';
+import { CowDto, JobDetailsDto, JobDto, PenDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows } from '../../../state/cattle/cattle.actions';
 import { CattleState } from '../../../state/cattle/cattle.store';
@@ -18,47 +18,32 @@ import { CreateJobDialogComponent } from '../../../features/work/job/create-job-
 })
 export class JobsPageComponent extends BaseComponent {
 
-  @Select(WorkState.jobs) jobs$! : Observable<JobDto[]>
+  @Select(WorkState.jobs) Jobs$! : Observable<JobDto[]>
   public Jobs : JobDto[] = [];
-  @Select(CattleState.cows) cows$! : Observable<CowDto[]>
+  @Select(WorkState.jobsDetails) JobsDetails$! : Observable<JobDetailsDto[]>
+  public JobsDetails : JobDetailsDto[] = [];
+  @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
   public Cows : CowDto[] = [];
-  @Select(InfrastructureState.pens) pens$! : Observable<PenDto[]>
+  @Select(InfrastructureState.pens) Pens$! : Observable<PenDto[]>
   public Pens : PenDto[] = [];
+
+  public Data$ = combineLatest([this.JobsDetails$, this.Jobs$, this.Cows$, this.Pens$])
 
   override ngOnInit(): void{
 
-    this.displayLoader = true;
-
-  this.jobs$.pipe(
-    takeUntil(this.$Destroyed), 
-    finalize(() => this.displayLoader = false))
-    .subscribe({
-      next:(jobs) => {
-        this.Jobs = jobs;
-        this.displayLoader = false
-      }
-    });
-
-  this.cows$.pipe(
-    takeUntil(this.$Destroyed), 
-    finalize(() => this.displayLoader = false))
-    .subscribe({
-      next:(cows) => {
-        this.Cows = cows;
-      }
-    });
-
-  this.pens$.pipe(
-    takeUntil(this.$Destroyed))
-    .subscribe({
-      next:(pens) => {
-        this.Pens = pens;
-      }
-    });
+  this.Data$.pipe(
+      takeUntil(this.$Destroyed),tap(([jd,j,c,p]) =>{
+        this.JobsDetails = jd;
+        this.Jobs = j;
+        this.Cows = c;
+        this.Pens = p;
+      })).subscribe({
+      })
 
     this.store.dispatch(new Jobs.GetAll());
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Pens.GetAll());
+    this.store.dispatch(new Jobs.GetAllDetails());
   }
 
   createJobDialog(): void {

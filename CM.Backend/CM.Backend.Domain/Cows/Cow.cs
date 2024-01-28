@@ -22,6 +22,4 @@ public class Cow : BaseEntity
     public virtual ICollection<Job> Jobs { get; } = new List<Job>();
     public virtual ICollection<Intervention> Interventions { get; } = new List<Intervention>();
     public virtual ICollection<Gestation> Gestations { get; } = new List<Gestation>();
-
-
 }

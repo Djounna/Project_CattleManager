@@ -8,7 +8,6 @@ import {FormBuilder} from '@angular/forms';
 import { CowDto, JobDto, PenDto } from '../../../../api/models';
 import { jobStatus } from '../../../../models/enums/workEnums';
 
-
 @Component({
   selector: 'app-create-job-dialog',
   templateUrl: './create-job-dialog.component.html',
@@ -24,12 +23,14 @@ export class CreateJobDialogComponent {
 
   public newJob : JobDto | undefined;
   public selectedPen : PenDto | undefined;
+  public selectedCow : CowDto | undefined;
 
   jobForm = this.formBuilder.group({
     title:['', Validators.required],
     description:['', Validators.required],
     length:[''],
-    pen:new FormControl<PenDto | null>(null)
+    pen:new FormControl<PenDto | null>(null),
+    cow:new FormControl<CowDto | null>(null)
   })
 
   OnCreate(): void {
@@ -39,9 +40,9 @@ export class CreateJobDialogComponent {
       title : this.jobForm.value.title, 
       description : this.jobForm.value.description,
       status : jobStatus.ToDo,
-      penId: this.jobForm.value.pen?.id
+      penId: this.jobForm.value.pen?.id,
+      cowId: this.jobForm.value.cow?.id
     }
-    //Object.assign(this.newJob!, this.jobForm.value);
     this.dialogRef.close(this.newJob);
   }
 

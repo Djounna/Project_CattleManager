@@ -35,7 +35,20 @@ public class JobController : ControllerBase
     {
         return Ok(await _mediator.Send(new GetJobsQuery()));
     }
-    
+
+    /// <summary>
+    /// Get All Jobs Details
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("details")]
+    [Authorize("read:jobs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetails()
+    {
+        return Ok(await _mediator.Send(new GetJobsDetailsQuery()));
+    }
+
     /// <summary>
     /// Get Job By Id 
     /// </summary>

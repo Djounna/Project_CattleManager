@@ -11,3 +11,4 @@ export { PenService } from './services/pen.service';
 export { StockService } from './services/stock.service';
 export { UserManagementService } from './services/user-management.service';
 export { WorkerService } from './services/worker.service';
+export { WorkerJobService } from './services/worker-job.service';
