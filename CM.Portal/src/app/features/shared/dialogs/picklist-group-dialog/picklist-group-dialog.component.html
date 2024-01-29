@@ -1,0 +1,28 @@
+<div class="card flex flex-row justify-content-around m-2">
+    <div class="flex flex-row align-items-center gap-2 m-2">
+        <label for="source">Source</label>
+        <p-dropdown 
+            [options]="data.Groups" [(ngModel)]="SelectedSourceGroup" 
+            optionLabel="name" [showClear]="true" placeholder="Source"
+            [filter]="true" filterBy="name">
+        </p-dropdown>
+    </div>
+    <div class="flex flex-row align-items-center gap-2 m-2">
+        <label for="destination">Destination</label>
+        <p-dropdown 
+            [options]="data.Groups" [(ngModel)]="SelectedTargetGroup" 
+            optionLabel="name" [showClear]="true" placeholder="Destination">
+        </p-dropdown>
+    </div>
+</div>
+
+<p-divider></p-divider>
+
+<app-picklist-tool 
+[Mode]="'Group'"
+[Cows]="data.Cows"
+[Groups]="data.Groups"
+[SourceId]="sourceId!"
+[TargetId]="targetId!"
+>
+</app-picklist-tool>

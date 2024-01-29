@@ -3,4 +3,5 @@
 namespace CM.Backend.Application.Interfaces.Persistence;
 public  interface IGroupRepository : IBaseRepository<Group>
 {
+    IEnumerable<Group> GetListDetails();
 }

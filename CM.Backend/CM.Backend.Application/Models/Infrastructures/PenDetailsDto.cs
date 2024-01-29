@@ -1,9 +1,7 @@
-﻿namespace CM.Backend.Application.Models.Infrastructures;
+﻿using CM.Backend.Application.Models.Cows;
 
-/// <summary>
-/// Pen Dto
-/// </summary>
-public class PenDto
+namespace CM.Backend.Application.Models.Infrastructures;
+public class PenDetailsDto
 {
     /// <summary>
     /// Id
@@ -19,4 +17,9 @@ public class PenDto
     /// Size
     /// </summary>
     public int Size { get; set; }
+
+    /// <summary>
+    /// Cattle list 
+    /// </summary>
+    public List<CowDto> Cows { get; set; } = new List<CowDto>();
 }

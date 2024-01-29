@@ -6,7 +6,6 @@ namespace CM.Backend.Domain.Infrastructures;
 public class Pen : BaseEntity
 {
     public string Name { get; set; }
-    public int Area { get; set; }
     public int Size { get; set; }
 
     public virtual ICollection<Cow> Cows { get; } = new List<Cow>();

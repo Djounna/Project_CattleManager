@@ -1,4 +1,6 @@
-<p-pickList [source]="sourceGroup" [target]="targetGroup" sourceHeader="Available" targetHeader="Selected" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
+
+
+<p-pickList [source]="source" [target]="target" sourceHeader="{{sourceName}}" targetHeader="{{targetName}}" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
     [targetStyle]="{ height: '30rem' }" filterBy="identifier" sourceFilterPlaceholder="Chercher par identifiant" targetFilterPlaceholder="Chercher par identifiant" breakpoint="1400px">
     <ng-template let-cow pTemplate="item">
         <div class="flex flex-wrap p-2 align-items-center gap-3">

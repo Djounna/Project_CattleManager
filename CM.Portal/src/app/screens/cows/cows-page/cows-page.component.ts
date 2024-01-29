@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { CowDto, GroupDto } from '../../../api/models';
+import { CowDto, GroupDto, PenDto } from '../../../api/models';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CreateCowDialogComponent } from '../../../features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
+import { Pens } from '../../../state/infrastructure/infrastructure.action';
 
 @Component({
   selector: 'app-cows-page',
@@ -18,8 +19,10 @@ export class CowsPageComponent extends BaseComponent{
   public Cows : CowDto[] = []
   @Select(CattleState.groups) Groups$! : Observable<GroupDto[]>
   public Groups: GroupDto[] = [];
+  @Select(CattleState.groups) Pens$! : Observable<PenDto[]>
+  public Pens: PenDto[] = [];
 
-  public Data$ = combineLatest([this.Cows$, this.Groups$])
+  public Data$ = combineLatest([this.Cows$, this.Groups$, this.Pens$])
 
   override ngOnInit(): void {
 
@@ -27,9 +30,10 @@ export class CowsPageComponent extends BaseComponent{
 
     this.Data$.pipe(
       takeUntil(this.$Destroyed),
-      tap(([c,g]) =>{
+      tap(([c,g,p]) =>{
         this.Cows = c;
         this.Groups = g;
+        this.Pens = p;
         })).subscribe({
           next:(res) => this.displayLoader = false,
           error:(err) => this.displayLoader = false
@@ -37,6 +41,7 @@ export class CowsPageComponent extends BaseComponent{
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
+    this.store.dispatch(new Pens.GetAll());
   }
   
   createCowDialog(): void {
