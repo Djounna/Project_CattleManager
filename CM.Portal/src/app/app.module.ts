@@ -83,6 +83,7 @@ import { PenDatagridComponent } from './features/pens/pen-datagrid/pen-datagrid.
 import { PicklistToolComponent } from './features/shared/picklist-tool/picklist-tool.component';
 import { PickListModule } from 'primeng/picklist';
 import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/assign-job-dialog.component';
+import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -90,7 +91,8 @@ import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
         CreateJobDialogComponent, CreateCowDialogComponent, GroupDatagridComponent, PenDatagridComponent, PicklistToolComponent,
-        AssignJobDialogComponent
+        AssignJobDialogComponent,
+        CreateGroupDialogComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],

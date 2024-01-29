@@ -5,6 +5,7 @@ import { CowDto, GroupDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { CattleState } from '../../../state/cattle/cattle.store';
+import { CreateGroupDialogComponent } from '../../../features/groups/group/create-group-dialog/create-group-dialog.component';
 
 @Component({
   selector: 'app-group-page',
@@ -31,5 +32,21 @@ export class GroupPageComponent extends BaseComponent {
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
+  }
+
+  createGroupDialog(): void {
+    const dialogRef = this.dialog.open(CreateGroupDialogComponent, {
+      height: '400px',
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == null)
+        return;
+      this.store.dispatch(new Groups.Create({body:result})).subscribe({
+        next:() => this.toastSuccess("Le groupe a été ajoutée avec succès"),
+        error:() => this.toastError("Une erreur s'est produite")
+      });
+    });
   }
 }
