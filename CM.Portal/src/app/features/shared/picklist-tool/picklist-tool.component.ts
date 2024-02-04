@@ -28,12 +28,12 @@ export class PicklistToolComponent {
     this.sourceId = value;
     switch(this.Mode){
       case 'Group':
-        this.source = JSON.parse(JSON.stringify(this.Cows.filter(c => c.groupId == value)));
+        this.source = [...(this.Cows.filter(c => c.groupId == value))]; //structuredClone(this.Cows.filter(c => c.groupId == value));
         this.selectedSourceGroup = this.Groups.find(g => g.id === value);
         this.sourceName = this.selectedSourceGroup?.name!; 
         break;
       case 'Pen':
-        this.source = JSON.parse(JSON.stringify(this.Cows.filter(c => c.penId == value)));
+        this.source = [...(this.Cows.filter(c => c.penId == value))]; //structuredClone(this.Cows.filter(c => c.penId == value));
         this.selectedSourcePen  = this.Pens.find(p => p.id === value);
         this.sourceName = this.selectedSourcePen?.name!; 
         break;
@@ -44,12 +44,12 @@ export class PicklistToolComponent {
     this.targetId = value;
     switch(this.Mode){
       case 'Group':
-        this.target = JSON.parse(JSON.stringify(this.Cows.filter(c => c.groupId == value)));
+        this.target = [...(this.Cows.filter(c => c.groupId == value))];
         this.selectedTargetGroup = this.Groups.find(g => g.id === value);
         this.targetName = this.selectedTargetGroup?.name!; 
         break;
       case 'Pen':
-        this.target = JSON.parse(JSON.stringify(this.Cows.filter(c => c.penId == value)));
+        this.target = [...(this.Cows.filter(c => c.penId == value))];
         this.selectedTargetPen = this.Pens.find(p => p.id === value);
         this.targetName = this.selectedTargetPen?.name!; 
         break;
