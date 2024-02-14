@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService, GenericError } from '@auth0/auth0-angular';
-import { filter, mergeMap } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent  {                    // implements OnInit
+export class AppComponent{                    // implements OnInit
   title = 'CM.Portal';
+
+  @ViewChild('sidebar') sidebar!: SidebarComponent
+
 
   //constructor(private authSrv : AuthService){}
 
@@ -19,4 +21,8 @@ export class AppComponent  {                    // implements OnInit
   //     mergeMap(() => this.authSrv.loginWithRedirect())
   //     ).subscribe(); 
   // }
+
+  showSidebar() : void{
+    this.sidebar.visible = true;
+  }
 }

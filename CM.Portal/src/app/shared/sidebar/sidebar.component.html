@@ -1,0 +1,10 @@
+<p-sidebar [(visible)]="visible" styleClass="w-10rem" (onHide)="visible =false">
+
+    <div style="display:flex; flex-direction: row; justify-content:center; align-items:center">
+        <h2>CM</h2>
+        <img src="assets\icons\cow_icon1.png" height="50px" width="50px">
+    </div>
+
+    <p-menu [model]="items"></p-menu>
+
+</p-sidebar>

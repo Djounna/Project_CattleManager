@@ -85,6 +85,7 @@ import { PickListModule } from 'primeng/picklist';
 import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/assign-job-dialog.component';
 import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
 import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -94,7 +95,8 @@ import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist
         CreateJobDialogComponent, CreateCowDialogComponent, GroupDatagridComponent, PenDatagridComponent, PicklistToolComponent,
         AssignJobDialogComponent,
         CreateGroupDialogComponent,
-        PicklistGroupDialogComponent
+        PicklistGroupDialogComponent,
+        SidebarComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],

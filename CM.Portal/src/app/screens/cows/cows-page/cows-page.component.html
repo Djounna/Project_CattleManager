@@ -1,24 +1,38 @@
-<div class="flex flex-column m-5">
+<div class="flex flex-row m-3">
 
-    <div class="flex flex-row justify-content-between align-content-center">
-        <h1>Bétail</h1>
-        <div class="flex flex-row justify-content-end gap-3">
-            <!-- <p-button label="Ajouter groupe"></p-button>  -->
-            <p-button label="Ajouter animal" (click)="createCowDialog()"></p-button> 
+    <div>
+        <p-tabView>
+            <p-tabPanel header="Groupes">
+                
+            </p-tabPanel>
+
+            <p-tabPanel header="Enclos">
+                
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+
+
+    <div class="flex flex-column m-3">
+
+        <div class="flex flex-row justify-content-start align-content-center">
+            <div class="flex flex-row justify-content-end gap-3">
+                <!-- <p-button label="Ajouter groupe"></p-button>  -->
+                <p-button label="Ajouter" (click)="createCowDialog()"></p-button> 
+            </div>
         </div>
+
+        <p-dialog [(visible)]="displayLoader" [style]="{width: '49vw'}">
+        <p-progressSpinner></p-progressSpinner>
+        <p>test</p>
+        </p-dialog>
+
+        <p-divider></p-divider>
+
+        <div class="gap-4">
+            <!-- <app-group-card-view [Groups]="Groups"></app-group-card-view> -->
+            <app-cows-list-view [Cows]="Cows"></app-cows-list-view>
+        </div>
+
     </div>
-
-    <p-dialog [(visible)]="displayLoader" [style]="{width: '49vw'}">
-    <p-progressSpinner></p-progressSpinner>
-    <p>test</p>
-    </p-dialog>
-
-    <p-divider></p-divider>
-
-    <div class="gap-4">
-        <!-- <app-group-card-view [Groups]="Groups"></app-group-card-view> -->
-        <app-cows-list-view [Cows]="Cows"></app-cows-list-view>
-    </div>
-
 </div>
-

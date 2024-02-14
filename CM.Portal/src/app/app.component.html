@@ -1,18 +1,9 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (onShowSidebar)="showSidebar()" stlyeclass=min-w-full ></app-toolbar>
 
 <div class="main">
-    <mat-sidenav-container style="height:100%">
-        <mat-sidenav [opened]="true" mode="side">
-            <aside class="sidenav">
-                <app-sidenav></app-sidenav>
-            </aside>
-        </mat-sidenav>
-
-        <mat-sidenav-content>
-            <div class="main-content">
-                <router-outlet></router-outlet>
-            </div>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
 </div>
+
+<app-sidebar #sidebar></app-sidebar>

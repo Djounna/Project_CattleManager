@@ -1,13 +1,13 @@
-<div class="bg-primary">
-    <p-menubar><!--[ngStyle]="{backgroundColor: 'var(--primary-color)'}"-->
-            <ng-template  pTemplate="start">
-                <div *ngIf="auth.user$ | async as user">
-                    {{user?.name}}
-                    {{user?.email}}
-                </div>
-            </ng-template>
-            <ng-template  pTemplate="end">
-                <app-auth-button></app-auth-button>
-            </ng-template>
+<div>
+    <p-menubar>
+        <ng-template  pTemplate="start" >
+            <div class="flex flex-row align-items-center">
+                <p-button *ngIf="auth.isAuthenticated$ | async;" icon="pi pi-bars" (click)="showSidebar()"></p-button>
+                <span style="font-size:x-large; margin-left:2rem">{{title}}</span>
+            </div>
+        </ng-template>
+        <ng-template  pTemplate="end">
+            <app-auth-button></app-auth-button>
+        </ng-template>
     </p-menubar>
 </div>
