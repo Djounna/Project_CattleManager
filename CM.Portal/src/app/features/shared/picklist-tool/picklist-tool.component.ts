@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CowDto, GroupDetailsDto, GroupDto, PenDetailsDto, PenDto } from '../../../api/models';
 import { GroupService, PenService } from '../../../api/services';
 import { takeUntil } from 'rxjs';
-import { Groups } from '../../../state/cattle/cattle.actions';
+import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { BaseComponent } from '../../../shared/base-component.component';
 
@@ -77,7 +77,7 @@ export class PicklistToolComponent extends BaseComponent {
         this.groupService.apiGroupAssignPost({body: groupToSend})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
-          next:(res) => this.store.dispatch(new Groups.GetAll()),
+          next:(res) => this.store.dispatch(new Cows.GetAll()),
           error:(err) => console.log(err) 
         })
       break;
@@ -93,7 +93,7 @@ export class PicklistToolComponent extends BaseComponent {
         this.penService.apiPenAssignPost({body: penToSend})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
-          next:(res) => this.store.dispatch(new Pens.GetAll()),
+          next:(res) => this.store.dispatch(new Cows.GetAll()),
           error:(err) => console.log(err) 
         })
       break;

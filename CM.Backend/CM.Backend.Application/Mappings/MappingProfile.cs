@@ -22,7 +22,9 @@ public class MappingProfile : Profile
         CreateMap<Cow, CowDto>().ReverseMap();
         CreateMap<Job, JobDto>().ReverseMap();
         CreateMap<Group, GroupDto>().ReverseMap();
+        CreateMap<Group, GroupDetailsDto>().ReverseMap();
         CreateMap<Pen, PenDto>().ReverseMap();
+        CreateMap<Pen, PenDetailsDto>().ReverseMap();
         CreateMap<Stock, StockDto>().ReverseMap();
         CreateMap<WorkerJob, WorkerJobDto>().ReverseMap();
         CreateMap<RecurringJob, RecurringJobDto>().ReverseMap();

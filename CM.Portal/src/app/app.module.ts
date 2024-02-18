@@ -86,6 +86,7 @@ import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/
 import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
 import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { GroupCardSmallComponent } from './features/groups/group-card-small/group-card-small.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -96,7 +97,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
         AssignJobDialogComponent,
         CreateGroupDialogComponent,
         PicklistGroupDialogComponent,
-        SidebarComponent
+        SidebarComponent,
+        GroupCardSmallComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],

@@ -1,9 +1,12 @@
-<div class="flex flex-row m-3">
+<div class="flex flex-row m-3 justify-content-between">
 
-    <div>
+    <div class="panel_border">
         <p-tabView>
             <p-tabPanel header="Groupes">
-                
+                @for (group of Groups; track $index) 
+                {
+                    <app-group-card-small [Group]="group"></app-group-card-small>
+                }
             </p-tabPanel>
 
             <p-tabPanel header="Enclos">

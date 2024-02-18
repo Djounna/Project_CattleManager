@@ -20,6 +20,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: column;
 }
 
+.page_base{
+    display:flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
 .form_base {
     display: flex;
     flex-direction: column;
@@ -41,6 +47,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-color: var(--blue-300);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12);
     background-color: #ffffff;
+}
+
+.small_card_layout{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin:0.5rem;
+    padding:0.25rem;
+    height: 6rem;    
+}
+.small_card_border{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12); 
+    border-radius: 0.25rem;
+}
+.small_card_border:hover{
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.06), 0px 7px 9px rgba(0, 0, 0, 0.12), 0px 20px 25px -8px rgba(0, 0, 0, 0.18);
 }
 
 .dialog_border{
