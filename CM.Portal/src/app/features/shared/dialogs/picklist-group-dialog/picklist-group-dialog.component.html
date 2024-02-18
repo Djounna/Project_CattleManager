@@ -7,6 +7,9 @@
             [filter]="true" filterBy="name">
         </p-dropdown>
     </div>
+    <div>
+            <p-button label="Confirmer" [raised]="true" (click)="Save()"></p-button>
+    </div>
     <div class="flex flex-row align-items-center gap-2 m-2">
         <label for="destination">Destination</label>
         <p-dropdown 
@@ -18,11 +21,12 @@
 
 <p-divider></p-divider>
 
-<app-picklist-tool 
+<app-picklist-tool #tool 
 [Mode]="'Group'"
 [Cows]="data.Cows"
 [Groups]="data.Groups"
 [SourceId]="sourceId!"
 [TargetId]="targetId!"
+(onClose)="Close()"
 >
 </app-picklist-tool>

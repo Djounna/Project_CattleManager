@@ -1,6 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface PenDto {
+import { CowDto } from './cow-dto';
+export interface PenDetailsDto {
+  cows?: null | Array<CowDto>;
   id?: number;
   name?: null | string;
   size?: number;

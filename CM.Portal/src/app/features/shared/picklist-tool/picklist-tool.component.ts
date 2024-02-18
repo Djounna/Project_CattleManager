@@ -1,17 +1,26 @@
-import { Component, Input } from '@angular/core';
-import { CowDto, GroupDto, PenDto } from '../../../api/models';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { CowDto, GroupDetailsDto, GroupDto, PenDetailsDto, PenDto } from '../../../api/models';
+import { GroupService, PenService } from '../../../api/services';
+import { takeUntil } from 'rxjs';
+import { Groups } from '../../../state/cattle/cattle.actions';
+import { Pens } from '../../../state/infrastructure/infrastructure.action';
+import { BaseComponent } from '../../../shared/base-component.component';
 
 @Component({
   selector: 'app-picklist-tool',
   templateUrl: './picklist-tool.component.html',
   styleUrl: './picklist-tool.component.css'
 })
-export class PicklistToolComponent {
+export class PicklistToolComponent extends BaseComponent {
+
+  groupService = inject(GroupService);
+  penService = inject(PenService);
 
   @Input() Cows : CowDto[] = [];
   @Input() Groups : GroupDto[] = [];
   @Input() Pens : PenDto[] = [];
   @Input() Mode: string = 'Group';
+  @Output() onClose : EventEmitter<void> = new EventEmitter<void>
 
   sourceId: number = 0;
   targetId: number = 0;
@@ -54,27 +63,41 @@ export class PicklistToolComponent {
         this.targetName = this.selectedTargetPen?.name!; 
         break;
     }
-  } 
+  }
 
+  Save(): void{
+    switch(this.Mode){
+      case 'Group':
+        let groupToSend : GroupDetailsDto = {
+          id : this.selectedTargetGroup!.id,
+          name: this.selectedTargetGroup!.name,
+          cows : this.target,
+        }
+        debugger;
+        this.groupService.apiGroupAssignPost({body: groupToSend})
+        .pipe(takeUntil(this.$OnDestroyed))
+        .subscribe({
+          next:(res) => this.store.dispatch(new Groups.GetAll()),
+          error:(err) => console.log(err) 
+        })
+      break;
 
-
-  // public set SelectedSourceGroup(value: GroupDto){
-  //   this.selectedSourceGroup = value;
-  //   this.source = JSON.parse(JSON.stringify(this.Cows.filter(c => c.groupId == value.id)));
-  // }
-
-  // public set SelectedTargetGroup(value: GroupDto){
-  //   this.selectedTargetGroup = value;
-  //   this.target = JSON.parse(JSON.stringify(this.Cows.filter(c => c.groupId == value.id)));
-  // }
-
-  // public set SelectedSourcePen(value: PenDto){
-  //   this.selectedSourcePen = value;
-  //   this.source = JSON.parse(JSON.stringify(this.Cows.filter(c => c.penId == value.id)));
-  // }
-
-  // public set SelectedTargetPen(value: PenDto){
-  //   this.selectedTargetPen = value;
-  //   this.target = JSON.parse(JSON.stringify(this.Cows.filter(c => c.penId == value.id)));
-  // }
+      case 'Pen':
+        let penToSend : PenDetailsDto = {
+          id : this.selectedTargetPen!.id,
+          name: this.selectedTargetPen!.name,
+          size: this.selectedTargetPen!.size,
+          cows : this.target,
+        }
+        debugger;
+        this.penService.apiPenAssignPost({body: penToSend})
+        .pipe(takeUntil(this.$OnDestroyed))
+        .subscribe({
+          next:(res) => this.store.dispatch(new Pens.GetAll()),
+          error:(err) => console.log(err) 
+        })
+      break;
+      }
+      this.onClose.next();
+    }
 }

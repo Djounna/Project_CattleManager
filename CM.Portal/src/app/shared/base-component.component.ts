@@ -19,14 +19,14 @@ export class BaseComponent implements OnInit, OnDestroy {
         protected messageService: MessageService 
         ){}
 
-    protected $Destroyed : Subject<void> = new Subject<void>();
+    protected $OnDestroyed : Subject<void> = new Subject<void>();
     protected displayLoader : boolean = false;
 
     ngOnInit(): void{}
 
     ngOnDestroy(): void {
-        this.$Destroyed.next();
-        this.$Destroyed.complete();
+        this.$OnDestroyed.next();
+        this.$OnDestroyed.complete();
     }
 
     protected toastSuccess(msg:string): void {

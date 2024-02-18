@@ -3,4 +3,5 @@
 namespace CM.Backend.Application.Interfaces.Persistence;
 public interface IPenRepository: IBaseRepository<Pen>
 {
+    Pen GetDetailsById(int id);
 }

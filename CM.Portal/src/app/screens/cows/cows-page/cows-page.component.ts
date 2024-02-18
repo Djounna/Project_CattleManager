@@ -29,7 +29,7 @@ export class CowsPageComponent extends BaseComponent{
     this.displayLoader = true;
 
     this.Data$.pipe(
-      takeUntil(this.$Destroyed),
+      takeUntil(this.$OnDestroyed),
       tap(([c,g,p]) =>{
         this.Cows = c;
         this.Groups = g;

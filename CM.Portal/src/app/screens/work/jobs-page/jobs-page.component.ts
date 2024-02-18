@@ -34,7 +34,7 @@ export class JobsPageComponent extends BaseComponent {
   override ngOnInit(): void{
 
   this.Data$.pipe(
-      takeUntil(this.$Destroyed),tap(([jd,j,c,p,w]) =>{
+      takeUntil(this.$OnDestroyed),tap(([jd,j,c,p,w]) =>{
         this.JobsDetails = jd;
         this.Jobs = j;
         this.Cows = c;

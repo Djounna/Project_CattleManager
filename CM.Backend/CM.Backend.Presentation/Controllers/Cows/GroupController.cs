@@ -92,4 +92,17 @@ public class GroupController : ControllerBase
         await _mediator.Send(new DeleteGroupCommand(id));
         return Ok();
     }
+
+    /// <summary>
+    /// Assign Cows to a group 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns>Group Details</returns>
+    [HttpPost("assign")]
+    [Authorize("write:cows")]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<GroupDetailsDto>> AssignToGroup(GroupDetailsDto dto)
+    {
+        return Ok(await _mediator.Send(new AssignToGroupCommand(dto)));
+    }
 }

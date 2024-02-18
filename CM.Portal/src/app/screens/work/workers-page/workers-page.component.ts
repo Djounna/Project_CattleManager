@@ -21,7 +21,7 @@ export class WorkersPageComponent extends BaseComponent{
     this.displayLoader = true;
 
     this.Workers$.pipe(
-      takeUntil(this.$Destroyed))
+      takeUntil(this.$OnDestroyed))
       .subscribe({
         next:(workers) => {
           this.Workers = workers;

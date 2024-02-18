@@ -781,6 +781,44 @@
         }
       }
     },
+    "/api/Group/assign": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupDetailsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupDetailsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupDetailsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Intervenant/{id}": {
       "get": {
         "tags": [
@@ -1977,6 +2015,44 @@
         }
       }
     },
+    "/api/Pen/assign": {
+      "post": {
+        "tags": [
+          "Pen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PenDetailsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PenDetailsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PenDetailsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Stock": {
       "get": {
         "tags": [
@@ -2517,6 +2593,35 @@
         },
         "additionalProperties": false
       },
+      "GroupDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imgLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "cows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CowDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GroupDto": {
         "type": "object",
         "properties": {
@@ -2731,7 +2836,7 @@
         },
         "additionalProperties": false
       },
-      "PenDto": {
+      "PenDetailsDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -2742,9 +2847,30 @@
             "type": "string",
             "nullable": true
           },
-          "area": {
+          "size": {
             "type": "integer",
             "format": "int32"
+          },
+          "cows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CowDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PenDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           },
           "size": {
             "type": "integer",

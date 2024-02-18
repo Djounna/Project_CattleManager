@@ -92,4 +92,17 @@ public class PenController : ControllerBase
         await _mediator.Send(new DeletePenCommand(id));
         return Ok();
     }
+
+    /// <summary>
+    /// Assign Cows to a pen 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns>Pen Details</returns>
+    [HttpPost("assign")]
+    [Authorize("write:cows")]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<PenDetailsDto>> AssignToPen(PenDetailsDto dto)
+    {
+        return Ok(await _mediator.Send(new AssignToPenCommand(dto)));
+    }
 }

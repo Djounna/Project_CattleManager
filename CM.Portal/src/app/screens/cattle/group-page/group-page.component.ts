@@ -28,7 +28,7 @@ export class GroupPageComponent extends BaseComponent {
   override ngOnInit(): void {
 
     this.Data$.pipe(
-      takeUntil(this.$Destroyed),
+      takeUntil(this.$OnDestroyed),
       tap(([c,g,p]) =>{
         this.Cows = c;
         this.Groups = g;

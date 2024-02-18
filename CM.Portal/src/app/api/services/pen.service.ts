@@ -9,7 +9,9 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { PenDetailsDto } from '../models/pen-details-dto';
 import { PenDto } from '../models/pen-dto';
+import { ProblemDetails } from '../models/problem-details';
 
 @Injectable({
   providedIn: 'root',
@@ -271,6 +273,57 @@ export class PenService extends BaseService {
 
     return this.apiPenIdGet$Response(params).pipe(
       map((r: StrictHttpResponse<PenDto>) => r.body as PenDto)
+    );
+  }
+
+  /**
+   * Path part for operation apiPenAssignPost
+   */
+  static readonly ApiPenAssignPostPath = '/api/Pen/assign';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiPenAssignPost()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiPenAssignPost$Response(params?: {
+    context?: HttpContext
+    body?: PenDetailsDto
+  }
+): Observable<StrictHttpResponse<ProblemDetails>> {
+
+    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenAssignPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ProblemDetails>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiPenAssignPost$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiPenAssignPost(params?: {
+    context?: HttpContext
+    body?: PenDetailsDto
+  }
+): Observable<ProblemDetails> {
+
+    return this.apiPenAssignPost$Response(params).pipe(
+      map((r: StrictHttpResponse<ProblemDetails>) => r.body as ProblemDetails)
     );
   }
 

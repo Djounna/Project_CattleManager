@@ -1,7 +1,6 @@
 ﻿namespace CM.Backend.Application.Models.Cows;
 public class GroupDetailsDto
 {
-
     /// <summary>
     /// Id
     /// </summary>

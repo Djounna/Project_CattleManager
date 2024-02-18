@@ -31,7 +31,7 @@ export class DashboardComponent extends BaseComponent{
   override ngOnInit(): void {
 
     this.Data$.pipe(
-      takeUntil(this.$Destroyed),tap(([a,j,w,g]) =>{
+      takeUntil(this.$OnDestroyed),tap(([a,j,w,g]) =>{
         this.Alerts = a;
         this.Jobs = j;
         this.Workers = w;

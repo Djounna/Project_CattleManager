@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CowDto, GroupDto, PenDto } from '../../../../api/models';
+import { PicklistToolComponent } from '../../picklist-tool/picklist-tool.component';
 
 @Component({
   selector: 'app-picklist-group-dialog',
@@ -9,6 +10,8 @@ import { CowDto, GroupDto, PenDto } from '../../../../api/models';
   styleUrl: './picklist-group-dialog.component.css'
 })
 export class PicklistGroupDialogComponent {
+
+  @ViewChild('tool') tool! : PicklistToolComponent 
 
   constructor(
     public dialogRef: MatDialogRef<PicklistGroupDialogComponent>,
@@ -27,5 +30,13 @@ export class PicklistGroupDialogComponent {
 
   ngOnInit() : void{
     this.SelectedSourceGroup = this.data.Groups.find(g => g.id === this.data.SourceId)!;
+  }
+
+  Close(): void{
+    this.dialogRef.close();
+  }
+
+  Save(): void{
+    this.tool.Save();
   }
 }
