@@ -18,7 +18,6 @@ export class AssignJobDialogComponent {
   public selectedWorker : UserDto | undefined;
 
   OnConfirm(): void {
-    debugger
     this.newWorkerJob = {
       id : 0,
       userId: this.selectedWorker!.id,

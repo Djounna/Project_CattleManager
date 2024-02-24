@@ -34,7 +34,6 @@ export class CreateJobDialogComponent {
   })
 
   OnCreate(): void {
-    debugger
     this.newJob = {
       id : 0,
       title : this.jobForm.value.title, 

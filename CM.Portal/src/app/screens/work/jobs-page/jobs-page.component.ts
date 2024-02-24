@@ -58,7 +58,6 @@ export class JobsPageComponent extends BaseComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger;
       if(result == null)
         return;
       this.store.dispatch(new Jobs.Create({body:result})).subscribe({

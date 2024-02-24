@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CowDto, GroupDto, PenDto } from '../../../api/models';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
 import { Select } from '@ngxs/store';
@@ -7,6 +7,7 @@ import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CreateCowDialogComponent } from '../../../features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
+import { CowsListViewComponent } from '../../../features/cattle/cows-list-view/cows-list-view.component';
 
 @Component({
   selector: 'app-cows-page',
@@ -14,6 +15,8 @@ import { Pens } from '../../../state/infrastructure/infrastructure.action';
   styleUrl: './cows-page.component.css'
 })
 export class CowsPageComponent extends BaseComponent{
+
+  @ViewChild('cowList') cowList!: CowsListViewComponent
 
   @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
   public Cows : CowDto[] = []
@@ -58,5 +61,9 @@ export class CowsPageComponent extends BaseComponent{
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
+  }
+
+  SelectGroup(group:GroupDto): void{
+    this.cowList.filterByGroup(group.id!);
   }
 }

@@ -52,10 +52,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .small_card_layout{
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0.5rem;
     margin:0.5rem;
-    padding:0.25rem;
     height: 6rem;    
 }
 .small_card_border{

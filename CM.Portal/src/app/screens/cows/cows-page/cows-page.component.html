@@ -5,7 +5,7 @@
             <p-tabPanel header="Groupes">
                 @for (group of Groups; track $index) 
                 {
-                    <app-group-card-small [Group]="group"></app-group-card-small>
+                    <app-group-card-small (onSelected)="SelectGroup(group)" [Group]="group"></app-group-card-small>
                 }
             </p-tabPanel>
 
@@ -44,7 +44,7 @@
 
         <div class="gap-4">
             <!-- <app-group-card-view [Groups]="Groups"></app-group-card-view> -->
-            <app-cows-list-view [Cows]="Cows"></app-cows-list-view>
+            <app-cows-list-view #cowList [Cows]="Cows"></app-cows-list-view>
         </div>
 
     </div>

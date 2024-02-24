@@ -15,8 +15,6 @@ export class JobDetailsListComponent extends BaseComponent {
 
   public assignJobDialog(job:any) : void{
 
-    debugger;
-
     const dialogRef = this.dialog.open(AssignJobDialogComponent, {
       height: '200px',
       width: '300px',
@@ -24,7 +22,6 @@ export class JobDetailsListComponent extends BaseComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger;
       if(result == null)
         return;
       this.store.dispatch(new Jobs.Assign({body:result})).subscribe({

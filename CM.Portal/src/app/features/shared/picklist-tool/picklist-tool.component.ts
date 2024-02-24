@@ -73,7 +73,6 @@ export class PicklistToolComponent extends BaseComponent {
           name: this.selectedTargetGroup!.name,
           cows : this.target,
         }
-        debugger;
         this.groupService.apiGroupAssignPost({body: groupToSend})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
@@ -89,7 +88,6 @@ export class PicklistToolComponent extends BaseComponent {
           size: this.selectedTargetPen!.size,
           cows : this.target,
         }
-        debugger;
         this.penService.apiPenAssignPost({body: penToSend})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({

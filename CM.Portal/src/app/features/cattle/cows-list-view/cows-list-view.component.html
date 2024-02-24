@@ -1,7 +1,7 @@
 <div class="panel_border">
     <p-panel header="Liste">
         <p-table #dt 
-            [value]="Cows" 
+            [value]="filteredCows" 
             styleClass="p-datatable-striped" 
             [tableStyle]="{ 'min-width': '50rem'}" 
             [globalFilterFields]="['identifier','name', 'status']" 

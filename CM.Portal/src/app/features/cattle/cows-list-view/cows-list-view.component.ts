@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { CowDto } from '../../../api/models';
 
@@ -9,7 +9,17 @@ import { CowDto } from '../../../api/models';
   styleUrl: './cows-list-view.component.css'
 })
 export class CowsListViewComponent {
-  @Input() Cows : CowDto[] = []
+  @ViewChild('dt') dt: any;
+  private cows : CowDto[] = [];
+  @Input() set Cows(value: CowDto[]){
+    this.cows = [...value]
+    this.filteredCows = [...this.cows];
+  }   
+  public get Cows(): CowDto[] {
+    return this.cows;
+  }
+
+  public filteredCows : CowDto[] = [];
 
   applyFilterGlobal(event: any) {
     return event.target.value;
@@ -18,4 +28,8 @@ export class CowsListViewComponent {
   clear(table: Table) {
         table.clear();
     }
+
+  public filterByGroup(id: number){
+    this.filteredCows = [...this.Cows.filter(c => c.groupId === id)];
+  }
 }
