@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogService } from "primeng/dynamicdialog";
 import { Store } from "@ngxs/store";
@@ -12,12 +12,17 @@ import { Subject } from "rxjs";
 })
 export class BaseComponent implements OnInit, OnDestroy {
 
-    constructor(
-        protected store: Store, 
-        protected dialog: MatDialog,
-        protected dialogService: DialogService,
-        protected messageService: MessageService 
-        ){}
+    // constructor(
+    //     // protected store: Store, 
+    //     // protected dialog: MatDialog,
+    //     // protected dialogService: DialogService,
+    //     // protected messageService: MessageService 
+    //     ){}
+
+    protected store = inject(Store);
+    protected dialog = inject(MatDialog);
+    protected dialogService =  inject(DialogService);
+    protected messageService = inject(MessageService);
 
     protected $OnDestroyed : Subject<void> = new Subject<void>();
     protected displayLoader : boolean = false;

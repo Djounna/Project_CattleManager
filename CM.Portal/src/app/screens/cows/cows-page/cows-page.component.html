@@ -1,4 +1,4 @@
-<div class="flex flex-row m-3 justify-content-between">
+<div class="flex flex-row m-3 justify-content-start gap-4">
 
     <div class="panel_border">
         <p-tabView>
@@ -10,13 +10,23 @@
             </p-tabPanel>
 
             <p-tabPanel header="Enclos">
-                
+                <!-- @for (pen of Pens; track $index) 
+                {
+                    <app-pen-card-small [Pen]="pen"></app-pen-card-small>
+                } -->
             </p-tabPanel>
+
+            <!-- <p-tabPanel header="Race"> -->
+                <!-- @for (race of Rraces; track $index) 
+                {
+
+                } -->
+            <!-- </p-tabPanel> -->
         </p-tabView>
     </div>
 
 
-    <div class="flex flex-column m-3">
+    <div class="flex flex-column">
 
         <div class="flex flex-row justify-content-start align-content-center">
             <div class="flex flex-row justify-content-end gap-3">

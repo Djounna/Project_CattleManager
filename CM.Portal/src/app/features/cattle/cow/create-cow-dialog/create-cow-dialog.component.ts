@@ -4,18 +4,21 @@ import { CowDto } from '../../../../api/models';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { races } from '../../../../models/enums/races';
 import { genders } from '../../../../models/enums/genders';
+import { BaseComponent } from '../../../../shared/base-component.component';
 
 @Component({
   selector: 'app-create-cow-dialog',
   templateUrl: './create-cow-dialog.component.html',
   styleUrl: './create-cow-dialog.component.css'
 })
-export class CreateCowDialogComponent {
+export class CreateCowDialogComponent extends BaseComponent {
 
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
-  ){}
+  ){
+    super();
+  }
 
   public newCow : CowDto | undefined;
   public races : string[] = Object.values(races);
@@ -37,6 +40,7 @@ export class CreateCowDialogComponent {
       race : this.cowForm.value.race,
       gender : this.cowForm.value.gender
     };
+
     this.dialogRef.close(this.newCow);
   }
 

@@ -1,14 +1,11 @@
 <div class="page_base">
 
-    <div class="flex flex-row justify-content-between gap-5">
+    <div class="flex flex-row justify-content-between gap-4">
 
         <div class="flex flex-column flex-grow-2">
-            <div class="flex flex-row justify-content-between align-content-center">
-
-            </div>
-            <p-divider></p-divider>
-            <div class="flex flex-column gap-2">
+            <div class="flex flex-row gap-4">
                 <app-job-list-view [Jobs]="Jobs" class="flex-grow-2" ></app-job-list-view>
+                <app-gestations-list [Gestations]="Gestations"></app-gestations-list>
             </div>
         </div>
 
@@ -16,7 +13,6 @@
 
         <div class="fles flex-column gap-3">
             <app-alert-list [Alerts]="Alerts"></app-alert-list>
-            <app-gestations-list [Gestations]="Gestations"></app-gestations-list>
         </div>
     </div>
 </div>

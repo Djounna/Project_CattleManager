@@ -54,7 +54,7 @@ export class CowsPageComponent extends BaseComponent{
       if(result == null)
         return;
       this.store.dispatch(new Cows.Create({body:result})).subscribe({
-        next:() => this.toastSuccess("l'animal a été créé avec succès"),
+        next:() => this.toastSuccess("L'animal a été créé avec succès"),
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
