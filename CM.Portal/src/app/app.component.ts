@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,6 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 })
 export class AppComponent{                    // implements OnInit
   title = 'CM.Portal';
-
-  @ViewChild('sidebar') sidebar!: SidebarComponent
-
 
   //constructor(private authSrv : AuthService){}
 
@@ -21,8 +17,4 @@ export class AppComponent{                    // implements OnInit
   //     mergeMap(() => this.authSrv.loginWithRedirect())
   //     ).subscribe(); 
   // }
-
-  showSidebar() : void{
-    this.sidebar.visible = true;
-  }
 }

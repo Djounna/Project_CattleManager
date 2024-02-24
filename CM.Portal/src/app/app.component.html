@@ -1,4 +1,4 @@
-<app-toolbar (onShowSidebar)="showSidebar()" stlyeclass=min-w-full ></app-toolbar>
+<!-- <app-toolbar (onShowSidebar)="showSidebar()" stlyeclass=min-w-full ></app-toolbar>
 
 <div class="main">
     <div class="main-content">
@@ -6,4 +6,21 @@
     </div>
 </div>
 
-<app-sidebar #sidebar></app-sidebar>
+<app-sidebar #sidebar></app-sidebar> -->
+
+<div class="main">
+  
+  <app-toolbar (onShowSidebar)="drawer.toggle()" stlyeclass=min-w-full ></app-toolbar>
+
+  <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <app-sidenav> </app-sidenav>
+      </mat-drawer>
+
+          <div class="main-content">
+              <router-outlet></router-outlet>
+          </div>
+  </mat-drawer-container>
+
+
+</div>
