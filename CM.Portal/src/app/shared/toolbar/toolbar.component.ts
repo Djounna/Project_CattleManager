@@ -7,7 +7,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css'
+  styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
 

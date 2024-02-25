@@ -7,7 +7,7 @@ import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-auth-button',
   templateUrl: './auth-button.component.html',
-  styleUrl:'./auth-button.component.css'
+  styleUrl:'./auth-button.component.scss'
 })
   // Inject the authentication service into your component through the constructor
 export class AuthButtonComponent {

@@ -7,7 +7,7 @@ import { Jobs } from '../../../state/work/work.actions';
 @Component({
   selector: 'app-job-details-list',
   templateUrl: './job-details-list.component.html',
-  styleUrl: './job-details-list.component.css'
+  styleUrl: './job-details-list.component.scss'
 })
 export class JobDetailsListComponent extends BaseComponent {
   @Input() JobsDetails : JobDetailsDto[] = []

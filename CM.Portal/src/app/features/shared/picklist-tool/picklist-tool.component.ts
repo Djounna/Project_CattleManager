@@ -9,7 +9,7 @@ import { BaseComponent } from '../../../shared/base-component.component';
 @Component({
   selector: 'app-picklist-tool',
   templateUrl: './picklist-tool.component.html',
-  styleUrl: './picklist-tool.component.css'
+  styleUrl: './picklist-tool.component.scss'
 })
 export class PicklistToolComponent extends BaseComponent {
 

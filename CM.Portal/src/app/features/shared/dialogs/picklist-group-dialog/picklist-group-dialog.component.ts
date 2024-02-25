@@ -7,7 +7,7 @@ import { PicklistToolComponent } from '../../picklist-tool/picklist-tool.compone
 @Component({
   selector: 'app-picklist-group-dialog',
   templateUrl: './picklist-group-dialog.component.html',
-  styleUrl: './picklist-group-dialog.component.css'
+  styleUrl: './picklist-group-dialog.component.scss'
 })
 export class PicklistGroupDialogComponent {
 

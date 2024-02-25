@@ -4,7 +4,7 @@ import { GestationDto } from '../../../../api/models';
 @Component({
   selector: 'app-gestations-list',
   templateUrl: './gestations-list.component.html',
-  styleUrl: './gestations-list.component.css'
+  styleUrl: './gestations-list.component.scss'
 })
 export class GestationsListComponent {
   @Input() Gestations: GestationDto[] = [];

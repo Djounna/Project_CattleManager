@@ -13,7 +13,7 @@ import { Gestations } from '../../state/cattle/cattle.actions';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent extends BaseComponent{
 

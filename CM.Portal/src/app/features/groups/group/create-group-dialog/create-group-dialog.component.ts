@@ -8,7 +8,7 @@ import { races } from '../../../../models/enums/races';
 @Component({
   selector: 'app-create-group-dialog',
   templateUrl: './create-group-dialog.component.html',
-  styleUrl: './create-group-dialog.component.css'
+  styleUrl: './create-group-dialog.component.scss'
 })
 export class CreateGroupDialogComponent {
 

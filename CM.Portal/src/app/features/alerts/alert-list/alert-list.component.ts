@@ -4,7 +4,7 @@ import { AlertDto } from '../../../api/models';
 @Component({
   selector: 'app-alert-list',
   templateUrl: './alert-list.component.html',
-  styleUrl: './alert-list.component.css'
+  styleUrl: './alert-list.component.scss'
 })
 export class AlertListComponent {
   @Input() Alerts : AlertDto[] = [];

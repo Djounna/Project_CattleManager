@@ -11,7 +11,7 @@ import { jobStatus } from '../../../../models/enums/workEnums';
 @Component({
   selector: 'app-create-job-dialog',
   templateUrl: './create-job-dialog.component.html',
-  styleUrl: './create-job-dialog.component.css'
+  styleUrl: './create-job-dialog.component.scss'
 })
 export class CreateJobDialogComponent {
 

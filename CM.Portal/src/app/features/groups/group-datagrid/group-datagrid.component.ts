@@ -6,7 +6,7 @@ import { PicklistGroupDialogComponent } from '../../shared/dialogs/picklist-grou
 @Component({
   selector: 'app-group-datagrid',
   templateUrl: './group-datagrid.component.html',
-  styleUrl: './group-datagrid.component.css'
+  styleUrl: './group-datagrid.component.scss'
 })
 export class GroupDatagridComponent extends BaseComponent{
   @Input() Cows : CowDto[] = [];

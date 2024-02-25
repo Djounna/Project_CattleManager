@@ -12,7 +12,7 @@ import { PicklistGroupDialogComponent } from '../../../features/shared/dialogs/p
 @Component({
   selector: 'app-group-page',
   templateUrl: './group-page.component.html',
-  styleUrl: './group-page.component.css'
+  styleUrl: './group-page.component.scss'
 })
 export class GroupPageComponent extends BaseComponent {
 

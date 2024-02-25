@@ -4,7 +4,7 @@ import { GroupDto } from '../../../api/models';
 @Component({
   selector: 'app-group-card',
   templateUrl: './group-card.component.html',
-  styleUrl: './group-card.component.css'
+  styleUrl: './group-card.component.scss'
 })
 export class GroupCardComponent {
 

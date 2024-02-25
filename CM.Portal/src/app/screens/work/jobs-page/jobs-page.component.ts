@@ -14,7 +14,7 @@ import { CreateJobDialogComponent } from '../../../features/work/job/create-job-
 @Component({
   selector: 'app-jobs-page',
   templateUrl: './jobs-page.component.html',
-  styleUrl: './jobs-page.component.css'
+  styleUrl: './jobs-page.component.scss'
 })
 export class JobsPageComponent extends BaseComponent {
 

@@ -6,7 +6,7 @@ import { CowDto } from '../../../api/models';
 @Component({
   selector: 'app-cows-list-view',
   templateUrl: './cows-list-view.component.html',
-  styleUrl: './cows-list-view.component.css'
+  styleUrl: './cows-list-view.component.scss'
 })
 export class CowsListViewComponent {
   @ViewChild('dt') dt: any;

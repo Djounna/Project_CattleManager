@@ -9,7 +9,7 @@ import { BaseComponent } from '../../../../shared/base-component.component';
 @Component({
   selector: 'app-create-cow-dialog',
   templateUrl: './create-cow-dialog.component.html',
-  styleUrl: './create-cow-dialog.component.css'
+  styleUrl: './create-cow-dialog.component.scss'
 })
 export class CreateCowDialogComponent extends BaseComponent {
 

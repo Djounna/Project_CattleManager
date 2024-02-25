@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-assign-job-dialog',
   templateUrl: './assign-job-dialog.component.html',
-  styleUrl: './assign-job-dialog.component.css'
+  styleUrl: './assign-job-dialog.component.scss'
 })
 export class AssignJobDialogComponent {
 

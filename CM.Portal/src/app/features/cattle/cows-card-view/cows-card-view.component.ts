@@ -6,7 +6,7 @@ import { GroupDto } from '../../../api/models';
   standalone: true,
   imports: [],
   templateUrl: './cows-card-view.component.html',
-  styleUrl: './cows-card-view.component.css'
+  styleUrl: './cows-card-view.component.scss'
 })
 export class CowsCardViewComponent {
   @Input() Groups : GroupDto[] = [];

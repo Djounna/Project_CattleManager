@@ -9,7 +9,7 @@ import { Workers } from '../../../state/work/work.actions';
 @Component({
   selector: 'app-workers-page',
   templateUrl: './workers-page.component.html',
-  styleUrl: './workers-page.component.css'
+  styleUrl: './workers-page.component.scss'
 })
 export class WorkersPageComponent extends BaseComponent{
 

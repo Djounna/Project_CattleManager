@@ -4,7 +4,7 @@ import { InterventionDto } from '../../../../api/models';
 @Component({
   selector: 'app-intervention-list',
   templateUrl: './intervention-list.component.html',
-  styleUrl: './intervention-list.component.css'
+  styleUrl: './intervention-list.component.scss'
 })
 export class InterventionListComponent {
   @Input() Interventions : InterventionDto[] = []

@@ -12,7 +12,7 @@ import { CowsListViewComponent } from '../../../features/cattle/cows-list-view/c
 @Component({
   selector: 'app-cows-page',
   templateUrl: './cows-page.component.html',
-  styleUrl: './cows-page.component.css'
+  styleUrl: './cows-page.component.scss'
 })
 export class CowsPageComponent extends BaseComponent{
 

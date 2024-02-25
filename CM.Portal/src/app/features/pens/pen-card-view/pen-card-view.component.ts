@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './pen-card-view.component.html',
-  styleUrl: './pen-card-view.component.css'
+  styleUrl: './pen-card-view.component.scss'
 })
 export class PenCardViewComponent {
 
