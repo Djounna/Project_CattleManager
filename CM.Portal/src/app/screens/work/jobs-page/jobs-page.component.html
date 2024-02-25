@@ -1,12 +1,49 @@
 <div class="page_base">
 
-    <div class="flex flex-row justify-content-start align-content-center">
-        <p-button label="Créer" (click)="createJobDialog()" ></p-button> 
+    <div class="flex flex-row m-3 justify-content-start gap-4">
+
+        <div class="flex flex-column">
+
+            <div class="flex flex-row justify-content-start align-content-center">
+                <div class="flex flex-row justify-content-between gap-3">
+                    <p-button label="Tout" (click)="ShowAll()"></p-button>
+                    <p-button label="Créer" (click)="createJobDialog()" ></p-button> 
+                </div>
+            </div>
+
+        <p-divider></p-divider>
+
+            <div class="panel_border">
+                <p-tabView>
+
+                    <p-tabPanel header="Travailleurs">
+                        <div
+                        class="flex flex-column m-2 g-2"
+                         *ngFor="let worker of Workers;">
+                            <p-button (click)="SelectWorker(worker)">
+                                <b>{{worker.username}}</b>
+                            </p-button>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Enclos">
+                        <div
+                        class="flex flex-column m-2 g-2"
+                         *ngFor="let pen of Pens;">
+                            <p-button (click)="SelectPen(pen)">
+                                <b>{{pen.name}}</b>
+                            </p-button>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </div>
+        </div>
+
+
+    <div class="flex flex-column">
+        <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
     </div>
-
-    <p-divider></p-divider>
-
-    <app-job-details-list [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
-
 </div>
+
 <p-toast></p-toast>

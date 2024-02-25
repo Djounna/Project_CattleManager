@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, combineLatest, finalize, takeUntil, tap } from 'rxjs';
+import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
 import { CowDto, JobDetailsDto, JobDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows } from '../../../state/cattle/cattle.actions';
@@ -10,6 +10,8 @@ import { InfrastructureState } from '../../../state/infrastructure/infrastructur
 import { Jobs, Workers } from '../../../state/work/work.actions';
 import { WorkState } from '../../../state/work/work.store';
 import { CreateJobDialogComponent } from '../../../features/work/job/create-job-dialog/create-job-dialog.component';
+import { JobListViewComponent } from '../../../features/work/job-list-view/job-list-view.component';
+import { JobDetailsListComponent } from '../../../features/work/job-details-list/job-details-list.component';
 
 @Component({
   selector: 'app-jobs-page',
@@ -17,6 +19,8 @@ import { CreateJobDialogComponent } from '../../../features/work/job/create-job-
   styleUrl: './jobs-page.component.scss'
 })
 export class JobsPageComponent extends BaseComponent {
+
+  @ViewChild('jobList') jobList!: JobDetailsListComponent
 
   @Select(WorkState.jobs) Jobs$! : Observable<JobDto[]>
   public Jobs : JobDto[] = [];
@@ -65,5 +69,15 @@ export class JobsPageComponent extends BaseComponent {
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
+  }
+
+  public ShowAll(): void{
+    this.jobList.showAll()
+  }
+  public SelectWorker(worker:UserDto): void{
+    this.jobList.filterByWorker(worker);
+  }
+  public SelectPen(pen:PenDto): void{
+    this.jobList.filterByPen(pen);
   }
 }

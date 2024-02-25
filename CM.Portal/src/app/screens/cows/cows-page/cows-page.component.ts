@@ -68,9 +68,9 @@ export class CowsPageComponent extends BaseComponent{
     this.cowList.showAll()
   }
   public SelectGroup(group:GroupDto): void{
-    this.cowList.filterByGroup(group.id!);
+    this.cowList.filterByGroup(group);
   }
   public SelectPen(pen:PenDto): void{
-    this.cowList.filterByGroup(pen.id!);
+    this.cowList.filterByPen(pen);
   }
 }

@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { JobDetailsDto, UserDto } from '../../../api/models';
+import { Component, Input, ViewChild } from '@angular/core';
+import { JobDetailsDto, JobDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { AssignJobDialogComponent } from '../job/assign-job-dialog/assign-job-dialog.component';
 import { Jobs } from '../../../state/work/work.actions';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-job-details-list',
@@ -10,8 +11,37 @@ import { Jobs } from '../../../state/work/work.actions';
   styleUrl: './job-details-list.component.scss'
 })
 export class JobDetailsListComponent extends BaseComponent {
-  @Input() JobsDetails : JobDetailsDto[] = []
   @Input() Workers : UserDto[] = []
+
+  @ViewChild('dt') dt: any;
+  private jobs : JobDetailsDto[] = [];
+  @Input() set JobsDetails(value: JobDetailsDto[]){
+    this.jobs = [...value]
+    this.filteredJobs = [...this.jobs];
+  }   
+  public get Jobs(): JobDetailsDto[] {
+    return this.jobs;
+  }
+
+  public filteredJobs : JobDetailsDto[] = [];
+
+  applyFilterGlobal(event: any) {
+    return event.target.value;
+  }
+
+  clear(table: Table) {
+        table.clear();
+    }
+
+  public showAll(): void{
+    this.filteredJobs = [...this.jobs];
+  }
+  public filterByWorker(worker:UserDto){
+    this.filteredJobs = [...this.jobs.filter(c => c?.workers?.some(w => w.id === worker.id))];
+  }
+  public filterByPen(pen: PenDto){
+    this.filteredJobs = [...this.jobs.filter(c => c?.pen?.id === pen.id)];
+  }
 
   public assignJobDialog(job:any) : void{
 

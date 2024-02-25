@@ -32,14 +32,6 @@ export class SidenavComponent implements OnInit {
                         icon: 'pi pi-fw pi-align-left',
                         routerLink:'/jobs'
                     },
-                    {
-                        label: 'Par travailleur',
-                        icon: 'pi pi-fw pi-align-right',
-                    },
-                    {
-                        label: 'Par enclos',
-                        icon: 'pi pi-fw pi-align-left',
-                    }
                 ]
             },
             {
@@ -55,17 +47,12 @@ export class SidenavComponent implements OnInit {
                         label: 'Groupes',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: '/groups'
-                    }
-                ]
-            },
-            {
-                label: 'Enclos',
-                icon: 'pi pi-fw pi-calendar',
-                items: [
-                    {
-                        label: 'Liste',
-                        icon: 'pi pi-fw pi-pencil',
                     },
+                    {
+                        label: 'Enclos',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink:'/pens'
+                    }
                 ]
             },
             {

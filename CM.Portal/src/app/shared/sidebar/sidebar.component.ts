@@ -32,14 +32,6 @@ export class SidebarComponent {
                         icon: 'pi pi-fw pi-align-left',
                         routerLink:'/jobs'
                     },
-                    // {
-                    //     label: 'Par travailleur',
-                    //     icon: 'pi pi-fw pi-align-right',
-                    // },
-                    // {
-                    //     label: 'Par enclos',
-                    //     icon: 'pi pi-fw pi-align-left',
-                    // }
                 ]
             },
             {

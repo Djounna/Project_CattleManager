@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { CowDto } from '../../../api/models';
+import { CowDto, GroupDto, PenDto } from '../../../api/models';
 
 
 @Component({
@@ -32,10 +32,10 @@ export class CowsListViewComponent {
   public showAll(): void{
     this.filteredCows = [...this.Cows];
   }
-  public filterByGroup(id: number){
-    this.filteredCows = [...this.Cows.filter(c => c.groupId === id)];
+  public filterByGroup(group: GroupDto){
+    this.filteredCows = [...this.Cows.filter(c => c.groupId === group.id)];
   }
-  public filterByPen(id: number){
-    this.filteredCows = [...this.Cows.filter(c => c.penId === id)];
+  public filterByPen(pen: PenDto){
+    this.filteredCows = [...this.Cows.filter(c => c.penId === pen.id)];
   }
 }
