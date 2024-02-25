@@ -87,6 +87,7 @@ import { CreateGroupDialogComponent } from './features/groups/group/create-group
 import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { GroupCardSmallComponent } from './features/groups/group-card-small/group-card-small.component';
+import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-small.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -98,7 +99,8 @@ import { GroupCardSmallComponent } from './features/groups/group-card-small/grou
         CreateGroupDialogComponent,
         PicklistGroupDialogComponent,
         SidebarComponent,
-        GroupCardSmallComponent
+        GroupCardSmallComponent,
+        PenCardSmallComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],

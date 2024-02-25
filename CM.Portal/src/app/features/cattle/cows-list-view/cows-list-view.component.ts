@@ -29,7 +29,13 @@ export class CowsListViewComponent {
         table.clear();
     }
 
+  public showAll(): void{
+    this.filteredCows = [...this.Cows];
+  }
   public filterByGroup(id: number){
     this.filteredCows = [...this.Cows.filter(c => c.groupId === id)];
+  }
+  public filterByPen(id: number){
+    this.filteredCows = [...this.Cows.filter(c => c.penId === id)];
   }
 }
