@@ -88,6 +88,8 @@ import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { GroupCardSmallComponent } from './features/groups/group-card-small/group-card-small.component';
 import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-small.component';
+import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
+import { MilkingInputComponent } from './features/milking/milking-input/milking-input.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -100,7 +102,9 @@ import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-s
         PicklistGroupDialogComponent,
         SidebarComponent,
         GroupCardSmallComponent,
-        PenCardSmallComponent
+        PenCardSmallComponent,
+        MilkingPageComponent,
+        MilkingInputComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],

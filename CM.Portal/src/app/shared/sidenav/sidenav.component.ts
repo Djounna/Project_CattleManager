@@ -35,6 +35,17 @@ export class SidenavComponent implements OnInit {
                 ]
             },
             {
+                label: 'Traite',
+                icon: 'pi pi-fw pi-pencil',
+                items: [
+                    {
+                        label: 'Encoder',
+                        icon: 'pi pi-fw pi-align-left',
+                        routerLink:'/milking'
+                    },
+                ]
+            },
+            {
                 label: 'Bétail',
                 icon: 'pi pi-fw pi-pencil',
                 items:[
