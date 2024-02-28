@@ -13,5 +13,5 @@ public class MilkProduction : BaseEntity
     public double TotalQuantity { get; set; }
     public double TotalDays { get; set; }
 
-    public virtual ICollection<Milking> Milkings { get; } = new List<Milking>();
+    //public virtual ICollection<Milking> Milkings { get; } = new List<Milking>();
 }
