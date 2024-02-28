@@ -21,11 +21,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CM.Backend.Application\CM.Backend.Application.csproj" />
     <ProjectReference Include="..\CM.Backend.Domain\CM.Backend.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MongoDB\Repositories\" />
   </ItemGroup>
 
 </Project>

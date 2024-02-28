@@ -1,6 +1,7 @@
 using CM.Backend.Application;
 using CM.Backend.Infrastructure;
 using CM.Backend.Persistence;
+using CM.Backend.Persistence.MongoDB;
 using CM.Backend.Presentation.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ var configuration = builder.Configuration;
 
 // Add JwtBearer Authentication
 builder.Services.AddAuthenticationJwtBearer(configuration);
+
+// Build Configuration objects
+builder.Services.Configure<MongoSettings>(configuration.GetSection("MongoDB")); 
 
 // Add Application Services
 builder.Services.AddApplicationServices();
