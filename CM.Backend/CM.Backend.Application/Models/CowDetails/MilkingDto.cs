@@ -10,8 +10,13 @@ public class MilkingDto
     /// <summary>
     /// Milk Production Id
     /// </summary>
-    public int MilkProductionId { get; set; }
+    //public int MilkProductionId { get; set; }
     //public virtual MilkProduction MilkProduction { get; set; }
+
+    /// <summary>
+    /// Cow Id
+    /// </summary>
+    public int CowId { get; set; }
 
     /// <summary>
     /// Date
