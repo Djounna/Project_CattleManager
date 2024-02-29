@@ -2501,6 +2501,9 @@
             "type": "string",
             "nullable": true
           },
+          "milkCow": {
+            "type": "boolean"
+          },
           "birthDate": {
             "$ref": "#/components/schemas/DateOnly"
           },
@@ -2822,7 +2825,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "milkProductionId": {
+          "cowId": {
             "type": "integer",
             "format": "int32"
           },
