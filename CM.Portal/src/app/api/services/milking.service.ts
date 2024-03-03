@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { MilkingDto } from '../models/milking-dto';
+import { MilkingInputsDto } from '../models/milking-inputs-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -271,6 +272,108 @@ export class MilkingService extends BaseService {
 
     return this.apiMilkingDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation apiMilkingMilkingInputsDateGet
+   */
+  static readonly ApiMilkingMilkingInputsDateGetPath = '/api/Milking/milkingInputs/{date}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingMilkingInputsDateGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingMilkingInputsDateGet$Response(params: {
+    date: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MilkingInputsDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingMilkingInputsDateGetPath, 'get');
+    if (params) {
+      rb.path('date', params.date, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MilkingInputsDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingMilkingInputsDateGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingMilkingInputsDateGet(params: {
+    date: string;
+    context?: HttpContext
+  }
+): Observable<MilkingInputsDto> {
+
+    return this.apiMilkingMilkingInputsDateGet$Response(params).pipe(
+      map((r: StrictHttpResponse<MilkingInputsDto>) => r.body as MilkingInputsDto)
+    );
+  }
+
+  /**
+   * Path part for operation apiMilkingMilkingInputsPost
+   */
+  static readonly ApiMilkingMilkingInputsPostPath = '/api/Milking/milkingInputs';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingMilkingInputsPost()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMilkingMilkingInputsPost$Response(params?: {
+    context?: HttpContext
+    body?: MilkingInputsDto
+  }
+): Observable<StrictHttpResponse<MilkingInputsDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingMilkingInputsPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MilkingInputsDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingMilkingInputsPost$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMilkingMilkingInputsPost(params?: {
+    context?: HttpContext
+    body?: MilkingInputsDto
+  }
+): Observable<MilkingInputsDto> {
+
+    return this.apiMilkingMilkingInputsPost$Response(params).pipe(
+      map((r: StrictHttpResponse<MilkingInputsDto>) => r.body as MilkingInputsDto)
     );
   }
 

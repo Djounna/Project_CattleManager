@@ -1627,6 +1627,93 @@
         }
       }
     },
+    "/api/Milking/milkingInputs/{date}": {
+      "get": {
+        "tags": [
+          "Milking"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilkingInputsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Milking/milkingInputs": {
+      "post": {
+        "tags": [
+          "Milking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilkingInputsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/MilkProduction/{id}": {
       "get": {
         "tags": [
@@ -2835,6 +2922,39 @@
           "volume": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MilkingInputDto": {
+        "type": "object",
+        "properties": {
+          "cowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "done": {
+            "type": "boolean"
+          },
+          "volume": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MilkingInputsDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "milkingInputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MilkingInputDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

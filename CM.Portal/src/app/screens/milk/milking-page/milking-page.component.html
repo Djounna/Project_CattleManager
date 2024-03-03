@@ -3,15 +3,8 @@ style="display:flex; flex-flow: row wrap;
 align-content:flex-start;
 margin:2rem; padding:1rem"
 >
-
-    <div *ngFor="let cow of Cows">
-        <app-milking-input [Cow]="cow"></app-milking-input>
+    <div *ngFor="let cow of MilkingDatas">
+        <app-milking-input [MilkingData]="cow"></app-milking-input>
     </div>
-
-
-
-
-
-
 
 </div>
