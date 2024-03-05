@@ -125,7 +125,8 @@ export class MilkingState{
 
     @Action(MilkingInputs.Update)
     updateMilkingInputs(ctx: StateContext<MilkingStateModel>, action:MilkingInputs.Update){
-        return this.milkingService.apiMilkingMilkingInputsPost(action.payload)
+        debugger;
+        return this.milkingService.apiMilkingMilkingInputsPost({body: action.payload})
         .pipe(
             tap(milkingInputs=>{
                 ctx.patchState({MilkingInputs : milkingInputs})

@@ -1,10 +1,16 @@
-<div
-style="display:flex; flex-flow: row wrap;
-align-content:flex-start;
-margin:2rem; padding:1rem"
->
-    <div *ngFor="let cow of MilkingDatas">
-        <app-milking-input [MilkingData]="cow"></app-milking-input>
+<div style="display:flex; flex-direction:column; gap:5rem²">
+    <div
+    style="display:flex; flex-flow: row wrap;
+    align-content:flex-start;
+    margin:2rem; padding:1rem"
+    >
+        <div *ngFor="let cow of MilkingDatas">
+            <app-milking-input #intput [MilkingData]="cow"></app-milking-input>
+        </div>
+
     </div>
 
+    <div style="display:flex; flex-direction:column; justify-content: flex-end;">
+        <p-button (click)="Save()"></p-button>
+    </div>
 </div>

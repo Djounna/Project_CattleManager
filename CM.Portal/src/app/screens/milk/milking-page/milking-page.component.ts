@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CowDto, MilkingInputsDto } from '../../../api/models';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { CowDto, MilkingInputDto, MilkingInputsDto } from '../../../api/models';
 import { Select } from '@ngxs/store';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
 import { CattleState } from '../../../state/cattle/cattle.store';
@@ -9,6 +9,7 @@ import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { MilkingInputs } from '../../../state/milking/milking.actions';
 import { MilkingState } from '../../../state/milking/milking.store';
 import moment from 'moment';
+import { MilkingInputComponent } from '../../../features/milking/milking-input/milking-input.component';
 
 @Component({
   selector: 'app-milking-page',
@@ -16,18 +17,23 @@ import moment from 'moment';
   styleUrl: './milking-page.component.scss'
 })
 export class MilkingPageComponent extends BaseComponent {
+
+  MilkingDatas : MilkingData[] = [];
+  Date!: Date ;
+
+  @ViewChildren(MilkingInputComponent)
+  MilkingDatasRef!: QueryList<MilkingInputComponent>;
+
   @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
   public Cows : CowDto[] = [];
   @Select(MilkingState.milkingInputs) MilkingInputs$! : Observable<MilkingInputsDto>
   public MilkingInputs!: MilkingInputsDto;
 
-  MilkingDatas : MilkingData[] = [];
-
   public Data$ = combineLatest([this.Cows$, this.MilkingInputs$])
 
   override ngOnInit(): void {
-    let date : Date = new Date();
-    let ddate : string = moment(date).format('YYYY-MM-DD');
+    this.Date = new Date();
+    let ddate : string = moment(this.Date).format('YYYY-MM-DD');
 
     this.displayLoader = true;
 
@@ -36,7 +42,6 @@ export class MilkingPageComponent extends BaseComponent {
       tap(([c,m]) =>{
         this.Cows = c.filter(c => c.milkCow === true);
         this.MilkingInputs = m;
-        debugger;
         this.Cows.forEach(c =>{
           let input = this.MilkingInputs.milkingInputs?.find(m => m.cowId === c.id);
           if(!!input){
@@ -61,6 +66,23 @@ export class MilkingPageComponent extends BaseComponent {
 
     this.store.dispatch(new MilkingInputs.Get(ddate))
     this.store.dispatch(new Cows.GetAll());
+  }
+
+  Save():void{
+    let newInputs : MilkingInputsDto = {
+      date: this.MilkingInputs.date,
+      milkingInputs : []
+    };
+    this.MilkingDatasRef.forEach(m => {
+      let newInput: MilkingInputDto = {
+        cowId: m.MilkingData.Cow.id,
+        done: true,
+        volume: m.formGroup.controls['volume'].value
+      }
+      newInputs.milkingInputs?.push(newInput);
+    })
+
+    this.store.dispatch(new MilkingInputs.Update(newInputs));
   }
 }
 
