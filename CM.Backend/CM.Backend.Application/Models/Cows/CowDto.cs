@@ -23,6 +23,11 @@ public class CowDto
     public string Name { get; set; }
 
     /// <summary>
+    /// Is Mikl Cow 
+    /// </summary>
+    public bool MilkCow { get; set; }
+
+    /// <summary>
     /// BirthDate
     /// </summary>
     public DateOnly BirthDate { get; set; }

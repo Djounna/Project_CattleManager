@@ -1,17 +1,38 @@
-<div
-style="display:flex; flex-flow: row wrap;
-align-content:flex-start;
-margin:2rem; padding:1rem"
->
+<div style="display:flex; flex-direction:column; gap:2rem">
+    
+    <!-- <div style="display:flex; flex-direction:row; gap:2rem">
+        <p-calendar [(ngModel)]="Date" [showButtonBar]="true"></p-calendar> 
+        <p-button (click)="SelectDate()" label="Charger"></p-button>
+    </div>
+    
+    <div>
+        Selected Date : {{SelectedDate}}
+    </div> -->
 
-    <div *ngFor="let cow of Cows">
-        <app-milking-input [Cow]="cow"></app-milking-input>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-subtitle>Selected Date</mat-card-subtitle>
+            <mat-card-title>{{SelectedDate}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div style="display:flex; flex-direction:row; gap:2rem; margin-top:1rem ">
+                <p-calendar [(ngModel)]="Date" [showButtonBar]="true"></p-calendar> 
+                <p-button (click)="SelectDate()" label="Charger"></p-button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div
+    style="display:flex; flex-flow: row wrap;
+    align-content:flex-start; padding:1rem; gap:1rem"
+    >
+        <div *ngFor="let cow of MilkingDatas">
+            <app-milking-input #intput [MilkingData]="cow"></app-milking-input>
+        </div>
+
     </div>
 
-
-
-
-
-
-
+    <div style="display:flex; flex-direction:column; justify-content: flex-end;">
+        <p-button (click)="Save()" label="Encoder" icon="pi pi-check" iconPos="right"></p-button>
+    </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
-import { CowDto } from '../../../api/models';
+import { CowDto, MilkingInputDto } from '../../../api/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MilkingData } from '../../../screens/milk/milking-page/milking-page.component';
 
 @Component({
   selector: 'app-milking-input',
@@ -10,14 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MilkingInputComponent {
   formBuilder = inject(FormBuilder);
 
-  @Input() Cow!: CowDto
+  @Input() MilkingData! : MilkingData;
 
-  public Volume: number = 0;
-  formGroup : FormGroup = this.formBuilder.group({
-    volume:['']
-    }
-  )
+  public formGroup! : FormGroup;
 
-
-
+  ngOnInit(){
+    this.formGroup = this.formBuilder.group({
+      volume:['']
+    });
+  }
 }

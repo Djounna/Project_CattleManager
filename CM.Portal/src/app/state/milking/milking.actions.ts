@@ -39,3 +39,15 @@ export namespace MilkProductions{
         constructor(public id: number){}
     }
 }
+
+export namespace MilkingInputs{
+    export class Update{
+        static readonly type = '[MilkingInputs] Update MilkingInputs'
+        constructor(public payload : any){}
+    }
+
+    export class Get{
+        static readonly type ='[MilkingInputs] Get MilkingInputs'
+        constructor(public date: string){}
+    }
+}

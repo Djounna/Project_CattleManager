@@ -1,14 +1,34 @@
-<div style="display:flex; flex-direction:row; gap:2rem; padding:0.5rem;"
-class="shadow-2 m-3 surface-card border-round-sm h-3rem w-9rem"
+<!-- <div style="display:flex; flex-direction:row; gap:2rem; padding:0.5rem;"
+class="shadow-2 m-3 surface-card border-round-sm h-3rem w-20"
 >
-    <span>
+    <div>
+        {{MilkingData.Cow.identifier}}
+    </div>
+    
+    @if(MilkingData.Done && !!MilkingData.Volume){
+        <p-inputNumber [(ngModel)]="MilkingData.Volume" [readonly]="true" inputId="integeronly"> </p-inputNumber>
+    }
+    @else{
+        <form [formGroup]="formGroup">
+            <p-inputNumber formControlName="volume" inputId="integeronly"> </p-inputNumber>
+        </form>
+    }
 
-    </span>
+</div>  -->
 
-    <p-inputNumber [(ngModel)]="Volume" inputId="integeronly"> </p-inputNumber>
-
-    <form [formGroup]="formGroup">
-        <p-inputNumber formControlName="volume" inputId="integeronly"> </p-inputNumber>
-    </form>
-
-</div> 
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{MilkingData.Cow.identifier}}</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+        @if(MilkingData.Done && !!MilkingData.Volume){
+            <p-inputNumber [(ngModel)]="MilkingData.Volume" [disabled]="true" [readonly]="true" inputId="integeronly"> </p-inputNumber>
+        }
+        @else{
+            <form [formGroup]="formGroup">
+                <p-inputNumber formControlName="volume" inputId="integeronly"> </p-inputNumber>
+            </form>
+        }
+    </mat-card-content>
+</mat-card>

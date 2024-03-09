@@ -49,6 +49,30 @@ public class MilkingController : ControllerBase
     }
 
     /// <summary>
+    /// Get MilkingInputs By Date
+    /// </summary>
+    /// <param name="date">Date</param>
+    /// <returns></returns>
+    [HttpGet("milkingInputs/{date}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<MilkingInputsDto>> GetMilkingInputsByDate(string date)
+    {
+        return Ok(await _mediator.Send(new GetMilkingInputsByDateQuery(date)));
+    }
+
+    /// <summary>
+    /// Update MilkingInputs By Datee
+    /// </summary>
+    [HttpPost("milkingInputs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<MilkingInputsDto>> UpdateMilkingInputs(MilkingInputsDto dto)
+    {
+        return Ok(await _mediator.Send(new UpdateMilkingInputsByDateCommand(dto)));
+    }
+
+    /// <summary>
     /// Create a milking
     /// </summary>
     /// <param name="dto"></param>

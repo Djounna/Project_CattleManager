@@ -11,6 +11,8 @@ export { JobDetailsDto } from './models/job-details-dto';
 export { JobDto } from './models/job-dto';
 export { MilkProductionDto } from './models/milk-production-dto';
 export { MilkingDto } from './models/milking-dto';
+export { MilkingInputDto } from './models/milking-input-dto';
+export { MilkingInputsDto } from './models/milking-inputs-dto';
 export { PenDetailsDto } from './models/pen-details-dto';
 export { PenDto } from './models/pen-dto';
 export { ProblemDetails } from './models/problem-details';

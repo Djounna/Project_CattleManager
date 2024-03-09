@@ -9,6 +9,7 @@ public class Cow : BaseEntity
     public string Identifier { get; set; }
     public string Name { get; set; }
 
+    public bool MilkCow { get; set; }
     public DateOnly BirthDate { get; set; }
     public string Race { get; set; }
     public string Gender { get; set; }

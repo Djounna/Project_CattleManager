@@ -7,6 +7,7 @@ export interface CowDto {
   groupId?: null | number;
   id?: number;
   identifier?: null | string;
+  milkCow?: boolean;
   name?: null | string;
   penId?: null | number;
   race?: null | string;

@@ -3,10 +3,9 @@ import { MilkingStateModel } from "./milking.state";
 import { Injectable } from "@angular/core";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { MilkingDto, MilkProductionDto } from "../../api/models";
+import { MilkingDto, MilkingInputsDto, MilkProductionDto } from "../../api/models";
 import { MilkingService, MilkProductionService } from "../../api/services";
-import { CattleStateModel } from "../cattle/cattle.state";
-import { Milkings, MilkProductions } from "./milking.actions";
+import { MilkingInputs, Milkings, MilkProductions } from "./milking.actions";
 
 @State<MilkingStateModel>({
     name:'milking',
@@ -28,6 +27,11 @@ export class MilkingState{
     @Selector()
     static milkProductions(milkingState:MilkingStateModel){
         return milkingState.MilkProductions;
+    }
+    
+    @Selector()
+    static milkingInputs(milkingState:MilkingStateModel){
+        return milkingState.MilkingInputs;
     }
 
     /// Milkings Actions
@@ -105,6 +109,27 @@ export class MilkingState{
         .pipe(
             tap(deleted =>{
                 ctx.setState(patch<MilkingStateModel>({MilkProductions : removeItem<MilkProductionDto>(c => c.id === action.id)}))
+            })
+        );
+    }
+
+    //MilkingInputs Actions
+    @Action(MilkingInputs.Get)
+    getMilkingInputs(ctx: StateContext<MilkingStateModel>, action: MilkingInputs.Get){
+        return this.milkingService.apiMilkingMilkingInputsDateGet({date: action.date})
+        .pipe(tap(milkingInputs=>{
+            ctx.patchState({MilkingInputs : milkingInputs})
+            })
+        );
+    }
+
+    @Action(MilkingInputs.Update)
+    updateMilkingInputs(ctx: StateContext<MilkingStateModel>, action:MilkingInputs.Update){
+        debugger;
+        return this.milkingService.apiMilkingMilkingInputsPost({body: action.payload})
+        .pipe(
+            tap(milkingInputs=>{
+                ctx.patchState({MilkingInputs : milkingInputs})
             })
         );
     }
