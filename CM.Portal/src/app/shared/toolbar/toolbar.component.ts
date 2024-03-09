@@ -32,6 +32,7 @@ export class ToolbarComponent {
             case '/jobs' : this.title = 'Tâches'; break;
             case '/cows' : this.title = 'Bétail'; break;
             case '/groups' : this.title = 'Groupe'; break;
+            case '/milking' : this.title = 'Traite'; break;
           }
         }
       });
