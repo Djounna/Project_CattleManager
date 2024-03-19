@@ -1,25 +1,25 @@
 <div class="panel_border">
     <p-panel header="Tâches">
-        <p-table [value]="Jobs" [tableStyle]="{ 'min-width': '30rem'}">
-
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Durée</th>
-                    <th>Statut</th>
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-job>
-                <tr>
-                    <td>{{job.title}}</td>
-                    <td>{{job.description}}</td>
-                    <td>{{job.length}}</td>
-                    <td>{{job.status}}</td>
-                </tr>
-            </ng-template>
-
-        </p-table>
+        <div style="max-height:40vh; overflow: auto;">
+            <p-table [value]="Jobs" [tableStyle]="{ 'min-width': '30rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Durée</th>
+                        <th>Statut</th>
+                    </tr>
+                </ng-template>
+                
+                <ng-template pTemplate="body" let-job >
+                    <tr>
+                        <td>{{job.title}}</td>
+                        <td>{{job.description}}</td>
+                        <td>{{job.length}}</td>
+                        <td>{{job.status}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </p-panel>
 </div>

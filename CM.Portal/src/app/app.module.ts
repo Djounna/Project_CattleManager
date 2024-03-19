@@ -25,6 +25,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ChartModule } from 'primeng/chart';
 // Material
 import { MatCardModule} from '@angular/material/card';
 
@@ -90,6 +91,7 @@ import { GroupCardSmallComponent } from './features/groups/group-card-small/grou
 import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-small.component';
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
 import { MilkingInputComponent } from './features/milking/milking-input/milking-input.component';
+import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-milkings-graph/month-milkings-graph.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -104,7 +106,8 @@ import { MilkingInputComponent } from './features/milking/milking-input/milking-
         GroupCardSmallComponent,
         PenCardSmallComponent,
         MilkingPageComponent,
-        MilkingInputComponent
+        MilkingInputComponent,
+        MonthMilkingsGraphComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
@@ -148,6 +151,7 @@ import { MilkingInputComponent } from './features/milking/milking-input/milking-
         DynamicDialogModule,
         DataViewModule,
         PickListModule,
+        ChartModule,
         // Routing configuration
         AppRoutingModule,
 

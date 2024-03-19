@@ -2,8 +2,8 @@
 /* @import "primeng/resources/themes/lara-light-teal/theme.css"; */
 /* @import "primeng/resources/themes/fluent-light/theme.css"; */
 /* @import "primeng/resources/themes/mira/theme.css"; */
-/* @import "primeng/resources/themes/nano/theme.css"; */
- @import "primeng/resources/themes/md-light-indigo/theme.css";
+@import "primeng/resources/themes/nano/theme.css";
+//  @import "primeng/resources/themes/md-light-indigo/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
@@ -23,7 +23,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .page_base{
     @include flex-column();
-    margin: 1rem;
+    max-height: 100%;
+    margin: 1rem 3rem 1rem 3rem;
 }
 
 .form_base {

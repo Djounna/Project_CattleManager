@@ -49,6 +49,29 @@ public class MilkingController : ControllerBase
     }
 
     /// <summary>
+    /// Get All Milkings By Date Range
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("range/{start}/{end}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<MilkingDto>>> GetListByDateRange(string start, string end)
+    {
+        return Ok(await _mediator.Send(new GetMilkingsByDateRangeQuery(start, end)));
+    }
+    /// <summary>
+    /// Get Milkings Range By Cow
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}/{range}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<MilkingDto>>> GetRangeByCow(int cowId, int range)
+    {
+        return Ok(await _mediator.Send(new GetMilkingsRangeByCowIdQuery(cowId, range)));
+    }
+
+    /// <summary>
     /// Get MilkingInputs By Date
     /// </summary>
     /// <param name="date">Date</param>

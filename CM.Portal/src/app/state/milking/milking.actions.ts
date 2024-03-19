@@ -1,18 +1,18 @@
 export namespace Milkings{
+    export class GetAll{
+        static readonly type ='[Milkings] Get All Milkings'
+    }
+    export class GetAllLastMonth{
+        static readonly type ='[Milkings] Get All Milkings from the last month'
+    }
     export class Create{
         static readonly type = '[Milkings] Create Milking'
         constructor(public payload : any){}
     }
-
     export class Update{
         static readonly type = '[Milkings] Update Milking'
         constructor(public payload : any){}
     }
-
-    export class GetAll{
-        static readonly type ='[Milkings] Get All Milkings'
-    }
-
     export class Delete{
         static readonly type = '[Milkings] Delete Milking'
         constructor(public id: number){}
