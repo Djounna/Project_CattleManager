@@ -276,6 +276,114 @@ export class MilkingService extends BaseService {
   }
 
   /**
+   * Path part for operation apiMilkingRangeStartEndGet
+   */
+  static readonly ApiMilkingRangeStartEndGetPath = '/api/Milking/range/{start}/{end}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingRangeStartEndGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingRangeStartEndGet$Response(params: {
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MilkingDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingRangeStartEndGetPath, 'get');
+    if (params) {
+      rb.path('start', params.start, {});
+      rb.path('end', params.end, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MilkingDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingRangeStartEndGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingRangeStartEndGet(params: {
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<Array<MilkingDto>> {
+
+    return this.apiMilkingRangeStartEndGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MilkingDto>>) => r.body as Array<MilkingDto>)
+    );
+  }
+
+  /**
+   * Path part for operation apiMilkingCowIdRangeGet
+   */
+  static readonly ApiMilkingCowIdRangeGetPath = '/api/Milking/{cowId}/{range}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingCowIdRangeGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingCowIdRangeGet$Response(params: {
+    cowId: number;
+    range: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MilkingDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingCowIdRangeGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+      rb.path('range', params.range, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MilkingDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingCowIdRangeGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingCowIdRangeGet(params: {
+    cowId: number;
+    range: number;
+    context?: HttpContext
+  }
+): Observable<Array<MilkingDto>> {
+
+    return this.apiMilkingCowIdRangeGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MilkingDto>>) => r.body as Array<MilkingDto>)
+    );
+  }
+
+  /**
    * Path part for operation apiMilkingMilkingInputsDateGet
    */
   static readonly ApiMilkingMilkingInputsDateGetPath = '/api/Milking/milkingInputs/{date}';

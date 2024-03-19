@@ -6,11 +6,13 @@ import { tap } from "rxjs";
 import { MilkingDto, MilkingInputsDto, MilkProductionDto } from "../../api/models";
 import { MilkingService, MilkProductionService } from "../../api/services";
 import { MilkingInputs, Milkings, MilkProductions } from "./milking.actions";
+import moment from "moment";
 
 @State<MilkingStateModel>({
     name:'milking',
     defaults:{
         Milkings: [],
+        MonthMilkings: [],
         MilkProductions: []
     }
 })
@@ -22,6 +24,11 @@ export class MilkingState{
     @Selector()
     static milkings(milkingState:MilkingStateModel){
         return milkingState.Milkings;
+    }
+
+    @Selector()
+    static milkingsLastMonth(milkingState:MilkingStateModel){
+        return milkingState.MonthMilkings;
     }
 
     @Selector()
@@ -39,6 +46,21 @@ export class MilkingState{
     getAllMilkings(ctx: StateContext<MilkingStateModel>){
         return this.milkingService.apiMilkingGet().pipe(tap(milkings=>{
             ctx.patchState({Milkings : milkings});
+            })
+        );
+    }
+
+    @Action(Milkings.GetAllLastMonth)
+    getAllMilkingsLastMonth(ctx: StateContext<MilkingStateModel>, action: Milkings.GetAllLastMonth){
+        debugger;
+        let endDate: Date = new Date();
+        let startDate: Date = new Date();
+        startDate.setDate(endDate.getDate()-30);
+        let start : string = moment(startDate).format('YYYY-MM-DD');
+        let end : string = moment(endDate).format('YYYY-MM-DD');
+        debugger;
+        return this.milkingService.apiMilkingRangeStartEndGet({start : start, end: end}).pipe(tap(milkings=>{
+            ctx.patchState({MonthMilkings : milkings});
             })
         );
     }

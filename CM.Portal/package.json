@@ -22,6 +22,7 @@
     "@angular/router": "^17.0.0",
     "@auth0/auth0-angular": "^2.2.2",
     "@ngxs/store": "^3.8.2",
+    "chart.js": "^4.4.2",
     "moment": "^2.30.1",
     "ng-openapi-gen": "^0.51.0",
     "primeflex": "^3.3.1",

@@ -12,15 +12,16 @@
   
   <app-toolbar (onShowSidebar)="drawer.toggle()" stlyeclass=min-w-full ></app-toolbar>
 
-  <mat-drawer-container class="example-container" autosize>
-      <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-sidenav-container>
+      <mat-sidenav #drawer mode="side">
         <app-sidenav> </app-sidenav>
-      </mat-drawer>
+      </mat-sidenav>
 
-          <div class="main-content">
-              <router-outlet></router-outlet>
-          </div>
-  </mat-drawer-container>
-
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+          <!-- <div class="main-content">
+          </div> -->
+  </mat-sidenav-container>
 
 </div>

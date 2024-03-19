@@ -12,7 +12,8 @@
     padding: 1rem;
 }
 
-
-.mat-drawer-container{
-    height:100%;
-}
+.mat-sidenav-container,
+.mat-sidenav-content {
+    height: 100% !important;
+    overflow: auto !important;
+} 

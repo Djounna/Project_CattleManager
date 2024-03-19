@@ -1,21 +1,21 @@
 <div class="panel_border">
     <p-panel header="Gestations">
-        <p-table [value]="Gestations" [tableStyle]="{ 'min-width': '20rem'}">
+        <div style="max-height:40vh; overflow: auto;">
+            <p-table [value]="Gestations" [tableStyle]="{ 'min-width': '20rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Vache</th>
+                        <th>Date</th>
+                    </tr>
+                </ng-template>
 
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Vache</th>
-                    <th>Date</th>
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-gestation>
-                <tr>
-                    <td>{{gestation.cowId}}</td>
-                    <td>{{gestation.startDate}}</td>
-                </tr>
-            </ng-template>
-
-        </p-table>
+                <ng-template pTemplate="body" let-gestation>
+                    <tr>
+                        <td>{{gestation.cowId}}</td>
+                        <td>{{gestation.startDate}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </p-panel>
 </div>

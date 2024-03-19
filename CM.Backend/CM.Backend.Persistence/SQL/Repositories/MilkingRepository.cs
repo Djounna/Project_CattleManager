@@ -11,4 +11,14 @@ public class MilkingRepository : BaseRepository<Milking>, IMilkingRepository
     {
         return _context.Milkings.Where(m => m.Date == date).ToList();
     }
+
+    public IEnumerable<Milking> GetListByDateRange(DateOnly start, DateOnly end)
+    {
+        return _context.Milkings.Where(m => m.Date > start && m.Date <= end).OrderBy(m => m.Date).ToList();
+    }
+
+    public IEnumerable<Milking> GetRangeByCowId(int cowId, int range)
+    {
+        return _context.Milkings.Where(m => m.CowId == cowId).TakeLast(range).OrderBy(m => m.Date).ToList();
+    }
 }
