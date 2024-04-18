@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using CM.Backend.Persistence.MongoDB;
+using MongoDB.Driver;
+using CM.Backend.Persistence.MongoDB.Repositories;
 
 namespace CM.Backend.Persistence;
 public static class PersistenceServiceRegistration
@@ -14,7 +16,8 @@ public static class PersistenceServiceRegistration
     {
         services.AddDbContext<CMContext>(options => options.UseSqlServer(configuration.GetConnectionString("CMConnectionString")));
 
-        //services.AddSingleton<MongoService>
+        services.Configure<MongoDatabaseSettings>(configuration.GetSection("MongoSettings"));
+        services.AddSingleton<HistoryRepository>();
 
         //services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
         services.AddScoped<IAlertRepository, AlertRepository>();
