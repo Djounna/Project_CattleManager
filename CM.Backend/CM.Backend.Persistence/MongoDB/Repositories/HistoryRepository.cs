@@ -15,4 +15,11 @@ public class HistoryRepository
         _movesCollection = mongoDatabase.GetCollection<Move>(mongoSettings.Value.MovesCollectionName);
         _commentsCollection = mongoDatabase.GetCollection<Comment>(mongoSettings.Value.CommentsCollectionName);
     }
+
+
+    public async Task<List<Move>> GetAllMoveByIdentifierAsync(string identifier) => await _movesCollection.Find(m => m.Identifier == identifier).ToListAsync();
+
+    public async Task<List<Comment>> GetAllCommentByIdentifierAsync(string identifier) => await _commentsCollection.Find(m => m.Identifier == identifier).ToListAsync();
+
+
 }
