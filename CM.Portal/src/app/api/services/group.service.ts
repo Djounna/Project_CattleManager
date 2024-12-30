@@ -9,7 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { GroupDetailsDto } from '../models/group-details-dto';
+import { AssignGroupDetailsDto } from '../models/assign-group-details-dto';
 import { GroupDto } from '../models/group-dto';
 import { ProblemDetails } from '../models/problem-details';
 
@@ -289,7 +289,7 @@ export class GroupService extends BaseService {
    */
   apiGroupAssignPost$Response(params?: {
     context?: HttpContext
-    body?: GroupDetailsDto
+    body?: AssignGroupDetailsDto
   }
 ): Observable<StrictHttpResponse<ProblemDetails>> {
 
@@ -318,7 +318,7 @@ export class GroupService extends BaseService {
    */
   apiGroupAssignPost(params?: {
     context?: HttpContext
-    body?: GroupDetailsDto
+    body?: AssignGroupDetailsDto
   }
 ): Observable<ProblemDetails> {
 

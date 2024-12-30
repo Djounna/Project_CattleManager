@@ -24,5 +24,11 @@ public class GroupDetailsDto
     /// <summary>
     /// Cattle list 
     /// </summary>
-    public List<CowDto> Cows {get; set; } = new List<CowDto>();
+    public List<CowDto> Cows { get; set; } = new List<CowDto>();
+}
+
+public class AssignGroupDetailsDto
+{
+    public GroupDetailsDto Group1 { get; set; }
+    public GroupDetailsDto Group2 { get; set; }
 }

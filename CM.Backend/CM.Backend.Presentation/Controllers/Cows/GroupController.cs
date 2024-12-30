@@ -20,7 +20,7 @@ public class GroupController : ControllerBase
     /// <param name="mediator"></param>
     public GroupController(IMediator mediator)
     {
-        _mediator = mediator;  
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class GroupController : ControllerBase
     {
         return Ok(await _mediator.Send(new GetGroupsQuery()));
     }
-    
+
     /// <summary>
     /// Get Group By Id 
     /// </summary>
@@ -59,7 +59,7 @@ public class GroupController : ControllerBase
     [Authorize("write:cows")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GroupDto>> Create([FromBody]GroupDto dto)
+    public async Task<ActionResult<GroupDto>> Create([FromBody] GroupDto dto)
     {
         return Ok(await _mediator.Send(new CreateGroupCommand(dto)));
     }
@@ -73,7 +73,7 @@ public class GroupController : ControllerBase
     [Authorize("write:cows")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GroupDto>> Update([FromBody]GroupDto dto)
+    public async Task<ActionResult<GroupDto>> Update([FromBody] GroupDto dto)
     {
         return Ok(await _mediator.Send(new UpdateGroupCommand(dto)));
     }
@@ -94,15 +94,15 @@ public class GroupController : ControllerBase
     }
 
     /// <summary>
-    /// Assign Cows to a group 
+    /// Assign Cows from a group to another group 
     /// </summary>
     /// <param name="dto"></param>
     /// <returns>Group Details</returns>
     [HttpPost("assign")]
     [Authorize("write:cows")]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult<GroupDetailsDto>> AssignToGroup(GroupDetailsDto dto)
+    public async Task<ActionResult<GroupDetailsDto>> AssignToGroup(AssignGroupDetailsDto dto)
     {
-        return Ok(await _mediator.Send(new AssignToGroupCommand(dto)));
+        return Ok(await _mediator.Send(new AssignToGroupCommand(dto.Group1, dto.Group2)));
     }
 }

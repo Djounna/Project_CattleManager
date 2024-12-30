@@ -790,17 +790,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupDetailsDto"
+                "$ref": "#/components/schemas/AssignGroupDetailsDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupDetailsDto"
+                "$ref": "#/components/schemas/AssignGroupDetailsDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupDetailsDto"
+                "$ref": "#/components/schemas/AssignGroupDetailsDto"
               }
             }
           }
@@ -2671,6 +2671,18 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssignGroupDetailsDto": {
+        "type": "object",
+        "properties": {
+          "group1": {
+            "$ref": "#/components/schemas/GroupDetailsDto"
+          },
+          "group2": {
+            "$ref": "#/components/schemas/GroupDetailsDto"
           }
         },
         "additionalProperties": false

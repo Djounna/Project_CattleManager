@@ -1,4 +1,5 @@
 export { AlertDto } from './models/alert-dto';
+export { AssignGroupDetailsDto } from './models/assign-group-details-dto';
 export { CowDto } from './models/cow-dto';
 export { DateOnly } from './models/date-only';
 export { DayOfWeek } from './models/day-of-week';
