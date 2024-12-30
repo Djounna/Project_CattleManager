@@ -26,9 +26,27 @@ import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChartModule } from 'primeng/chart';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { PickListModule } from 'primeng/picklist';
+import { DividerModule } from 'primeng/divider';
+import { ToastModule } from 'primeng/toast';
+import { PanelModule } from 'primeng/panel';
+import { MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
 // Material
 import { MatCardModule} from '@angular/material/card';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // Shared components
 import { AuthButtonComponent } from './auth-button/auth-button.component';
@@ -38,7 +56,6 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { CowsPageComponent } from './screens/cows/cows-page/cows-page.component';
 // Features components
 import { CowsListViewComponent } from "./features/cattle/cows-list-view/cows-list-view.component";
-
 
 // Ngxs Store and states
 import { NgxsModule } from '@ngxs/store';
@@ -56,33 +73,16 @@ import { InterventionListComponent } from './features/cattle/intervention/interv
 import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
 import { AlertState } from './state/alert/alert.store';
 import { MilkingState } from './state/milking/milking.store';
-import { DividerModule } from 'primeng/divider';
-import { ToastModule } from 'primeng/toast';
-import { PanelModule } from 'primeng/panel';
-import { MessageService } from 'primeng/api';
 import { GestationsListComponent } from './features/cattle/gestation/gestations-list/gestations-list.component';
 import { GroupCardViewComponent } from './features/cattle/group-card-view/group-card-view.component';
 import { GroupPageComponent } from './screens/cattle/group-page/group-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CreateJobDialogComponent } from './features/work/job/create-job-dialog/create-job-dialog.component';
 import { CreateCowDialogComponent } from './features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
-import { CalendarModule } from 'primeng/calendar';
-import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { RadioButtonModule } from 'primeng/radiobutton';
 import { JobDetailsListComponent } from './features/work/job-details-list/job-details-list.component';
 import { GroupDatagridComponent } from './features/groups/group-datagrid/group-datagrid.component';
 import { PenDatagridComponent } from './features/pens/pen-datagrid/pen-datagrid.component';
 import { PicklistToolComponent } from './features/shared/picklist-tool/picklist-tool.component';
-import { PickListModule } from 'primeng/picklist';
 import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/assign-job-dialog.component';
 import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
 import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
@@ -132,6 +132,8 @@ import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-mi
         InputTextModule,
         InputTextareaModule,
         RadioButtonModule,
+        InputGroupModule,
+        InputGroupAddonModule,
         InputNumberModule,
         DropdownModule,
         SidebarModule,
