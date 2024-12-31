@@ -40,6 +40,13 @@ export namespace MilkProductions{
     }
 }
 
+export namespace MilkingInput{
+    export class Update{
+        static readonly type = '[MilkingInput] Update MilkingInput'
+        constructor(public payload : any){}
+    }
+}
+
 export namespace MilkingInputs{
     export class Update{
         static readonly type = '[MilkingInputs] Update MilkingInputs'

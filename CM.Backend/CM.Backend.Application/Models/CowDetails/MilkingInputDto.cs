@@ -12,4 +12,5 @@ public class MilkingInputDto
     public int CowId { get; set; }
     public bool Done { get; set; }
     public double Volume { get; set; }
+    public DateOnly? Date { get; set; }
 }

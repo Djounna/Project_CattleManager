@@ -5,7 +5,7 @@ import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { MilkingDto, MilkingInputsDto, MilkProductionDto } from "../../api/models";
 import { MilkingService, MilkProductionService } from "../../api/services";
-import { MilkingInputs, Milkings, MilkProductions } from "./milking.actions";
+import { MilkingInput, MilkingInputs, Milkings, MilkProductions } from "./milking.actions";
 import moment from "moment";
 
 @State<MilkingStateModel>({
@@ -52,13 +52,11 @@ export class MilkingState{
 
     @Action(Milkings.GetAllLastMonth)
     getAllMilkingsLastMonth(ctx: StateContext<MilkingStateModel>, action: Milkings.GetAllLastMonth){
-        debugger;
         let endDate: Date = new Date();
         let startDate: Date = new Date();
         startDate.setDate(endDate.getDate()-30);
         let start : string = moment(startDate).format('YYYY-MM-DD');
         let end : string = moment(endDate).format('YYYY-MM-DD');
-        debugger;
         return this.milkingService.apiMilkingRangeStartEndGet({start : start, end: end}).pipe(tap(milkings=>{
             ctx.patchState({MonthMilkings : milkings});
             })
@@ -135,6 +133,17 @@ export class MilkingState{
         );
     }
 
+    //MilkingInput Acions
+    @Action(MilkingInput.Update)
+    updateMilkingInput(ctx: StateContext<MilkingStateModel>, action:MilkingInputs.Update){
+        return this.milkingService.apiMilkingMilkingInputPost({body: action.payload})
+        .pipe(
+            tap(milkingInputs=>{
+                ctx.patchState({MilkingInputs : milkingInputs})
+            })
+        );
+    }
+
     //MilkingInputs Actions
     @Action(MilkingInputs.Get)
     getMilkingInputs(ctx: StateContext<MilkingStateModel>, action: MilkingInputs.Get){
@@ -147,7 +156,6 @@ export class MilkingState{
 
     @Action(MilkingInputs.Update)
     updateMilkingInputs(ctx: StateContext<MilkingStateModel>, action:MilkingInputs.Update){
-        debugger;
         return this.milkingService.apiMilkingMilkingInputsPost({body: action.payload})
         .pipe(
             tap(milkingInputs=>{

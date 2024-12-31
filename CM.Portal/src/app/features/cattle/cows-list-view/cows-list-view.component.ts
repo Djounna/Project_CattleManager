@@ -10,6 +10,15 @@ import { CowDto, GroupDto, PenDto } from '../../../api/models';
 })
 export class CowsListViewComponent {
   @ViewChild('dt') dt: any;
+
+  private name : string = '';
+  @Input() set Name(value: string){
+    this.name = value;
+  }
+  public get Name(): string{
+    return this.name;
+  }
+
   private cows : CowDto[] = [];
   @Input() set Cows(value: CowDto[]){
     this.cows = [...value]

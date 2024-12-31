@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { MilkingDto } from '../models/milking-dto';
+import { MilkingInputDto } from '../models/milking-input-dto';
 import { MilkingInputsDto } from '../models/milking-inputs-dto';
 
 @Injectable({
@@ -481,6 +482,57 @@ export class MilkingService extends BaseService {
 ): Observable<MilkingInputsDto> {
 
     return this.apiMilkingMilkingInputsPost$Response(params).pipe(
+      map((r: StrictHttpResponse<MilkingInputsDto>) => r.body as MilkingInputsDto)
+    );
+  }
+
+  /**
+   * Path part for operation apiMilkingMilkingInputPost
+   */
+  static readonly ApiMilkingMilkingInputPostPath = '/api/Milking/milkingInput';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingMilkingInputPost()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMilkingMilkingInputPost$Response(params?: {
+    context?: HttpContext
+    body?: MilkingInputDto
+  }
+): Observable<StrictHttpResponse<MilkingInputsDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingMilkingInputPostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<MilkingInputsDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingMilkingInputPost$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiMilkingMilkingInputPost(params?: {
+    context?: HttpContext
+    body?: MilkingInputDto
+  }
+): Observable<MilkingInputsDto> {
+
+    return this.apiMilkingMilkingInputPost$Response(params).pipe(
       map((r: StrictHttpResponse<MilkingInputsDto>) => r.body as MilkingInputsDto)
     );
   }

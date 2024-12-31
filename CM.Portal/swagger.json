@@ -1816,6 +1816,54 @@
         }
       }
     },
+    "/api/Milking/milkingInput": {
+      "post": {
+        "tags": [
+          "Milking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MilkingInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilkingInputsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/MilkProduction/{id}": {
       "get": {
         "tags": [
@@ -3053,6 +3101,9 @@
           "volume": {
             "type": "number",
             "format": "double"
+          },
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
           }
         },
         "additionalProperties": false

@@ -1,15 +1,14 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { CowDto, MilkingInputDto, MilkingInputsDto } from '../../../api/models';
+import { CowDto, MilkingDto, MilkingInputDto, MilkingInputsDto } from '../../../api/models';
 import { Select } from '@ngxs/store';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows } from '../../../state/cattle/cattle.actions';
-import { MilkingInputs } from '../../../state/milking/milking.actions';
+import { MilkingInput, MilkingInputs, Milkings } from '../../../state/milking/milking.actions';
 import { MilkingState } from '../../../state/milking/milking.store';
 import moment from 'moment';
 import { MilkingInputComponent } from '../../../features/milking/milking-input/milking-input.component';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-milking-page',
@@ -81,7 +80,20 @@ export class MilkingPageComponent extends BaseComponent {
     this.store.dispatch(new MilkingInputs.Get(ddate))
   }
 
-  Save():void{
+  SaveOne(milkingData: MilkingData): void{
+    let dto: MilkingDto = {
+      cowId : milkingData?.Cow?.id,
+      volume : milkingData.Volume,
+      date : this.MilkingInputs.date
+    };
+    this.store.dispatch(new MilkingInput.Update(dto))
+    .subscribe({
+      next:(res) => this.toastSuccess('Les données de traite ont été enregistrées avec succès'),
+      error:(res) => this.toastError('Une erreur s\'est produite lors de l\'enregistrement des données de traite')
+    });
+  }
+
+  SaveAll():void{
     let newInputs : MilkingInputsDto = {
       date: this.MilkingInputs.date,
       milkingInputs : []

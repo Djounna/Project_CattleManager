@@ -85,7 +85,7 @@ public class MilkingController : ControllerBase
     }
 
     /// <summary>
-    /// Update MilkingInputs By Datee
+    /// Update All MilkingInputs By Date
     /// </summary>
     [HttpPost("milkingInputs")]
     [ProducesDefaultResponseType]
@@ -93,6 +93,17 @@ public class MilkingController : ControllerBase
     public async Task<ActionResult<MilkingInputsDto>> UpdateMilkingInputs(MilkingInputsDto dto)
     {
         return Ok(await _mediator.Send(new UpdateMilkingInputsByDateCommand(dto)));
+    }
+
+    /// <summary>
+    /// Update a MilkingInput
+    /// </summary>
+    [HttpPost("milkingInput")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<MilkingInputDto>> UpdateMilkingInput(MilkingInputDto dto)
+    {
+        return Ok(await _mediator.Send(new UpdateMilkingInputCommand(dto)));
     }
 
     /// <summary>
