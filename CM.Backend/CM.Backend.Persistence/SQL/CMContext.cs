@@ -36,6 +36,8 @@ public class CMContext : DbContext
     public DbSet<Intervention> Interventions { get; set; }
     public DbSet<MilkProduction> MilkProductions { get; set; }
     public DbSet<Milking> Milkings { get; set; }
+    public DbSet<PenMove> PenMoves { get; set; }
+    public DbSet<GroupMove> GroupMoves { get; set; }
 
     public DbSet<Alert> Alerts { get; set; }
 
