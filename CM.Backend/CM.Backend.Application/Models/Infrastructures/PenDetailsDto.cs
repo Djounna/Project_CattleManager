@@ -23,3 +23,9 @@ public class PenDetailsDto
     /// </summary>
     public List<CowDto> Cows { get; set; } = new List<CowDto>();
 }
+
+public class AssignPenDetailsDto
+{
+    public PenDetailsDto Pen1 { get; set; }
+    public PenDetailsDto Pen2 { get; set; }
+}

@@ -17,6 +17,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IAlertRepository, AlertRepository>();
         services.AddScoped<ICowRepository, CowRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();
+        services.AddScoped<IGroupMoveRepository, GroupMoveRepository>();
         services.AddScoped<IGestationRepository, GestationRepository>();
         services.AddScoped<IInterventionRepository, InterventionRepository>();
         services.AddScoped<IMilkingRepository, MilkingRepository>();
@@ -26,6 +27,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IRecurringJobRepository, RecurringJobRepository>();
         services.AddScoped<IWorkerJobRepository, WorkerJobRepository>();
         services.AddScoped<IPenRepository, PenRepository>();
+        services.AddScoped<IPenMoveRepository, PenMoveRepository>();
         services.AddScoped<IStockRepository, StockRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         //services.AddScoped<IWorkerRepository, WorkerRepository>();

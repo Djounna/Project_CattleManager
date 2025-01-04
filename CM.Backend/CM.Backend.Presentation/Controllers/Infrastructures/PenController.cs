@@ -94,15 +94,15 @@ public class PenController : ControllerBase
     }
 
     /// <summary>
-    /// Assign Cows to a pen 
+    /// Assign Cows from a pen to another pen 
     /// </summary>
     /// <param name="dto"></param>
     /// <returns>Pen Details</returns>
     [HttpPost("assign")]
     [Authorize("write:cows")]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult<PenDetailsDto>> AssignToPen(PenDetailsDto dto)
+    public async Task<ActionResult<PenDetailsDto>> AssignToPen(AssignPenDetailsDto dto)
     {
-        return Ok(await _mediator.Send(new AssignToPenCommand(dto)));
+        return Ok(await _mediator.Send(new AssignToPenCommand(dto.Pen1, dto.Pen2)));
     }
 }
