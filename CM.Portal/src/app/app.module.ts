@@ -92,6 +92,7 @@ import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-s
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
 import { MilkingInputComponent } from './features/milking/milking-input/milking-input.component';
 import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-milkings-graph/month-milkings-graph.component';
+import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -107,7 +108,8 @@ import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-mi
         PenCardSmallComponent,
         MilkingPageComponent,
         MilkingInputComponent,
-        MonthMilkingsGraphComponent
+        MonthMilkingsGraphComponent,
+        CowDetailsComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
