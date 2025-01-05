@@ -12,24 +12,29 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@mixin flex-row(){
+@mixin flex-row{
     display:flex;
     flex-direction: row;
 }
 
-@mixin flex-column(){
+@mixin flex-column{
     display:flex;
     flex-direction: column;
 }
 
+@mixin size_scroll($size){
+    max-height:$size; 
+    overflow: auto;
+}
+
 .page_base{
-    @include flex-column();
+    @include flex-column;
     max-height: 100%;
-    margin: 1rem 3rem 1rem 3rem;
+    margin: 1rem 2rem;
 }
 
 .form_base {
-    @include flex-column();
+    @include flex-column;
     align-items: flex-start;
     margin: 1rem;
 }

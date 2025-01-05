@@ -1,6 +1,6 @@
 <div class="panel_border">
-    <p-tabView>
-        <p-tabPanel header="Interventions">
+    <p-panel header="Interventions">
+        <div class="size_scroll">
             <p-table [value]="Interventions" [tableStyle]="{ 'min-width': '20rem'}">
 
                 <ng-template pTemplate="header">
@@ -20,6 +20,6 @@
                 </ng-template>
 
             </p-table>
-        </p-tabPanel>
-    </p-tabView>
+        </div>
+    </p-panel>
 </div>
