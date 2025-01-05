@@ -1,4 +1,5 @@
-﻿using CM.Backend.Domain.Base;
+﻿using CM.Backend.Domain.Alerts;
+using CM.Backend.Domain.Base;
 using CM.Backend.Domain.CowDetails;
 using CM.Backend.Domain.Infrastructures;
 using CM.Backend.Domain.Jobs;
@@ -13,6 +14,7 @@ public class Cow : BaseEntity
     public DateOnly BirthDate { get; set; }
     public string Race { get; set; }
     public string Gender { get; set; }
+    public string? ImgLink { get; set; }
 
     public int? PenId { get; set; }
     public virtual Pen Pen { get; set; }
@@ -23,4 +25,7 @@ public class Cow : BaseEntity
     public virtual ICollection<Job> Jobs { get; } = new List<Job>();
     public virtual ICollection<Intervention> Interventions { get; } = new List<Intervention>();
     public virtual ICollection<Gestation> Gestations { get; } = new List<Gestation>();
+    public virtual ICollection<GroupMove> GroupMoves { get; } = new List<GroupMove>();
+    public virtual ICollection<PenMove> PenMoves { get; } = new List<PenMove>();
+    public virtual ICollection<Alert> Alerts { get; } = new List<Alert>();
 }
