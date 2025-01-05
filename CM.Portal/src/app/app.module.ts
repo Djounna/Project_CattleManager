@@ -41,6 +41,7 @@ import { ToastModule } from 'primeng/toast';
 import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -93,6 +94,8 @@ import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.c
 import { MilkingInputComponent } from './features/milking/milking-input/milking-input.component';
 import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-milkings-graph/month-milkings-graph.component';
 import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
+import { PenNamePipe } from './utils/pipes/pen-name.pipe';
+import { GroupNamePipe } from './utils/pipes/group-name.pipe';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -109,7 +112,9 @@ import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.comp
         MilkingPageComponent,
         MilkingInputComponent,
         MonthMilkingsGraphComponent,
-        CowDetailsComponent
+        CowDetailsComponent,
+        PenNamePipe,
+        GroupNamePipe
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
@@ -156,6 +161,7 @@ import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.comp
         DataViewModule,
         PickListModule,
         ChartModule,
+        OverlayPanelModule,
         // Routing configuration
         AppRoutingModule,
 

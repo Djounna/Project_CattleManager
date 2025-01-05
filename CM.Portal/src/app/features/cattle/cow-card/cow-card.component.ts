@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CowDto } from '../../../api/models';
 
 @Component({
   selector: 'app-cow-card',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './cow-card.component.scss'
 })
 export class CowCardComponent {
+  @Input('Cow') Cow! : CowDto;
 
 }

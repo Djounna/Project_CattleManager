@@ -55,7 +55,12 @@
                     <td>{{cow.name}}</td>
                     <td>{{cow.race}}</td>
                     <td>{{cow.birthDate}}</td>
-                    <td></td>
+                    <td>
+                        <p-button (onClick)="op.toggle($event)" icon="pi pi-share-alt" label="Share" />
+                        <p-overlayPanel #op>
+                            <app-cow-card [Cow]="cow"></app-cow-card> 
+                        </p-overlayPanel>
+                    </td>
                 </tr>
             </ng-template>
 

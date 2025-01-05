@@ -1,41 +1,44 @@
-<div class="flex flex-row m-3 justify-content-start gap-4">
+<div class="page_base">
 
-    <div class="flex flex-column">
+    <div class="flex flex-row justify-content-start gap-4">
 
-        <div class="flex flex-row justify-content-start align-content-center">
-            <div class="flex flex-row justify-content-between gap-3">
-                <p-button label="Tout" (click)="ShowAll()"></p-button>
-                <p-button label="Ajouter" (click)="createCowDialog()"></p-button> 
+        <div class="flex flex-column">
+
+            <div class="flex flex-row justify-content-start align-content-center">
+                <div class="flex flex-row justify-content-between gap-3">
+                    <p-button label="Tout" (click)="ShowAll()"></p-button>
+                    <p-button label="Ajouter" (click)="createCowDialog()"></p-button> 
+                </div>
+            </div>
+
+            <p-divider></p-divider>
+
+            <div class="panel_border">
+                <!-- <p-tabView> -->
+
+                    <p-panel header="Groupes" [toggleable]="true" [collapsed]="true">
+                        @for (group of Groups; track $index) 
+                        {
+                            <app-group-card-small (onSelected)="SelectGroup(group)" [Group]="group"></app-group-card-small>
+                        }
+                    </p-panel>
+
+                    <p-panel header="Enclos" [toggleable]="true" [collapsed]="true">
+                        @for (pen of Pens; track $index) 
+                        {
+                            <app-pen-card-small (onSelected)="SelectPen(pen)" [Pen]="pen"></app-pen-card-small>
+                        }
+                    </p-panel>
+
+                <!-- </p-tabView> -->
             </div>
         </div>
 
-        <p-divider></p-divider>
-
-        <div class="panel_border">
-            <p-tabView>
-
-                <p-tabPanel header="Groupes">
-                    @for (group of Groups; track $index) 
-                    {
-                        <app-group-card-small (onSelected)="SelectGroup(group)" [Group]="group"></app-group-card-small>
-                    }
-                </p-tabPanel>
-
-                <p-tabPanel header="Enclos">
-                    @for (pen of Pens; track $index) 
-                    {
-                        <app-pen-card-small (onSelected)="SelectPen(pen)" [Pen]="pen"></app-pen-card-small>
-                    }
-                </p-tabPanel>
-
-            </p-tabView>
+        <div class="flex flex-column">
+            <app-cows-list-view #cowList [Cows]="Cows"></app-cows-list-view>
         </div>
-    </div>
 
-    <div class="flex flex-column">
-        <app-cows-list-view #cowList [Cows]="Cows"></app-cows-list-view>
     </div>
-
 </div>
 
 <p-toast></p-toast>
