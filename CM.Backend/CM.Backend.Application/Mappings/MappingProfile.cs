@@ -19,7 +19,14 @@ public class MappingProfile : Profile
 {
     public MappingProfile() 
     {
-        CreateMap<Cow, CowDto>().ReverseMap();
+        CreateMap<DateTime, DateOnly>().ConvertUsing<DateTimeToDateOnlyConverter>();
+        CreateMap<DateOnly, DateTime>().ConvertUsing<DateOnlyToDateTimeConverter>();
+
+        CreateMap<Cow, CowDto>()
+            .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
+            .ReverseMap()
+            .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate));
+
         CreateMap<Job, JobDto>().ReverseMap();
         CreateMap<Group, GroupDto>().ReverseMap();
         CreateMap<Group, GroupDetailsDto>().ReverseMap();
@@ -29,8 +36,19 @@ public class MappingProfile : Profile
         CreateMap<WorkerJob, WorkerJobDto>().ReverseMap();
         CreateMap<RecurringJob, RecurringJobDto>().ReverseMap();
         CreateMap<Intervenant, IntervenantDto>().ReverseMap();
-        CreateMap<Intervention, InterventionDto>().ReverseMap();
-        CreateMap<Gestation, GestationDto>().ReverseMap();
+
+        CreateMap<Intervention, InterventionDto>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
+            .ReverseMap()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+
+        CreateMap<Gestation, GestationDto>()
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
+            .ForMember(dest => dest.CalvingDate, opt => opt.MapFrom(src => src.CalvingDate))
+            .ReverseMap()
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
+            .ForMember(dest => dest.CalvingDate, opt => opt.MapFrom(src => src.CalvingDate));
+
         CreateMap<MilkProduction, MilkProductionDto>().ReverseMap();
         CreateMap<Milking, MilkingDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();
@@ -39,6 +57,7 @@ public class MappingProfile : Profile
         CreateMap<Role, RoleDto>().ReverseMap();
         //CreateMap<Worker, WorkerDto>().ReverseMap();
     }
+
     
     //public MappingProfile()
     //{
@@ -65,4 +84,20 @@ public class MappingProfile : Profile
     //        methodInfo?.Invoke(instance, new object[] { this });
     //    }
     //}
+
+    public class DateTimeToDateOnlyConverter : ITypeConverter<DateTime, DateOnly>
+    {
+        public DateOnly Convert(DateTime source, DateOnly destination, ResolutionContext context)
+        {
+            return DateOnly.FromDateTime(source);
+        }
+    }
+
+    public class DateOnlyToDateTimeConverter : ITypeConverter<DateOnly, DateTime>
+    {
+        public DateTime Convert(DateOnly source, DateTime destination, ResolutionContext context)
+        {
+            return source.ToDateTime(TimeOnly.MinValue);
+        }
+    }
 }
