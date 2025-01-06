@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { AssignGroupDetailsDto, CowDto, GroupDetailsDto, GroupDto, PenDetailsDto, PenDto } from '../../../api/models';
+import { AssignGroupDetailsDto, AssignPenDetailsDto, CowDto, GroupDetailsDto, GroupDto, PenDetailsDto, PenDto } from '../../../api/models';
 import { GroupService, PenService } from '../../../api/services';
 import { takeUntil } from 'rxjs';
 import { Cows } from '../../../state/cattle/cattle.actions';
@@ -90,13 +90,21 @@ export class PicklistToolComponent extends BaseComponent {
       break;
 
       case 'Pen':
-        let penToSend : PenDetailsDto = {
-          id : this.selectedTargetPen!.id,
-          name: this.selectedTargetPen!.name,
-          size: this.selectedTargetPen!.size,
+        let pen1 : PenDetailsDto = {
+          id : this.selectedSourceGroup!.id,
+          name: this.selectedSourceGroup!.name,
+          cows : this.source,
+        };
+        let pen2 : PenDetailsDto = {
+          id : this.selectedTargetGroup!.id,
+          name: this.selectedTargetGroup!.name,
           cows : this.target,
+        };
+        let dto2 : AssignPenDetailsDto = {
+          pen1 : pen1,
+          pen2 : pen2
         }
-        this.penService.apiPenAssignPost({body: penToSend})
+        this.penService.apiPenAssignPost({body: dto2})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
           next:(res) => this.store.dispatch(new Cows.GetAll()),

@@ -9,7 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { PenDetailsDto } from '../models/pen-details-dto';
+import { AssignPenDetailsDto } from '../models/assign-pen-details-dto';
 import { PenDto } from '../models/pen-dto';
 import { ProblemDetails } from '../models/problem-details';
 
@@ -289,7 +289,7 @@ export class PenService extends BaseService {
    */
   apiPenAssignPost$Response(params?: {
     context?: HttpContext
-    body?: PenDetailsDto
+    body?: AssignPenDetailsDto
   }
 ): Observable<StrictHttpResponse<ProblemDetails>> {
 
@@ -318,7 +318,7 @@ export class PenService extends BaseService {
    */
   apiPenAssignPost(params?: {
     context?: HttpContext
-    body?: PenDetailsDto
+    body?: AssignPenDetailsDto
   }
 ): Observable<ProblemDetails> {
 
