@@ -12,9 +12,10 @@ public class CreateCowCommandHandler : IRequestHandler<CreateCowCommand, CowDto>
     private readonly ICowRepository _cowRepository;
     private IMapper _mapper;
 
-    public CreateCowCommandHandler(ICowRepository cowRepository)
+    public CreateCowCommandHandler(ICowRepository cowRepository, IMapper mapper)
     {
         _cowRepository = cowRepository;
+        _mapper = mapper;
     }
 
     public async Task<CowDto> Handle(CreateCowCommand request, CancellationToken cancellationToken)
