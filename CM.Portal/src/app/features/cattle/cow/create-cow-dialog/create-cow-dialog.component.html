@@ -1,5 +1,5 @@
 <div>
-    <form  [formGroup]="cowForm">
+    <form  [formGroup]="createCowForm">
         <div class="flex flex-row">
             <div class="form_base gap-2">
                 <div class="flex flex-column gap-2">
@@ -12,26 +12,37 @@
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="birthdate">Date de naissance</label>
-                    <p-calendar formControlName="birthdate"></p-calendar>
+                    <p-calendar type="date" formControlName="birthdate"></p-calendar>
                 </div>
-            </div>
-
-            <div class="form_base gap-2">
-                <div class="flex flex-column gap-2">
+                <div class="flex flex-row gap-2">
                     <label for="">sex</label>
-                        <div *ngFor="let gender of genders" class="field-checkbox">
-                            <p-radioButton [inputId]="gender" [value]="gender" formControlName="gender"></p-radioButton>
-                            <label [for]="gender" class="ml-2">{{ gender }}</label>
-    </div>
+                    <div *ngFor="let gender of genders" class="flex flex-row field-checkbox">
+                        <p-radioButton [inputId]="gender" [value]="gender" formControlName="gender"></p-radioButton>
+                        <label [for]="gender" class="ml-2">{{ gender }}</label>
+                    </div>
                 </div>
             </div>
 
             <div class="form_base gap-2">
                 <div class="flex flex-column gap-2">
-                    <label for="pen">Enclos</label>
+                    <label for="race">Race</label>
                     <p-dropdown 
                         [options]="races" formControlName="race"
                         [showClear]="true" placeholder="race">
+                    </p-dropdown>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="group">Groupe</label>
+                    <p-dropdown 
+                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId"
+                        [showClear]="true" placeholder="groupe">
+                    </p-dropdown>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="pen">Enclos</label>
+                    <p-dropdown 
+                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId"
+                        [showClear]="true" placeholder="enclos">
                     </p-dropdown>
                 </div>
             </div>
@@ -40,7 +51,7 @@
 
         <div class="flex-row justify-content-end m-2 gap-2">
             <p-button label="Annuler" [raised]="true" severity="warning" (click)="OnCancel()"></p-button>
-            <p-button label="Confirmer" [raised]="true" [disabled]="!cowForm.valid" (click)="OnCreate()"></p-button>
+            <p-button label="Confirmer" [raised]="true" [disabled]="!createCowForm.valid" (click)="OnCreate()"></p-button>
         </div>
 
     </form>

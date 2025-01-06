@@ -5,6 +5,8 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { races } from '../../../../models/enums/races';
 import { genders } from '../../../../models/enums/genders';
 import { BaseComponent } from '../../../../shared/base-component.component';
+import { CattleState } from '../../../../state/cattle/cattle.store';
+import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
 
 @Component({
   selector: 'app-create-cow-dialog',
@@ -13,8 +15,7 @@ import { BaseComponent } from '../../../../shared/base-component.component';
 })
 export class CreateCowDialogComponent extends BaseComponent {
 
-  constructor(
-    private formBuilder: FormBuilder,
+  constructor( private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
   ){
     super();
@@ -23,22 +24,49 @@ export class CreateCowDialogComponent extends BaseComponent {
   public newCow : CowDto | undefined;
   public races : string[] = Object.values(races);
   public genders : string[] = Object.values(genders);
+  public groupDict : Map<number, string> = this.store.selectSnapshot(CattleState.groupDict);
+  public penDict : Map<number, string> = this.store.selectSnapshot(InfrastructureState.penDict);
+  public groups: any[] = [];   
+  public pens: any[] = []
+  // public groups = this.store.selectSnapshot(CattleState.groups);
+  // public pens = this.store.selectSnapshot(InfrastructureState.pens);
+  
+  override ngOnInit(): void {
+    this.groupDict.forEach((value, key) => {
+      this.groups.push({
+        id: key,
+        name: value
+      });
+    }) 
+    this.penDict.forEach((value, key) => {
+      this.pens.push({
+        id: key,
+        name: value
+      });
+    }) 
+  }
 
-  cowForm = this.formBuilder.group({
+  createCowForm = this.formBuilder.group({
     identifier:['', Validators.required],
     name:['', Validators.required],
-    birthdate:['',Validators.required],
-    race:[''],
-    gender:['']
+    birthdate:[new Date(),Validators.required],
+    race:['', Validators.required],
+    gender:['', Validators.required],
+    penId:[0, Validators.required],
+    groupId:[0, Validators.required]
   })
 
   OnCreate(): void {
     this.newCow = {
       id : 0,
-      identifier : this.cowForm.value.identifier, 
-      name : this.cowForm.value.name,
-      race : this.cowForm.value.race,
-      gender : this.cowForm.value.gender
+      identifier : this.createCowForm.value.identifier, 
+      name : this.createCowForm.value.name,
+      birthDate:this.createCowForm.value.birthdate, 
+      race : this.createCowForm.value.race,
+      gender : this.createCowForm.value.gender,
+      groupId: this.createCowForm.value.groupId,
+      penId: this.createCowForm.value.penId,
+      imgLink: ""
     };
 
     this.dialogRef.close(this.newCow);
