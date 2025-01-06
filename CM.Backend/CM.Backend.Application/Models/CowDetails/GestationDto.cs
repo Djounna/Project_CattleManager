@@ -24,10 +24,10 @@ public class GestationDto
     /// <summary>
     /// Start Date
     /// </summary>
-    public DateOnly StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     /// <summary>
     /// Calving Date
     /// </summary>
-    public DateOnly? CalvingDate { get; set; }
+    public DateTime? CalvingDate { get; set; }
 }

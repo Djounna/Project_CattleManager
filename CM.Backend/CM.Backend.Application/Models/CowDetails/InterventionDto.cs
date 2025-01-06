@@ -35,7 +35,7 @@ public class InterventionDto
     /// <summary>
     /// Date
     /// </summary>
-    public DateOnly? Date { get; set; }
+    public DateTime? Date { get; set; }
 
     /// <summary>
     /// Description

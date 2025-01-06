@@ -1,9 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DateOnly } from './date-only';
 export interface InterventionDto {
   cowId?: number;
-  date?: DateOnly;
+  date?: null | string;
   description?: null | string;
   id?: number;
   intervenantId?: number;

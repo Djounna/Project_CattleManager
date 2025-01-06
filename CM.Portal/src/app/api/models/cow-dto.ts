@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DateOnly } from './date-only';
 export interface CowDto {
-  birthDate?: DateOnly;
+  birthDate?: string;
   gender?: null | string;
   groupId?: null | number;
   id?: number;
   identifier?: null | string;
+  imgLink?: null | string;
   milkCow?: boolean;
   name?: null | string;
   penId?: null | number;

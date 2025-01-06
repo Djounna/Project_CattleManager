@@ -30,7 +30,7 @@ public class CowDto
     /// <summary>
     /// BirthDate
     /// </summary>
-    public DateOnly BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
 
     /// <summary>
     /// Race
@@ -41,6 +41,11 @@ public class CowDto
     /// Gender
     /// </summary>
     public string Gender { get; set; }
+
+    /// <summary>
+    /// ImgLink
+    /// </summary>
+    public string? ImgLink { get; set; }
 
     /// <summary>
     /// PenId

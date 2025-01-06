@@ -1856,7 +1856,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MilkingInputsDto"
+                  "$ref": "#/components/schemas/MilkingInputDto"
                 }
               }
             }
@@ -2261,17 +2261,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PenDetailsDto"
+                "$ref": "#/components/schemas/AssignPenDetailsDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PenDetailsDto"
+                "$ref": "#/components/schemas/AssignPenDetailsDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PenDetailsDto"
+                "$ref": "#/components/schemas/AssignPenDetailsDto"
               }
             }
           }
@@ -2735,6 +2735,18 @@
         },
         "additionalProperties": false
       },
+      "AssignPenDetailsDto": {
+        "type": "object",
+        "properties": {
+          "pen1": {
+            "$ref": "#/components/schemas/PenDetailsDto"
+          },
+          "pen2": {
+            "$ref": "#/components/schemas/PenDetailsDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "CowDto": {
         "type": "object",
         "properties": {
@@ -2754,13 +2766,18 @@
             "type": "boolean"
           },
           "birthDate": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time"
           },
           "race": {
             "type": "string",
             "nullable": true
           },
           "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "imgLink": {
             "type": "string",
             "nullable": true
           },
@@ -2837,10 +2854,13 @@
             "nullable": true
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time"
           },
           "calvingDate": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2942,7 +2962,9 @@
             "nullable": true
           },
           "date": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "description": {
             "type": "string",

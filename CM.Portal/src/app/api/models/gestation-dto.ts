@@ -1,10 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DateOnly } from './date-only';
 export interface GestationDto {
-  calvingDate?: DateOnly;
+  calvingDate?: null | string;
   cowId?: number;
   id?: number;
-  startDate?: DateOnly;
+  startDate?: string;
   status?: null | string;
 }
