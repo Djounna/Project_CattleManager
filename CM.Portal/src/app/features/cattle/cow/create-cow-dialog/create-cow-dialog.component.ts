@@ -28,8 +28,6 @@ export class CreateCowDialogComponent extends BaseComponent {
   public penDict : Map<number, string> = this.store.selectSnapshot(InfrastructureState.penDict);
   public groups: any[] = [];   
   public pens: any[] = []
-  // public groups = this.store.selectSnapshot(CattleState.groups);
-  // public pens = this.store.selectSnapshot(InfrastructureState.pens);
   
   override ngOnInit(): void {
     this.groupDict.forEach((value, key) => {
@@ -61,7 +59,7 @@ export class CreateCowDialogComponent extends BaseComponent {
       id : 0,
       identifier : this.createCowForm.value.identifier, 
       name : this.createCowForm.value.name,
-      birthDate:this.createCowForm.value.birthdate, 
+      birthDate:this.createCowForm.value.birthdate?.toISOString(), 
       race : this.createCowForm.value.race,
       gender : this.createCowForm.value.gender,
       groupId: this.createCowForm.value.groupId,
