@@ -1,0 +1,34 @@
+<div class="dialog_container">
+    <form  [formGroup]="updateCowForm">
+        <div class="form-columns">
+
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="name">Nom</label>
+                    <input pInputText id="name" formControlName="name" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="group">Groupe</label>
+                    <p-dropdown 
+                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId"
+                        [showClear]="true" placeholder="groupe">
+                    </p-dropdown>
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="pen">Enclos</label>
+                    <p-dropdown 
+                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId"
+                        [showClear]="true" placeholder="enclos">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <p-button label="Annuler" [raised]="true" severity="warning" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [raised]="true" [disabled]="!updateCowForm.valid" (click)="OnUpdate()"></p-button>
+        </div>
+
+    </form>
+</div>
+

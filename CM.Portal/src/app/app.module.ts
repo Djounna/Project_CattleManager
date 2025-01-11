@@ -96,6 +96,7 @@ import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-mi
 import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
 import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
+import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 
 @NgModule({
     declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
@@ -114,7 +115,8 @@ import { GroupNamePipe } from './utils/pipes/group-name.pipe';
         MonthMilkingsGraphComponent,
         CowDetailsComponent,
         PenNamePipe,
-        GroupNamePipe
+        GroupNamePipe,
+        UpdateCowDialogComponent
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
     bootstrap: [AppComponent],
