@@ -1,0 +1,26 @@
+.dialog{
+    &_container{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+
+        .form{
+            &-columns{
+                display: flex; 
+                flex-direction: row;
+                justify-content: space-around;
+                gap:2rem;
+                padding:1rem;
+            }
+            &-actions{
+                display: flex; 
+                flex-direction: row;
+                justify-content: flex-end;
+                gap: 1rem;
+                padding:1rem;
+            }
+        }
+
+    }
+}

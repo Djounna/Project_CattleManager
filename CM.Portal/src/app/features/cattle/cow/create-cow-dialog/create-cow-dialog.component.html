@@ -1,6 +1,7 @@
-<div>
+<div class="dialog_container">
     <form  [formGroup]="createCowForm">
-        <div class="flex flex-row">
+        <div class="form-columns">
+
             <div class="form_base gap-2">
                 <div class="flex flex-column gap-2">
                     <label for="identifier">Identifiant</label>
@@ -49,7 +50,7 @@
             
         </div>
 
-        <div class="flex-row justify-content-end m-2 gap-2">
+        <div class="form-actions">
             <p-button label="Annuler" [raised]="true" severity="warning" (click)="OnCancel()"></p-button>
             <p-button label="Confirmer" [raised]="true" [disabled]="!createCowForm.valid" (click)="OnCreate()"></p-button>
         </div>

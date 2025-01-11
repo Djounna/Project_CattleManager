@@ -50,8 +50,9 @@ export class CowsPageComponent extends BaseComponent{
   
   createCowDialog(): void {
     const dialogRef = this.dialogService.open(CreateCowDialogComponent, {
-      height: '400px',
-      width: '700px',
+      header: 'Ajouter un animal',
+      height: '450px',
+      width: '500px',
     });
 
     dialogRef.onClose.subscribe(result => {
