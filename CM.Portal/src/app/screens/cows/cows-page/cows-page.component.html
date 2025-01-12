@@ -35,7 +35,7 @@
         </div>
 
         <div class="flex flex-column">
-            <app-cows-list-view #cowList [Cows]="Cows"></app-cows-list-view>
+            <app-cows-list-view #cowList [Cows]="Cows" (onUpdate)="UpdateCowDialog($event)"></app-cows-list-view>
         </div>
 
     </div>

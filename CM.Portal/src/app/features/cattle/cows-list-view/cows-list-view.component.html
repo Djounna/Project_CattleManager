@@ -54,12 +54,13 @@
                     <td>{{cow.identifier}}</td>
                     <td>{{cow.name}}</td>
                     <td>{{cow.race}}</td>
-                    <td>{{cow.birthDate}}</td>
-                    <td>
-                        <p-button (onClick)="op.toggle($event)" icon="pi pi-share-alt" label="Share" />
+                    <td>{{cow.birthDate | date: 'dd/MM/yyyy'}}</td>
+                    <td style="display:flex; flex-direction:row; justify-content: flex-start; gap:0.1rem;">
+                        <p-button (onClick)="op.toggle($event)" icon="pi pi-eye"/>
                         <p-overlayPanel #op>
                             <app-cow-card [Cow]="cow"></app-cow-card> 
                         </p-overlayPanel>
+                        <p-button (onClick)="UpdateCow(cow)" icon="pi pi-pencil"/>
                     </td>
                 </tr>
             </ng-template>

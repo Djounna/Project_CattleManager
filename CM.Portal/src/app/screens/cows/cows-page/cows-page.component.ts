@@ -9,6 +9,7 @@ import { CreateCowDialogComponent } from '../../../features/cattle/cow/create-co
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { CowsListViewComponent } from '../../../features/cattle/cows-list-view/cows-list-view.component';
 import { InfrastructureState } from '../../../state/infrastructure/infrastructure.store';
+import { UpdateCowDialogComponent } from '../../../features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 
 @Component({
   selector: 'app-cows-page',
@@ -60,6 +61,24 @@ export class CowsPageComponent extends BaseComponent{
         return;
       this.store.dispatch(new Cows.Create({body:result})).subscribe({
         next:() => this.toastSuccess("L'animal a été créé avec succès"),
+        error:() => this.toastError("Une erreur s'est produite")
+      });
+    });
+  }
+
+  public UpdateCowDialog(cow: CowDto): void{
+    const dialogRef = this.dialogService.open(UpdateCowDialogComponent, {
+      data: cow,
+      header: 'Mettre à jour un animal',
+      height: '450px',
+      width: '350px',
+    });
+
+    dialogRef.onClose.subscribe(result => {
+      if(result == null)
+        return;
+      this.store.dispatch(new Cows.Update({body:result})).subscribe({
+        next:() => this.toastSuccess("L'animal a été modifié avec succès"),
         error:() => this.toastError("Une erreur s'est produite")
       });
     });

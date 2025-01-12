@@ -8,5 +8,4 @@ import { CowDto } from '../../../api/models';
 })
 export class CowCardComponent {
   @Input('Cow') Cow! : CowDto;
-
 }

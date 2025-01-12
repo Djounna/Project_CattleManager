@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../../../../shared/base-component.component';
-import { FormBuilder, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CowDto } from '../../../../api/models';
 import { genders } from '../../../../models/enums/genders';
 import { races } from '../../../../models/enums/races';
@@ -17,11 +17,13 @@ export class UpdateCowDialogComponent extends BaseComponent {
 
   constructor( private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
+    public dialogConfig: DynamicDialogConfig,
   ){
     super();
   }
 
   public cow!: CowDto;
+  public updateCowForm!: FormGroup;
   public updatedCow!: CowDto;
   public groupDict : Map<number, string> = this.store.selectSnapshot(CattleState.groupDict);
   public penDict : Map<number, string> = this.store.selectSnapshot(InfrastructureState.penDict);
@@ -29,6 +31,12 @@ export class UpdateCowDialogComponent extends BaseComponent {
   public pens: any[] = []
 
   override ngOnInit(): void {
+    this.cow = this.dialogConfig.data;
+    this.updateCowForm = this.formBuilder.group({
+      name:[this.cow.name, Validators.required],
+      penId:[this.cow.penId, Validators.required],
+      groupId:[this.cow.groupId, Validators.required]
+    })
     this.groupDict.forEach((value, key) => {
       this.groups.push({
         id: key,
@@ -43,15 +51,6 @@ export class UpdateCowDialogComponent extends BaseComponent {
     }) 
   }
 
-  updateCowForm = this.formBuilder.group({
-    name:['', Validators.required],
-    penId:[0, Validators.required],
-    groupId:[0, Validators.required]
-  })
-
-  private GetData(){
-
-  }
 
   public OnUpdate(): void {
     this.updatedCow = {

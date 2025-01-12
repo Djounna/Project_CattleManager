@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { CowDto, GroupDto, PenDto } from '../../../api/models';
 
@@ -10,6 +10,7 @@ import { CowDto, GroupDto, PenDto } from '../../../api/models';
 })
 export class CowsListViewComponent {
   @ViewChild('dt') dt: any;
+  @Output() onUpdate: EventEmitter<CowDto> = new EventEmitter<CowDto>();
 
   private name : string = '';
   @Input() set Name(value: string){
@@ -46,5 +47,10 @@ export class CowsListViewComponent {
   }
   public filterByPen(pen: PenDto){
     this.filteredCows = [...this.Cows.filter(c => c.penId === pen.id)];
+  }
+
+  public UpdateCow(cow: CowDto){
+    debugger;
+    this.onUpdate.emit(cow);
   }
 }
