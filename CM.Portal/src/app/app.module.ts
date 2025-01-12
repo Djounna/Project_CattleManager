@@ -35,7 +35,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialog } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PickListModule } from 'primeng/picklist';
 import { DividerModule } from 'primeng/divider';
