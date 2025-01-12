@@ -18,6 +18,9 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 // PrimeNgModules
+import Aura from '@primeng/themes/aura';
+import Nora from '@primeng/themes/nora';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from  'primeng/tabview';
 import { CardModule } from 'primeng/card';
@@ -30,10 +33,9 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialog } from 'primeng/dynamicdialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PickListModule } from 'primeng/picklist';
 import { DividerModule } from 'primeng/divider';
@@ -97,6 +99,7 @@ import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.comp
 import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
 import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
+import { providePrimeNG } from 'primeng/config';
 
 @NgModule({ declarations: [AppComponent, ToolbarComponent, SidenavComponent, AuthButtonComponent,
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
@@ -135,7 +138,6 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
         // primeNg
         ButtonModule,
         InputTextModule,
-        InputTextareaModule,
         RadioButtonModule,
         InputGroupModule,
         InputGroupAddonModule,
@@ -155,7 +157,6 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
         ProgressSpinnerModule,
         PanelModule,
         DialogModule,
-        DynamicDialogModule,
         DataViewModule,
         PickListModule,
         ChartModule,
@@ -193,5 +194,19 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
                     }
                 ]
             }
-        })], providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService, provideHttpClient(withInterceptorsFromDi())] })
+        })], 
+        providers: [
+            { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, 
+            AuthGuard, 
+            MessageService, 
+            DialogService, 
+            provideAnimationsAsync(),
+            provideHttpClient(withInterceptorsFromDi()),
+            providePrimeNG({ 
+            theme: {
+                preset: Nora
+            }
+        })
+        ] 
+    })
 export class AppModule {}
