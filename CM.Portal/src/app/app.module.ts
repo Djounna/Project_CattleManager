@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 // Import the ApiModule generatred by Ng-OpenApi-gen
 import { ApiModule } from './api/api.module';
 // Import the injector module and the HTTP client module from Angular
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 // Import the HTTP interceptor from the Auth0 Angular SDK
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
@@ -98,8 +98,7 @@ import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
 import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 
-@NgModule({
-    declarations: [AppComponent, ToolbarComponent, SidenavComponent,  AuthButtonComponent, 
+@NgModule({ declarations: [AppComponent, ToolbarComponent, SidenavComponent, AuthButtonComponent,
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
@@ -118,10 +117,7 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
         GroupNamePipe,
         UpdateCowDialogComponent
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
         FormsModule,
@@ -166,12 +162,8 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
         OverlayPanelModule,
         // Routing configuration
         AppRoutingModule,
-
         //State Mgmt
         NgxsModule.forRoot([AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
-
-        //API Service
-        HttpClientModule,
         ApiModule.forRoot({ rootUrl: 'https://localhost:7276' }),
         // Auth0
         AuthModule.forRoot({
@@ -185,24 +177,21 @@ import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialo
                 scope: 'read:events write:events read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures',
             },
             httpInterceptor: {
-                    allowedList: [
+                allowedList: [
                     {
                         // Match any request that starts 'https://dev-c6lwemo7.us.auth0.com/api/v2/' (note the asterisk)
                         // uri: 'https://dev-c6lwemo7.us.auth0.com/api/v2/*',
                         uri: 'https://localhost:7276/*',
                         tokenOptions: {
-                        authorizationParams: {
-                            // The attached token should target this audience
-                            audience: 'https://CM.WebApi',
-
-                            // The attached token should have these scopes
-                            scope: 'read:events write:events read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures'
+                            authorizationParams: {
+                                // The attached token should target this audience
+                                audience: 'https://CM.WebApi',
+                                // The attached token should have these scopes
+                                scope: 'read:events write:events read:cows write:cows read:jobs write:jobs read:infrastructures write:infrastructures'
                             }
                         }
                     }
                 ]
             }
-        }),
-    ],
-})
+        })], providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, AuthGuard, MessageService, DialogService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
