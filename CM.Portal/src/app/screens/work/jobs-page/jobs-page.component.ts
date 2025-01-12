@@ -14,9 +14,10 @@ import { JobListViewComponent } from '../../../features/work/job-list-view/job-l
 import { JobDetailsListComponent } from '../../../features/work/job-details-list/job-details-list.component';
 
 @Component({
-  selector: 'app-jobs-page',
-  templateUrl: './jobs-page.component.html',
-  styleUrl: './jobs-page.component.scss'
+    selector: 'app-jobs-page',
+    templateUrl: './jobs-page.component.html',
+    styleUrl: './jobs-page.component.scss',
+    standalone: false
 })
 export class JobsPageComponent extends BaseComponent {
 

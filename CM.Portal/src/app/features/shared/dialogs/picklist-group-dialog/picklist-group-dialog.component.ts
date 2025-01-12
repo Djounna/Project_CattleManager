@@ -5,9 +5,10 @@ import { CowDto, GroupDto, PenDto } from '../../../../api/models';
 import { PicklistToolComponent } from '../../picklist-tool/picklist-tool.component';
 
 @Component({
-  selector: 'app-picklist-group-dialog',
-  templateUrl: './picklist-group-dialog.component.html',
-  styleUrl: './picklist-group-dialog.component.scss'
+    selector: 'app-picklist-group-dialog',
+    templateUrl: './picklist-group-dialog.component.html',
+    styleUrl: './picklist-group-dialog.component.scss',
+    standalone: false
 })
 export class PicklistGroupDialogComponent {
 

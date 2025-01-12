@@ -10,9 +10,10 @@ import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { PicklistGroupDialogComponent } from '../../../features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
 
 @Component({
-  selector: 'app-group-page',
-  templateUrl: './group-page.component.html',
-  styleUrl: './group-page.component.scss'
+    selector: 'app-group-page',
+    templateUrl: './group-page.component.html',
+    styleUrl: './group-page.component.scss',
+    standalone: false
 })
 export class GroupPageComponent extends BaseComponent {
 

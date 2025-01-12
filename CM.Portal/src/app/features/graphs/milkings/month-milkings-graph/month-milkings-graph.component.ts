@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { DateOnly, MilkingDto } from '../../../../api/models';
 
 @Component({
-  selector: 'app-month-milkings-graph',
-  templateUrl: './month-milkings-graph.component.html',
-  styleUrl: './month-milkings-graph.component.scss'
+    selector: 'app-month-milkings-graph',
+    templateUrl: './month-milkings-graph.component.html',
+    styleUrl: './month-milkings-graph.component.scss',
+    standalone: false
 })
 export class MonthMilkingsGraphComponent {
 

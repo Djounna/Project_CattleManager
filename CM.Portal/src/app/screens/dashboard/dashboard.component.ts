@@ -15,9 +15,10 @@ import { InfrastructureState } from '../../state/infrastructure/infrastructure.s
 import { Pens } from '../../state/infrastructure/infrastructure.action';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss',
+    standalone: false
 })
 export class DashboardComponent extends BaseComponent {
 

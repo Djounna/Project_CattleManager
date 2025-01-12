@@ -3,9 +3,10 @@ import { AuthService, GenericError } from '@auth0/auth0-angular';
 import { filter, mergeMap } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    standalone: false
 })
 export class AppComponent{                    // implements OnInit
   title = 'CM.Portal';

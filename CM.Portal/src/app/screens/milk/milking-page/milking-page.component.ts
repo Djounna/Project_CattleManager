@@ -11,9 +11,10 @@ import moment from 'moment';
 import { MilkingInputComponent } from '../../../features/milking/milking-input/milking-input.component';
 
 @Component({
-  selector: 'app-milking-page',
-  templateUrl: './milking-page.component.html',
-  styleUrl: './milking-page.component.scss'
+    selector: 'app-milking-page',
+    templateUrl: './milking-page.component.html',
+    styleUrl: './milking-page.component.scss',
+    standalone: false
 })
 export class MilkingPageComponent extends BaseComponent {
 

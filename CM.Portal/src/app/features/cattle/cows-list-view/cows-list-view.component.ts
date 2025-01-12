@@ -4,9 +4,10 @@ import { CowDto, GroupDto, PenDto } from '../../../api/models';
 
 
 @Component({
-  selector: 'app-cows-list-view',
-  templateUrl: './cows-list-view.component.html',
-  styleUrl: './cows-list-view.component.scss'
+    selector: 'app-cows-list-view',
+    templateUrl: './cows-list-view.component.html',
+    styleUrl: './cows-list-view.component.scss',
+    standalone: false
 })
 export class CowsListViewComponent {
   @ViewChild('dt') dt: any;

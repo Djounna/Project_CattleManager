@@ -3,9 +3,10 @@ import { JobDetailsDto, UserDto, WorkerJobDto } from '../../../../api/models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-assign-job-dialog',
-  templateUrl: './assign-job-dialog.component.html',
-  styleUrl: './assign-job-dialog.component.scss'
+    selector: 'app-assign-job-dialog',
+    templateUrl: './assign-job-dialog.component.html',
+    styleUrl: './assign-job-dialog.component.scss',
+    standalone: false
 })
 export class AssignJobDialogComponent {
 

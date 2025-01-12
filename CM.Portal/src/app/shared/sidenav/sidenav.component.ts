@@ -4,7 +4,8 @@ import { MenuItem } from 'primeng/api';
 @Component({
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
-    styleUrl: './sidenav.component.scss'
+    styleUrl: './sidenav.component.scss',
+    standalone: false
 })
 export class SidenavComponent implements OnInit {
 

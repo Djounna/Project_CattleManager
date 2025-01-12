@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MilkingData } from '../../../screens/milk/milking-page/milking-page.component';
 
 @Component({
-  selector: 'app-milking-input',
-  templateUrl: './milking-input.component.html',
-  styleUrl: './milking-input.component.scss'
+    selector: 'app-milking-input',
+    templateUrl: './milking-input.component.html',
+    styleUrl: './milking-input.component.scss',
+    standalone: false
 })
 export class MilkingInputComponent {
   formBuilder = inject(FormBuilder);

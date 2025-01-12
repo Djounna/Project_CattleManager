@@ -9,9 +9,10 @@ import { CattleState } from '../../../../state/cattle/cattle.store';
 import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
 
 @Component({
-  selector: 'app-create-cow-dialog',
-  templateUrl: './create-cow-dialog.component.html',
-  styleUrl: './create-cow-dialog.component.scss'
+    selector: 'app-create-cow-dialog',
+    templateUrl: './create-cow-dialog.component.html',
+    styleUrl: './create-cow-dialog.component.scss',
+    standalone: false
 })
 export class CreateCowDialogComponent extends BaseComponent {
 

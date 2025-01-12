@@ -9,9 +9,10 @@ import { CowDto, JobDto, PenDto } from '../../../../api/models';
 import { jobStatus } from '../../../../models/enums/workEnums';
 
 @Component({
-  selector: 'app-create-job-dialog',
-  templateUrl: './create-job-dialog.component.html',
-  styleUrl: './create-job-dialog.component.scss'
+    selector: 'app-create-job-dialog',
+    templateUrl: './create-job-dialog.component.html',
+    styleUrl: './create-job-dialog.component.scss',
+    standalone: false
 })
 export class CreateJobDialogComponent {
 

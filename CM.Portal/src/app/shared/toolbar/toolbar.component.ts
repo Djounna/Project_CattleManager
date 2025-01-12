@@ -5,9 +5,10 @@ import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss'
+    selector: 'app-toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrl: './toolbar.component.scss',
+    standalone: false
 })
 export class ToolbarComponent {
 

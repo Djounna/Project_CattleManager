@@ -6,9 +6,10 @@ import { Cows } from '../../../state/cattle/cattle.actions';
 import { BaseComponent } from '../../../shared/base-component.component';
 
 @Component({
-  selector: 'app-picklist-tool',
-  templateUrl: './picklist-tool.component.html',
-  styleUrl: './picklist-tool.component.scss'
+    selector: 'app-picklist-tool',
+    templateUrl: './picklist-tool.component.html',
+    styleUrl: './picklist-tool.component.scss',
+    standalone: false
 })
 export class PicklistToolComponent extends BaseComponent {
 

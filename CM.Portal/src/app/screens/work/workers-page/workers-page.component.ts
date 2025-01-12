@@ -7,9 +7,10 @@ import { BaseComponent } from '../../../shared/base-component.component';
 import { Workers } from '../../../state/work/work.actions';
 
 @Component({
-  selector: 'app-workers-page',
-  templateUrl: './workers-page.component.html',
-  styleUrl: './workers-page.component.scss'
+    selector: 'app-workers-page',
+    templateUrl: './workers-page.component.html',
+    styleUrl: './workers-page.component.scss',
+    standalone: false
 })
 export class WorkersPageComponent extends BaseComponent{
 

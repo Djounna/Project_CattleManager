@@ -8,7 +8,8 @@ import { Subject } from "rxjs";
 @Component({
     selector: 'app-base',
     template: `<div> base works!!  </div>`,
-    providers: [MessageService, DialogService]
+    providers: [MessageService, DialogService],
+    standalone: false
 })
 export class BaseComponent implements OnInit, OnDestroy {
 

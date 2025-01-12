@@ -12,9 +12,10 @@ import { InfrastructureState } from '../../../state/infrastructure/infrastructur
 import { UpdateCowDialogComponent } from '../../../features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 
 @Component({
-  selector: 'app-cows-page',
-  templateUrl: './cows-page.component.html',
-  styleUrl: './cows-page.component.scss'
+    selector: 'app-cows-page',
+    templateUrl: './cows-page.component.html',
+    styleUrl: './cows-page.component.scss',
+    standalone: false
 })
 export class CowsPageComponent extends BaseComponent{
 

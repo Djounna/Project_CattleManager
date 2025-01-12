@@ -4,9 +4,10 @@ import { BaseComponent } from '../../../shared/base-component.component';
 import { PicklistGroupDialogComponent } from '../../shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
 
 @Component({
-  selector: 'app-group-datagrid',
-  templateUrl: './group-datagrid.component.html',
-  styleUrl: './group-datagrid.component.scss'
+    selector: 'app-group-datagrid',
+    templateUrl: './group-datagrid.component.html',
+    styleUrl: './group-datagrid.component.scss',
+    standalone: false
 })
 export class GroupDatagridComponent extends BaseComponent{
   @Input() Cows : CowDto[] = [];

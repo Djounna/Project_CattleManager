@@ -6,9 +6,10 @@ import { Jobs } from '../../../state/work/work.actions';
 import { Table } from 'primeng/table';
 
 @Component({
-  selector: 'app-job-details-list',
-  templateUrl: './job-details-list.component.html',
-  styleUrl: './job-details-list.component.scss'
+    selector: 'app-job-details-list',
+    templateUrl: './job-details-list.component.html',
+    styleUrl: './job-details-list.component.scss',
+    standalone: false
 })
 export class JobDetailsListComponent extends BaseComponent {
   @Input() Workers : UserDto[] = []
