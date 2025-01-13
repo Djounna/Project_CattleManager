@@ -17,7 +17,7 @@ using CM.Backend.Domain.Users;
 namespace CM.Backend.Application.Mappings;
 public class MappingProfile : Profile
 {
-    public MappingProfile() 
+    public MappingProfile()
     {
         CreateMap<DateTime, DateOnly>().ConvertUsing<DateTimeToDateOnlyConverter>();
         CreateMap<DateOnly, DateTime>().ConvertUsing<DateOnlyToDateTimeConverter>();
@@ -49,6 +49,11 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
             .ForMember(dest => dest.CalvingDate, opt => opt.MapFrom(src => src.CalvingDate));
 
+        CreateMap<Vaccination, VaccinationDto>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
+            .ReverseMap()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+
         CreateMap<MilkProduction, MilkProductionDto>().ReverseMap();
         CreateMap<Milking, MilkingDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();
@@ -58,7 +63,7 @@ public class MappingProfile : Profile
         //CreateMap<Worker, WorkerDto>().ReverseMap();
     }
 
-    
+
     //public MappingProfile()
     //{
     //    // Calling the private method

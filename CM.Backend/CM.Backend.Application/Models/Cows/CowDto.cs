@@ -48,6 +48,26 @@ public class CowDto
     public string? ImgLink { get; set; }
 
     /// <summary>
+    /// Mother Id
+    /// </summary>
+    public int? MotherId { get; set; }
+
+    /// <summary>
+    /// Mother
+    /// </summary>
+    // public string? Mother { get; set; }
+
+    /// <summary>
+    /// Father Id
+    /// </summary>
+    public int? FatherId { get; set; }
+
+    /// <summary>
+    /// Father
+    /// </summary>
+    // public string? Father { get; set; }
+
+    /// <summary>
     /// PenId
     /// </summary>
     public int? PenId { get; set; }
