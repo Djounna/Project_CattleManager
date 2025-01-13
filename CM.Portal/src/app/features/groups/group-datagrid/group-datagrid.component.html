@@ -1,7 +1,7 @@
 <div class="panel_border">
     <p-panel header="Groupes">
     <p-dataView #dv [value]="Groups" [layout]="'grid'">
-        <ng-template let-group pTemplate="grid" let-groups>
+        <ng-template #grid let-groups>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" *ngFor="let group of groups">
                     <div class="p-2 border-1 surface-border surface-card border-round">

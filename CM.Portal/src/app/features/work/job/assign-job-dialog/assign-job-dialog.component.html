@@ -8,10 +8,10 @@
     <div class="form_base gap-2">
         <div class="flex flex-column gap-2">
             <label for="worker">Travailleur</label>
-            <p-dropdown 
+            <p-select 
                 [options]="data.Workers" [(ngModel)]="selectedWorker" optionLabel="username" 
                 [showClear]="true" placeholder="Choisissez un travailleur">
-            </p-dropdown>
+            </p-select>
         </div>
     </div>
 

@@ -14,29 +14,35 @@
         <p-divider></p-divider>
 
             <div class="panel_border">
-                <p-tabView>
+                <p-tabs value="0">
+                    <p-tablist>
+                        <p-tab value="0">Travailleurs</p-tab>
+                        <p-tab value="1">Enclos</p-tab>
+                    </p-tablist>
 
-                    <p-tabPanel header="Travailleurs">
-                        <div
-                        class="flex flex-column m-2 g-2"
-                         *ngFor="let worker of Workers;">
-                            <p-button (click)="SelectWorker(worker)">
-                                <b>{{worker.username}}</b>
-                            </p-button>
-                        </div>
-                    </p-tabPanel>
+                    <p-tabpanels>
+                        <p-tabpanel value="0">
+                            <div
+                            class="flex flex-column m-2 g-2"
+                            *ngFor="let worker of Workers;">
+                                <p-button (click)="SelectWorker(worker)">
+                                    <b>{{worker.username}}</b>
+                                </p-button>
+                            </div>
+                        </p-tabpanel>
 
-                    <p-tabPanel header="Enclos">
-                        <div
-                        class="flex flex-column m-2 g-2"
-                         *ngFor="let pen of Pens;">
-                            <p-button (click)="SelectPen(pen)">
-                                <b>{{pen.name}}</b>
-                            </p-button>
-                        </div>
-                    </p-tabPanel>
+                        <p-tabpanel value="1">
+                            <div
+                            class="flex flex-column m-2 g-2"
+                            *ngFor="let pen of Pens;">
+                                <p-button (click)="SelectPen(pen)">
+                                    <b>{{pen.name}}</b>
+                                </p-button>
+                            </div>
+                        </p-tabpanel>
+                    </p-tabpanels>
 
-                </p-tabView>
+                </p-tabs>
             </div>
         </div>
 

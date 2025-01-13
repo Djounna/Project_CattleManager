@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="birthdate">Date de naissance</label>
-                    <p-calendar type="date" formControlName="birthdate"></p-calendar>
+                    <p-datepicker type="date" formControlName="birthdate"></p-datepicker>
                 </div>
                 <div class="flex flex-row gap-2">
                     <label for="">sex</label>
@@ -27,24 +27,21 @@
             <div class="form_base gap-2">
                 <div class="flex flex-column gap-2">
                     <label for="race">Race</label>
-                    <p-dropdown 
-                        [options]="races" formControlName="race"
-                        [showClear]="true" placeholder="race">
-                    </p-dropdown>
+                    <p-select 
+                        [options]="races" formControlName="race" placeholder="race" [showClear]="true">
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="group">Groupe</label>
-                    <p-dropdown 
-                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId"
-                        [showClear]="true" placeholder="groupe">
-                    </p-dropdown>
+                    <p-select 
+                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="pen">Enclos</label>
-                    <p-dropdown 
-                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId"
-                        [showClear]="true" placeholder="enclos">
-                    </p-dropdown>
+                    <p-select 
+                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
+                    </p-select>
                 </div>
             </div>
             

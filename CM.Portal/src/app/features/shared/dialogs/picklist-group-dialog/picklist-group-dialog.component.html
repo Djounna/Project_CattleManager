@@ -1,21 +1,19 @@
 <div class="card flex flex-row justify-content-around m-2">
     <div class="flex flex-row align-items-center gap-2 m-2">
         <label for="source">Source</label>
-        <p-dropdown 
-            [options]="data.Groups" [(ngModel)]="SelectedSourceGroup" 
-            optionLabel="name" [showClear]="true" placeholder="Source"
+        <p-select 
+            [options]="data.Groups" [(ngModel)]="SelectedSourceGroup" optionLabel="name" placeholder="Source" [showClear]="true"
             [filter]="true" filterBy="name">
-        </p-dropdown>
+        </p-select>
     </div>
     <div>
             <p-button label="Confirmer" [raised]="true" (click)="Save()"></p-button>
     </div>
     <div class="flex flex-row align-items-center gap-2 m-2">
         <label for="destination">Destination</label>
-        <p-dropdown 
-            [options]="data.Groups" [(ngModel)]="SelectedTargetGroup" 
-            optionLabel="name" [showClear]="true" placeholder="Destination">
-        </p-dropdown>
+        <p-select 
+            [options]="data.Groups" [(ngModel)]="SelectedTargetGroup" optionLabel="name" placeholder="Destination" [showClear]="true">
+        </p-select>
     </div>
 </div>
 

@@ -3,7 +3,7 @@
 
         <p-card header="Selected Date" subheader="{{SelectedDate}}">
             <div style="display:flex; flex-direction:row; gap:2rem; margin-top:1rem ">
-                <p-calendar [(ngModel)]="Date" [showButtonBar]="true" (onSelect)="SelectDate()"></p-calendar> 
+                <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
             </div>
 
             <ng-template pTemplate="footer">

@@ -9,17 +9,15 @@
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="group">Groupe</label>
-                    <p-dropdown 
-                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId"
-                        [showClear]="true" placeholder="groupe">
-                    </p-dropdown>
+                    <p-select 
+                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="pen">Enclos</label>
-                    <p-dropdown 
-                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId"
-                        [showClear]="true" placeholder="enclos">
-                    </p-dropdown>
+                    <p-select 
+                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
+                    </p-select>
                 </div>
             </div>
         </div>

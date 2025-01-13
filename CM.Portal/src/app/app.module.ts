@@ -4,9 +4,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
-import { ButtonModule } from 'primeng/button';
-import { PanelMenuModule } from 'primeng/panelmenu';
-import { SidebarModule } from 'primeng/sidebar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -20,9 +17,12 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 // PrimeNgModules
 import Aura from '@primeng/themes/aura';
 import Nora from '@primeng/themes/nora';
+import { ButtonModule } from 'primeng/button';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { SidebarModule } from 'primeng/sidebar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TableModule } from 'primeng/table';
-import { TabViewModule } from  'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { MenubarModule } from 'primeng/menubar';
@@ -42,8 +42,10 @@ import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
 import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
+import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -142,7 +144,6 @@ import { providePrimeNG } from 'primeng/config';
         InputGroupModule,
         InputGroupAddonModule,
         InputNumberModule,
-        DropdownModule,
         SidebarModule,
         PanelMenuModule,
         DividerModule,
@@ -150,7 +151,7 @@ import { providePrimeNG } from 'primeng/config';
         CalendarModule,
         ButtonModule,
         TableModule,
-        TabViewModule,
+        TabsModule,
         CardModule,
         MenubarModule,
         MenuModule,
@@ -161,6 +162,9 @@ import { providePrimeNG } from 'primeng/config';
         PickListModule,
         ChartModule,
         OverlayPanelModule,
+        DatePickerModule,
+        PopoverModule,
+        SelectModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

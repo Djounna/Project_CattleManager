@@ -14,8 +14,6 @@
             <p-divider></p-divider>
 
             <div class="panel_border">
-                <!-- <p-tabView> -->
-
                     <p-panel header="Groupes" [toggleable]="true" [collapsed]="true">
                         @for (group of Groups; track $index) 
                         {
@@ -29,8 +27,6 @@
                             <app-pen-card-small (onSelected)="SelectPen(pen)" [Pen]="pen"></app-pen-card-small>
                         }
                     </p-panel>
-
-                <!-- </p-tabView> -->
             </div>
         </div>
 
