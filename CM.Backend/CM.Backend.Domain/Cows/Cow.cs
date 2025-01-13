@@ -16,6 +16,11 @@ public class Cow : BaseEntity
     public string Gender { get; set; }
     public string? ImgLink { get; set; }
 
+    public int? MotherId { get; set; }
+    public virtual Cow Mother { get; set; }
+    public int? FatherId {  get; set; } 
+    public virtual Cow Father { get; set; }
+
     public int? PenId { get; set; }
     public virtual Pen Pen { get; set; }
 

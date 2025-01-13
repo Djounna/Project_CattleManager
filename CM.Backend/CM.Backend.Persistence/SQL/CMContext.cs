@@ -34,6 +34,7 @@ public class CMContext : DbContext
 
     public DbSet<Gestation> Gestations { get; set; }
     public DbSet<Intervention> Interventions { get; set; }
+    public DbSet<Vaccination> Vaccinations { get; set; }
     public DbSet<MilkProduction> MilkProductions { get; set; }
     public DbSet<Milking> Milkings { get; set; }
     public DbSet<PenMove> PenMoves { get; set; }
@@ -46,10 +47,12 @@ public class CMContext : DbContext
         optionsBuilder.UseSqlServer("Server=LAPTOP-R3GDQJIT;Database=CattleManager;Trusted_Connection=True;TrustServerCertificate=True");
     }
 
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //    base.OnModelCreating(modelBuilder);
-    //    modelBuilder.Entity<Job>()
-    //            .Property(e => e.Title).IsRequired();
-    //}
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        //modelBuilder.Entity<Job>().Property(e => e.Title).IsRequired();
+
+        modelBuilder.Entity<Cow>().HasOne(c => c.Father).WithMany();
+        modelBuilder.Entity<Cow>().HasOne(c => c.Mother).WithMany();
+    }
 }
