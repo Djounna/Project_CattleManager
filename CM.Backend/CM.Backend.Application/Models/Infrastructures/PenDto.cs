@@ -19,4 +19,9 @@ public class PenDto
     /// Size
     /// </summary>
     public int Size { get; set; }
+
+    /// <summary>
+    /// Coordinates
+    /// </summary>
+    public string? Coordinates { get; set; }
 }

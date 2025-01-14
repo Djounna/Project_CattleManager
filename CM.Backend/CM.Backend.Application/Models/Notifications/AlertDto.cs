@@ -26,6 +26,11 @@ public class AlertDto
     public string Level { get; set; }
 
     /// <summary>
+    /// Infos
+    /// </summary>
+    public string? Infos { get; set; }
+
+    /// <summary>
     /// Cow Id
     /// </summary>
     public int? CowId { get; set; }
@@ -34,4 +39,5 @@ public class AlertDto
     /// Pen Id
     /// </summary>
     public int? PenId { get; set; }
+
 }
