@@ -1,6 +1,4 @@
-﻿using CM.Backend.Application.Models.Infrastructures;
-
-namespace CM.Backend.Application.Models.Cows;
+﻿namespace CM.Backend.Application.Models.Cows;
 
 /// <summary>
 /// Cow DTO

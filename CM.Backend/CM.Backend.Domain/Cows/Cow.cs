@@ -30,6 +30,7 @@ public class Cow : BaseEntity
     public virtual ICollection<Job> Jobs { get; } = new List<Job>();
     public virtual ICollection<Intervention> Interventions { get; } = new List<Intervention>();
     public virtual ICollection<Gestation> Gestations { get; } = new List<Gestation>();
+    public virtual ICollection<Vaccination> Vaccinations { get; } = new List<Vaccination>();
     public virtual ICollection<GroupMove> GroupMoves { get; } = new List<GroupMove>();
     public virtual ICollection<PenMove> PenMoves { get; } = new List<PenMove>();
     public virtual ICollection<Alert> Alerts { get; } = new List<Alert>();

@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using AutoMapper;
 using CM.Backend.Application.Interfaces.Persistence;
-using CM.Backend.Application.Models.Cows;
 using CM.Backend.Application.Models.CowDetails;
 
 namespace CM.Backend.Application.Services.Intervention.Commands;

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CM.Backend.Application.Interfaces.Persistence;
+﻿using CM.Backend.Application.Interfaces.Persistence;
 using CM.Backend.Persistence.EF;
 using CM.Backend.Persistence.SQL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +19,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IGroupMoveRepository, GroupMoveRepository>();
         services.AddScoped<IGestationRepository, GestationRepository>();
         services.AddScoped<IInterventionRepository, InterventionRepository>();
+        services.AddScoped<IVaccinationRepository, VaccinationRepository>();
         services.AddScoped<IMilkingRepository, MilkingRepository>();
         services.AddScoped<IMilkProductionRepository, MilkProductionRepository>();
         services.AddScoped<IIntervenantRepository, IntervenantRepository>();
