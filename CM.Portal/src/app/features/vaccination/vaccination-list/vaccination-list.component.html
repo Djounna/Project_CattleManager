@@ -1,0 +1,23 @@
+<div class="panel_border">
+    <p-panel header="Vaccinations">
+        <div class="size_scroll">
+            <p-table [value]="Vaccinations" [tableStyle]="{ 'min-width': '20rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Animal</th>
+                        <th>Vaccin</th>
+                        <th>Date</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-vaccination>
+                    <tr>
+                        <td>{{vaccination.cowId}}</td>
+                        <td>{{vaccination.cowId}}</td>
+                        <td>{{vaccination.startDate}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-panel>
+</div>

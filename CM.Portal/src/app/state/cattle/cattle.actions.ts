@@ -82,3 +82,23 @@ export namespace Interventions{
         constructor(public id: number){}
     }
 }
+export namespace Vaccinations{
+    export class Create{
+        static readonly type = '[Vaccinations] Create Vaccination'
+        constructor(public payload : any){}
+    }
+
+    export class Update{
+        static readonly type = '[Vaccinations] Update Vaccination'
+        constructor(public payload : any){}
+    }
+
+    export class GetAll{
+        static readonly type ='[Vaccinations] Get All Vaccinations'
+    }
+
+    export class Delete{
+        static readonly type = '[Vaccinations] Delete Vaccination'
+        constructor(public id: number){}
+    }
+}

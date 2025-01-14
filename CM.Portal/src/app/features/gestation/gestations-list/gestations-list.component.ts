@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GestationDto } from '../../../../api/models';
+import { GestationDto } from '../../../api/models';
 
 @Component({
     selector: 'app-gestations-list',

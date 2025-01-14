@@ -74,11 +74,11 @@ import { GroupCardComponent } from './features/cattle/group-card/group-card.comp
 import { AlertListComponent } from './features/alerts/alert-list/alert-list.component';
 import { DashboardComponent } from './screens/dashboard/dashboard.component';
 import { JobListViewComponent } from './features/work/job-list-view/job-list-view.component';
-import { InterventionListComponent } from './features/cattle/intervention/intervention-list/intervention-list.component';
+import { InterventionListComponent } from './features/intervention/intervention-list/intervention-list.component';
 import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
 import { AlertState } from './state/alert/alert.store';
 import { MilkingState } from './state/milking/milking.store';
-import { GestationsListComponent } from './features/cattle/gestation/gestations-list/gestations-list.component';
+import { GestationsListComponent } from './features/gestation/gestations-list/gestations-list.component';
 import { GroupCardViewComponent } from './features/cattle/group-card-view/group-card-view.component';
 import { GroupPageComponent } from './screens/cattle/group-page/group-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -102,8 +102,17 @@ import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
 import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 import { providePrimeNG } from 'primeng/config';
+import { CreateGestationDialogComponent } from './features/gestation/create-gestation-dialog/create-gestation-dialog.component';
+import { UpdateGestationDialogComponent } from './features/gestation/update-gestation-dialog/update-gestation-dialog.component';
+import { CreateVaccinationDialogComponent } from './features/vaccination/create-vaccination-dialog/create-vaccination-dialog.component';
+import { UpdateVaccinationDialogComponent } from './features/vaccination/update-vaccination-dialog/update-vaccination-dialog.component';
+import { VaccinationListComponent } from './features/vaccination/vaccination-list/vaccination-list.component';
+import { CreateInterventionDialogComponent } from './features/intervention/create-intervention-dialog/create-intervention-dialog.component';
+import { UpdateInterventionDialogComponent } from './features/intervention/update-intervention-dialog/update-intervention-dialog.component';
 
-@NgModule({ declarations: [AppComponent, ToolbarComponent, SidenavComponent, AuthButtonComponent,
+@NgModule({ 
+    declarations: 
+    [AppComponent, ToolbarComponent, SidenavComponent, AuthButtonComponent,
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
@@ -120,7 +129,14 @@ import { providePrimeNG } from 'primeng/config';
         CowDetailsComponent,
         PenNamePipe,
         GroupNamePipe,
-        UpdateCowDialogComponent
+        UpdateCowDialogComponent,
+        CreateGestationDialogComponent,
+        UpdateGestationDialogComponent,
+        CreateVaccinationDialogComponent,
+        UpdateVaccinationDialogComponent,
+        VaccinationListComponent,
+        CreateInterventionDialogComponent,
+        UpdateInterventionDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

@@ -21,4 +21,5 @@ export { ProblemDetails } from './models/problem-details';
 export { StockDto } from './models/stock-dto';
 export { UserDto } from './models/user-dto';
 export { UserInput } from './models/user-input';
+export { VaccinationDto } from './models/vaccination-dto';
 export { WorkerJobDto } from './models/worker-job-dto';

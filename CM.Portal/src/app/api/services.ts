@@ -10,5 +10,6 @@ export { MilkProductionService } from './services/milk-production.service';
 export { PenService } from './services/pen.service';
 export { StockService } from './services/stock.service';
 export { UserManagementService } from './services/user-management.service';
+export { VaccinationService } from './services/vaccination.service';
 export { WorkerService } from './services/worker.service';
 export { WorkerJobService } from './services/worker-job.service';

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { InterventionDto } from '../../../../api/models';
+import { InterventionDto } from '../../../api/models';
 
 @Component({
     selector: 'app-intervention-list',

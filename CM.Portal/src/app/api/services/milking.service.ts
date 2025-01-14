@@ -501,7 +501,7 @@ export class MilkingService extends BaseService {
     context?: HttpContext
     body?: MilkingInputDto
   }
-): Observable<StrictHttpResponse<MilkingInputsDto>> {
+): Observable<StrictHttpResponse<MilkingInputDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingMilkingInputPostPath, 'post');
     if (params) {
@@ -515,7 +515,7 @@ export class MilkingService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<MilkingInputsDto>;
+        return r as StrictHttpResponse<MilkingInputDto>;
       })
     );
   }
@@ -530,10 +530,10 @@ export class MilkingService extends BaseService {
     context?: HttpContext
     body?: MilkingInputDto
   }
-): Observable<MilkingInputsDto> {
+): Observable<MilkingInputDto> {
 
     return this.apiMilkingMilkingInputPost$Response(params).pipe(
-      map((r: StrictHttpResponse<MilkingInputsDto>) => r.body as MilkingInputsDto)
+      map((r: StrictHttpResponse<MilkingInputDto>) => r.body as MilkingInputDto)
     );
   }
 

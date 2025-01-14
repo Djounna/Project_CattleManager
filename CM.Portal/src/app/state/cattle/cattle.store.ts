@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Selector, Action, StateContext, State } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { CowDto, GestationDto, GroupDto, InterventionDto } from "../../api/models";
-import { CowService, GestationService, GroupService, InterventionService } from "../../api/services";
-import { Cows, Gestations, Groups, Interventions } from "./cattle.actions";
+import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
+import { CowService, GestationService, GroupService, InterventionService, VaccinationService } from "../../api/services";
+import { Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 
 @State<CattleStateModel>({
@@ -15,12 +15,18 @@ import { CattleStateModel } from "./cattle.state";
     GroupDictionnary: new Map<number, string>(),
     Gestations: [],
     Interventions: [],
+    Vaccinations: [],
   }
 })
 
 @Injectable()
 export class CattleState {
-  constructor(private cowService: CowService, private groupService: GroupService, private gestationService: GestationService, private interventionService: InterventionService) { }
+  constructor(
+    private cowService: CowService, 
+    private groupService: GroupService, 
+    private gestationService: GestationService, 
+    private interventionService: InterventionService,
+    private vaccinationService: VaccinationService) { }
 
   @Selector()
   static cows(cattleState: CattleStateModel) {
@@ -45,6 +51,11 @@ export class CattleState {
   @Selector()
   static interventions(cattleState: CattleStateModel) {
     return cattleState.Interventions;
+  }
+
+  @Selector()
+  static vaccinations(cattleState: CattleStateModel) {
+    return cattleState.Vaccinations;
   }
 
   /// Cows Actions
@@ -207,6 +218,46 @@ export class CattleState {
       .pipe(
         tap(deleted => {
           ctx.setState(patch<CattleStateModel>({ Interventions: removeItem<InterventionDto>(c => c.id === action.id) }))
+        })
+      );
+  }
+
+  /// Vaccinations Actions
+  @Action(Vaccinations.GetAll)
+  getAllVaccinations(ctx: StateContext<CattleStateModel>) {
+    return this.vaccinationService.apiVaccinationGet()
+      .pipe(tap(vaccinations => {
+        ctx.patchState({ Vaccinations: vaccinations })
+      })
+      );
+  }
+
+  @Action(Vaccinations.Create)
+  createVaccination(ctx: StateContext<CattleStateModel>, action: Vaccinations.Create) {
+    return this.vaccinationService.apiVaccinationPost(action.payload)
+      .pipe(
+        tap(newVaccination => {
+          ctx.setState(patch<CattleStateModel>({ Vaccinations: append<VaccinationDto>([newVaccination]) }))
+        })
+      );
+  }
+
+  @Action(Vaccinations.Update)
+  updateVaccination(ctx: StateContext<CattleStateModel>, action: Vaccinations.Update) {
+    return this.vaccinationService.apiVaccinationPut(action.payload)
+      .pipe(
+        tap(updatedVaccination => {
+          ctx.setState(patch<CattleStateModel>({ Vaccinations: updateItem<VaccinationDto>(c => c.id === updatedVaccination.id, updatedVaccination) }))
+        })
+      );
+  }
+
+  @Action(Vaccinations.Delete)
+  deleteVaccination(ctx: StateContext<CattleStateModel>, action: Vaccinations.Delete) {
+    return this.vaccinationService.apiVaccinationDelete({ id: action.id })
+      .pipe(
+        tap(deleted => {
+          ctx.setState(patch<CattleStateModel>({ Vaccinations: removeItem<VaccinationDto>(c => c.id === action.id) }))
         })
       );
   }
