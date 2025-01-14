@@ -9,6 +9,7 @@ public class Alert : BaseEntity
     public string Title { get; set; }
     public string Description { get; set; }
     public string Level { get; set; }
+    public string? Infos { get; set; }
 
     public int? CowId { get; set; }
     public virtual Cow? Cow { get; set; }

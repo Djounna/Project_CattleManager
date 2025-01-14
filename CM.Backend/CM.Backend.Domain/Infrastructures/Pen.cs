@@ -7,6 +7,7 @@ public class Pen : BaseEntity
 {
     public string Name { get; set; }
     public int Size { get; set; }
+    public string? Coordinates { get; set; }
 
     public virtual ICollection<Cow> Cows { get; } = new List<Cow>();
     public virtual ICollection<Job> Jobs { get; } = new List<Job>();
