@@ -24,7 +24,7 @@ export class CreateVaccinationDialogComponent extends BaseComponent {
   createVaccinationForm = this.formBuilder.group({
     name: ['', Validators.required],
     cowId: [0, Validators.required],
-    start:[new Date(),Validators.required],
+    date:[new Date(),Validators.required],
   })
 
   OnCreate(): void {
@@ -32,7 +32,7 @@ export class CreateVaccinationDialogComponent extends BaseComponent {
       id : 0,
       name: this.createVaccinationForm.value.name!,
       cowId: this.createVaccinationForm.value.cowId!,
-      date:this.createVaccinationForm.value.start?.toISOString(), 
+      date:this.createVaccinationForm.value.date?.toISOString(), 
     };
 
     this.dialogRef.close(this.newVaccination);
