@@ -1,15 +1,23 @@
-<p-card header="{{Cow.identifier}}" subheader="{{Cow.name}}" [style]="{ width: '360px' }">
-    <ng-template pTemplate="header">
-        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+<p-card [style]="{ width: '20rem', overflow: 'hidden' }">
+    <ng-template #header>
+        <img alt="Card" src="assets\images\cattle\{{Cow?.imgLink}}" />
     </ng-template>
+    <ng-template #title> {{Cow.identifier}} </ng-template>
+    <ng-template #subtitle> {{Cow.name}} </ng-template>
+    <p>
+        Race : {{Cow.race}}
+    </p>
+    <p-divider/>
     <p>
         Group : {{Cow.groupId | groupName}}
     </p>
     <p>
         Pen : {{Cow.penId | penName}}
     </p>
-    <ng-template pTemplate="footer">
+    <p-divider/>
+    <ng-template #footer>
         <p-button label="Modifier" icon="pi pi-check"></p-button>
+        <p-button severity="warn" label="Supprimer" icon="pi pi-trash"></p-button>
     </ng-template>
 </p-card>
 
