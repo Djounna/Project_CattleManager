@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { CowDto, GroupDto, PenDto } from '../../../api/models';
+import { MenuItem } from 'primeng/api/menuitem';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { CowDto, GroupDto, PenDto } from '../../../api/models';
 export class CowsListViewComponent {
   @ViewChild('dt') dt: any;
   @Output() onUpdate: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+  @Output() onSelectCow: EventEmitter<CowDto> = new EventEmitter<CowDto>();
 
   private name : string = '';
   @Input() set Name(value: string){
@@ -31,6 +33,28 @@ export class CowsListViewComponent {
   }
 
   public filteredCows : CowDto[] = [];
+  public menuItems:MenuItem[] | undefined;
+
+  ngOninit(): void{
+    this.menuItems = [ 
+    {
+      label:'options',
+      items:[
+        {
+          label: 'Intervention',
+          icon: 'pi pi-refresh'
+        },
+        {
+          label: 'Gestation',
+          icon: 'pi pi-refresh'
+        },
+        {
+          label: 'Vaccination',
+          icon: 'pi pi-refresh'
+        },
+      ]
+    }]
+  }
 
   applyFilterGlobal(event: any) {
     return event.target.value;
@@ -51,7 +75,10 @@ export class CowsListViewComponent {
   }
 
   public UpdateCow(cow: CowDto){
-    debugger;
     this.onUpdate.emit(cow);
+  }
+  
+  public SelectCow(cow: CowDto){
+    this.onSelectCow.emit(cow);
   }
 }

@@ -12,23 +12,25 @@ import { InfrastructureState } from '../../../state/infrastructure/infrastructur
 import { UpdateCowDialogComponent } from '../../../features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 
 @Component({
-    selector: 'app-cows-page',
-    templateUrl: './cows-page.component.html',
-    styleUrl: './cows-page.component.scss',
-    standalone: false
+  selector: 'app-cows-page',
+  templateUrl: './cows-page.component.html',
+  styleUrl: './cows-page.component.scss',
+  standalone: false
 })
-export class CowsPageComponent extends BaseComponent{
+export class CowsPageComponent extends BaseComponent {
 
   @ViewChild('cowList') cowList!: CowsListViewComponent
 
-  @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
-  public Cows : CowDto[] = []
-  @Select(CattleState.groups) Groups$! : Observable<GroupDto[]>
+  @Select(CattleState.cows) Cows$!: Observable<CowDto[]>
+  public Cows: CowDto[] = []
+  @Select(CattleState.groups) Groups$!: Observable<GroupDto[]>
   public Groups: GroupDto[] = [];
-  @Select(InfrastructureState.pens) Pens$! : Observable<PenDto[]>
+  @Select(InfrastructureState.pens) Pens$!: Observable<PenDto[]>
   public Pens: PenDto[] = [];
 
   public Data$ = combineLatest([this.Cows$, this.Groups$, this.Pens$])
+
+  public SelectedCow!: CowDto;
 
   override ngOnInit(): void {
 
@@ -36,20 +38,20 @@ export class CowsPageComponent extends BaseComponent{
 
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
-      tap(([c,g,p]) =>{
+      tap(([c, g, p]) => {
         this.Cows = c;
         this.Groups = g;
         this.Pens = p;
-        })).subscribe({
-          next:(res) => this.displayLoader = false,
-          error:(err) => this.displayLoader = false
-        });
+      })).subscribe({
+        next: (res) => this.displayLoader = false,
+        error: (err) => this.displayLoader = false
+      });
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
   }
-  
+
   createCowDialog(): void {
     const dialogRef = this.dialogService.open(CreateCowDialogComponent, {
       header: 'Ajouter un animal',
@@ -58,16 +60,16 @@ export class CowsPageComponent extends BaseComponent{
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result == null)
+      if (result == null)
         return;
-      this.store.dispatch(new Cows.Create({body:result})).subscribe({
-        next:() => this.toastSuccess("L'animal a été créé avec succès"),
-        error:() => this.toastError("Une erreur s'est produite")
+      this.store.dispatch(new Cows.Create({ body: result })).subscribe({
+        next: () => this.toastSuccess("L'animal a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
       });
     });
   }
 
-  public UpdateCowDialog(cow: CowDto): void{
+  public UpdateCowDialog(cow: CowDto): void {
     const dialogRef = this.dialogService.open(UpdateCowDialogComponent, {
       data: cow,
       header: 'Mettre à jour un animal',
@@ -76,22 +78,26 @@ export class CowsPageComponent extends BaseComponent{
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result == null)
+      if (result == null)
         return;
-      this.store.dispatch(new Cows.Update({body:result})).subscribe({
-        next:() => this.toastSuccess("L'animal a été modifié avec succès"),
-        error:() => this.toastError("Une erreur s'est produite")
+      this.store.dispatch(new Cows.Update({ body: result })).subscribe({
+        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
       });
     });
   }
 
-  public ShowAll(): void{
+  public ShowAll(): void {
     this.cowList.showAll()
   }
-  public SelectGroup(group:GroupDto): void{
+  public SelectGroup(group: GroupDto): void {
     this.cowList.filterByGroup(group);
   }
-  public SelectPen(pen:PenDto): void{
+  public SelectPen(pen: PenDto): void {
     this.cowList.filterByPen(pen);
+  }
+
+  public SelectCow(cow: CowDto): void {
+    this.SelectedCow = cow;
   }
 }

@@ -1,13 +1,13 @@
 <div class="page_base">
 
-    <div class="flex flex-row justify-content-start gap-4">
+    <div class="flex flex-row justify-content-between gap-4">
 
-        <div class="flex flex-column">
+        <div class="flex flex-column" style="flex-grow:1">
 
             <div class="flex flex-row justify-content-start align-content-center">
                 <div class="flex flex-row justify-content-between gap-3">
                     <p-button label="Tout" (click)="ShowAll()"></p-button>
-                    <p-button label="Ajouter" (click)="createCowDialog()"></p-button> 
+                    <p-button label="Ajouter" (click)="createCowDialog()"></p-button>
                 </div>
             </div>
 
@@ -15,14 +15,14 @@
 
             <div class="panel_border">
                     <p-panel header="Groupes" [toggleable]="true" [collapsed]="true">
-                        @for (group of Groups; track $index) 
+                        @for (group of Groups; track $index)
                         {
                             <app-group-card-small (onSelected)="SelectGroup(group)" [Group]="group"></app-group-card-small>
                         }
                     </p-panel>
 
                     <p-panel header="Enclos" [toggleable]="true" [collapsed]="true">
-                        @for (pen of Pens; track $index) 
+                        @for (pen of Pens; track $index)
                         {
                             <app-pen-card-small (onSelected)="SelectPen(pen)" [Pen]="pen"></app-pen-card-small>
                         }
@@ -30,8 +30,12 @@
             </div>
         </div>
 
+        <div class="flex flex-column" style="flex-grow:3;">
+            <app-cows-list-view #cowList [Cows]="Cows" (onUpdate)="UpdateCowDialog($event)" (onSelectCow)="SelectCow($event)"></app-cows-list-view>
+        </div>
+
         <div class="flex flex-column">
-            <app-cows-list-view #cowList [Cows]="Cows" (onUpdate)="UpdateCowDialog($event)"></app-cows-list-view>
+            <app-cow-card [Cow]="SelectedCow"></app-cow-card>
         </div>
 
     </div>

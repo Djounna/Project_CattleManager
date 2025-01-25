@@ -1,18 +1,18 @@
 <div class="panel_border">
     <p-panel header="Liste">
-        <p-table #dt 
-            [value]="filteredCows" 
-            styleClass="p-datatable-striped" 
-            [tableStyle]="{ 'min-width': '50rem'}" 
-            [globalFilterFields]="['identifier','name', 'status']" 
+        <p-table #dt
+            [value]="filteredCows"
+            styleClass="p-datatable-striped"
+            [globalFilterFields]="['identifier','name', 'status']"
             >
 
+            <!-- [tableStyle]="{ 'min-width': '50rem'}" -->
             <ng-template pTemplate="caption">
                 <div class="flex">
                     <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
                     <span class="p-input-icon-left ml-auto">
                         <i class="pi pi-search"></i>
-                        <input pInputText #textInput type="text" 
+                        <input pInputText #textInput type="text"
                         (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
                     </span>
                 </div>
@@ -22,7 +22,6 @@
                 <tr>
                     <th>Identifiant</th>
                     <th>Name</th>
-                    <th>Race
                         <!-- <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="header">
                                 <div class="px-3 pt-3 pb-0">
@@ -40,27 +39,29 @@
                                 </p-multiSelect>
                             </ng-template>
                         </p-columnFilter> -->
-
-
-                    </th>
                     <th>Naissance</th>
                     <th>Actions</th>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="body" let-cow>
-                
+
                 <tr>
                     <td>{{cow.identifier}}</td>
                     <td>{{cow.name}}</td>
-                    <td>{{cow.race}}</td>
                     <td>{{cow.birthDate | date: 'dd/MM/yyyy'}}</td>
                     <td style="display:flex; flex-direction:row; justify-content: flex-start; gap:0.1rem;">
-                        <p-button (onClick)="op.toggle($event)" icon="pi pi-eye"/>
+                        <!-- <p-button (onClick)="op.toggle($event)" icon="pi pi-eye"/>
                         <p-popover #op>
-                            <app-cow-card [Cow]="cow"></app-cow-card> 
-                        </p-popover>
+                            <app-cow-card [Cow]="cow"></app-cow-card>
+                        </p-popover> -->
+                        <p-button (onClick)="SelectCow(cow)" icon="pi pi-eye"/>
                         <p-button (onClick)="UpdateCow(cow)" icon="pi pi-pencil"/>
+                        <div> 
+                            <p-toast />
+                            <p-menu #menu [model]="menuItems" [popup]="true"/>
+                            <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"/>
+                        </div>
                     </td>
                 </tr>
             </ng-template>
