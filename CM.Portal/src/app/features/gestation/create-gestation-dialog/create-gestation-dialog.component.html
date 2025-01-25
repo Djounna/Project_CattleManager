@@ -1,1 +1,23 @@
-<p>create-gestation-dialog works!</p>
+<div class="dialog_container">
+    <form  [formGroup]="CreateGestationForm">
+        <div class="form-columns">
+
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="identifier">Identifiant</label>
+                    <input pInputText id="identifier" formControlName="identifier" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="birthdate">Date de début</label>
+                    <p-datepicker type="date" formControlName="startDate"></p-datepicker>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [raised]="true" [disabled]="!CreateGestationForm.valid" (click)="OnCreate()"></p-button>
+        </div>
+
+    </form>
+</div>

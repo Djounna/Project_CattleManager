@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../../../shared/base-component.component';
-import { FormBuilder, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { VaccinationDto } from '../../../api/models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CowDto, VaccinationDto } from '../../../api/models';
 
 @Component({
   selector: 'app-create-vaccination-dialog',
@@ -12,30 +12,37 @@ import { VaccinationDto } from '../../../api/models';
   styleUrl: './create-vaccination-dialog.component.scss'
 })
 export class CreateVaccinationDialogComponent extends BaseComponent {
+  public Cow!: CowDto;
+  public CreateVaccinationForm!: FormGroup;
+  public NewVaccination: VaccinationDto | undefined;
 
   constructor( private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
+    public dialogConfig: DynamicDialogConfig,
   ){
     super();
   }
 
-  public newVaccination: VaccinationDto | undefined;
+  override ngOnInit(): void {
+    this.Cow = this.dialogConfig.data;
+    this.CreateVaccinationForm = this.formBuilder.group({
+      identifier: [this.Cow.identifier],
+      // cowId: [0, Validators.required],
+      name: ['', Validators.required],
+      date:[new Date(),Validators.required],
+    });
+  }
 
-  createVaccinationForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    cowId: [0, Validators.required],
-    date:[new Date(),Validators.required],
-  })
 
   OnCreate(): void {
-    this.newVaccination = {
+    this.NewVaccination = {
       id : 0,
-      name: this.createVaccinationForm.value.name!,
-      cowId: this.createVaccinationForm.value.cowId!,
-      date:this.createVaccinationForm.value.date?.toISOString(), 
+      cowId: this.Cow.id!,
+      name: this.CreateVaccinationForm.value.name!,
+      date:this.CreateVaccinationForm.value.date?.toISOString(), 
     };
 
-    this.dialogRef.close(this.newVaccination);
+    this.dialogRef.close(this.NewVaccination);
   }
 
   OnCancel(): void{

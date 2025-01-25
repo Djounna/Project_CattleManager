@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CowDto } from '../../../api/models';
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-cow-card',
@@ -7,6 +8,40 @@ import { CowDto } from '../../../api/models';
     styleUrl: './cow-card.component.scss',
     standalone: false
 })
-export class CowCardComponent {
+export class CowCardComponent implements OnInit {
   @Input('Cow') Cow! : CowDto;
+  @Output() onUpdate: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+  @Output() onAddIntervention: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+  @Output() onAddVaccination: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+  @Output() onAddGestation: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+
+  public menuItems:MenuItem[] | undefined;
+
+  ngOnInit(): void{
+    this.menuItems = [ 
+    {
+      label:'Options',
+      items:[
+        {
+          label: 'Intervention',
+          icon: 'pi pi-plus-circle',
+          command: () => {this.onAddIntervention.emit(this.Cow)}
+        },
+        {
+          label: 'Vaccination',
+          icon: 'pi pi-plus-circle',
+          command: () => {this.onAddVaccination.emit(this.Cow)}
+        },
+        {
+          label: 'Gestation',
+          icon: 'pi pi-plus-circle',
+          command: () => {this.onAddGestation.emit(this.Cow)}
+        },
+      ]
+    }]
+  }
+
+  public UpdateCow(cow: CowDto){
+    this.onUpdate.emit(cow);
+  }
 }

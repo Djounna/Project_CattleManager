@@ -16,8 +16,13 @@
     </p>
     <p-divider/>
     <ng-template #footer>
-        <p-button label="Modifier" icon="pi pi-check"></p-button>
-        <p-button severity="warn" label="Supprimer" icon="pi pi-trash"></p-button>
+        <div class="card-actions">
+            <div> 
+                <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"/>
+                <p-button (click)="menu.toggle($event)" icon="pi pi-plus"/>
+            </div>
+            <p-button (onClick)="UpdateCow(Cow)" icon="pi pi-pencil"></p-button>
+        </div>
     </ng-template>
 </p-card>
 

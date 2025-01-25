@@ -7,7 +7,7 @@
             <div class="flex flex-row justify-content-start align-content-center">
                 <div class="flex flex-row justify-content-between gap-3">
                     <p-button label="Tout" (click)="ShowAll()"></p-button>
-                    <p-button label="Ajouter" (click)="createCowDialog()"></p-button>
+                    <p-button label="Ajouter" (click)="CreateCowDialog()"></p-button>
                 </div>
             </div>
 
@@ -35,7 +35,13 @@
         </div>
 
         <div class="flex flex-column">
-            <app-cow-card [Cow]="SelectedCow"></app-cow-card>
+            <app-cow-card [Cow]="SelectedCow"
+            (onUpdate)="UpdateCowDialog($event)"
+            (onAddIntervention)="CreateInterventionDialog($event)"
+            (onAddVaccination)="CreateVaccinationDialog($event)"
+            (onAddGestation)="CreateGestationDialog($event)"
+            >
+        </app-cow-card>
         </div>
 
     </div>

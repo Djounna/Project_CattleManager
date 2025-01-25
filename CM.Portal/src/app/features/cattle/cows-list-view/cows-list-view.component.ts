@@ -33,28 +33,6 @@ export class CowsListViewComponent {
   }
 
   public filteredCows : CowDto[] = [];
-  public menuItems:MenuItem[] | undefined;
-
-  ngOninit(): void{
-    this.menuItems = [ 
-    {
-      label:'options',
-      items:[
-        {
-          label: 'Intervention',
-          icon: 'pi pi-refresh'
-        },
-        {
-          label: 'Gestation',
-          icon: 'pi pi-refresh'
-        },
-        {
-          label: 'Vaccination',
-          icon: 'pi pi-refresh'
-        },
-      ]
-    }]
-  }
 
   applyFilterGlobal(event: any) {
     return event.target.value;

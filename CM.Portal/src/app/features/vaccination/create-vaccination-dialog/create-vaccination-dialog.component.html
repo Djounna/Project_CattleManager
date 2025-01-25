@@ -1,1 +1,27 @@
-<p>create-vaccination-dialog works!</p>
+<div class="dialog_container">
+    <form  [formGroup]="CreateVaccinationForm">
+        <div class="form-columns">
+
+            <div class="form_base gap-2">
+                <div class="flex flex-column gap-2">
+                    <label for="identifier">Identifiant</label>
+                    <input pInputText id="identifier" formControlName="identifier" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="name">Nom</label>
+                    <input pInputText id="name" formControlName="name" />
+                </div>
+                <div class="flex flex-column gap-2">
+                    <label for="date">Date</label>
+                    <p-datepicker type="date" formControlName="date"></p-datepicker>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+            <p-button label="Confirmer" [raised]="true" [disabled]="!CreateVaccinationForm.valid" (click)="OnCreate()"></p-button>
+        </div>
+
+    </form>
+</div>

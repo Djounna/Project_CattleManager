@@ -57,11 +57,6 @@
                         </p-popover> -->
                         <p-button (onClick)="SelectCow(cow)" icon="pi pi-eye"/>
                         <p-button (onClick)="UpdateCow(cow)" icon="pi pi-pencil"/>
-                        <div> 
-                            <p-toast />
-                            <p-menu #menu [model]="menuItems" [popup]="true"/>
-                            <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"/>
-                        </div>
                     </td>
                 </tr>
             </ng-template>
