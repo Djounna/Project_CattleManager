@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CowDto, GestationDto } from '../../../api/models';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseComponent } from '../../../shared/base-component.component';
+import { CowUtils } from '../../../utils/cow-utils';
 
 @Component({
   selector: 'app-create-gestation-dialog',
@@ -33,11 +34,15 @@ export class CreateGestationDialogComponent extends BaseComponent{
   }
 
   OnCreate(): void {
+    let startDate = this.CreateGestationForm.value.startDate?.toISOString();
+    let calvingDate = CowUtils.GetCalvingDateFromStartDate(new Date(startDate)).toISOString();
+
     this.NewGestation = {
       id : 0,
       cowId: this.Cow.id,
       status: 'En cours',
-      startDate:this.CreateGestationForm.value.startDate?.toISOString(), 
+      startDate: startDate, 
+      calvingDate: calvingDate
     };
 
     this.dialogRef.close(this.NewGestation);
