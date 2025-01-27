@@ -2,6 +2,8 @@ import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from 
 
 export interface CattleStateModel {
   Cows: CowDto[],
+  CowIdentifierDictionnary: Map<number, string>,
+  CowNameDictionnary: Map<number, string>,
   Groups: GroupDto[],
   GroupDictionnary: Map<number, string>,
   Gestations: GestationDto[],

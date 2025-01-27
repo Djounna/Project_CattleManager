@@ -6,11 +6,14 @@ import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from 
 import { CowService, GestationService, GroupService, InterventionService, VaccinationService } from "../../api/services";
 import { Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
+import { CowUtils } from "../../utils/cow-utils";
 
 @State<CattleStateModel>({
   name: 'cattle',
   defaults: {
     Cows: [],
+    CowIdentifierDictionnary: new Map<number, string>(),
+    CowNameDictionnary: new Map<number, string>(),
     Groups: [],
     GroupDictionnary: new Map<number, string>(),
     Gestations: [],
@@ -31,6 +34,16 @@ export class CattleState {
   @Selector()
   static cows(cattleState: CattleStateModel) {
     return cattleState.Cows;
+  }
+
+  @Selector()
+  static cowIdentifierDict(cattleState: CattleStateModel) {
+    return cattleState.CowIdentifierDictionnary;
+  }
+
+  @Selector()
+  static cowNameDict(cattleState: CattleStateModel) {
+    return cattleState.CowNameDictionnary;
   }
 
   @Selector()
@@ -63,6 +76,12 @@ export class CattleState {
   getAllCows(ctx: StateContext<CattleStateModel>) {
     return this.cowService.apiCowGet().pipe(tap(cows => {
       ctx.patchState({ Cows: cows });
+      ctx.patchState({
+        CowIdentifierDictionnary: new Map(cows.map(c => [c.id as number, c.identifier as string]))
+      });
+      ctx.patchState({
+        CowNameDictionnary: new Map(cows.map(c => [c.id as number, c.name as string]))
+      });
     })
     );
   }
@@ -146,6 +165,7 @@ export class CattleState {
   getAllGestations(ctx: StateContext<CattleStateModel>) {
     return this.gestationService.apiGestationGet()
       .pipe(tap(gestations => {
+        gestations.forEach(g => g.progress = CowUtils.ComputeProgress(new Date(g.startDate as string), new Date(g.calvingDate as string)));
         ctx.patchState({ Gestations: gestations })
       })
       );
