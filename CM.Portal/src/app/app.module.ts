@@ -17,6 +17,8 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 // PrimeNgModules
 import Aura from '@primeng/themes/aura';
 import Nora from '@primeng/themes/nora';
+import { NoraLime } from './styles/mypreset';
+import { AuraLime } from './styles/mypreset';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
@@ -113,6 +115,8 @@ import { VaccinationListComponent } from './features/vaccination/vaccination-lis
 import { CreateInterventionDialogComponent } from './features/intervention/create-intervention-dialog/create-intervention-dialog.component';
 import { UpdateInterventionDialogComponent } from './features/intervention/update-intervention-dialog/update-intervention-dialog.component';
 import { GestationsBoardComponent } from './features/gestation/gestations-board/gestations-board.component';
+import { LiteralMapExpr } from '@angular/compiler';
+import { Colors } from 'chart.js';
 
 @NgModule({ 
     declarations: 
@@ -232,7 +236,7 @@ import { GestationsBoardComponent } from './features/gestation/gestations-board/
             provideHttpClient(withInterceptorsFromDi()),
             providePrimeNG({ 
             theme: {
-                preset: Nora
+                preset: NoraLime,
             }
         })
         ] 
