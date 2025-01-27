@@ -11,6 +11,6 @@ import { GestationDto } from '../../../api/models';
 export class GestationsBoardComponent implements OnInit{
   @Input() Gestations: GestationDto[] = [];
   ngOnInit(){
-    this.Gestations.sort((a, b) => new Date(a.calvingDate as string).getDate() - new Date(b.calvingDate as string).getDate());
+    this.Gestations.sort((a, b) => new Date(b.calvingDate as string).getDate() - new Date(a.calvingDate as string).getDate());
   }
 }
