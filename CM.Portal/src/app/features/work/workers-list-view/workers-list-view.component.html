@@ -1,19 +1,17 @@
-<div class="panel_border">
-    <p-panel header="Workers list">
-        <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
+<p-panel header="Workers list">
+    <p-table [value]="Workers" [tableStyle]="{ 'min-width': '50rem'}">
 
-        <ng-template pTemplate="header">
-            <tr>
-            <th>Name</th>
+    <ng-template pTemplate="header">
+        <tr>
+        <th>Name</th>
+    </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-worker>
+        <tr>
+            <td>{{worker.username}}</td>
         </tr>
-        </ng-template>
+    </ng-template>
 
-        <ng-template pTemplate="body" let-worker>
-            <tr>
-                <td>{{worker.username}}</td>
-            </tr>
-        </ng-template>
-
-        </p-table>
-    </p-panel>
-</div>
+    </p-table>
+</p-panel>

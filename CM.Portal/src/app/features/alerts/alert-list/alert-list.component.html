@@ -1,21 +1,19 @@
-<div class="panel_border">
-    <p-panel header="Notifications">
-        <p-table [value]="Alerts" [tableStyle]="{ 'min-width': '20rem'}">
+<p-panel header="Notifications">
+    <p-table [value]="Alerts" [tableStyle]="{ 'min-width': '20rem'}">
 
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                </tr>
-            </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+            </tr>
+        </ng-template>
 
-            <ng-template pTemplate="body" let-alert>
-                <tr [ngStyle]="{'background-color' : alert.level === 'urgent' ? 'var(yellow-400)' : 'var(yellow-50)'}">
-                    <td>{{alert.title}}</td>
-                    <td>{{alert.description}}</td>
-                </tr>
-            </ng-template>
+        <ng-template pTemplate="body" let-alert>
+            <tr [ngStyle]="{'background-color' : alert.level === 'urgent' ? 'var(yellow-400)' : 'var(yellow-50)'}">
+                <td>{{alert.title}}</td>
+                <td>{{alert.description}}</td>
+            </tr>
+        </ng-template>
 
-        </p-table>
-    </p-panel>
-</div>
+    </p-table>
+</p-panel>

@@ -1,9 +1,7 @@
-<div class="panel_border">    
-    <p-panel header = Groupes>
-        <div class="flex flex-row m-2">
-            <div class="m-1" *ngFor="let group of Groups">
-                <app-group-card class="card_panel" [Group]="group"></app-group-card>
-            </div>
+<p-panel header = Groupes>
+    <div class="flex flex-row m-2">
+        <div class="m-1" *ngFor="let group of Groups">
+            <app-group-card class="card_panel" [Group]="group"></app-group-card>
         </div>
-    </p-panel>
-</div>
+    </div>
+</p-panel>
