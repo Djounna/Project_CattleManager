@@ -8,7 +8,7 @@ import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
 import { Alerts } from '../../state/alert/alert.action';
 import { Jobs, Workers } from '../../state/work/work.actions';
-import { Gestations, Groups } from '../../state/cattle/cattle.actions';
+import { Cows, Gestations, Groups } from '../../state/cattle/cattle.actions';
 import { MilkingState } from '../../state/milking/milking.store';
 import { Milkings } from '../../state/milking/milking.actions';
 import { InfrastructureState } from '../../state/infrastructure/infrastructure.store';
@@ -22,6 +22,10 @@ import { Pens } from '../../state/infrastructure/infrastructure.action';
 })
 export class DashboardComponent extends BaseComponent {
 
+  @Select(CattleState.cowIdentifierDict) CowIdentifierDictionnary$!: Observable<Map<number,string>>
+  public CowIdentifierDictionnary: Map<number, string> = new Map<number, string>;
+  @Select(CattleState.cowNameDict) CowNameDictionnary$!: Observable<Map<number,string>>
+  public CowNameDictionnary: Map<number, string> = new Map<number, string>;
   @Select(WorkState.jobs) Jobs$!: Observable<JobDto[]>
   public Jobs: JobDto[] = []
   @Select(WorkState.jobs) Workers$!: Observable<UserDto[]>
@@ -43,13 +47,15 @@ export class DashboardComponent extends BaseComponent {
   @Select(MilkingState.milkingsLastMonth) Milkings$!: Observable<MilkingDto[]>
   public Milkings: MilkingDto[] = []
 
-  public Data$ = combineLatest([this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$, this.Milkings$])
+  public Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$, this.Milkings$])
 
   override ngOnInit(): void {
 
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
-      tap(([a, j, w, ge, g, gd, p, pd, m]) => {
+      tap(([cid, cnd, a, j, w, ge, g, gd, p, pd, m]) => {
+        this.CowIdentifierDictionnary = cid;
+        this.CowNameDictionnary = cnd;
         this.Alerts = a;
         this.Jobs = j;
         this.Workers = w;
@@ -61,6 +67,7 @@ export class DashboardComponent extends BaseComponent {
         this.Milkings = m;
       })).subscribe();
 
+    this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Alerts.GetAll());
     this.store.dispatch(new Jobs.GetAll());
     this.store.dispatch(new Gestations.GetAll());

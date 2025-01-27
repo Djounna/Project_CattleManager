@@ -4,6 +4,7 @@ export interface GestationDto {
   calvingDate?: null | string;
   cowId?: number;
   id?: number;
-  startDate?: string;
+  startDate?: null | string;
   status?: null | string;
+  progress?: number;
 }

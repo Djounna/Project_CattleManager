@@ -45,6 +45,7 @@ import { MessageService } from 'primeng/api';
 import { SelectModule } from 'primeng/select';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PopoverModule } from 'primeng/popover';
+import { ProgressBarModule } from 'primeng/progressbar';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
 // Material
 import { MatCardModule} from '@angular/material/card';
@@ -100,6 +101,8 @@ import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-mi
 import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
 import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
+import { CowNamePipe } from './utils/pipes/cow-name.pipe';
+import { CowIdentifierPipe } from './utils/pipes/cow-identifier.pipe';
 import { UpdateCowDialogComponent } from './features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 import { providePrimeNG } from 'primeng/config';
 import { CreateGestationDialogComponent } from './features/gestation/create-gestation-dialog/create-gestation-dialog.component';
@@ -109,6 +112,7 @@ import { UpdateVaccinationDialogComponent } from './features/vaccination/update-
 import { VaccinationListComponent } from './features/vaccination/vaccination-list/vaccination-list.component';
 import { CreateInterventionDialogComponent } from './features/intervention/create-intervention-dialog/create-intervention-dialog.component';
 import { UpdateInterventionDialogComponent } from './features/intervention/update-intervention-dialog/update-intervention-dialog.component';
+import { GestationsBoardComponent } from './features/gestation/gestations-board/gestations-board.component';
 
 @NgModule({ 
     declarations: 
@@ -129,6 +133,8 @@ import { UpdateInterventionDialogComponent } from './features/intervention/updat
         CowDetailsComponent,
         PenNamePipe,
         GroupNamePipe,
+        CowNamePipe,
+        CowIdentifierPipe,
         UpdateCowDialogComponent,
         CreateGestationDialogComponent,
         UpdateGestationDialogComponent,
@@ -136,7 +142,8 @@ import { UpdateInterventionDialogComponent } from './features/intervention/updat
         UpdateVaccinationDialogComponent,
         VaccinationListComponent,
         CreateInterventionDialogComponent,
-        UpdateInterventionDialogComponent
+        UpdateInterventionDialogComponent,
+        GestationsBoardComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -181,6 +188,7 @@ import { UpdateInterventionDialogComponent } from './features/intervention/updat
         DatePickerModule,
         PopoverModule,
         SelectModule,
+        ProgressBarModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

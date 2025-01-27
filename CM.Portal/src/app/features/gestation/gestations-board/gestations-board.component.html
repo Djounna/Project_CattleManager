@@ -1,0 +1,13 @@
+<p-card header="Gestations">
+    <p-divider/>
+    <div>
+        <div *ngFor="let gestation of Gestations; index as i" style="display:flex; flex-direction: column; gap:0.3rem; padding: 0.2rem;">
+            <span>{{gestation.cowId | cowIdentifier}} - {{gestation.calvingDate | date: 'dd/MM/yyyy'}}</span>
+            <p-progressbar [value]="gestation.progress" />
+                <!-- <ng-template #content let-value>
+                    <span>{{gestation.cowId | cowIdentifier}} - {{value}}/100</span>
+                </ng-template> -->
+            <!-- </p-progressbar> -->
+        </div>
+    </div>
+</p-card>
