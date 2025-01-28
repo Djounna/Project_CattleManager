@@ -14,19 +14,17 @@ export class MilkingInputComponent {
   @Input() MilkingData! : MilkingData;
   @Output() onSave :EventEmitter<MilkingData> = new EventEmitter<MilkingData>;
 
-  public formGroup! : FormGroup;
+  public volume! : number;
 
   ngOnInit(){
-    this.formGroup = this.formBuilder.group({
-      volume:['']
-    });
+      this.volume = this.MilkingData.Volume;
   }
 
   Save(): void{
-    if(this.formGroup.controls['volume'].value <= 0 || this.MilkingData == null){
+    if(this.volume <= 0 || this.MilkingData == null){
       return;
     }
-    let newVolume = this.formGroup.controls['volume'].value;
+    let newVolume = this.volume;
     let newData : MilkingData = {
       Cow: this.MilkingData?.Cow,
       Volume: newVolume,

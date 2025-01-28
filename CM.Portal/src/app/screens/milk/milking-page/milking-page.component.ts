@@ -100,10 +100,10 @@ export class MilkingPageComponent extends BaseComponent {
       milkingInputs : []
     };
     this.MilkingDatasRef.forEach(m => {
-      if(m.formGroup.controls['volume'].value > 0){
+      if(m.volume > 0){
           let newInput: MilkingInputDto = {
             cowId: m.MilkingData.Cow.id,
-            volume: m.formGroup.controls['volume'].value,
+            volume: m.volume,
             done: true
           }
           newInputs.milkingInputs?.push(newInput);

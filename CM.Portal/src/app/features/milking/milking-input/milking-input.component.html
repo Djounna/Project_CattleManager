@@ -1,22 +1,14 @@
-<!-- <div style="display:flex; flex-direction:row; gap:2rem; padding:0.5rem;" class="shadow-2 m-3 surface-card border-round-sm h-3rem w-20"></div>-->
-
 <div class="milking_input">
-    <span>{{MilkingData.Cow.identifier}}</span>
-    <span style="max-width: 6rem;">
-        @if(MilkingData.Done && !!MilkingData.Volume){
+        <span class="identifier">{{MilkingData.Cow.identifier}}</span>
+        <div class="inputs">
             <p-inputGroup>
-                <p-inputNumber [(ngModel)]="MilkingData.Volume" [disabled]="true" [readonly]="true" inputId="integeronly"></p-inputNumber>
+                <p-inputNumber [(ngModel)]="volume" [disabled]="MilkingData.Done || MilkingData?.Volume !== 0" [inputStyle]="{width: '3rem'}" inputId="integeronly"></p-inputNumber>
                 <p-inputGroupAddon>L</p-inputGroupAddon>
             </p-inputGroup>
-        }
-        @else{
-            <form [formGroup]="formGroup">
-            <p-inputGroup>
-                <p-inputNumber formControlName="volume" inputId="integeronly"></p-inputNumber>
-                <p-inputGroupAddon>L</p-inputGroupAddon>
-            </p-inputGroup>
-            </form>
-        }
-    </span>
-    <p-button icon="pi pi-check" (click)="Save()" [disabled]="MilkingData.Done"/> 
+            <p-slider [(ngModel)]="volume" [disabled]="MilkingData.Done" [style]="{width: '6rem'}"/>
+            <!-- <mat-slider [max]="50" [min]="0" [step]="1" [disabled]="MilkingData.Done || MilkingData?.Volume !== 0">
+                <input matSliderThumb [(ngModel)]="volume" #slider>
+            </mat-slider> -->
+        </div>
+        <p-button icon="pi pi-check" (click)="Save()" [disabled]="MilkingData.Done"/> 
 </div>

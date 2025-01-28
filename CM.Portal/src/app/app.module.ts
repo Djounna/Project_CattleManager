@@ -34,6 +34,7 @@ import { ChartModule } from 'primeng/chart';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SliderModule } from 'primeng/slider';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
@@ -55,6 +56,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatSliderModule} from '@angular/material/slider'; 
 
 // Shared components
 import { AuthButtonComponent } from './auth-button/auth-button.component';
@@ -160,6 +162,7 @@ import { Colors } from 'chart.js';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        MatSliderModule,
         MatDialogTitle,
         MatDialogContent,
         MatDialogActions,
@@ -171,6 +174,7 @@ import { Colors } from 'chart.js';
         InputGroupModule,
         InputGroupAddonModule,
         InputNumberModule,
+        SliderModule,
         SidebarModule,
         PanelMenuModule,
         DividerModule,

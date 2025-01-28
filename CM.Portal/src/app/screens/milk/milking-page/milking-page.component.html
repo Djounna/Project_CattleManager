@@ -14,7 +14,7 @@
             </ng-template>
         </p-card>
 
-        <div style="display:flex; flex-flow: row wrap; align-content:flex-start; gap:0.5rem">
+        <div class="milking-inputs">
             <div *ngFor="let cow of MilkingDatas">
             <app-milking-input #input [MilkingData]="cow" (onSave)="SaveOne($event)"></app-milking-input>
             </div>
