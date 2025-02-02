@@ -29,6 +29,10 @@ public class JobDto
     /// Recurring Job Id
     /// </summary>
     public int? RecurringJobId { get; set; }
+    /// <summary>
+    /// Infos
+    /// </summary>
+    public string? Infos { get; set; }
 
     //public virtual RecurringJob RecurringJob { get; set; }
 
