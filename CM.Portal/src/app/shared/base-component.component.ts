@@ -13,13 +13,6 @@ import { Subject } from "rxjs";
 })
 export class BaseComponent implements OnInit, OnDestroy {
 
-    // constructor(
-    //     // protected store: Store, 
-    //     // protected dialog: MatDialog,
-    //     // protected dialogService: DialogService,
-    //     // protected messageService: MessageService 
-    //     ){}
-
     protected store = inject(Store);
     protected dialog = inject(MatDialog);
     protected dialogService =  inject(DialogService);
