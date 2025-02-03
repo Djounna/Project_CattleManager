@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { CowDto } from '../../../api/models';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cow-card',
@@ -9,6 +10,7 @@ import { MenuItem } from 'primeng/api';
     standalone: false
 })
 export class CowCardComponent implements OnInit {
+  private router = inject(Router);
   @Input('Cow') Cow! : CowDto;
   @Output() onUpdate: EventEmitter<CowDto> = new EventEmitter<CowDto>();
   @Output() onAddIntervention: EventEmitter<CowDto> = new EventEmitter<CowDto>();
@@ -43,5 +45,9 @@ export class CowCardComponent implements OnInit {
 
   public UpdateCow(cow: CowDto){
     this.onUpdate.emit(cow);
+  }
+
+  public navigateToCowDetails(cow: CowDto){
+    this.router.navigate(['/cowDetails', cow.id]);
   }
 }
