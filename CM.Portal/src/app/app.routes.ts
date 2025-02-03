@@ -6,12 +6,14 @@ import { AuthGuard } from '@auth0/auth0-angular';
 import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
 import { GroupPageComponent } from './screens/cattle/group-page/group-page.component';
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
+import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   { path: 'workers', component: WorkersPageComponent, canActivate:[AuthGuard]},
   { path: 'jobs', component: JobsPageComponent, canActivate:[AuthGuard]},
   { path: 'cows', component: CowsPageComponent, canActivate:[AuthGuard]},
+  { path: 'cowDetails/:id', component: CowDetailsComponent, canActivate:[AuthGuard]},
   { path: 'groups', component: GroupPageComponent, canActivate:[AuthGuard]},
   { path: 'milking', component: MilkingPageComponent, canActivate:[AuthGuard]},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},

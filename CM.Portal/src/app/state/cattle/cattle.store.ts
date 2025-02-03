@@ -4,13 +4,14 @@ import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
 import { CowService, GestationService, GroupService, InterventionService, VaccinationService } from "../../api/services";
-import { Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
+import { CowDetails, Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 import { CowUtils } from "../../utils/cow-utils";
 
 @State<CattleStateModel>({
   name: 'cattle',
   defaults: {
+    CowDetails: undefined,
     Cows: [],
     CowIdentifierDictionnary: new Map<number, string>(),
     CowNameDictionnary: new Map<number, string>(),
@@ -30,6 +31,11 @@ export class CattleState {
     private gestationService: GestationService, 
     private interventionService: InterventionService,
     private vaccinationService: VaccinationService) { }
+
+  @Selector()
+  static cowDetails(cattleState: CattleStateModel){
+    return cattleState.CowDetails;
+  }
 
   @Selector()
   static cows(cattleState: CattleStateModel) {
@@ -115,6 +121,16 @@ export class CattleState {
         })
       );
   }
+
+  /// Cow Details Actions
+  @Action(CowDetails.Get)
+    getCowDetails(ctx: StateContext<CattleStateModel>, action: CowDetails.Get) {
+      return this.cowService.apiCowIdDetailsGet({ id: action.id})
+      .pipe(
+        tap(cowDetails => 
+          ctx.patchState({ CowDetails: cowDetails }))
+      );
+    }
 
   /// Groups Actions
   @Action(Groups.GetAll)

@@ -50,6 +50,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
+import { OrganizationChartModule } from 'primeng/organizationchart';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -119,6 +120,7 @@ import { UpdateInterventionDialogComponent } from './features/intervention/updat
 import { GestationsBoardComponent } from './features/gestation/gestations-board/gestations-board.component';
 import { LiteralMapExpr } from '@angular/compiler';
 import { Colors } from 'chart.js';
+import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-genealogy.component';
 
 @NgModule({ 
     declarations: 
@@ -149,7 +151,8 @@ import { Colors } from 'chart.js';
         VaccinationListComponent,
         CreateInterventionDialogComponent,
         UpdateInterventionDialogComponent,
-        GestationsBoardComponent
+        GestationsBoardComponent,
+        CowGenealogyComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -197,6 +200,7 @@ import { Colors } from 'chart.js';
         PopoverModule,
         SelectModule,
         ProgressBarModule,
+        OrganizationChartModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

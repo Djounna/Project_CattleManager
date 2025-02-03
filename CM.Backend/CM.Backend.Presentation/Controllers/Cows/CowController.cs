@@ -20,7 +20,7 @@ public class CowController : ControllerBase
     /// <param name="mediator"></param>
     public CowController(IMediator mediator)
     {
-        _mediator = mediator;  
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -34,6 +34,19 @@ public class CowController : ControllerBase
     public async Task<ActionResult<CowDto>> GetById(int id)
     {
         return Ok(await _mediator.Send(new GetCowByIdQuery(id)));
+    }
+
+    /// <summary>
+    /// Get Cow Details By Cow Id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns></returns>
+    [HttpGet("{id}/details")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<CowDetailsDto>> GetDetailsById(int id)
+    {
+        return Ok(await _mediator.Send(new GetCowDetailsByIdQuery(id)));
     }
 
     /// <summary>
@@ -56,7 +69,7 @@ public class CowController : ControllerBase
     [HttpPost]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<CowDto>> Create([FromBody]CowDto dto)
+    public async Task<ActionResult<CowDto>> Create([FromBody] CowDto dto)
     {
         return Ok(await _mediator.Send(new CreateCowCommand(dto)));
     }
@@ -69,7 +82,7 @@ public class CowController : ControllerBase
     [HttpPut]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<CowDto>> Update([FromBody]CowDto dto)
+    public async Task<ActionResult<CowDto>> Update([FromBody] CowDto dto)
     {
         return Ok(await _mediator.Send(new UpdateCowCommand(dto)));
     }

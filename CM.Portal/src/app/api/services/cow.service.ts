@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { CowDetailsDto } from '../models/cow-details-dto';
 import { CowDto } from '../models/cow-dto';
 
 @Injectable({
@@ -70,6 +71,57 @@ export class CowService extends BaseService {
 
     return this.apiCowIdGet$Response(params).pipe(
       map((r: StrictHttpResponse<CowDto>) => r.body as CowDto)
+    );
+  }
+
+  /**
+   * Path part for operation apiCowIdDetailsGet
+   */
+  static readonly ApiCowIdDetailsGetPath = '/api/Cow/{id}/details';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCowIdDetailsGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCowIdDetailsGet$Response(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<CowDetailsDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowIdDetailsGetPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<CowDetailsDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiCowIdDetailsGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCowIdDetailsGet(params: {
+    id: number;
+    context?: HttpContext
+  }
+): Observable<CowDetailsDto> {
+
+    return this.apiCowIdDetailsGet$Response(params).pipe(
+      map((r: StrictHttpResponse<CowDetailsDto>) => r.body as CowDetailsDto)
     );
   }
 

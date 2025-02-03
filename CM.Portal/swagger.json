@@ -239,6 +239,46 @@
         }
       }
     },
+    "/api/Cow/{id}/details": {
+      "get": {
+        "tags": [
+          "Cow"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CowDetailsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Cow": {
       "get": {
         "tags": [
@@ -2945,6 +2985,101 @@
         },
         "additionalProperties": false
       },
+      "CowDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "milkCow": {
+            "type": "boolean"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "race": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "imgLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "pen": {
+            "$ref": "#/components/schemas/PenDto"
+          },
+          "group": {
+            "$ref": "#/components/schemas/GroupDto"
+          },
+          "milkings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MilkingDto"
+            },
+            "nullable": true
+          },
+          "interventions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionDto"
+            },
+            "nullable": true
+          },
+          "vaccinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VaccinationDto"
+            },
+            "nullable": true
+          },
+          "gestations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GestationDto"
+            },
+            "nullable": true
+          },
+          "genealogy": {
+            "$ref": "#/components/schemas/GenealogyDto"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CowDto"
+            },
+            "nullable": true
+          },
+          "penMoves": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PenMoveDto"
+            },
+            "nullable": true
+          },
+          "groupMoves": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupMoveDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CowDto": {
         "type": "object",
         "properties": {
@@ -3046,6 +3181,18 @@
         "type": "integer",
         "format": "int32"
       },
+      "GenealogyDto": {
+        "type": "object",
+        "properties": {
+          "mother": {
+            "$ref": "#/components/schemas/ParentDto"
+          },
+          "father": {
+            "$ref": "#/components/schemas/ParentDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "GestationDto": {
         "type": "object",
         "properties": {
@@ -3120,6 +3267,28 @@
           "imgLink": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupMoveDto": {
+        "type": "object",
+        "properties": {
+          "cowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "sourceGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "destinationGroupId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -3250,6 +3419,10 @@
             "format": "int32",
             "nullable": true
           },
+          "infos": {
+            "type": "string",
+            "nullable": true
+          },
           "penId": {
             "type": "integer",
             "format": "int32",
@@ -3354,6 +3527,21 @@
         },
         "additionalProperties": false
       },
+      "ParentDto": {
+        "type": "object",
+        "properties": {
+          "cow": {
+            "$ref": "#/components/schemas/CowDto"
+          },
+          "mother": {
+            "$ref": "#/components/schemas/CowDto"
+          },
+          "father": {
+            "$ref": "#/components/schemas/CowDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "PenDetailsDto": {
         "type": "object",
         "properties": {
@@ -3397,6 +3585,28 @@
           "coordinates": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PenMoveDto": {
+        "type": "object",
+        "properties": {
+          "cowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "sourcePenId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "destinationPenId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

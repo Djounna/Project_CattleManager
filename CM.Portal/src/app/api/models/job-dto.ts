@@ -4,6 +4,7 @@ export interface JobDto {
   cowId?: null | number;
   description?: null | string;
   id?: number;
+  infos?: null | string;
   length?: null | number;
   penId?: null | number;
   recurringJobId?: null | number;

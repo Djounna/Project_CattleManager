@@ -6,6 +6,7 @@ using CM.Backend.Application.Models.Infrastructures;
 using CM.Backend.Application.Models.Jobs;
 using CM.Backend.Application.Models.Notifications;
 using CM.Backend.Application.Models.Users;
+using CM.Backend.Application.Services.Group.Commands;
 using CM.Backend.Domain.Alerts;
 using CM.Backend.Domain.CowDetails;
 using CM.Backend.Domain.Cows;
@@ -30,8 +31,10 @@ public class MappingProfile : Profile
         CreateMap<Job, JobDto>().ReverseMap();
         CreateMap<Group, GroupDto>().ReverseMap();
         CreateMap<Group, GroupDetailsDto>().ReverseMap();
+        CreateMap<GroupMove, GroupMoveDto>().ReverseMap();
         CreateMap<Pen, PenDto>().ReverseMap();
         CreateMap<Pen, PenDetailsDto>().ReverseMap();
+        CreateMap<PenMove, PenMoveDto>().ReverseMap();
         CreateMap<Stock, StockDto>().ReverseMap();
         CreateMap<WorkerJob, WorkerJobDto>().ReverseMap();
         CreateMap<RecurringJob, RecurringJobDto>().ReverseMap();

@@ -34,4 +34,5 @@ public class Cow : BaseEntity
     public virtual ICollection<GroupMove> GroupMoves { get; } = new List<GroupMove>();
     public virtual ICollection<PenMove> PenMoves { get; } = new List<PenMove>();
     public virtual ICollection<Alert> Alerts { get; } = new List<Alert>();
+    public virtual ICollection<Milking> Milkings { get; } = new List<Milking>();
 }
