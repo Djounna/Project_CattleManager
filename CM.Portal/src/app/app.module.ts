@@ -51,6 +51,7 @@ import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
 import { OrganizationChartModule } from 'primeng/organizationchart';
+import { Timeline, TimelineModule } from 'primeng/timeline'
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -121,6 +122,7 @@ import { GestationsBoardComponent } from './features/gestation/gestations-board/
 import { LiteralMapExpr } from '@angular/compiler';
 import { Colors } from 'chart.js';
 import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-genealogy.component';
+import { CowTimelineComponent } from './features/cattle/cow/cow-timeline/cow-timeline.component';
 
 @NgModule({ 
     declarations: 
@@ -152,7 +154,8 @@ import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-g
         CreateInterventionDialogComponent,
         UpdateInterventionDialogComponent,
         GestationsBoardComponent,
-        CowGenealogyComponent
+        CowGenealogyComponent,
+        CowTimelineComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -201,6 +204,7 @@ import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-g
         SelectModule,
         ProgressBarModule,
         OrganizationChartModule,
+        TimelineModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt
@@ -240,6 +244,9 @@ import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-g
             AuthGuard, 
             MessageService, 
             DialogService, 
+            CowNamePipe,
+            PenNamePipe,
+            GroupNamePipe,
             provideAnimationsAsync(),
             provideHttpClient(withInterceptorsFromDi()),
             providePrimeNG({ 

@@ -1,6 +1,5 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BaseComponent } from '../../../shared/base-component.component';
-import { CowService } from '../../../api/services';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { Select } from '@ngxs/store';
 import { finalize, Observable, takeUntil } from 'rxjs';
@@ -17,7 +16,6 @@ import { ActivatedRoute } from '@angular/router';
 export class CowDetailsComponent extends BaseComponent{
     private route = inject(ActivatedRoute);
     cowId = 0;
-    // @Input() cowId!: number;
     @Select(CattleState.cowDetails) cowDetails$!: Observable<CowDetailsDto>; 
     public cowDetails!: CowDetailsDto
 

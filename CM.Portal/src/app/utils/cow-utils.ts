@@ -12,5 +12,4 @@ export class CowUtils{
     public static GetCalvingDateFromStartDate(startDate: Date): Date{
         return TimeUtils.AddMonthsToDate(startDate, 9);
     }
-
 }

@@ -1,0 +1,12 @@
+<p-card header="Historique">
+    <p-timeline [value]="events">
+        <ng-template #opposite let-event>
+            <small class="text-surface-500 dark:text-surface-400">{{ event.Date | date :'dd/MM/yyyy' }}</small>
+        </ng-template>
+        <ng-template #content let-event>
+            <div style="display: flex; flex-direction: column">
+                <span>{{ event.Title }}</span>
+            </div>
+        </ng-template>
+    </p-timeline>        
+</p-card>

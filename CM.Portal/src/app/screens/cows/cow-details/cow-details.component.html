@@ -1,3 +1,11 @@
 <div class="page_base">
-    <app-cow-genealogy [CowDetails]="cowDetails"></app-cow-genealogy>
+    <div style="display:flex; flex-direction: row; gap: 2rem">
+        <div style="flex-grow:2"></div>
+        <div style="flex-grow:1">
+            <app-cow-genealogy [CowDetails]="cowDetails"></app-cow-genealogy>
+        </div>
+        <div style="max-height:75vh; overflow:auto">
+            <app-cow-timeline [CowDetails]="cowDetails"></app-cow-timeline>
+        </div>
+    </div>
 </div>
