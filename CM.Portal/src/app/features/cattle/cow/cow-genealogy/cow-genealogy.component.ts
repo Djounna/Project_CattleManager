@@ -18,40 +18,68 @@ export class CowGenealogyComponent{
     this.cowDetails = value;
     this.data = [
       {
-        label: `${this.CowDetails.identifier} - ${this.CowDetails.name}` ,
+        label: `${this.CowDetails.name}` ,
         expanded : !!this.CowDetails.genealogy?.father || !!this.CowDetails.genealogy?.mother,
-        data: this.CowDetails?.imgLink,
+        type: 'cow',
+        data:{
+          identifier: this.CowDetails.identifier, 
+          img : this.CowDetails?.imgLink,
+        } ,
         children:
         [
           {
-            label: `${this.CowDetails.genealogy?.father?.cow?.identifier} - ${this.CowDetails.genealogy?.father?.cow?.name}` ,
+            label: `${this.CowDetails.genealogy?.father?.cow?.name}` ,
             expanded: !!this.CowDetails.genealogy?.father?.father || !!this.CowDetails.genealogy?.father?.mother,
-            data:this.CowDetails.genealogy?.father?.cow?.imgLink,
+            type: 'cow',
+            data: {
+              identifier:this.CowDetails.genealogy?.father?.cow?.identifier ,
+              img: this.CowDetails.genealogy?.father?.cow?.imgLink,
+            },
             children: 
             [
               {
-                label: `${this.CowDetails.genealogy?.father?.father?.identifier} - ${this.CowDetails.genealogy?.father?.father?.name}` ,
-                data: this.CowDetails.genealogy?.father?.father?.imgLink,
+                label: `${this.CowDetails.genealogy?.father?.father?.name}` ,
+                type: 'cow',
+                data: {
+                  identifier: this.CowDetails.genealogy?.father?.father?.identifier ,
+                  img: this.CowDetails.genealogy?.father?.father?.imgLink,
+                }
               },
               {
-                label: `${this.CowDetails.genealogy?.father?.mother?.identifier} - ${this.CowDetails.genealogy?.father?.mother?.name}` ,
-                data: this.CowDetails.genealogy?.father?.mother?.imgLink,
+                label: `${this.CowDetails.genealogy?.father?.mother?.name}`,
+                type: 'cow',
+                data:{
+                  identifier: this.CowDetails.genealogy?.father?.mother?.identifier,
+                  img: this.CowDetails.genealogy?.father?.mother?.imgLink,
+                } 
               }
             ]
           },
           {
-            label: `${this.CowDetails.genealogy?.mother?.cow?.identifier} - ${this.CowDetails.genealogy?.mother?.cow?.name}` ,
+            label: `${this.CowDetails.genealogy?.mother?.cow?.name}` ,
             expanded: !!this.CowDetails.genealogy?.mother?.father || !!this.CowDetails.genealogy?.mother?.mother,
-            data: this.CowDetails.genealogy?.mother?.cow?.imgLink,
+            type: 'cow',
+            data: {
+              identifier: this.CowDetails.genealogy?.mother?.cow?.identifier,
+              img: this.CowDetails.genealogy?.mother?.cow?.imgLink,
+            },
             children: 
             [
               {
-                label: `${this.CowDetails.genealogy?.mother?.father?.identifier} - ${this.CowDetails.genealogy?.mother?.father?.name}` ,
-                data: this.CowDetails.genealogy?.mother?.father?.imgLink,
+                label: `${this.CowDetails.genealogy?.mother?.father?.name}`,
+                type: 'cow',
+                data: {
+                  identifier:this.CowDetails.genealogy?.mother?.father?.identifier,
+                  img:this.CowDetails.genealogy?.mother?.father?.imgLink,
+                } 
               },
               {
-                label: `${this.CowDetails.genealogy?.mother?.mother?.identifier} - ${this.CowDetails.genealogy?.mother?.mother?.name}` ,
-                data: this.CowDetails.genealogy?.mother?.mother?.imgLink,
+                label: `${this.CowDetails.genealogy?.mother?.mother?.name}` ,
+                type: 'cow',
+                data: {
+                  identifier: this.CowDetails.genealogy?.mother?.mother?.identifier,
+                  img: this.CowDetails.genealogy?.mother?.mother?.imgLink,
+                }
               }
             ]
           },
