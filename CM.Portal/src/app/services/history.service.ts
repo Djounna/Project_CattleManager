@@ -71,6 +71,8 @@ export class HistoryService {
             events.push(event);
         });
 
+        events.sort((a, b) => {return new Date(a.Date).getTime() - new Date(b.Date).getTime()})
+
         return events;
     }
 }
