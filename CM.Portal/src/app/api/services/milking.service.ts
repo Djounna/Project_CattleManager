@@ -12,6 +12,7 @@ import { map, filter } from 'rxjs/operators';
 import { MilkingDto } from '../models/milking-dto';
 import { MilkingInputDto } from '../models/milking-input-dto';
 import { MilkingInputsDto } from '../models/milking-inputs-dto';
+import { MilkingVolumeDto } from '../models/milking-volume-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -327,6 +328,60 @@ export class MilkingService extends BaseService {
 
     return this.apiMilkingRangeStartEndGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MilkingDto>>) => r.body as Array<MilkingDto>)
+    );
+  }
+
+  /**
+   * Path part for operation apiMilkingVolumeRangeStartEndGet
+   */
+  static readonly ApiMilkingVolumeRangeStartEndGetPath = '/api/Milking/volume/range/{start}/{end}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingVolumeRangeStartEndGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingVolumeRangeStartEndGet$Response(params: {
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MilkingVolumeDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingVolumeRangeStartEndGetPath, 'get');
+    if (params) {
+      rb.path('start', params.start, {});
+      rb.path('end', params.end, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MilkingVolumeDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingVolumeRangeStartEndGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingVolumeRangeStartEndGet(params: {
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<Array<MilkingVolumeDto>> {
+
+    return this.apiMilkingVolumeRangeStartEndGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MilkingVolumeDto>>) => r.body as Array<MilkingVolumeDto>)
     );
   }
 

@@ -1717,6 +1717,56 @@
         }
       }
     },
+    "/api/Milking/volume/range/{start}/{end}": {
+      "get": {
+        "tags": [
+          "Milking"
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MilkingVolumeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Milking/{cowId}/{range}": {
       "get": {
         "tags": [
@@ -3523,6 +3573,31 @@
               "$ref": "#/components/schemas/MilkingInputDto"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MilkingVolumeDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "volume": {
+            "type": "number",
+            "format": "double"
+          },
+          "average": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          },
+          "max": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false

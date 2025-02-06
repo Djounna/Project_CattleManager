@@ -18,6 +18,7 @@ export { MilkProductionDto } from './models/milk-production-dto';
 export { MilkingDto } from './models/milking-dto';
 export { MilkingInputDto } from './models/milking-input-dto';
 export { MilkingInputsDto } from './models/milking-inputs-dto';
+export { MilkingVolumeDto } from './models/milking-volume-dto';
 export { ParentDto } from './models/parent-dto';
 export { PenDetailsDto } from './models/pen-details-dto';
 export { PenDto } from './models/pen-dto';

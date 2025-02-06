@@ -59,6 +59,18 @@ public class MilkingController : ControllerBase
     {
         return Ok(await _mediator.Send(new GetMilkingsByDateRangeQuery(start, end)));
     }
+
+    /// <summary>
+    /// Get Milking Volumes by date range
+    /// </summary>
+    [HttpGet("volume/range/{start}/{end}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<MilkingVolumeDto>>> GetVolumesByDateRange(string start, string end)
+    {
+        return Ok(await _mediator.Send(new GetMilkingVolumesByDateRangeQuery(start, end)));
+    }
+
     /// <summary>
     /// Get Milkings Range By Cow
     /// </summary>
