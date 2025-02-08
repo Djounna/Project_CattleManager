@@ -26,4 +26,9 @@ public class MilkingRepository : BaseRepository<Milking>, IMilkingRepository
     {
         return _context.Milkings.Where(m => m.CowId == cowId).TakeLast(range).OrderBy(m => m.Date).ToList();
     }
+
+    public IEnumerable<Milking> GetDateRangeByCowId(int cowId, DateOnly start, DateOnly end)
+    {
+        return _context.Milkings.Where(m => m.CowId == cowId && m.Date > start && m.Date <= end).OrderBy(m => m.Date).ToList();
+    }
 }

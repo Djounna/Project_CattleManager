@@ -20,10 +20,8 @@ public class GetMilkingsByDateRangeQueryHandler : IRequestHandler<GetMilkingsByD
 
     public async Task<IList<MilkingDto>> Handle(GetMilkingsByDateRangeQuery request, CancellationToken cancellationToken)
     {
-
         DateOnly start = DateOnly.Parse(request.startDate);
         DateOnly end = DateOnly.Parse(request.endDate);
-
-       return _mapper.Map<IList<MilkingDto>>(_milkingRepository.GetListByDateRange(start, end)); // , cancellationToken
+        return _mapper.Map<IList<MilkingDto>>(_milkingRepository.GetListByDateRange(start, end)); // , cancellationToken
     }
 }

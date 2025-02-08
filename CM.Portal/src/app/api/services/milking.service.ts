@@ -440,6 +440,63 @@ export class MilkingService extends BaseService {
   }
 
   /**
+   * Path part for operation apiMilkingCowIdStartEndGet
+   */
+  static readonly ApiMilkingCowIdStartEndGetPath = '/api/Milking/{cowId}/{start}/{end}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiMilkingCowIdStartEndGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingCowIdStartEndGet$Response(params: {
+    cowId: number;
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MilkingDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MilkingService.ApiMilkingCowIdStartEndGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+      rb.path('start', params.start, {});
+      rb.path('end', params.end, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MilkingDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiMilkingCowIdStartEndGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiMilkingCowIdStartEndGet(params: {
+    cowId: number;
+    start: string;
+    end: string;
+    context?: HttpContext
+  }
+): Observable<Array<MilkingDto>> {
+
+    return this.apiMilkingCowIdStartEndGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MilkingDto>>) => r.body as Array<MilkingDto>)
+    );
+  }
+
+  /**
    * Path part for operation apiMilkingMilkingInputsDateGet
    */
   static readonly ApiMilkingMilkingInputsDateGetPath = '/api/Milking/milkingInputs/{date}';

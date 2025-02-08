@@ -10,4 +10,6 @@ public interface IMilkingRepository : IBaseRepository<Milking>
     IEnumerable<Milking> GetListByDateRange(DateOnly start, DateOnly end);
 
     IEnumerable<Milking> GetRangeByCowId(int cowId, int range);
+
+    IEnumerable<Milking> GetDateRangeByCowId(int cowId, DateOnly start, DateOnly end);
 }
