@@ -6,7 +6,7 @@ import { AuthGuard } from '@auth0/auth0-angular';
 import { JobsPageComponent } from './screens/work/jobs-page/jobs-page.component';
 import { GroupPageComponent } from './screens/cattle/group-page/group-page.component';
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
-import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
+import { CowDetailsComponent } from './screens/cows/cow-details/cow-details-page.component';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},

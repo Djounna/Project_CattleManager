@@ -104,7 +104,7 @@ import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-s
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
 import { MilkingInputComponent } from './features/milking/milking-input/milking-input.component';
 import { MonthMilkingsGraphComponent } from './features/graphs/milkings/month-milkings-graph/month-milkings-graph.component';
-import { CowDetailsComponent } from './screens/cows/cow-details/cow-details.component';
+import { CowDetailsComponent } from './screens/cows/cow-details/cow-details-page.component';
 import { PenNamePipe } from './utils/pipes/pen-name.pipe';
 import { GroupNamePipe } from './utils/pipes/group-name.pipe';
 import { CowNamePipe } from './utils/pipes/cow-name.pipe';

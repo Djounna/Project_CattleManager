@@ -10,9 +10,9 @@ import { MilkingState } from '../../../state/milking/milking.store';
 import { Milkings } from '../../../state/milking/milking.actions';
 
 @Component({
-    selector: 'app-cow-details',
-    templateUrl: './cow-details.component.html',
-    styleUrl: './cow-details.component.scss',
+    selector: 'app-cow-details-page',
+    templateUrl: './cow-details-page.component.html',
+    styleUrl: './cow-details-page.component.scss',
     standalone: false
 })
 export class CowDetailsComponent extends BaseComponent{
