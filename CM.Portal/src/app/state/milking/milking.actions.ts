@@ -2,8 +2,15 @@ export namespace Milkings{
     export class GetAll{
         static readonly type ='[Milkings] Get All Milkings'
     }
+    export class GetAllLastMonthForSelectedCow{
+        static readonly type ='[Milkings] Get All Milkings for selected cow'
+        constructor(public cowId: number){}
+    }
     export class GetAllLastMonth{
         static readonly type ='[Milkings] Get All Milkings from the last month'
+    }
+    export class GetVolumesLastMonth{
+        static readonly type ='[Milkings] Get All Milking volumes from the last month'
     }
     export class Create{
         static readonly type = '[Milkings] Create Milking'

@@ -3,7 +3,7 @@ import { MilkingStateModel } from "./milking.state";
 import { Injectable } from "@angular/core";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { MilkingDto, MilkingInputsDto, MilkProductionDto } from "../../api/models";
+import { MilkingDto, MilkProductionDto } from "../../api/models";
 import { MilkingService, MilkProductionService } from "../../api/services";
 import { MilkingInput, MilkingInputs, Milkings, MilkProductions } from "./milking.actions";
 import moment from "moment";
@@ -13,6 +13,8 @@ import moment from "moment";
     defaults:{
         Milkings: [],
         MonthMilkings: [],
+        SelectedCowMonthMilkings: [],
+        MonthMilkingVolumes: [],
         MilkProductions: []
     }
 })
@@ -27,8 +29,18 @@ export class MilkingState{
     }
 
     @Selector()
+    static selectedCowMonthMilkings(milkingState:MilkingStateModel){
+        return milkingState.SelectedCowMonthMilkings;
+    }
+
+    @Selector()
     static milkingsLastMonth(milkingState:MilkingStateModel){
         return milkingState.MonthMilkings;
+    }
+
+    @Selector()
+    static milkingVolumesLastMonth(milkingState:MilkingStateModel){
+        return milkingState.MonthMilkingVolumes;
     }
 
     @Selector()
@@ -49,6 +61,19 @@ export class MilkingState{
             })
         );
     }
+    
+    @Action(Milkings.GetAllLastMonthForSelectedCow)
+    getAllMilkingsForSelectedCow(ctx: StateContext<MilkingStateModel>, action: Milkings.GetAllLastMonthForSelectedCow){
+        let endDate: Date = new Date();
+        let startDate: Date = new Date();
+        startDate.setDate(endDate.getDate()-30);
+        let start : string = moment(startDate).format('YYYY-MM-DD');
+        let end : string = moment(endDate).format('YYYY-MM-DD');
+        return this.milkingService.apiMilkingCowIdStartEndGet({cowId: action.cowId, start: start, end: end}).pipe(tap(milkings=>{
+            ctx.patchState({SelectedCowMonthMilkings : milkings});
+            })
+        );
+    }
 
     @Action(Milkings.GetAllLastMonth)
     getAllMilkingsLastMonth(ctx: StateContext<MilkingStateModel>, action: Milkings.GetAllLastMonth){
@@ -59,6 +84,19 @@ export class MilkingState{
         let end : string = moment(endDate).format('YYYY-MM-DD');
         return this.milkingService.apiMilkingRangeStartEndGet({start : start, end: end}).pipe(tap(milkings=>{
             ctx.patchState({MonthMilkings : milkings});
+            })
+        );
+    }
+
+    @Action(Milkings.GetVolumesLastMonth)
+    getVolumesLastMonth(ctx: StateContext<MilkingStateModel>, action : Milkings.GetVolumesLastMonth){
+        let endDate: Date = new Date();
+        let startDate: Date = new Date();
+        startDate.setDate(endDate.getDate()-30);
+        let start : string = moment(startDate).format('YYYY-MM-DD');
+        let end : string = moment(endDate).format('YYYY-MM-DD');
+        return this.milkingService.apiMilkingVolumeRangeStartEndGet({start : start, end: end}).pipe(tap(mv=>{
+            ctx.patchState({MonthMilkingVolumes : mv});
             })
         );
     }

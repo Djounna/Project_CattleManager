@@ -123,6 +123,7 @@ import { LiteralMapExpr } from '@angular/compiler';
 import { Colors } from 'chart.js';
 import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-genealogy.component';
 import { CowTimelineComponent } from './features/cattle/cow/cow-timeline/cow-timeline.component';
+import { CowMonthMilkingsGraphComponent } from './features/graphs/milkings/cow-month-milkings-graph/cow-month-milkings-graph.component';
 
 @NgModule({ 
     declarations: 
@@ -155,7 +156,8 @@ import { CowTimelineComponent } from './features/cattle/cow/cow-timeline/cow-tim
         UpdateInterventionDialogComponent,
         GestationsBoardComponent,
         CowGenealogyComponent,
-        CowTimelineComponent
+        CowTimelineComponent,
+        CowMonthMilkingsGraphComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

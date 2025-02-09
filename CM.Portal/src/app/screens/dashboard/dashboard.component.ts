@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
-import { AlertDto, GestationDto, InterventionDto, JobDto, MilkingDto, UserDto, GroupDto, PenDto } from '../../api/models';
+import { AlertDto, GestationDto, InterventionDto, JobDto, MilkingDto, UserDto, GroupDto, PenDto, MilkingVolumeDto } from '../../api/models';
 import { AlertState } from '../../state/alert/alert.store';
 import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
@@ -44,16 +44,18 @@ export class DashboardComponent extends BaseComponent {
   public Pens: PenDto[] = []
   @Select(InfrastructureState.penDict) PenDictionnary$!: Observable<Map<number, string>>
   public PenDictionnary: Map<number, string> = new Map<number, string>;
-  @Select(MilkingState.milkingsLastMonth) Milkings$!: Observable<MilkingDto[]>
-  public Milkings: MilkingDto[] = []
+  // @Select(MilkingState.milkingsLastMonth) Milkings$!: Observable<MilkingDto[]>
+  // public Milkings: MilkingDto[] = []
+  @Select(MilkingState.milkingVolumesLastMonth) MilkingVolumes$!: Observable<MilkingVolumeDto[]>
+  public MilkingVolumes: MilkingVolumeDto[] = []
 
-  public Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$, this.Milkings$])
+  private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$, this.MilkingVolumes$])
 
   override ngOnInit(): void {
 
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
-      tap(([cid, cnd, a, j, w, ge, g, gd, p, pd, m]) => {
+      tap(([cid, cnd, a, j, w, ge, g, gd, p, pd, mv]) => {
         this.CowIdentifierDictionnary = cid;
         this.CowNameDictionnary = cnd;
         this.Alerts = a;
@@ -64,7 +66,7 @@ export class DashboardComponent extends BaseComponent {
         this.GroupDictionnary = gd;
         this.Pens = p;
         this.PenDictionnary = pd;
-        this.Milkings = m;
+        this.MilkingVolumes = mv;
       })).subscribe();
 
     this.store.dispatch(new Cows.GetAll());
@@ -75,6 +77,7 @@ export class DashboardComponent extends BaseComponent {
     this.store.dispatch(new Pens.GetAll());
     this.store.dispatch(new Workers.GetAll());
     this.store.dispatch(new Milkings.GetAllLastMonth());
+    this.store.dispatch(new Milkings.GetVolumesLastMonth());
   }
 }
 

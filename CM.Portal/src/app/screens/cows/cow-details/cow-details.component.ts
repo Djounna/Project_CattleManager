@@ -2,10 +2,12 @@ import { Component, inject } from '@angular/core';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { Select } from '@ngxs/store';
-import { finalize, Observable, takeUntil } from 'rxjs';
-import { CowDetailsDto } from '../../../api/models';
+import { combineLatest, finalize, Observable, takeUntil, tap } from 'rxjs';
+import { CowDetailsDto, MilkingDto, MilkingVolumeDto } from '../../../api/models';
 import { CowDetails } from '../../../state/cattle/cattle.actions';
 import { ActivatedRoute } from '@angular/router';
+import { MilkingState } from '../../../state/milking/milking.store';
+import { Milkings } from '../../../state/milking/milking.actions';
 
 @Component({
     selector: 'app-cow-details',
@@ -16,28 +18,34 @@ import { ActivatedRoute } from '@angular/router';
 export class CowDetailsComponent extends BaseComponent{
     private route = inject(ActivatedRoute);
     cowId = 0;
-    @Select(CattleState.cowDetails) cowDetails$!: Observable<CowDetailsDto>; 
-    public cowDetails!: CowDetailsDto
+    @Select(CattleState.cowDetails) CowDetails$!: Observable<CowDetailsDto>; 
+    public CowDetails!: CowDetailsDto
+    @Select(MilkingState.milkingVolumesLastMonth) MilkingVolumes$!: Observable<MilkingVolumeDto[]>;
+    public MilkingVolumes! : MilkingVolumeDto[];
+    @Select(MilkingState.selectedCowMonthMilkings) CowMilkingVolumes$!: Observable<MilkingDto[]>;
+    public CowMilkingVolumes! : MilkingDto[];
+
+    private Data$ = combineLatest([this.CowDetails$, this.MilkingVolumes$, this.CowMilkingVolumes$])
 
     override ngOnInit(): void {
         this.route.params.subscribe(params => {
             this.cowId = +params['id'];
     });
         this.GetData(); 
+        this.store.dispatch(new Milkings.GetAllLastMonth);
         this.store.dispatch(new CowDetails.Get(this.cowId)); 
+        this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
     }
 
     public GetData(): void{
-        this.cowDetails$.pipe(
-        takeUntil(this.$OnDestroyed),
-        finalize(() => this.displayLoader = false))
-        .subscribe({
-            next:(res) => {
-                this.cowDetails = res;
-            },
-            error:(err) => {
-                console.log(err);
-            }
-        });
+        this.Data$.pipe(
+            tap(([cd, mv, cmv]) => {
+                this.CowDetails = cd;
+                this.MilkingVolumes = mv;
+                this.CowMilkingVolumes = cmv;
+            }),
+            takeUntil(this.$OnDestroyed),
+            finalize(() => this.displayLoader = false))
+        .subscribe({ error:(err) => { console.log(err); }});
     }
 }
