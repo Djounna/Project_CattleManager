@@ -1,4 +1,4 @@
-import { CowDetailsDto, CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
+import { CattleStatisticsDto, CowDetailsDto, CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
 
 export interface CattleStateModel {
   CowDetails?: CowDetailsDto,
@@ -10,4 +10,5 @@ export interface CattleStateModel {
   Gestations: GestationDto[],
   Interventions: InterventionDto[],
   Vaccinations: VaccinationDto[]
+  CattleStatistics?: CattleStatisticsDto,
 }

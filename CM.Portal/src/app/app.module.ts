@@ -124,6 +124,10 @@ import { Colors } from 'chart.js';
 import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-genealogy.component';
 import { CowTimelineComponent } from './features/cattle/cow/cow-timeline/cow-timeline.component';
 import { CowMonthMilkingsGraphComponent } from './features/graphs/milkings/cow-month-milkings-graph/cow-month-milkings-graph.component';
+import { StatisticsCowsPageComponent } from './screens/statistics/statistics-cows-page/statistics-cows-page.component';
+import { SatisticsJobsPageComponent } from './screens/statistics/satistics-jobs-page/satistics-jobs-page.component';
+import { GroupPieChartComponent } from './features/graphs/cattle/group-pie-chart/group-pie-chart.component';
+import { PenPieChartComponent } from './features/graphs/cattle/pen-pie-chart/pen-pie-chart.component';
 
 @NgModule({ 
     declarations: 
@@ -157,7 +161,11 @@ import { CowMonthMilkingsGraphComponent } from './features/graphs/milkings/cow-m
         GestationsBoardComponent,
         CowGenealogyComponent,
         CowTimelineComponent,
-        CowMonthMilkingsGraphComponent
+        CowMonthMilkingsGraphComponent,
+        StatisticsCowsPageComponent,
+        SatisticsJobsPageComponent,
+        GroupPieChartComponent,
+        PenPieChartComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

@@ -3,8 +3,8 @@ import { Selector, Action, StateContext, State } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
-import { CowService, GestationService, GroupService, InterventionService, VaccinationService } from "../../api/services";
-import { CowDetails, Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
+import { CowService, GestationService, GroupService, InterventionService, StatisticService, VaccinationService } from "../../api/services";
+import { CattleStatistics, CowDetails, Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 import { CowUtils } from "../../utils/cow-utils";
 
@@ -20,6 +20,7 @@ import { CowUtils } from "../../utils/cow-utils";
     Gestations: [],
     Interventions: [],
     Vaccinations: [],
+    CattleStatistics: undefined,
   }
 })
 
@@ -30,7 +31,9 @@ export class CattleState {
     private groupService: GroupService, 
     private gestationService: GestationService, 
     private interventionService: InterventionService,
-    private vaccinationService: VaccinationService) { }
+    private vaccinationService: VaccinationService,
+    private statisticService: StatisticService
+    ) { }
 
   @Selector()
   static cowDetails(cattleState: CattleStateModel){
@@ -75,6 +78,11 @@ export class CattleState {
   @Selector()
   static vaccinations(cattleState: CattleStateModel) {
     return cattleState.Vaccinations;
+  }
+
+  @Selector()
+  static cattleStats(cattleState: CattleStateModel) {
+    return cattleState.CattleStatistics;
   }
 
   /// Cows Actions
@@ -296,5 +304,16 @@ export class CattleState {
           ctx.setState(patch<CattleStateModel>({ Vaccinations: removeItem<VaccinationDto>(c => c.id === action.id) }))
         })
       );
+  }
+
+  /// Statistic Actions
+  @Action(CattleStatistics.Get)
+  getCattleStatistics(ctx: StateContext<CattleStateModel>){
+    return this. statisticService.apiStatisticGet()
+      .pipe(tap(cattleStatistics => {
+        debugger;
+        ctx.patchState({ CattleStatistics: cattleStatistics })
+      })
+    );
   }
 }

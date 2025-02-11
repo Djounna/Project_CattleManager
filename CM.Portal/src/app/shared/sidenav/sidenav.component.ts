@@ -21,6 +21,22 @@ export class SidenavComponent implements OnInit {
                         label:'Dashboard',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink:'/dashboard'
+                    },
+                ]
+            },
+            {
+                label: 'Statistics',
+                icon: 'pi pi-fw pi-chart-bar',
+                items:[
+                    {
+                        label:'Cattle',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink:'/statisticscows'
+                    },
+                    {
+                        label:'Jobs',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink:'/statisticsjobs'
                     }
                 ]
             },

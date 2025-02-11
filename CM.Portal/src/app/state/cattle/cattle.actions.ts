@@ -109,3 +109,8 @@ export namespace Vaccinations{
         constructor(public id: number){}
     }
 }
+export namespace CattleStatistics{
+    export class Get{
+        static readonly type = '[Statistics] Get Cattle Statistics'
+    }
+}

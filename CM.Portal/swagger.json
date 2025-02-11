@@ -2439,6 +2439,35 @@
         }
       }
     },
+    "/api/Statistic": {
+      "get": {
+        "tags": [
+          "Statistic"
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CattleStatisticsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Stock": {
       "get": {
         "tags": [
@@ -3034,6 +3063,20 @@
   },
   "components": {
     "schemas": {
+      "AgeGroupStatisticDto": {
+        "type": "object",
+        "properties": {
+          "ageGroupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "AlertDto": {
         "type": "object",
         "properties": {
@@ -3090,6 +3133,33 @@
           },
           "pen2": {
             "$ref": "#/components/schemas/PenDetailsDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CattleStatisticsDto": {
+        "type": "object",
+        "properties": {
+          "groupStatistics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupStatisticDto"
+            },
+            "nullable": true
+          },
+          "penStatistics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PenStatisticDto"
+            },
+            "nullable": true
+          },
+          "ageGroupStatistics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeGroupStatisticDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3396,6 +3466,24 @@
             "nullable": true
           },
           "destinationGroupId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupStatisticDto": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
             "type": "integer",
             "format": "int32"
           }
@@ -3739,6 +3827,24 @@
             "nullable": true
           },
           "destinationPenId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PenStatisticDto": {
+        "type": "object",
+        "properties": {
+          "penId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penName": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
             "type": "integer",
             "format": "int32"
           }

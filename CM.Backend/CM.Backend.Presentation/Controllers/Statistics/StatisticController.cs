@@ -32,6 +32,6 @@ public class StatisticController: ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<CattleStatisticsDto>> GetCattleStatistics()
     {
-        return Ok(_mediator.Send(new GetCattleStatisticsQuery()));
+        return Ok(await _mediator.Send(new GetCattleStatisticsQuery()));
     }
 }
