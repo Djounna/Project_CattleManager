@@ -11,13 +11,15 @@ import { CattleStatisticsDto, PenStatisticDto } from '../../../../api/models';
 export class GroupPieChartComponent {
   public graphData: any;
   @Input() set data(value: CattleStatisticsDto | undefined){
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color'); 
     this.graphData =  {
         labels: value?.groupStatistics?.map(g => g.groupName),
         datasets: [
             {
-                data: value?.groupStatistics?.map(d => d.number),
-                backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+                data: value?.groupStatistics?.map(g => g.number),
+                backgroundColor: [documentStyle.getPropertyValue('--p-lime-200'), documentStyle.getPropertyValue('--p-lime-400'), documentStyle.getPropertyValue('--p-lime-600'), documentStyle.getPropertyValue('--p-lime-800')],
+                hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400')]
             }
         ]
     }; 

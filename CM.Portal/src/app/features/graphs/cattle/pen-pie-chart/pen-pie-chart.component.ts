@@ -11,14 +11,15 @@ import { CattleStatisticsDto } from '../../../../api/models';
 export class PenPieChartComponent {
   public graphData: any;
   @Input() set data(value: CattleStatisticsDto | undefined){
-    debugger;
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color'); 
     this.graphData =  {
         labels: value?.penStatistics?.map(p => p.penName),
         datasets: [
             {
                 data: value?.penStatistics?.map(p => p.number),
-                backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+                backgroundColor: [documentStyle.getPropertyValue('--p-emerald-200'), documentStyle.getPropertyValue('--p-emerald-400'), documentStyle.getPropertyValue('--p-emerald-600'), documentStyle.getPropertyValue('--p-emerald-800')],
+                hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400')]
             }
         ]
     }; 

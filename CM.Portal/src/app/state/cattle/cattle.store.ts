@@ -311,7 +311,6 @@ export class CattleState {
   getCattleStatistics(ctx: StateContext<CattleStateModel>){
     return this. statisticService.apiStatisticGet()
       .pipe(tap(cattleStatistics => {
-        debugger;
         ctx.patchState({ CattleStatistics: cattleStatistics })
       })
     );

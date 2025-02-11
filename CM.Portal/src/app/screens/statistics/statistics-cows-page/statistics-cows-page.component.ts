@@ -27,7 +27,6 @@ export class StatisticsCowsPageComponent extends BaseComponent{
     this.CattleStatistics$
       .pipe(
         tap((res) =>{
-          debugger;
           this.CattleStatistics = res
         } ),
         takeUntil(this.$OnDestroyed)
