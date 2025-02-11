@@ -8,6 +8,7 @@ export { JobService } from './services/job.service';
 export { MilkingService } from './services/milking.service';
 export { MilkProductionService } from './services/milk-production.service';
 export { PenService } from './services/pen.service';
+export { StatisticService } from './services/statistic.service';
 export { StockService } from './services/stock.service';
 export { UserManagementService } from './services/user-management.service';
 export { VaccinationService } from './services/vaccination.service';

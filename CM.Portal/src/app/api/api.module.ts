@@ -14,6 +14,7 @@ import { JobService } from './services/job.service';
 import { MilkingService } from './services/milking.service';
 import { MilkProductionService } from './services/milk-production.service';
 import { PenService } from './services/pen.service';
+import { StatisticService } from './services/statistic.service';
 import { StockService } from './services/stock.service';
 import { UserManagementService } from './services/user-management.service';
 import { VaccinationService } from './services/vaccination.service';
@@ -38,6 +39,7 @@ import { WorkerJobService } from './services/worker-job.service';
     MilkingService,
     MilkProductionService,
     PenService,
+    StatisticService,
     StockService,
     UserManagementService,
     VaccinationService,
