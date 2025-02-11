@@ -13,6 +13,14 @@ public class CowRepository : BaseRepository<Cow>, ICowRepository
         return _context.Cows.Where(c => c.MilkCow).ToList();
     }
 
+    public IEnumerable<Cow> GetListWithDetails()
+    {
+        return _context.Cows
+            .Include(c => c.Group)
+            .Include(c => c.Pen)
+            .ToList();
+    }
+
     public Cow GetDetailsById(int id) 
     {
         Cow cowDetails = _context.Cows
