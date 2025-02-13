@@ -38,10 +38,26 @@ public class GetCattleStatisticsQueryhandler: IRequestHandler<GetCattleStatistic
 
         List<AgeGroupStatisticDto> AgeGroupStatisticList = cows.GroupBy(c => Math.Floor((decimal)(DateTime.Now.Year - c.BirthDate.Year)), c => c, (age, cow) => new AgeGroupStatisticDto
         {
+            AgeGroupName = age.ToString(),
+            Number = cow.Count()
+        }).OrderByDescending(a => int.Parse(a.AgeGroupName)).ToList();
+        result.AgeGroupStatistics = AgeGroupStatisticList;
+
+        List<AgeGenderGroupStatisticDto> AgeGroupStatisticListFemale = cows.Where(c => c.Gender == "F").GroupBy(c => Math.Floor((decimal)(DateTime.Now.Year - c.BirthDate.Year)), c => c, (age, cow) => new AgeGenderGroupStatisticDto
+        {
+           Gender = "Female", 
            AgeGroupName = age.ToString(),
            Number = cow.Count()
-        }).ToList();
-        result.AgeGroupStatistics = AgeGroupStatisticList;
+        }).OrderByDescending(a => int.Parse(a.AgeGroupName)).ToList();
+        result.AgeGenderGroupStatisticsFemale = AgeGroupStatisticListFemale;
+
+        List<AgeGenderGroupStatisticDto> AgeGroupStatisticListMale = cows.Where(c => c.Gender == "M").GroupBy(c => Math.Floor((decimal)(DateTime.Now.Year - c.BirthDate.Year)), c => c, (age, cow) => new AgeGenderGroupStatisticDto
+        {
+           Gender = "Male", 
+           AgeGroupName = age.ToString(),
+           Number = cow.Count()
+        }).OrderByDescending(a => int.Parse(a.AgeGroupName)).ToList();
+        result.AgeGenderGroupStatisticsMale = AgeGroupStatisticListMale;
 
         return result;
     }

@@ -128,6 +128,8 @@ import { StatisticsCowsPageComponent } from './screens/statistics/statistics-cow
 import { SatisticsJobsPageComponent } from './screens/statistics/satistics-jobs-page/satistics-jobs-page.component';
 import { GroupPieChartComponent } from './features/graphs/cattle/group-pie-chart/group-pie-chart.component';
 import { PenPieChartComponent } from './features/graphs/cattle/pen-pie-chart/pen-pie-chart.component';
+import { AgePieChartComponent } from './features/graphs/cattle/age-pie-chart/age-pie-chart.component';
+import { AgeBarChartComponent } from './features/graphs/cattle/age-bar-chart/age-bar-chart.component';
 
 @NgModule({ 
     declarations: 
@@ -165,7 +167,9 @@ import { PenPieChartComponent } from './features/graphs/cattle/pen-pie-chart/pen
         StatisticsCowsPageComponent,
         SatisticsJobsPageComponent,
         GroupPieChartComponent,
-        PenPieChartComponent
+        PenPieChartComponent,
+        AgePieChartComponent,
+        AgeBarChartComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
