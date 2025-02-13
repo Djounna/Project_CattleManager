@@ -130,6 +130,7 @@ import { GroupPieChartComponent } from './features/graphs/cattle/group-pie-chart
 import { PenPieChartComponent } from './features/graphs/cattle/pen-pie-chart/pen-pie-chart.component';
 import { AgePieChartComponent } from './features/graphs/cattle/age-pie-chart/age-pie-chart.component';
 import { AgeBarChartComponent } from './features/graphs/cattle/age-bar-chart/age-bar-chart.component';
+import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
 
 @NgModule({ 
     declarations: 
@@ -169,7 +170,8 @@ import { AgeBarChartComponent } from './features/graphs/cattle/age-bar-chart/age
         GroupPieChartComponent,
         PenPieChartComponent,
         AgePieChartComponent,
-        AgeBarChartComponent
+        AgeBarChartComponent,
+        PenPageComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
