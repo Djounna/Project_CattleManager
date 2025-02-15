@@ -144,6 +144,7 @@ import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-p
         AssignJobDialogComponent,
         CreateGroupDialogComponent,
         PicklistGroupDialogComponent,
+        PicklistPenDialogComponent,
         SidebarComponent,
         GroupCardSmallComponent,
         PenCardSmallComponent,
@@ -174,7 +175,6 @@ import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-p
         AgePieChartComponent,
         AgeBarChartComponent,
         PenPageComponent,
-        PicklistPenDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

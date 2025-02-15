@@ -1,7 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CowDto, GroupDto, PenDto } from '../../../../api/models';
+import { CowDto, GroupDto } from '../../../../api/models';
 import { PicklistToolComponent } from '../../picklist-tool/picklist-tool.component';
 
 @Component({
@@ -17,7 +16,6 @@ export class PicklistGroupDialogComponent {
     public dialogRef: MatDialogRef<PicklistGroupDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {Cows:CowDto[], Groups:GroupDto[], SourceId:number}
   ){}
-
 
   sourceId : number | undefined 
   targetId : number | undefined;

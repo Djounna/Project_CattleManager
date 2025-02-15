@@ -6,8 +6,6 @@ import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
-import { tileLayer, latLng, circle, polygon } from 'leaflet';
-import { PicklistGroupDialogComponent } from '../../../features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
 import { InfrastructureState } from '../../../state/infrastructure/infrastructure.store';
 import { MapService, PenMapInfo } from '../../../services/map.service';
 import { PicklistPenDialogComponent } from '../../../features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
@@ -15,7 +13,6 @@ import { PicklistPenDialogComponent } from '../../../features/shared/dialogs/pic
 @Component({
   selector: 'app-pen-page',
   standalone: false,
-  
   templateUrl: './pen-page.component.html',
   styleUrl: './pen-page.component.scss'
 })
@@ -57,13 +54,13 @@ export class PenPageComponent extends BaseComponent{
   }
 
   picklistPenDialog(pen: any): void{
-    const dialogRef2 = this.dialog.open(PicklistPenDialogComponent, {
+    const dialogRef = this.dialog.open(PicklistPenDialogComponent, {
       height: '0.8vh',
       width: '0.8vw',
       data: {Cows: this.Cows, Pens: this.Pens, SourceId: pen.id} 
     });
 
-    dialogRef2.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       if(result == null)
         return;
     });
