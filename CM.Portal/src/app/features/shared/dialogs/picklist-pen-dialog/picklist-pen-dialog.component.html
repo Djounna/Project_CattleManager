@@ -1,0 +1,30 @@
+<div class="card flex flex-row justify-content-around m-2">
+    <div class="flex flex-row align-items-center gap-2 m-2">
+        <label for="source">Source</label>
+        <p-select 
+            [options]="data.Pens" [(ngModel)]="SelectedSourcePen" optionLabel="name" placeholder="Source" [showClear]="true"
+            [filter]="true" filterBy="name">
+        </p-select>
+    </div>
+    <div>
+            <p-button label="Confirmer" [raised]="true" (click)="Save()"></p-button>
+    </div>
+    <div class="flex flex-row align-items-center gap-2 m-2">
+        <label for="destination">Destination</label>
+        <p-select 
+            [options]="data.Pens" [(ngModel)]="SelectedTargetPen" optionLabel="name" placeholder="Destination" [showClear]="true">
+        </p-select>
+    </div>
+</div>
+
+<p-divider></p-divider>
+
+<app-picklist-tool #tool 
+[Mode]="'Pen'"
+[Cows]="data.Cows"
+[Groups]="data.Pens"
+[SourceId]="sourceId!"
+[TargetId]="targetId!"
+(onClose)="Close()"
+>
+</app-picklist-tool>

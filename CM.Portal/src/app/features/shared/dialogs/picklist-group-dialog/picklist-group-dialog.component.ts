@@ -11,7 +11,6 @@ import { PicklistToolComponent } from '../../picklist-tool/picklist-tool.compone
     standalone: false
 })
 export class PicklistGroupDialogComponent {
-
   @ViewChild('tool') tool! : PicklistToolComponent 
 
   constructor(
