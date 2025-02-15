@@ -56,17 +56,4 @@ export class GroupPageComponent extends BaseComponent {
       });
     });
   }
-
-  picklistGroupDialog(group: any): void{
-    const dialogRef2 = this.dialog.open(PicklistGroupDialogComponent, {
-      height: '0.8vh',
-      width: '0.8vw',
-      data: {Cows: this.Cows, Groups: this.Groups, SourceId: group.id} 
-    });
-
-    dialogRef2.afterClosed().subscribe(result => {
-      if(result == null)
-        return;
-    });
-  }
 }

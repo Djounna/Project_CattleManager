@@ -31,8 +31,6 @@ export class PenPageComponent extends BaseComponent{
   public Data$ = combineLatest([this.Cows$, this.Groups$, this.Pens$])
 
   public PenMapInfos : PenMapInfo[] = [];
-  public mapOptions: any[] = [];
-  public mapLayers: any;
 
   override ngOnInit(): void {
     this.Data$.pipe(
@@ -55,8 +53,8 @@ export class PenPageComponent extends BaseComponent{
 
   picklistPenDialog(pen: any): void{
     const dialogRef = this.dialog.open(PicklistPenDialogComponent, {
-      height: '0.8vh',
-      width: '0.8vw',
+      height: '80vh',
+      width: '80vw',
       data: {Cows: this.Cows, Pens: this.Pens, SourceId: pen.id} 
     });
 

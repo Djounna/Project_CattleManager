@@ -92,13 +92,13 @@ export class PicklistToolComponent extends BaseComponent {
 
       case 'Pen':
         let pen1 : PenDetailsDto = {
-          id : this.selectedSourceGroup!.id,
-          name: this.selectedSourceGroup!.name,
+          id : this.selectedSourcePen!.id,
+          name: this.selectedSourcePen!.name,
           cows : this.source,
         };
         let pen2 : PenDetailsDto = {
-          id : this.selectedTargetGroup!.id,
-          name: this.selectedTargetGroup!.name,
+          id : this.selectedTargetPen!.id,
+          name: this.selectedTargetPen!.name,
           cows : this.target,
         };
         let dto2 : AssignPenDetailsDto = {
