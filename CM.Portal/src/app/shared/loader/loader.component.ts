@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-loader',
   standalone: false,
-  imports: [],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss'
 })
-export class LoaderComponent {
-
+export class LoaderComponent implements OnInit{
+    loading$!: Observable<boolean>;
+    
+    constructor(private loaderService: LoaderService) {}
+    ngOnInit(): void {
+      this.loading$ = this.loaderService.loading$; // Subscribe to loading state
+  }
 }

@@ -1,1 +1,3 @@
-<p>loader works!</p>
+<div *ngIf="loading$ | async" class="overlay">
+<p-progress-spinner ariaLabel="loading" />
+</div>

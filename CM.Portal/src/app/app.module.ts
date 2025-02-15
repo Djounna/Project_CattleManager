@@ -133,6 +133,8 @@ import { AgeBarChartComponent } from './features/graphs/cattle/age-bar-chart/age
 import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({ 
     declarations: 
@@ -175,6 +177,7 @@ import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-p
         AgePieChartComponent,
         AgeBarChartComponent,
         PenPageComponent,
+        LoaderComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -261,6 +264,7 @@ import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-p
         })], 
         providers: [
             { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, 
+            { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
             AuthGuard, 
             MessageService, 
             DialogService, 
