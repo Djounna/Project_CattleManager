@@ -1,3 +1,39 @@
 <div class="page_base">
+    <!-- <div style="height: 600px;" leaflet 
+        [leafletOptions]="mapOptions"
+        [leafletLayers]="mapLayers"
+        ></div> -->
 
+    <p-dataView #dv [value]="PenMapInfos" [layout]="'grid'">
+        <ng-template #grid let-penInfos>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" *ngFor="let penInfo of penInfos; index as i">
+                    <div class="p-2 border-1 surface-border surface-card border-round">
+                        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                            <span class="flex align-items-center gap-2">
+                                <i class="pi pi-tag"></i>
+                                <span class="font-semibold">{{ penInfo.Pen.name }}</span>
+                            </span>
+                        </div>
+                        <!-- <div class="flex flex-column align-items-center p-3"> -->
+                            <div style="height: 200px;" leaflet 
+                                [leafletOptions]="penInfo.MapOptions"
+                                [leafletLayers]="penInfo.MapLayers"
+                            ></div>
+                        <!-- </div> -->
+                        <div class="flex flex-row justify-content-end gap-2">
+                            <span class="p-buttonset">
+                                <p-button icon="pi pi-user" severity="info" 
+                                pTooltip="Assigner" (click)="picklistGroupDialog(penInfo.Pen)"></p-button>
+                                <p-button icon="pi pi-bookmark" severity="secondary"
+                                pTooltip="Modifier"></p-button>
+                                <p-button icon="pi pi-times" severity="danger"
+                                pTooltip="Supprimer"></p-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
 </div>

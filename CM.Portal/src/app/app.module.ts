@@ -131,6 +131,8 @@ import { PenPieChartComponent } from './features/graphs/cattle/pen-pie-chart/pen
 import { AgePieChartComponent } from './features/graphs/cattle/age-pie-chart/age-pie-chart.component';
 import { AgeBarChartComponent } from './features/graphs/cattle/age-bar-chart/age-bar-chart.component';
 import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -171,13 +173,15 @@ import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
         PenPieChartComponent,
         AgePieChartComponent,
         AgeBarChartComponent,
-        PenPageComponent
+        PenPageComponent,
+        PicklistPenDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        LeafletModule,
         // material
         MatCardModule,
         MatSidenavModule,

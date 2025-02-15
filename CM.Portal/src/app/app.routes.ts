@@ -9,6 +9,7 @@ import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.c
 import { CowDetailsComponent } from './screens/cows/cow-details/cow-details-page.component';
 import { StatisticsCowsPageComponent } from './screens/statistics/statistics-cows-page/statistics-cows-page.component';
 import { SatisticsJobsPageComponent } from './screens/statistics/satistics-jobs-page/satistics-jobs-page.component';
+import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'cows', component: CowsPageComponent, canActivate:[AuthGuard]},
   { path: 'cowDetails/:id', component: CowDetailsComponent, canActivate:[AuthGuard]},
   { path: 'groups', component: GroupPageComponent, canActivate:[AuthGuard]},
+  { path: 'pens', component: PenPageComponent, canActivate:[AuthGuard]},
   { path: 'milking', component: MilkingPageComponent, canActivate:[AuthGuard]},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
 ];

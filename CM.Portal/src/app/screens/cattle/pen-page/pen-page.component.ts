@@ -6,6 +6,11 @@ import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows, Groups } from '../../../state/cattle/cattle.actions';
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
+import { tileLayer, latLng, circle, polygon } from 'leaflet';
+import { PicklistGroupDialogComponent } from '../../../features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
+import { InfrastructureState } from '../../../state/infrastructure/infrastructure.store';
+import { MapService, PenMapInfo } from '../../../services/map.service';
+import { PicklistPenDialogComponent } from '../../../features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
 
 @Component({
   selector: 'app-pen-page',
@@ -16,27 +21,51 @@ import { Pens } from '../../../state/infrastructure/infrastructure.action';
 })
 export class PenPageComponent extends BaseComponent{
 
+  constructor(private mapService: MapService){
+    super();
+  }
+
   @Select(CattleState.cows) Cows$! : Observable<CowDto[]>
   public Cows : CowDto[] = []
   @Select(CattleState.groups) Groups$! : Observable<GroupDto[]>
   public Groups: GroupDto[] = [];
-  @Select(CattleState.groups) Pens$! : Observable<PenDto[]>
+  @Select(InfrastructureState.pens) Pens$! : Observable<PenDto[]>
   public Pens: PenDto[] = [];
-
   public Data$ = combineLatest([this.Cows$, this.Groups$, this.Pens$])
 
-  override ngOnInit(): void {
+  public PenMapInfos : PenMapInfo[] = [];
+  public mapOptions: any[] = [];
+  public mapLayers: any;
 
+  override ngOnInit(): void {
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
       tap(([c,g,p]) =>{
         this.Cows = c;
         this.Groups = g;
         this.Pens = p;
+        this.initMapOptions();
         })).subscribe();
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
+  }
+
+  private initMapOptions(): void{
+    this.PenMapInfos = this.mapService.CreatePenMapInfosList(this.Pens);
+  }
+
+  picklistPenDialog(pen: any): void{
+    const dialogRef2 = this.dialog.open(PicklistPenDialogComponent, {
+      height: '0.8vh',
+      width: '0.8vw',
+      data: {Cows: this.Cows, Pens: this.Pens, SourceId: pen.id} 
+    });
+
+    dialogRef2.afterClosed().subscribe(result => {
+      if(result == null)
+        return;
+    });
   }
 }
