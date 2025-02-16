@@ -52,6 +52,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { Timeline, TimelineModule } from 'primeng/timeline'
+import { CheckboxModule } from 'primeng/checkbox';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -135,6 +136,7 @@ import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { TodoListComponent } from './features/work/todo-list/todo-list.component';
 
 @NgModule({ 
     declarations: 
@@ -177,7 +179,8 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
         AgePieChartComponent,
         AgeBarChartComponent,
         PenPageComponent,
-        LoaderComponent
+        LoaderComponent,
+        TodoListComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -228,6 +231,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
         ProgressBarModule,
         OrganizationChartModule,
         TimelineModule,
+        CheckboxModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt
