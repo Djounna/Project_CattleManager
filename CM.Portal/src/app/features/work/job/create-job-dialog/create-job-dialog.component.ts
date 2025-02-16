@@ -6,7 +6,7 @@ import {
 import {FormControl, Validators} from '@angular/forms';
 import {FormBuilder} from '@angular/forms';
 import { CowDto, JobDto, PenDto } from '../../../../api/models';
-import { jobStatus } from '../../../../models/enums/workEnums';
+import { JobStatus } from '../../../../models/enums/workEnums';
 
 @Component({
     selector: 'app-create-job-dialog',
@@ -39,7 +39,7 @@ export class CreateJobDialogComponent {
       id : 0,
       title : this.jobForm.value.title, 
       description : this.jobForm.value.description,
-      status : jobStatus.ToDo,
+      status : JobStatus.ToDo,
       penId: this.jobForm.value.pen?.id,
       cowId: this.jobForm.value.cow?.id
     }
