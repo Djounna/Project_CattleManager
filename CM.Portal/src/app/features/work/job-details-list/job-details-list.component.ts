@@ -16,6 +16,7 @@ export class JobDetailsListComponent extends BaseComponent {
 
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
+  public filteredJobs : JobDetailsDto[] = [];
   @Input() set JobsDetails(value: JobDetailsDto[]){
     this.jobs = [...value]
     this.filteredJobs = [...this.jobs];
@@ -23,8 +24,6 @@ export class JobDetailsListComponent extends BaseComponent {
   public get Jobs(): JobDetailsDto[] {
     return this.jobs;
   }
-
-  public filteredJobs : JobDetailsDto[] = [];
 
   applyFilterGlobal(event: any) {
     return event.target.value;

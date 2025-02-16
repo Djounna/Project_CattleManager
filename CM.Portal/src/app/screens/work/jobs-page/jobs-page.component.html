@@ -46,9 +46,10 @@
             </div>
         </div>
 
-
     <div class="flex flex-column">
-        <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
+        <p-panel header="Tâches">
+            <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
+        </p-panel>
     </div>
 </div>
 
