@@ -1,8 +1,6 @@
-<p-panel header="Gestations">
-    <div *ngFor="let gestation of Gestations; index as i">
-        <span>{{gestation.cowId | cowIdentifier}} - {{gestation.calvingDate | date: 'dd/MM/yyyy'}}</span>
-        <div>
-            <p-progressbar [value]="gestation.progress" />
-        </div>
+<div *ngFor="let gestation of Gestations; index as i">
+    <span>{{gestation.cowId | cowIdentifier}} - {{gestation.calvingDate | date: 'dd/MM/yyyy'}}</span>
+    <div>
+        <p-progressbar [value]="gestation.progress" />
     </div>
-</p-panel>
+</div>

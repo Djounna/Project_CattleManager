@@ -1,0 +1,10 @@
+.size-scroll{
+    &_jobList{
+        max-height:40vh; 
+        overflow: auto;
+    }
+    &_interventionList{
+        max-height:40vh; 
+        overflow: auto;
+    }
+}

@@ -1,17 +1,25 @@
 <div class="page_base">
+    <div class="flex flex-column gap-4">
 
-    <div style="display:flex; flex-direction: row; gap:2rem">
-        <p-card header="Enclos">
-            <app-pen-pie-chart [data]="CattleStatistics"></app-pen-pie-chart>
-        </p-card>
-        <p-card header="Groupes">
-            <app-group-pie-chart [data]="CattleStatistics"></app-group-pie-chart>
-        </p-card>
-        <p-card header="Age">
-            <app-age-pie-chart [data]="CattleStatistics"></app-age-pie-chart>
-        </p-card>
-        <p-card header="Age">
-            <app-age-bar-chart [data]="CattleStatistics"></app-age-bar-chart>
-        </p-card>
+        <div style="display:flex; flex-direction: row; gap:2rem">
+            <p-card header="Enclos">
+                <app-pen-pie-chart [data]="CattleStatistics"></app-pen-pie-chart>
+            </p-card>
+            <p-card header="Groupes">
+                <app-group-pie-chart [data]="CattleStatistics"></app-group-pie-chart>
+            </p-card>
+            <p-card header="Age">
+                <app-age-pie-chart [data]="CattleStatistics"></app-age-pie-chart>
+            </p-card>
+            <p-card header="Age">
+                <app-age-bar-chart [data]="CattleStatistics"></app-age-bar-chart>
+            </p-card>
+        </div>
+
+        <div class="flex-grow-1">
+            <p-card header="Production laitière">
+                <app-month-milkings-graph [MilkingVolumes]="MilkingVolumes"></app-month-milkings-graph>
+            </p-card>
+        </div>
     </div>
 </div>

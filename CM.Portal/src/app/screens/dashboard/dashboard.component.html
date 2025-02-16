@@ -7,16 +7,26 @@
             <div class="flex flex-column">
                 <div class="flex flex-row gap-4">
                     <div class="flex-grow-2 max">
-                        <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
+                        <p-panel header="Tâches">
+                            <div class="size-scroll_jobList">
+                                <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
+                            </div>
+                        </p-panel>
                     </div>
                     <!-- <div>
                         <app-gestations-list [Gestations]="Gestations"></app-gestations-list>
                     </div> -->
                     <div>
-                        <app-gestations-board [Gestations]="Gestations"></app-gestations-board>
+                        <p-panel header="Gestations">
+                            <app-gestations-board [Gestations]="Gestations"></app-gestations-board>
+                        </p-panel>
                     </div>
                     <div>
-                        <app-intervention-list [Interventions]="Interventions"></app-intervention-list>
+                        <p-panel header="Interventions">
+                            <div class="size-scroll_interventionList">
+                                <app-intervention-list [Interventions]="Interventions"></app-intervention-list>
+                            </div>
+                        </p-panel>
                     </div>
                 </div>
             </div>
@@ -27,11 +37,6 @@
                 <app-alert-list [Alerts]="Alerts"></app-alert-list>
             </div> -->
         </div>
-
-        <div class="flex-grow-1">
-            <app-month-milkings-graph [MilkingVolumes]="MilkingVolumes"></app-month-milkings-graph>
-        </div>
-
     </div>
 
 </div>
