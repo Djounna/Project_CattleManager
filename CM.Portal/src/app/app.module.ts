@@ -53,6 +53,7 @@ import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { Timeline, TimelineModule } from 'primeng/timeline'
 import { CheckboxModule } from 'primeng/checkbox';
+import { ImageModule} from 'primeng/image';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -232,6 +233,7 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
         OrganizationChartModule,
         TimelineModule,
         CheckboxModule,
+        ImageModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

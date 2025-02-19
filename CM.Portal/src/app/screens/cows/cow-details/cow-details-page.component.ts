@@ -8,6 +8,7 @@ import { CowDetails } from '../../../state/cattle/cattle.actions';
 import { ActivatedRoute } from '@angular/router';
 import { MilkingState } from '../../../state/milking/milking.store';
 import { Milkings } from '../../../state/milking/milking.actions';
+import { latLng, tileLayer } from 'leaflet';
 
 @Component({
     selector: 'app-cow-details-page',
@@ -24,17 +25,20 @@ export class CowDetailsComponent extends BaseComponent{
     public MilkingVolumes! : MilkingVolumeDto[];
     @Select(MilkingState.selectedCowMonthMilkings) CowMilkingVolumes$!: Observable<MilkingDto[]>;
     public CowMilkingVolumes! : MilkingDto[];
-
     private Data$ = combineLatest([this.CowDetails$, this.MilkingVolumes$, this.CowMilkingVolumes$])
+
+    public mapOptions: any;
+
+    public ShowStatisticsDialog = false;
+    public ShowTimelineDialog = false
+    public ShowGenealogyDialog = false
 
     override ngOnInit(): void {
         this.route.params.subscribe(params => {
             this.cowId = +params['id'];
-    });
+        });
+        this.initMap();
         this.GetData(); 
-        this.store.dispatch(new Milkings.GetAllLastMonth);
-        this.store.dispatch(new CowDetails.Get(this.cowId)); 
-        this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
     }
 
     public GetData(): void{
@@ -47,5 +51,35 @@ export class CowDetailsComponent extends BaseComponent{
             takeUntil(this.$OnDestroyed),
             finalize(() => this.displayLoader = false))
         .subscribe({ error:(err) => { console.log(err); }});
+
+        this.store.dispatch(new Milkings.GetAllLastMonth);
+        this.store.dispatch(new CowDetails.Get(this.cowId)); 
+        this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
+    }
+
+    private initMap(): void{
+        this.mapOptions = {
+            layers: [
+            tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+            ],
+            zoom: 5,
+            center: latLng(46.879966, -121.726909)
+        }
+    }
+
+    public UpdateCowDialog(): void{
+
+    }
+
+    public ShowStatistics(): void{
+        this.ShowStatisticsDialog = true;
+    }
+
+    public ShowTimeline(): void{
+        this.ShowTimelineDialog = true;
+    }
+
+    public ShowGenealogy():void{
+        this.ShowGenealogyDialog = true;
     }
 }

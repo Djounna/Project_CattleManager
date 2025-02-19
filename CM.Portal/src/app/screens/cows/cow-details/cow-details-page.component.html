@@ -1,14 +1,80 @@
 <div class="page_base">
-    <div style="display:flex; flex-direction: row; gap: 2rem">
-        <div style="flex-grow:2"></div>
-        <div style="flex-grow:1">
-            <app-cow-genealogy [CowDetails]="CowDetails"></app-cow-genealogy>
+    <div style="display:flex; flex-direction: row; align-items: stretch; gap: 2rem">
+        <div class="flex flex-column gap-4 flex-grow-4">
+
+            <div style="display:flex; flex-direction:row; flex-grow:3; gap:0.5rem">
+                <div class="flex flex-column gap-2">
+                    <div>
+                        <p-card>
+                            <p-image src="assets\images\cattle\{{CowDetails?.imgLink}}" alt="Image" width="250" />
+                        </p-card>
+                    </div>
+                    <div>
+                        <p-card>
+                            <div style="height: 150px;" leaflet 
+                                [leafletOptions]="mapOptions">
+                            </div>
+                        </p-card>
+                    </div>
+                </div>
+                <div *ngIf="!!CowDetails">
+                    <p-card header="Details" [style]="{ width: '25rem', overflow: 'hidden' }">
+                        <ng-template #title> {{CowDetails.identifier}} </ng-template>
+                        <ng-template #subtitle> {{CowDetails.name}} </ng-template>
+                        <p-divider/>
+                        <p>
+                            Naissance : {{CowDetails.birthDate | date:'dd/MM/yyyy'}}
+                        </p>
+                        <p>
+                            Race : {{CowDetails.race}}
+                        </p>
+                        <p-divider/>
+                        <p>
+                            Groupe : {{CowDetails.group?.name}}
+                        </p>
+                        <p>
+                            Enclos : {{CowDetails.pen?.name}}
+                        </p>
+                        
+                    </p-card>
+                </div>
+                <div style="display:flex; flex-direction: column; gap:0.5rem;">
+                    <p-button icon="pi pi-cog" [raised]="true" size="large" (click)="UpdateCowDialog()" />
+                    <p-button icon="pi pi-sitemap" [raised]="true"  size="large" (click)="ShowGenealogy()"/>
+                    <p-button icon="pi pi-chart-bar" [raised]="true"  size="large" (click)="ShowStatistics()"/>
+                    <p-button icon="pi pi-user" [raised]="true"  size="large" (click)="ShowTimeline()"/>
+                </div>
+
+            </div>
+
+            <!-- <div *ngIf="!!CowMilkingVolumes && CowDetails?.milkCow">
+                <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
+            </div> -->
         </div>
-        <div style="max-height:75vh; overflow:auto">
+
+        <!-- <div *ngIf="!!CowDetails" style="max-height:90vh; overflow:auto; display:flex; flex-grow:1">
             <app-cow-timeline [CowDetails]="CowDetails"></app-cow-timeline>
-        </div>
-    </div>
-    <div>
-        <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
+        </div> -->
+        <!-- <div style="display: flex; flex-grow:1">
+            <app-cow-genealogy [CowDetails]="CowDetails"></app-cow-genealogy>
+        </div> -->
     </div>
 </div>
+
+<ng-container *ngIf="!!CowDetails">
+<p-dialog header="Généalogie" [modal]="true" [(visible)]="ShowGenealogyDialog" [style]="{ width: '50rem' }">
+    <app-cow-genealogy [CowDetails]="CowDetails"></app-cow-genealogy>
+</p-dialog>
+</ng-container>
+
+<ng-container *ngIf="!!CowDetails">
+<p-dialog header="Historique" [modal]="true" [(visible)]="ShowTimelineDialog" [style]="{ width: '25rem' }">
+    <app-cow-timeline [CowDetails]="CowDetails"></app-cow-timeline>
+</p-dialog>
+</ng-container>
+
+<ng-container *ngIf="!!CowMilkingVolumes && CowDetails?.milkCow">
+<p-dialog header="Production laitère" [modal]="true" [(visible)]="ShowStatisticsDialog" [style]="{ width: '100rem' }">
+    <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
+</p-dialog>
+</ng-container>
