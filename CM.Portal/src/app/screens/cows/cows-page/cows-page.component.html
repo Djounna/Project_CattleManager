@@ -34,14 +34,13 @@
             <app-cows-list-view #cowList [Cows]="Cows" (onUpdate)="UpdateCowDialog($event)" (onSelectCow)="SelectCow($event)"></app-cows-list-view>
         </div>
 
-        <div class="flex flex-column">
+        <div class="flex flex-column" *ngIf="!!SelectedCow">
             <app-cow-card [Cow]="SelectedCow"
             (onUpdate)="UpdateCowDialog($event)"
             (onAddIntervention)="CreateInterventionDialog($event)"
             (onAddVaccination)="CreateVaccinationDialog($event)"
-            (onAddGestation)="CreateGestationDialog($event)"
-            >
-        </app-cow-card>
+            (onAddGestation)="CreateGestationDialog($event)">
+            </app-cow-card>
         </div>
 
     </div>

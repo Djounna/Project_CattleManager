@@ -43,6 +43,7 @@ export class CowsPageComponent extends BaseComponent {
       takeUntil(this.$OnDestroyed),
       tap(([c, g, p]) => {
         this.Cows = c;
+        this.SelectedCow = this.Cows[0];
         this.Groups = g;
         this.Pens = p;
       })).subscribe({
