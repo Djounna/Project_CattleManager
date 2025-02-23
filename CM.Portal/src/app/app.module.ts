@@ -61,6 +61,7 @@ import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } fr
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider'; 
+import {MatIconModule} from '@angular/material/icon';
 
 // Shared components
 import { AuthButtonComponent } from './auth-button/auth-button.component';
@@ -196,6 +197,7 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
         MatInputModule,
         MatButtonModule,
         MatSliderModule,
+        MatIconModule,
         MatDialogTitle,
         MatDialogContent,
         MatDialogActions,
@@ -281,7 +283,7 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
             provideHttpClient(withInterceptorsFromDi()),
             providePrimeNG({ 
             theme: {
-                preset: NoraLime,
+                preset: AuraLime,
             }
         })
         ] 
