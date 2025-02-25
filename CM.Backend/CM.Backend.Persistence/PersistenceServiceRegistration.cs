@@ -20,6 +20,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IGestationRepository, GestationRepository>();
         services.AddScoped<IInterventionRepository, InterventionRepository>();
         services.AddScoped<IVaccinationRepository, VaccinationRepository>();
+        services.AddScoped<IConditionRepository, ConditionRepository>();
+        services.AddScoped<ITreatmentRepository, TreatmentRepository>();
         services.AddScoped<IMilkingRepository, MilkingRepository>();
         services.AddScoped<IMilkProductionRepository, MilkProductionRepository>();
         services.AddScoped<IIntervenantRepository, IntervenantRepository>();

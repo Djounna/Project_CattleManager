@@ -3,7 +3,7 @@
 public class MilkingDto
 {
     /// <summary>
-    /// 
+    /// Id
     /// </summary>
     public int Id { get; set; }
 
@@ -26,6 +26,6 @@ public class MilkingDto
     /// <summary>
     /// Vaolume (L)
     /// </summary>
-    public double Volume { get; set; }     
+    public double Volume { get; set; }
 
 }

@@ -57,6 +57,18 @@ public class MappingProfile : Profile
             .ReverseMap()
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
 
+        CreateMap<Condition, ConditionDto>()
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
+            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate))
+            .ReverseMap()
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
+            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate));
+
+        CreateMap<Treatment, TreatmentDto>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
+            .ReverseMap()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+
         CreateMap<MilkProduction, MilkProductionDto>().ReverseMap();
         CreateMap<Milking, MilkingDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();
