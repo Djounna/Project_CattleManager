@@ -1,24 +1,42 @@
 <div class="page_base">
     <div style="display:flex; flex-direction:column; gap:2rem">
 
-        <p-card header="Selected Date" subheader="{{SelectedDate}}">
-            <div style="display:flex; flex-direction:row; gap:2rem; margin-top:1rem ">
-                <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
-            </div>
-
-            <ng-template pTemplate="footer">
-                <div class="flex gap-4 mt-1">
-                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" />
-                    <p-button (click)="SaveAll()" label="Encoder" icon="pi pi-check" iconPos="right"></p-button>
+        <div style="display:flex; flex-direction:row; gap:2rem">
+            <p-card header="Date" subheader="{{SelectedDate}}">
+                <div style="display:flex; flex-direction:row; gap:2rem; margin-top:1rem ">
+                    <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
                 </div>
-            </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-4 mt-1">
+                        <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" />
+                        <p-button (click)="SaveAll()" label="Encoder" icon="pi pi-check" iconPos="right"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+
+            <p-card>
+
+            </p-card>
+        </div>
+
+        <p-card>
+            <div class="milking-inputs" *ngIf="MilkingDatas.length > 0">
+                <div *ngFor="let item of MilkingDatas">
+                <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)"></app-milking-input>
+                </div>
+            </div>
         </p-card>
 
-        <div class="milking-inputs">
-            <div *ngFor="let cow of MilkingDatas">
-            <app-milking-input #input [MilkingData]="cow" (onSave)="SaveOne($event)"></app-milking-input>
-            </div>
+        <!-- <p-dataview #dv [value]="MilkingDatas">
+            <ng-template #list let-items>
+                <div class="dataview" *ngFor="let item of items; let first = first">
+                    <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)"></app-milking-input>
+                </div>
+            </ng-template>
+        </p-dataview> -->
 
-        </div>
+
+
     </div>
 </div>

@@ -4,18 +4,31 @@
     align-items:center; 
     gap:1rem;
     padding:1rem;
-    background-color: white;
-    border: 1px solid black; 
-    border-radius: 5px;   
+    // border: 1px solid black; 
+    // border-radius: 5px;   
+    .column{
+        display:flex; 
+        flex-direction: column; 
+        gap: 0.2rem;
 
-    .identifier{
-        font-weight: bold;
+        .name{
+            font-size: large;
+            font-weight: bold;
+        }
+        .identifier{
+            font-style: italic;
+        }
+        .inputs{
+            display:flex;   
+            flex-direction:row; 
+            justify-content: center;
+            align-items:center;
+            gap: 1rem; 
+        }
     }
-    .inputs{
-        display:flex;   
-        flex-direction:row; 
-        justify-content: center;
-        align-items:center;
-        gap: 1rem; 
+
+    img{
+        width: 160px;
+        border-radius: 5px;
     }
 }
