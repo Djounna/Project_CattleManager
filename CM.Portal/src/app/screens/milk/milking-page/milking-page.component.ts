@@ -89,7 +89,10 @@ export class MilkingPageComponent extends BaseComponent {
     };
     this.store.dispatch(new MilkingInput.Update(dto))
     .subscribe({
-      next:(res) => this.toastSuccess('Les données de traite ont été enregistrées avec succès'),
+      next:(res) => {
+        this.toastSuccess('Les données de traite ont été enregistrées avec succès');
+        this.store.dispatch(new MilkingInputs.Get(this.SelectedDate));
+      },
       error:(res) => this.toastError('Une erreur s\'est produite lors de l\'enregistrement des données de traite')
     });
   }

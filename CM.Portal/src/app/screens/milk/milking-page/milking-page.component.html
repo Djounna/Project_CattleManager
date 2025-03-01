@@ -1,7 +1,7 @@
 <div class="page_base">
     <div style="display:flex; flex-direction:column; gap:2rem">
 
-        <div style="display:flex; flex-direction:row; gap:2rem">
+        <!-- <div style="display:flex; flex-direction:row; gap:2rem">
             <p-card header="Date" subheader="{{SelectedDate}}">
                 <div style="display:flex; flex-direction:row; gap:2rem; margin-top:1rem ">
                     <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
@@ -14,19 +14,40 @@
                     </div>
                 </ng-template>
             </p-card>
+        </div> -->
 
-            <p-card>
-
-            </p-card>
-        </div>
-
-        <p-card>
+        <p-menubar>
+            <ng-template #start>
+                <!-- <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="..." fill="var(--primary-color)" />
+                </svg> -->
+                <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                    <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
+                    <span>Date:</span>
+                    <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
+                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" />
+                </div>
+            </ng-template>
+            <!-- <ng-template #item let-item let-root="root">
+                <a pRipple class="flex items-center p-menubar-item-link">
+                    <span>{{ item.label }}</span>
+                    <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
+                    <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+                </a>
+            </ng-template> -->
+            <ng-template #end>
+                <div class="flex gap-4 mt-1">
+                    <p-button (click)="SaveAll()" label="Enregistrer" icon="pi pi-check" iconPos="right"></p-button>
+                </div>
+            </ng-template>
+        </p-menubar>
+        <!-- <p-card> -->
             <div class="milking-inputs" *ngIf="MilkingDatas.length > 0">
                 <div *ngFor="let item of MilkingDatas">
                 <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)"></app-milking-input>
                 </div>
             </div>
-        </p-card>
+        <!-- </p-card> -->
 
         <!-- <p-dataview #dv [value]="MilkingDatas">
             <ng-template #list let-items>

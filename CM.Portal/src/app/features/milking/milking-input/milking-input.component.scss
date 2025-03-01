@@ -3,32 +3,37 @@
     flex-direction: row;
     align-items:center; 
     gap:1rem;
-    padding:1rem;
-    // border: 1px solid black; 
-    // border-radius: 5px;   
+    padding:0.5rem;
+    background-color: white;
+    // border: 0.1px solid black; 
+    border-radius: 5px;   
+    border-color: white;
+    box-shadow: 1px 1px 5px grey;
+
     .column{
         display:flex; 
         flex-direction: column; 
         gap: 0.2rem;
-
         .name{
             font-size: large;
             font-weight: bold;
-        }
+            }
         .identifier{
             font-style: italic;
-        }
-        .inputs{
-            display:flex;   
-            flex-direction:row; 
-            justify-content: center;
-            align-items:center;
-            gap: 1rem; 
+            }
         }
     }
 
+    .inputs{
+        display:flex;   
+        flex-direction:row; 
+        justify-content: center;
+        align-items:center;
+        gap: 1rem; 
+    }
+
     img{
-        width: 160px;
+        // width: 160px;
+        width: 90px;
         border-radius: 5px;
     }
-}

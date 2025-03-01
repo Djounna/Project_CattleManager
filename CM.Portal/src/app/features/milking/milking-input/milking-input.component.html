@@ -1,10 +1,13 @@
 <div class="milking_input">
+
         <div>
             <img width=160px src="assets\images\cattle\{{MilkingData.Cow.imgLink}}" [alt]="MilkingData.Cow.name"/>
         </div>
         <div class="column">
             <span class="identifier">{{MilkingData.Cow.identifier}}</span>
             <span class="name">{{MilkingData.Cow.name}}</span>
+        </div>
+        <div style="display:flex; flex-direction: column; gap:0.2rem;">
             <div class="inputs">
                 <p-inputGroup>
                     <p-inputNumber [(ngModel)]="volume" [disabled]="MilkingData.Done || MilkingData?.Volume !== 0" [inputStyle]="{width: '3rem'}" inputId="integeronly"></p-inputNumber>
@@ -15,7 +18,10 @@
                     <input matSliderThumb [(ngModel)]="volume" #slider>
                 </mat-slider> -->
             </div>
+            <div style="display:flex; flex-direction:row; gap:1rem; align-self: flex-end;">
+                <p-button icon="pi pi-check" size='small'  [text]="true" [raised]="true" (click)="Save()" [disabled]="MilkingData.Done"/> 
+                <p-button icon="pi pi-times" severity="warn" size='small' [text]="true" [raised]="true" (click)="Annul()" [disabled]="MilkingData.Done"/> 
+            </div>
         </div>
-        <p-button icon="pi pi-check" (click)="Save()" [disabled]="MilkingData.Done"/> 
 </div>
-<p-divider></p-divider>
+<!-- <p-divider></p-divider> -->

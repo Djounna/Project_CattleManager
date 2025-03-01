@@ -32,4 +32,8 @@ export class MilkingInputComponent {
     }
     this.onSave.emit(newData);
   }
+
+  Annul(): void{
+    return;
+  }
 }
