@@ -6,19 +6,23 @@
         padding: 1rem;
 
         .form{
+            display: flex;
+            flex-direction: column;
+            gap:2rem;
             &-columns{
                 display: flex; 
                 flex-direction: row;
                 justify-content: space-around;
                 gap:2rem;
-                padding:1rem;
+                // padding:1rem;
             }
             &-actions{
                 display: flex; 
                 flex-direction: row;
                 justify-content: flex-end;
                 gap: 1rem;
-                padding:1rem;
+                // margin-top: 2rem;
+                // padding:1rem;
             }
         }
 
