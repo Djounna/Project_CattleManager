@@ -58,6 +58,7 @@ export class UpdateCowDialogComponent extends BaseComponent {
       name : this.updateCowForm.value.name,
       groupId: this.updateCowForm.value.groupId,
       penId: this.updateCowForm.value.penId,
+      milkCow: this.updateCowForm.value.milkCow,
     };
 
     this.dialogRef.close(this.updatedCow);

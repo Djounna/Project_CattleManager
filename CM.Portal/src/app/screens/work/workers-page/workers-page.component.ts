@@ -19,19 +19,11 @@ export class WorkersPageComponent extends BaseComponent{
 
   override ngOnInit(): void{
 
-    this.displayLoader = true;
-
     this.Workers$.pipe(
       takeUntil(this.$OnDestroyed))
       .subscribe({
-        next:(workers) => {
-          this.Workers = workers;
-          this.displayLoader = false
-        },
-        error:(err) => {
-          console.log(err);
-          this.displayLoader = false
-        }
+        next:(workers) => this.Workers = workers,
+        error:(err) =>  console.log(err) 
     });
 
     this.store.dispatch(new Workers.GetAll());

@@ -32,6 +32,11 @@ public class UpdateCowCommandHandler : IRequestHandler<UpdateCowCommand, CowDto>
             cow.Name = request.dto.Name;
         }
 
+        if (request.dto.MilkCow != cow.MilkCow)
+        {
+            cow.MilkCow = request.dto.MilkCow;
+        }
+
         if (request.dto.PenId != null && request.dto.PenId != cow.PenId)
         {
             var penMove = new PenMove()

@@ -37,8 +37,6 @@ export class CowsPageComponent extends BaseComponent {
 
   override ngOnInit(): void {
 
-    this.displayLoader = true;
-
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
       tap(([c, g, p]) => {
@@ -46,10 +44,7 @@ export class CowsPageComponent extends BaseComponent {
         this.SelectedCow = this.Cows[0];
         this.Groups = g;
         this.Pens = p;
-      })).subscribe({
-        next: (res) => this.displayLoader = false,
-        error: (err) => this.displayLoader = false
-      });
+      })).subscribe();
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());

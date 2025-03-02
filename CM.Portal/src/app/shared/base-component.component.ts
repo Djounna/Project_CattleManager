@@ -4,6 +4,7 @@ import { DialogService } from "primeng/dynamicdialog";
 import { Store } from "@ngxs/store";
 import { MessageService } from "primeng/api";
 import { Subject } from "rxjs";
+import { LoaderService } from "../services/loader.service";
 
 @Component({
     selector: 'app-base',
@@ -17,9 +18,9 @@ export class BaseComponent implements OnInit, OnDestroy {
     protected dialog = inject(MatDialog);
     protected dialogService =  inject(DialogService);
     protected messageService = inject(MessageService);
+    protected loader = inject(LoaderService);
 
     protected $OnDestroyed : Subject<void> = new Subject<void>();
-    protected displayLoader : boolean = false;
 
     ngOnInit(): void{}
 
