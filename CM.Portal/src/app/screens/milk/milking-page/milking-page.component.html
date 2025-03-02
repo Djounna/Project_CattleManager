@@ -18,14 +18,11 @@
 
         <p-menubar>
             <ng-template #start>
-                <!-- <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="..." fill="var(--primary-color)" />
-                </svg> -->
                 <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
                     <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
                     <span>Date:</span>
                     <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
-                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" />
+                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />
                 </div>
             </ng-template>
             <!-- <ng-template #item let-item let-root="root">
@@ -41,23 +38,12 @@
                 </div>
             </ng-template>
         </p-menubar>
-        <!-- <p-card> -->
-            <div class="milking-inputs" *ngIf="MilkingDatas.length > 0">
-                <div *ngFor="let item of MilkingDatas">
-                <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)"></app-milking-input>
-                </div>
+        
+        <div class="milking-inputs" *ngIf="MilkingDatas.length > 0">
+            <div *ngFor="let item of MilkingDatas">
+            <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)" (onAnnul)="SaveOne($event, true)"></app-milking-input>
             </div>
-        <!-- </p-card> -->
-
-        <!-- <p-dataview #dv [value]="MilkingDatas">
-            <ng-template #list let-items>
-                <div class="dataview" *ngFor="let item of items; let first = first">
-                    <app-milking-input #input [MilkingData]="item" (onSave)="SaveOne($event)"></app-milking-input>
-                </div>
-            </ng-template>
-        </p-dataview> -->
-
-
+        </div>
 
     </div>
 </div>

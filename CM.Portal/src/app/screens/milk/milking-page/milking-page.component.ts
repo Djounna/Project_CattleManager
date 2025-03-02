@@ -75,17 +75,23 @@ export class MilkingPageComponent extends BaseComponent {
         })
   }
 
-  SelectDate(): void{
+  public SelectDate(): void{
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
     this.store.dispatch(new MilkingInputs.Get(ddate))
   }
 
-  SaveOne(milkingData: MilkingData): void{
+  public SetDateAsToday(): void{
+    this.Date = new Date();
+    this.SelectDate();
+  }
+
+  SaveOne(milkingData: MilkingData, cancel: boolean = false): void{
     let dto: MilkingDto = {
       cowId : milkingData?.Cow?.id,
-      volume : milkingData.Volume,
-      date : this.MilkingInputs.date
+      volume : cancel ? 0 : milkingData.Volume,
+      date : this.MilkingInputs.date,
+      cancelled : cancel ? true : false
     };
     this.store.dispatch(new MilkingInput.Update(dto))
     .subscribe({
