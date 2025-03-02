@@ -28,7 +28,8 @@ public class GetMilkingInputsByDateQueryHandler : IRequestHandler<GetMilkingInpu
             {
                 CowId = m.CowId,
                 Volume = m.Volume,
-                Done = m.Volume != 0 ? true : false,
+                Done = m.Volume != 0 || m.Cancelled ? true : false,
+                Cancelled = m.Cancelled,
             }).ToList()
         };
     }
