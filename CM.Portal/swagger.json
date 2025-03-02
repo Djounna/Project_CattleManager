@@ -4143,6 +4143,9 @@
           "volume": {
             "type": "number",
             "format": "double"
+          },
+          "cancelled": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -4163,6 +4166,9 @@
           },
           "date": {
             "$ref": "#/components/schemas/DateOnly"
+          },
+          "cancelled": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
