@@ -9,9 +9,7 @@ public static class InfrastructureServiceRegistration
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHttpClient();
-
         services.AddScoped<IUserManagementService, AuthZeroManagementApi>();
-
         return services;
     }
 }
