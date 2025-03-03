@@ -29,6 +29,7 @@ public class UpdateMilkingInputCommandHandler : IRequestHandler<UpdateMilkingInp
                 Date = request.dto.Date.Value,
                 CowId = request.dto.CowId,
                 Volume = request.dto.Volume,
+                Cancelled = request.dto.Cancelled,
             };
 
         if (currentMilking != null)

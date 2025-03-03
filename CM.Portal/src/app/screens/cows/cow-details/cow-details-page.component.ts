@@ -49,7 +49,7 @@ export class CowDetailsComponent extends BaseComponent{
                 this.CowMilkingVolumes = cmv;
             }),
             takeUntil(this.$OnDestroyed),
-            finalize(() => this.displayLoader = false))
+        )
         .subscribe({ error:(err) => { console.log(err); }});
 
         this.store.dispatch(new Milkings.GetAllLastMonth);

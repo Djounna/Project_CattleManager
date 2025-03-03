@@ -1,7 +1,7 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { CowDto, MilkingDto, MilkingInputDto, MilkingInputsDto } from '../../../api/models';
 import { Select } from '@ngxs/store';
-import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
+import { Observable, combineLatest, finalize, takeUntil, tap } from 'rxjs';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Cows } from '../../../state/cattle/cattle.actions';
@@ -33,29 +33,30 @@ export class MilkingPageComponent extends BaseComponent {
   public Data$ = combineLatest([this.Cows$, this.MilkingInputs$]);
 
   override ngOnInit(): void {
+    this.loader.show()
     this.Date = new Date();
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
 
-    this.displayLoader = true;
 
     this.Data$.pipe(
+      finalize(() => this.loader.hide()),
       takeUntil(this.$OnDestroyed),
       tap(([c,m]) =>{
         this.Cows = c.filter(c => c.milkCow === true);
         this.MilkingInputs = m;
         this.refreshDatas();
-      })).subscribe({
-          next:(res) => this.displayLoader = false,
-          error:(err) => this.displayLoader = false
-        });
+      })).subscribe();
 
     this.store.dispatch(new MilkingInputs.Get(ddate))
     this.store.dispatch(new Cows.GetAll());
   }
 
   private refreshDatas(): void{
-        this.MilkingDatas.splice(0,this.MilkingDatas.length);
+      if(!this.MilkingInputs)
+        return;
+        // this.MilkingDatas.splice(0,this.MilkingDatas.length);
+        this.MilkingDatas = [];
         this.Cows.forEach(c =>{
           let input = this.MilkingInputs.milkingInputs?.find(m => m.cowId === c.id);
           if(!!input){
@@ -75,21 +76,30 @@ export class MilkingPageComponent extends BaseComponent {
         })
   }
 
-  SelectDate(): void{
+  public SelectDate(): void{
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
     this.store.dispatch(new MilkingInputs.Get(ddate))
   }
 
-  SaveOne(milkingData: MilkingData): void{
+  public SetDateAsToday(): void{
+    this.Date = new Date();
+    this.SelectDate();
+  }
+
+  SaveOne(milkingData: MilkingData, cancel: boolean = false): void{
     let dto: MilkingDto = {
       cowId : milkingData?.Cow?.id,
-      volume : milkingData.Volume,
-      date : this.MilkingInputs.date
+      volume : cancel ? 0 : milkingData.Volume,
+      date : this.MilkingInputs.date,
+      cancelled : cancel ? true : false
     };
     this.store.dispatch(new MilkingInput.Update(dto))
     .subscribe({
-      next:(res) => this.toastSuccess('Les données de traite ont été enregistrées avec succès'),
+      next:(res) => {
+        this.toastSuccess('Les données de traite ont été enregistrées avec succès');
+        this.store.dispatch(new MilkingInputs.Get(this.SelectedDate));
+      },
       error:(res) => this.toastError('Une erreur s\'est produite lors de l\'enregistrement des données de traite')
     });
   }

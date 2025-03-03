@@ -1,8 +1,10 @@
+export { AgeGenderGroupStatisticDto } from './models/age-gender-group-statistic-dto';
 export { AgeGroupStatisticDto } from './models/age-group-statistic-dto';
 export { AlertDto } from './models/alert-dto';
 export { AssignGroupDetailsDto } from './models/assign-group-details-dto';
 export { AssignPenDetailsDto } from './models/assign-pen-details-dto';
 export { CattleStatisticsDto } from './models/cattle-statistics-dto';
+export { ConditionDto } from './models/condition-dto';
 export { CowDetailsDto } from './models/cow-details-dto';
 export { CowDto } from './models/cow-dto';
 export { DateOnly } from './models/date-only';
@@ -29,6 +31,7 @@ export { PenMoveDto } from './models/pen-move-dto';
 export { PenStatisticDto } from './models/pen-statistic-dto';
 export { ProblemDetails } from './models/problem-details';
 export { StockDto } from './models/stock-dto';
+export { TreatmentDto } from './models/treatment-dto';
 export { UserDto } from './models/user-dto';
 export { UserInput } from './models/user-input';
 export { VaccinationDto } from './models/vaccination-dto';

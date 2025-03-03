@@ -13,4 +13,5 @@ public class MilkingInputDto
     public bool Done { get; set; }
     public double Volume { get; set; }
     public DateOnly? Date { get; set; }
+    public bool Cancelled { get; set; } 
 }

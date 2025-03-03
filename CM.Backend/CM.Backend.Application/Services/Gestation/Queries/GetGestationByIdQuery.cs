@@ -10,17 +10,17 @@ public record GetGestationByIdQuery(int id) : IRequest<GestationDto>;
 
 public class GetGestationByIdQueryHandler : IRequestHandler<GetGestationByIdQuery, GestationDto>
 {
-    private readonly IGestationRepository _groupRepository;
+    private readonly IGestationRepository _gestationRepository;
     private readonly IMapper _mapper;
 
-    public GetGestationByIdQueryHandler(IGestationRepository groupRepository, IMapper mapper)
+    public GetGestationByIdQueryHandler(IGestationRepository gestationRepository, IMapper mapper)
     {
-        _groupRepository = groupRepository;
+        _gestationRepository = gestationRepository;
         _mapper = mapper;
     }
 
     public async Task<GestationDto> Handle(GetGestationByIdQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<GestationDto>(_groupRepository.GetById(request.id)); // , cancellationToken
+        return _mapper.Map<GestationDto>(_gestationRepository.GetById(request.id)); // , cancellationToken
     }
 }

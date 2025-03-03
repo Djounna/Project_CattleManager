@@ -3,8 +3,6 @@ import { BaseComponent } from '../../../../shared/base-component.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CowDto } from '../../../../api/models';
-import { genders } from '../../../../models/enums/genders';
-import { races } from '../../../../models/enums/races';
 import { CattleState } from '../../../../state/cattle/cattle.store';
 import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
 
@@ -36,7 +34,8 @@ export class UpdateCowDialogComponent extends BaseComponent {
     this.updateCowForm = this.formBuilder.group({
       name:[this.cow.name, Validators.required],
       penId:[this.cow.penId, Validators.required],
-      groupId:[this.cow.groupId, Validators.required]
+      groupId:[this.cow.groupId, Validators.required],
+      milkcow:[this.cow.milkCow]
     })
     this.groupDict.forEach((value, key) => {
       this.groups.push({
@@ -59,6 +58,7 @@ export class UpdateCowDialogComponent extends BaseComponent {
       name : this.updateCowForm.value.name,
       groupId: this.updateCowForm.value.groupId,
       penId: this.updateCowForm.value.penId,
+      milkCow: this.updateCowForm.value.milkCow,
     };
 
     this.dialogRef.close(this.updatedCow);

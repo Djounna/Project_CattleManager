@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AlertService } from './services/alert.service';
+import { ConditionService } from './services/condition.service';
 import { CowService } from './services/cow.service';
 import { GestationService } from './services/gestation.service';
 import { GroupService } from './services/group.service';
@@ -16,6 +17,7 @@ import { MilkProductionService } from './services/milk-production.service';
 import { PenService } from './services/pen.service';
 import { StatisticService } from './services/statistic.service';
 import { StockService } from './services/stock.service';
+import { TreatmentService } from './services/treatment.service';
 import { UserManagementService } from './services/user-management.service';
 import { VaccinationService } from './services/vaccination.service';
 import { WorkerService } from './services/worker.service';
@@ -30,6 +32,7 @@ import { WorkerJobService } from './services/worker-job.service';
   declarations: [],
   providers: [
     AlertService,
+    ConditionService,
     CowService,
     GestationService,
     GroupService,
@@ -41,6 +44,7 @@ import { WorkerJobService } from './services/worker-job.service';
     PenService,
     StatisticService,
     StockService,
+    TreatmentService,
     UserManagementService,
     VaccinationService,
     WorkerService,

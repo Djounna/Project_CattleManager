@@ -13,6 +13,7 @@ export class MilkingInputComponent {
 
   @Input() MilkingData! : MilkingData;
   @Output() onSave :EventEmitter<MilkingData> = new EventEmitter<MilkingData>;
+  @Output() onAnnul :EventEmitter<MilkingData> = new EventEmitter<MilkingData>;
 
   public volume! : number;
 
@@ -31,5 +32,14 @@ export class MilkingInputComponent {
       Done: true
     }
     this.onSave.emit(newData);
+  }
+
+  Annul(): void{
+    let newData : MilkingData = {
+      Cow: this.MilkingData?.Cow,
+      Volume: 0,
+      Done: true
+    }
+    this.onAnnul.emit(newData);
   }
 }

@@ -10,5 +10,6 @@ public class Milking : BaseEntity
     public int CowId { get; set; }
     public virtual Cow Cow { get; set; }
     public DateOnly Date { get; set; }
-    public double Volume { get; set; }     
+    public double Volume { get; set; }
+    public bool Cancelled { get; set; } = false;
 }

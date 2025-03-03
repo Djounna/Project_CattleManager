@@ -81,6 +81,45 @@ namespace CM.Backend.Persistence.Migrations
                     b.ToTable("Alerts");
                 });
 
+            modelBuilder.Entity("CM.Backend.Domain.CowDetails.Condition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CowId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CowId");
+
+                    b.ToTable("Conditions");
+                });
+
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.Gestation", b =>
                 {
                     b.Property<int>("Id")
@@ -218,6 +257,9 @@ namespace CM.Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Cancelled")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CowId")
                         .HasColumnType("int");
 
@@ -263,6 +305,35 @@ namespace CM.Backend.Persistence.Migrations
                     b.HasIndex("SourcePenId");
 
                     b.ToTable("PenMoves");
+                });
+
+            modelBuilder.Entity("CM.Backend.Domain.CowDetails.Treatment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConditionId");
+
+                    b.ToTable("Treatments");
                 });
 
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.Vaccination", b =>
@@ -575,6 +646,17 @@ namespace CM.Backend.Persistence.Migrations
                     b.Navigation("Pen");
                 });
 
+            modelBuilder.Entity("CM.Backend.Domain.CowDetails.Condition", b =>
+                {
+                    b.HasOne("CM.Backend.Domain.Cows.Cow", "Cow")
+                        .WithMany()
+                        .HasForeignKey("CowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cow");
+                });
+
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.Gestation", b =>
                 {
                     b.HasOne("CM.Backend.Domain.Cows.Cow", "Cow")
@@ -644,7 +726,7 @@ namespace CM.Backend.Persistence.Migrations
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.Milking", b =>
                 {
                     b.HasOne("CM.Backend.Domain.Cows.Cow", "Cow")
-                        .WithMany()
+                        .WithMany("Milkings")
                         .HasForeignKey("CowId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -675,6 +757,17 @@ namespace CM.Backend.Persistence.Migrations
                     b.Navigation("DestinationPen");
 
                     b.Navigation("SourcePen");
+                });
+
+            modelBuilder.Entity("CM.Backend.Domain.CowDetails.Treatment", b =>
+                {
+                    b.HasOne("CM.Backend.Domain.CowDetails.Condition", "Condition")
+                        .WithMany()
+                        .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Condition");
                 });
 
             modelBuilder.Entity("CM.Backend.Domain.CowDetails.Vaccination", b =>
@@ -791,6 +884,8 @@ namespace CM.Backend.Persistence.Migrations
                     b.Navigation("Interventions");
 
                     b.Navigation("Jobs");
+
+                    b.Navigation("Milkings");
 
                     b.Navigation("PenMoves");
 

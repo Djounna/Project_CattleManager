@@ -1,30 +1,38 @@
 <div class="dialog_container">
     <form  [formGroup]="updateCowForm">
-        <div class="form-columns">
 
-            <div class="form_base gap-2">
-                <div class="flex flex-column gap-2">
-                    <label for="name">Nom</label>
-                    <input pInputText id="name" formControlName="name" />
-                </div>
-                <div class="flex flex-column gap-2">
-                    <label for="group">Groupe</label>
-                    <p-select 
-                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
-                    </p-select>
-                </div>
-                <div class="flex flex-column gap-2">
-                    <label for="pen">Enclos</label>
-                    <p-select 
-                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
-                    </p-select>
+        <div class="form">
+            <div class="form-columns">
+                <div class="flex flex-column gap-3">
+                    <div class="flex flex-column gap-2">
+                        <label for="name">Nom</label>
+                        <input pInputText id="name" formControlName="name" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="group">Groupe</label>
+                        <p-select fluid
+                            [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
+                        </p-select>
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="pen">Enclos</label>
+                        <p-select fluid
+                            [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
+                        </p-select>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <p-checkbox 
+                            formControlName="milkcow" [binary]="true">
+                        </p-checkbox>
+                        <label for="milkcow">Allaitante</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-actions">
-            <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
-            <p-button label="Confirmer" [raised]="true" [disabled]="!updateCowForm.valid" (click)="OnUpdate()"></p-button>
+            <div class="form-actions">
+                <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+                <p-button label="Confirmer" [raised]="true" [disabled]="!updateCowForm.valid" (click)="OnUpdate()"></p-button>
+            </div>
         </div>
 
     </form>

@@ -3,7 +3,7 @@
 public class MilkingDto
 {
     /// <summary>
-    /// 
+    /// Id
     /// </summary>
     public int Id { get; set; }
 
@@ -24,8 +24,13 @@ public class MilkingDto
     public DateOnly Date { get; set; }
 
     /// <summary>
-    /// Vaolume (L)
+    /// Volume (L)
     /// </summary>
-    public double Volume { get; set; }     
+    public double Volume { get; set; }
+
+    /// <summary>
+    /// Cancelled status
+    /// </summary>
+    public bool Cancelled { get; set; }
 
 }
