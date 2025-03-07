@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService, GenericError } from '@auth0/auth0-angular';
-import { filter, mergeMap } from 'rxjs';
+import { filter, mergeMap, switchMap } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -8,20 +8,24 @@ import { filter, mergeMap } from 'rxjs';
     styleUrl: './app.component.scss',
     standalone: false
 })
-export class AppComponent{                    // implements OnInit
-  title = 'CM.Portal';
+export class AppComponent{
+  public Title = 'CM.Portal';
 
-  constructor(private authSrv : AuthService){}
+  constructor(private authService : AuthService){}
 
   ngOnInit(): void {
-    // this.checkLogin();
+    this.checkLogin();
   }
 
   private checkLogin(): void{
-    this.authSrv.getAccessTokenSilently().subscribe({}); 
-    this.authSrv.error$.pipe(
-      filter((e) => e instanceof GenericError && e.error === 'login_required'),
-      mergeMap(() => this.authSrv.loginWithRedirect())
-      ).subscribe(); 
+    this.authService.isAuthenticated$.pipe(
+      filter(isAuthenticated => isAuthenticated),  
+      switchMap(() => this.authService.getAccessTokenSilently({ cacheMode: 'cache-only' })), // Try cache first
+      switchMap(token => token ? [token] : this.authService.getAccessTokenSilently())) // If no cache, fetch a new token
+      .subscribe({
+        next:(token) => console.log('Final Token:', token),
+        error:(error) => console.error('Token fetch error:', error)
+      });
   }
+
 }

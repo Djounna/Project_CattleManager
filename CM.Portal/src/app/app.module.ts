@@ -270,7 +270,9 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
                         }
                     }
                 ]
-            }
+            }, 
+            cacheLocation : 'localstorage',
+            useRefreshTokens : true
         })], 
         providers: [
             { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, 
