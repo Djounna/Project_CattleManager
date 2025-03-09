@@ -23,6 +23,7 @@ export class CreateInterventionDialogComponent extends BaseComponent {
   }
 
   override ngOnInit(): void {
+    super.ngOnInit();
     this.Cow = this.dialogConfig.data;
     this.CreateInterventionForm = this.formBuilder.group({
       // cowId: [0, Validators.required],

@@ -33,6 +33,8 @@ export class PenPageComponent extends BaseComponent{
   public PenMapInfos : PenMapInfo[] = [];
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
       tap(([c,g,p]) =>{

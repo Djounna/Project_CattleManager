@@ -31,6 +31,8 @@ export class CreateCowDialogComponent extends BaseComponent {
   public pens: any[] = []
   
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.groupDict.forEach((value, key) => {
       this.groups.push({
         id: key,

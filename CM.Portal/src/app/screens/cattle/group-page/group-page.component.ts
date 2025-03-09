@@ -27,6 +27,7 @@ export class GroupPageComponent extends BaseComponent {
   public Data$ = combineLatest([this.Cows$, this.Groups$, this.Pens$])
 
   override ngOnInit(): void {
+    super.ngOnInit();
 
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),

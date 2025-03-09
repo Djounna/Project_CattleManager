@@ -25,6 +25,7 @@ export class CreateGestationDialogComponent extends BaseComponent{
   }
 
   override ngOnInit(): void {
+    super.ngOnInit();
     this.Cow = this.dialogConfig.data;
     this.CreateGestationForm = this.formBuilder.group({
       // cowId: [0, Validators.required],

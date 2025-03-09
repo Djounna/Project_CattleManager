@@ -24,6 +24,8 @@ export class CreateVaccinationDialogComponent extends BaseComponent {
   }
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.Cow = this.dialogConfig.data;
     this.CreateVaccinationForm = this.formBuilder.group({
       identifier: [this.Cow.identifier],

@@ -36,6 +36,7 @@ export class CowsPageComponent extends BaseComponent {
   public SelectedCow!: CowDto;
 
   override ngOnInit(): void {
+    super.ngOnInit();
 
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),

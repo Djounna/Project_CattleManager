@@ -45,6 +45,7 @@ export class DashboardComponent extends BaseComponent {
   private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$])
 
   override ngOnInit(): void {
+    super.ngOnInit();
     this.getData();
   }
 

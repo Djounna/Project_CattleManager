@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, finalize, takeUntil } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { UserDto } from '../../../api/models';
 import { Select } from '@ngxs/store';
 import * as workStore from '../../../state/work/work.store';
@@ -18,7 +18,7 @@ export class WorkersPageComponent extends BaseComponent{
   public Workers : UserDto[] = [];
 
   override ngOnInit(): void{
-
+    super.ngOnInit();
     this.Workers$.pipe(
       takeUntil(this.$OnDestroyed))
       .subscribe({

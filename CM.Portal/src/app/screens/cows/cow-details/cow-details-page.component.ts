@@ -34,6 +34,8 @@ export class CowDetailsComponent extends BaseComponent{
     public ShowGenealogyDialog = false
 
     override ngOnInit(): void {
+        super.ngOnInit();
+
         this.route.params.subscribe(params => {
             this.cowId = +params['id'];
         });

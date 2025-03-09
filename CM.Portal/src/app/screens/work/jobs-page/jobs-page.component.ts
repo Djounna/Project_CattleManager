@@ -37,8 +37,9 @@ export class JobsPageComponent extends BaseComponent {
   public Data$ = combineLatest([this.JobsDetails$, this.Jobs$, this.Cows$, this.Pens$, this.Workers$])
 
   override ngOnInit(): void{
+    super.ngOnInit();
 
-  this.Data$.pipe(
+    this.Data$.pipe(
       takeUntil(this.$OnDestroyed),tap(([jd,j,c,p,w]) =>{
         this.JobsDetails = jd;
         this.Jobs = j;

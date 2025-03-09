@@ -25,6 +25,7 @@ export class UpdateGestationDialogComponent extends BaseComponent{
   public updateGestationForm!: FormGroup;
 
   override ngOnInit(): void {
+    super.ngOnInit();
     this.gestation = this.dialogConfig.data;
     this.updateGestationForm = this.formBuilder.group({
       startDate: [this.gestation.startDate, Validators.required],

@@ -33,12 +33,12 @@ export class MilkingPageComponent extends BaseComponent {
   public Data$ = combineLatest([this.Cows$, this.MilkingInputs$]);
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.loader.show()
     this.Date = new Date();
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
-
-
     this.Data$.pipe(
       finalize(() => this.loader.hide()),
       takeUntil(this.$OnDestroyed),

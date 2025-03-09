@@ -25,6 +25,8 @@ export class UpdateInterventionDialogComponent extends BaseComponent {
   public updateInterventionForm!: FormGroup;
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.intervention = this.dialogConfig.data;
     this.updateInterventionForm = this.formBuilder.group({
       date: [this.intervention.date, Validators.required],

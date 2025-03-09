@@ -30,6 +30,8 @@ export class UpdateCowDialogComponent extends BaseComponent {
   public pens: any[] = []
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.cow = this.dialogConfig.data;
     this.updateCowForm = this.formBuilder.group({
       name:[this.cow.name, Validators.required],

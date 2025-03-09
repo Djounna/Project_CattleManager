@@ -25,6 +25,7 @@ export class StatisticsCowsPageComponent extends BaseComponent{
   private Data$ = combineLatest([this.CattleStatistics$, this.MilkingVolumes$])
 
   override ngOnInit(): void {
+    super.ngOnInit();
     this.getData();
   }
 

@@ -25,6 +25,8 @@ export class UpdateVaccinationDialogComponent extends BaseComponent{
   public updatedVaccination!: VaccinationDto;
 
   override ngOnInit(): void {
+    super.ngOnInit();
+
     this.vaccination = this.dialogConfig.data;
     this.updateVaccinationForm = this.formBuilder.group({
       name: [this.vaccination.name, Validators.required],
