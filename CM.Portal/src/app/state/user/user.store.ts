@@ -47,7 +47,6 @@ getToken(ctx: StateContext<UserStateModel>){
     switchMap(token => token ? [token] : this.authService.getAccessTokenSilently())) // If no cache, fetch a new token
     .subscribe({
       next:(token) => {
-        debugger;
         console.log('Final Token:', token);
         const decoded = jwtDecode<cmJwtPayload>(token);
         const roles = decoded['cattlemanager/roles'];

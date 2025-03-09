@@ -28,22 +28,6 @@ export class AppComponent{
   }
 
   private checkLogin(): void{
-    debugger;
     this.store.dispatch(new User.GetToken());
-    
-  // this.authService.isAuthenticated$.pipe(
-  //   filter(isAuthenticated => isAuthenticated),  
-  //   switchMap(() => this.authService.getAccessTokenSilently({ cacheMode: 'cache-only' })), // Try cache first
-  //   switchMap(token => token ? [token] : this.authService.getAccessTokenSilently())) // If no cache, fetch a new token
-  //   .subscribe({
-  //     next:(token) => {
-  //       debugger;
-  //       console.log('Final Token:', token);
-  //       const decoded = jwtDecode<cmJwtPayload>(token);
-  //       const roles = decoded['cattlemanager/roles'];
-  //       this.store.dispatch(new User.SetRoles(roles));
-  //     },
-  //     error:(error) => console.error('Token fetch error:', error)
-  //   });
   }
 }
