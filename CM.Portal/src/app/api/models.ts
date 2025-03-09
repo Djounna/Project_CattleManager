@@ -30,6 +30,7 @@ export { PenDto } from './models/pen-dto';
 export { PenMoveDto } from './models/pen-move-dto';
 export { PenStatisticDto } from './models/pen-statistic-dto';
 export { ProblemDetails } from './models/problem-details';
+export { RoleDto } from './models/role-dto';
 export { StockDto } from './models/stock-dto';
 export { TreatmentDto } from './models/treatment-dto';
 export { UserDto } from './models/user-dto';

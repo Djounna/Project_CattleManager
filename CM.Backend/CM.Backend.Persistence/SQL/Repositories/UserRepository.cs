@@ -1,4 +1,5 @@
 ﻿using CM.Backend.Application.Interfaces.Persistence;
+using CM.Backend.Application.Models.Users;
 using CM.Backend.Domain.Users;
 using CM.Backend.Persistence.EF;
 
@@ -12,3 +13,4 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         return _context.Users.Where(u => u.Role.Name == "Worker");
     }
 }
+

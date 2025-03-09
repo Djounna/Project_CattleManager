@@ -8,7 +8,7 @@ public class UserDto
     /// <summary>
     /// Id
     /// </summary>
-    public int Id { get; set; } 
+    public int Id { get; set; }
 
     /// <summary>
     /// UserName
@@ -19,6 +19,11 @@ public class UserDto
     /// Email
     /// </summary>
     public string Email { get; set; }
+
+    /// <summary>
+    /// AuthId
+    /// </summary>
+    public int AuthId { get; set; }
 
     /// <summary>
     /// Role Id

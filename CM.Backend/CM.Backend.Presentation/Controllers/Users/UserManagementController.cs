@@ -6,6 +6,8 @@ using CM.Backend.Application.Services.Job.Commands;
 using CM.Backend.Application.Models.Jobs;
 using CM.Backend.Application.Models.Users;
 using CM.Backend.Application.Services.User.Commands;
+using CM.Backend.Application.Services.UserManagement.Queries;
+using System;
 
 namespace CM.Backend.Presentation.Controllers.Jobs;
 
@@ -26,6 +28,20 @@ public class UserManagementController : ControllerBase
     }
 
     /// <summary>
+    /// Get user roles
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns>Roles</returns>
+    [HttpGet, Route("user/{userId}/roles")]
+    [AllowAnonymous]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<RoleDto>>> GetUserRoles(int userId)
+    {
+        return Ok(await _mediator.Send(new GetUserRolesByIdQuery(userId)));
+    }
+
+    /// <summary>
     /// User SignIn
     /// </summary>
     /// <param name="dto"></param>
@@ -36,20 +52,22 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<UserInput>> Create([FromBody]UserInput dto)
     {
-        return Ok(await _mediator.Send(new CreateUserCommand(dto)));
+        throw new NotImplementedException();
+        //return Ok(await _mediator.Send(new CreateUserCommand(dto)));
     }
 
     /// <summary>
     /// Assign Role to a user 
     /// </summary>
-    /// <param name="dto"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    //[HttpPut]
-    //[Authorize("write:jobs")]
-    //[ProducesDefaultResponseType]
-    //[ProducesResponseType(StatusCodes.Status200OK)]
-    //public async Task<ActionResult<JobDto>> Update([FromBody]JobDto dto)
-    //{
-    //    return Ok(await _mediator.Send(new UpdateJobCommand(dto)));
-    //}
- }
+    [HttpPut]
+    //[Authorize("write:")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<RoleDto>>> AssignUserRoles(int userId)
+    {
+        throw new NotImplementedException();
+        //return Ok(await _mediator.Send(new UpdateJobCommand(dto)));
+    }
+}

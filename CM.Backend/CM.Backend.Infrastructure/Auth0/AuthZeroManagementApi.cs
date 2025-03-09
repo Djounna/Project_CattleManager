@@ -156,7 +156,7 @@ public class AuthZeroManagementApi : IUserManagementService
         //Role role = await GetRoleInDb(user, cancellation);
         var result = lst.Find(c => c.name == role);
 
-        string[] tab = {result.id};
+        string[] tab = { result.id };
         AssignRolesRequest rolesRequest = new AssignRolesRequest(tab);
 
         var json = JsonConvert.SerializeObject(rolesRequest);
@@ -169,6 +169,35 @@ public class AuthZeroManagementApi : IUserManagementService
         }
 
         return true;
+    }
+
+    public async Task<List<Role>> GetUserRoles(int userId)
+    {
+        var tokenResponse = await GetToken();
+        var tokenAccess = tokenResponse.access_token;
+
+        using HttpClient _httpClient = _httpClientFactory.CreateClient();
+        var url = _configuration["Auth0ManagementApi:Audience"] + $"users/{userId}/roles";
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenAccess);
+        var httpResponse = await _httpClient.GetAsync(url);
+        if (!httpResponse.IsSuccessStatusCode) throw new Exception();
+
+        var content = await httpResponse.Content.ReadAsStringAsync();
+        List<UserRole> roles = JsonConvert.DeserializeObject<List<UserRole>>(content);
+        if (roles == null)
+        {
+            return null;
+        }
+
+        return roles.Select(r =>
+        {
+            return new Role
+            {
+                Name = r.name,
+                Description = r.description,
+            };
+        }).ToList();
     }
 
     private async Task<List<UserRole>> GetAllRoles(CancellationToken cancellationToken)

@@ -3050,6 +3050,49 @@
         }
       }
     },
+    "/api/UserManagement/user/{userId}/roles": {
+      "get": {
+        "tags": [
+          "UserManagement"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/UserManagement": {
       "post": {
         "tags": [
@@ -3091,6 +3134,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserManagement"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDto"
+                  }
                 }
               }
             }
@@ -4343,6 +4426,24 @@
         },
         "additionalProperties": { }
       },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "StockDto": {
         "type": "object",
         "properties": {
@@ -4397,6 +4498,10 @@
           "email": {
             "type": "string",
             "nullable": true
+          },
+          "authId": {
+            "type": "integer",
+            "format": "int32"
           },
           "roleId": {
             "type": "integer",
