@@ -1,0 +1,110 @@
+import { Injectable } from "@angular/core";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { UserManagementService } from "../../api/services";
+import { UserStateModel } from "./user.state";
+import { User } from "./user.action";
+import { filter, switchMap, tap, UnsubscriptionError } from "rxjs";
+import { AuthService } from "@auth0/auth0-angular";
+import { jwtDecode } from "jwt-decode";
+import { cmJwtPayload } from "../../models/jwt/jwt";
+
+@State<UserStateModel>({
+  name: 'user',
+  defaults: {
+    UserRoles: [], 
+    IsAdmin : false,
+    IsWorker: false,
+  }
+})
+
+@Injectable()
+export class UserState {
+  constructor(
+    private authService: AuthService,
+    private userService: UserManagementService
+  ) { }
+
+  @Selector()
+  static UserRoles(userState: UserStateModel){
+    return userState.UserRoles;
+  }
+
+  @Selector()
+  static IsAdmin(userState: UserStateModel){
+    return userState.IsAdmin;
+  }
+
+  @Selector()
+  static IsWorker(userState: UserStateModel){
+    return userState.IsWorker
+  }
+
+@Action(User.GetToken)
+getToken(ctx: StateContext<UserStateModel>){
+  this.authService.isAuthenticated$.pipe(
+    filter(isAuthenticated => isAuthenticated),  
+    switchMap(() => this.authService.getAccessTokenSilently({ cacheMode: 'cache-only' })), // Try cache first
+    switchMap(token => token ? [token] : this.authService.getAccessTokenSilently())) // If no cache, fetch a new token
+    .subscribe({
+      next:(token) => {
+        debugger;
+        console.log('Final Token:', token);
+        const decoded = jwtDecode<cmJwtPayload>(token);
+        const roles = decoded['cattlemanager/roles'];
+        if (roles.includes('Manager')){
+          ctx.patchState({IsAdmin : true})
+        }
+        else{
+          ctx.patchState({IsAdmin : false})
+        }
+        if(roles.includes('Worker')){
+          ctx.patchState({IsWorker : true})
+        }
+        else{
+          ctx.patchState({ IsWorker: false})
+        }
+      },
+      error:(error) => console.error('Token fetch error:', error)
+    });
+}
+
+@Action(User.SetRoles)
+setUserRoles(ctx: StateContext<UserStateModel>, action: User.SetRoles){
+  const roles = action.roles;
+  if (roles.includes('Manager')){
+    ctx.patchState({IsAdmin : true})
+  }
+  else{
+    ctx.patchState({IsAdmin : false})
+  }
+  if(roles.includes('Worker')){
+    ctx.patchState({IsWorker : true})
+  }
+  else{
+    ctx.patchState({ IsWorker: false})
+  }
+}
+
+@Action(User.GetRoles)
+getRoles(ctx: StateContext<UserStateModel>, action: User.GetRoles){
+  return this.userService.apiUserManagementUserUserIdRolesGet({userId: action.id})
+    .pipe(
+      tap(roles => {
+        ctx.patchState({UserRoles : roles})
+        if(roles.some(r => r.name === 'Admin')){
+          ctx.patchState({IsAdmin : true})
+        }
+        else{
+          ctx.patchState({IsAdmin : false})
+        }
+        if(roles.some(r => r.name === 'Worker')){
+          ctx.patchState({IsAdmin : true})
+        }
+        else{
+          ctx.patchState({IsAdmin : true})
+        }
+      })
+    )
+}
+
+}

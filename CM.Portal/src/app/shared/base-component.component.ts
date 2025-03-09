@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogService } from "primeng/dynamicdialog";
-import { Store } from "@ngxs/store";
+import { Select, Store } from "@ngxs/store";
 import { MessageService } from "primeng/api";
-import { Subject } from "rxjs";
+import { Observable, Subject, tap } from "rxjs";
 import { LoaderService } from "../services/loader.service";
+import { UserState } from "../state/user/user.store";
 
 @Component({
     selector: 'app-base',
@@ -21,8 +22,19 @@ export class BaseComponent implements OnInit, OnDestroy {
     protected loader = inject(LoaderService);
 
     protected $OnDestroyed : Subject<void> = new Subject<void>();
+    // @Select(UserState.IsAdmin) IsAdmin$! : Observable<boolean>;
+    // @Select(UserState.IsWorker) IsWorker$! : Observable<boolean>;
+    public IsAdmin: boolean = false;
+    public IsWorker: boolean = false;
 
-    ngOnInit(): void{}
+    ngOnInit(): void{
+        // this.IsAdmin$.pipe(tap((res) => this.IsAdmin = res)).subscribe();
+        // this.IsWorker$.pipe(tap((res) => this.IsWorker = res)).subscribe();
+        this.IsAdmin = this.store.selectSnapshot(UserState.IsAdmin);
+        this.IsWorker = this.store.selectSnapshot(UserState.IsWorker);
+        console.log('IsAdmin : '); console.log(this.IsAdmin);
+        console.log('IsWorker : '); console.log(this.IsWorker);
+    }
 
     ngOnDestroy(): void {
         this.$OnDestroyed.next();

@@ -140,6 +140,7 @@ import { PicklistPenDialogComponent } from './features/shared/dialogs/picklist-p
 import { LoaderComponent } from './shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { TodoListComponent } from './features/work/todo-list/todo-list.component';
+import { UserState } from './state/user/user.store';
 
 @NgModule({ 
     declarations: 
@@ -241,7 +242,7 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
         // Routing configuration
         AppRoutingModule,
         //State Mgmt
-        NgxsModule.forRoot([AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
+        NgxsModule.forRoot([UserState, AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
         ApiModule.forRoot({ rootUrl: 'https://localhost:7276' }),
         // Auth0
         AuthModule.forRoot({
