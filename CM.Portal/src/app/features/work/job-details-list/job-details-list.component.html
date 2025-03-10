@@ -1,5 +1,5 @@
+    <!-- [tableStyle]="{ 'min-width': '50rem' }" -->
 <p-table [value]="filteredJobs" styleClass="p-datatable-gridlines" 
-    [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
     [rows]="5"
     [showCurrentPageReport]="true"
@@ -45,6 +45,8 @@
                 pTooltip="Modifier"></p-button>
                 <p-button icon="pi pi-times" severity="danger"
                 pTooltip="Supprimer"></p-button>
+                <p-button icon="pi pi-times" severity="success"
+                pTooltip="Zoomer" (click)="FocusOnJob(job)"></p-button>
             </td>
         </tr>
     </ng-template>

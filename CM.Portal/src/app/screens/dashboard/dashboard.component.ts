@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
-import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
-import { AlertDto, GestationDto, InterventionDto, JobDto, UserDto, GroupDto, PenDto } from '../../api/models';
+import { Observable, combineLatest, forkJoin, takeUntil, tap } from 'rxjs';
+import { AlertDto, GestationDto, InterventionDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto } from '../../api/models';
 import { AlertState } from '../../state/alert/alert.store';
 import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
@@ -11,6 +11,7 @@ import { Jobs, Workers } from '../../state/work/work.actions';
 import { Cows, Gestations, Groups } from '../../state/cattle/cattle.actions';
 import { InfrastructureState } from '../../state/infrastructure/infrastructure.store';
 import { Pens } from '../../state/infrastructure/infrastructure.action';
+import { MapInfo, MapService } from '../../services/map.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -24,8 +25,8 @@ export class DashboardComponent extends BaseComponent {
   public CowIdentifierDictionnary: Map<number, string> = new Map<number, string>;
   @Select(CattleState.cowNameDict) CowNameDictionnary$!: Observable<Map<number,string>>
   public CowNameDictionnary: Map<number, string> = new Map<number, string>;
-  @Select(WorkState.jobs) Jobs$!: Observable<JobDto[]>
-  public Jobs: JobDto[] = []
+  @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDto[]>
+  public JobsDetails: JobDetailsDto[] = []
   @Select(WorkState.jobs) Workers$!: Observable<UserDto[]>
   public Workers: UserDto[] = []
   @Select(AlertState.alerts) Alerts$!: Observable<AlertDto[]>
@@ -42,7 +43,13 @@ export class DashboardComponent extends BaseComponent {
   public Pens: PenDto[] = []
   @Select(InfrastructureState.penDict) PenDictionnary$!: Observable<Map<number, string>>
   public PenDictionnary: Map<number, string> = new Map<number, string>;
-  private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.Jobs$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$, this.Pens$, this.PenDictionnary$])
+  private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.JobsDetails$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$])
+
+  public MapInfos!: MapInfo;
+
+  constructor(private mapService: MapService){
+    super();
+  }
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -52,28 +59,58 @@ export class DashboardComponent extends BaseComponent {
   private getData(): void{
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
-      tap(([cid, cnd, a, j, w, ge, g, gd, p, pd]) => {
+      tap(([cid, cnd, a, j, w, ge, g, gd]) => {
         this.CowIdentifierDictionnary = cid;
         this.CowNameDictionnary = cnd;
         this.Alerts = a;
-        this.Jobs = j;
+        this.JobsDetails = j;
         this.Workers = w;
         this.Gestations = ge;
         this.Groups = g;
         this.GroupDictionnary = gd;
-        this.Pens = p;
-        this.PenDictionnary = pd;
+        // this.Pens = p;
+        // this.PenDictionnary = pd;
       })).subscribe();
+
+      this.Pens$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        )
+      .subscribe({
+        next:(res) => {
+          this.Pens = res;
+          this.initMap();
+          },
+        error: (err) => console.log("An error occured during data retrieval")
+      });
+
+      this.PenDictionnary$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        tap((p) => this.PenDictionnary = p))
+      .subscribe();
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Alerts.GetAll());
     this.store.dispatch(new Jobs.GetAll());
+    this.store.dispatch(new Jobs.GetAllDetails());
     this.store.dispatch(new Gestations.GetAll());
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
     this.store.dispatch(new Workers.GetAll());
   }
+
+  private initMap(): void{
+    this.MapInfos = this.mapService.CreateAllPenMapInfos(this.Pens);
+  }
+
+  public onMapReady(map: any){
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 1000);
+  }
 }
+
 
 export interface MilkingHistoryData {
   date: Date,

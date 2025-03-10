@@ -10,10 +10,10 @@
                                 <span class="font-semibold">{{ penInfo.Pen.name }}</span>
                             </span>
                         </div>
-                            <div style="height: 200px;" leaflet 
-                                [leafletOptions]="penInfo.MapOptions"
-                                [leafletLayers]="penInfo.MapLayers"
-                            ></div>
+                        <div style="height: 200px;" leaflet 
+                            [leafletOptions]="penInfo.MapOptions"
+                            [leafletLayers]="penInfo.MapLayers">
+                        </div>
                         <div class="flex flex-row justify-content-end gap-2">
                             <span class="p-buttonset">
                                 <p-button icon="pi pi-user" severity="info" 

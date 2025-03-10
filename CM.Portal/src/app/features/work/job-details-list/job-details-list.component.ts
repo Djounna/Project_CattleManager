@@ -1,5 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { JobDetailsDto, JobDto, PenDto, UserDto } from '../../../api/models';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { JobDetailsDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { AssignJobDialogComponent } from '../job/assign-job-dialog/assign-job-dialog.component';
 import { Jobs } from '../../../state/work/work.actions';
@@ -17,6 +17,7 @@ export class JobDetailsListComponent extends BaseComponent {
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
   public filteredJobs : JobDetailsDto[] = [];
+
   @Input() set JobsDetails(value: JobDetailsDto[]){
     this.jobs = [...value]
     this.filteredJobs = [...this.jobs];
@@ -25,13 +26,15 @@ export class JobDetailsListComponent extends BaseComponent {
     return this.jobs;
   }
 
+  @Output() onFocusJob : EventEmitter<JobDetailsDto> = new EventEmitter<JobDetailsDto>();
+
   applyFilterGlobal(event: any) {
     return event.target.value;
   }
 
   clear(table: Table) {
         table.clear();
-    }
+  }
 
   public showAll(): void{
     this.filteredJobs = [...this.jobs];
@@ -43,8 +46,11 @@ export class JobDetailsListComponent extends BaseComponent {
     this.filteredJobs = [...this.jobs.filter(c => c?.pen?.id === pen.id)];
   }
 
-  public assignJobDialog(job:any) : void{
+  public FocusOnJob(job: JobDetailsDto){
+    this.onFocusJob.emit(job);
+  }
 
+  public assignJobDialog(job:any) : void{
     const dialogRef = this.dialog.open(AssignJobDialogComponent, {
       height: '200px',
       width: '300px',
