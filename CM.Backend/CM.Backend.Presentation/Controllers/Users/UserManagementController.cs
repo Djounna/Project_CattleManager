@@ -24,7 +24,7 @@ public class UserManagementController : ControllerBase
     /// <param name="mediator"></param>
     public UserManagementController(IMediator mediator)
     {
-        _mediator = mediator;  
+        _mediator = mediator;
     }
 
     /// <summary>

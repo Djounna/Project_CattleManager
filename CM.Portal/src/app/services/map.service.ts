@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PenDto } from "../api/models";
-import { latLng, LatLngExpression, Polygon, polygon, tileLayer } from "leaflet";
+import L, { FeatureGroup, latLng, LatLngExpression, Polygon, polygon, tileLayer } from "leaflet";
 
 @Injectable({
     providedIn: 'root'
@@ -8,18 +8,41 @@ import { latLng, LatLngExpression, Polygon, polygon, tileLayer } from "leaflet";
 export class MapService {
 
     public CreateAllPenMapInfos(pens: PenDto[]): MapInfo{
-        let penMapLayers = pens.map(p => this.CreatePenMapLayer(p));
+        // let penMapLayers = pens.map(p => this.CreatePenMapLayer(p));
+        let penMapLayers: FeatureGroup = L.featureGroup();
+        this.CreatePenMapLayers(penMapLayers, pens);
         let MapInfo: MapInfo = {
             MapOptions: {
                 layers: [
-                tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+                    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
+                    penMapLayers
                 ],
                 zoom: 16,
                 center: latLng(50.491320, 4.971440),
             },
-            PenMapLayers: penMapLayers 
+            PenMapLayers: penMapLayers
         }
         return MapInfo;
+    }
+
+    public CreatePenMapLayers(featureGroup: FeatureGroup, pens: PenDto[]): void{
+        pens.forEach(p => {
+            let poly = this.GeneratePenPolygon(p);
+            featureGroup.addLayer(poly);
+        });
+    }
+
+    public CreatePenMapLayersWithFocus(featureGroup: FeatureGroup, pens: PenDto[], pen: PenDto): void{
+        pens.forEach(p => {
+            let poly: Polygon;
+            if(p.id === pen.id){
+                poly = this.GeneratePenPolygonWithFocus(p);
+            }
+            else{
+                poly = this.GeneratePenPolygon(p);
+            }
+            featureGroup.addLayer(poly);
+        });
     }
 
     public CreatePenMapLayer(pen: PenDto): PenMapLayer{
@@ -31,7 +54,7 @@ export class MapService {
         return penMapLayer;
     }
 
-    private GeneratePenPolygon(pen : PenDto): Polygon<any>{
+    public GeneratePenPolygon(pen : PenDto): Polygon<any>{
         if (pen.coordinates == null){
             return polygon([]);
         }
@@ -88,7 +111,8 @@ export class MapService {
 
 export interface MapInfo{
     MapOptions: any; 
-    PenMapLayers: PenMapLayer[];
+    PenMapLayers: FeatureGroup;
+    // PenMapLayers: PenMapLayer[];
 }
 
 export interface PenMapLayer{

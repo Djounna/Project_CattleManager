@@ -12,6 +12,7 @@ import { Cows, Gestations, Groups } from '../../state/cattle/cattle.actions';
 import { InfrastructureState } from '../../state/infrastructure/infrastructure.store';
 import { Pens } from '../../state/infrastructure/infrastructure.action';
 import { MapInfo, MapService } from '../../services/map.service';
+import * as L from 'leaflet';
 
 @Component({
     selector: 'app-dashboard',
@@ -45,7 +46,7 @@ export class DashboardComponent extends BaseComponent {
   public PenDictionnary: Map<number, string> = new Map<number, string>;
   private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.JobsDetails$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$])
 
-  public Map: any;
+  public Map!: L.Map;
   public MapInfos!: MapInfo;
 
   constructor(private mapService: MapService){
@@ -56,6 +57,10 @@ export class DashboardComponent extends BaseComponent {
     super.ngOnInit();
     this.getData();
   }
+
+  // ngAfterViewInit() {
+  //   this.loadInitialPolygons();
+  // }
 
   private getData(): void{
     this.Data$.pipe(
@@ -103,6 +108,7 @@ export class DashboardComponent extends BaseComponent {
 
   private initMap(): void{
     this.MapInfos = this.mapService.CreateAllPenMapInfos(this.Pens);
+    this.mapService.CreatePenMapLayers(this.MapInfos.MapOptions.penMapLayers, this.Pens);
   }
 
   public onMapReady(map: any){
@@ -112,24 +118,43 @@ export class DashboardComponent extends BaseComponent {
     }, 1000);
   }
 
-  public Focus(job: JobDetailsDto){
+  public onFocusPolygon(job: JobDetailsDto){
+    let penFocus: PenDto | undefined;
     if (!!job.pen){
-      const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
-      if (!!penMapLayer){
-        penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
-        this.Map.fitBounds(penMapLayer.poly.getBounds());
-      }
+      penFocus= this.Pens.find(p => p.id === job.pen?.id) as PenDto;
     }
     else if(!!job.cow){
       if(!!job.cow?.penId){
-        const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
-        if (!!penMapLayer){
-        penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
-        this.Map.fitBounds(penMapLayer.poly.getBounds());
-        }
+        penFocus = this.Pens.find(p => p.id === job.cow?.penId) as PenDto;
       }
     }
+
+    if(!!penFocus){
+      this.MapInfos.PenMapLayers.clearLayers(); // Remove existing polygons
+      this.mapService.CreatePenMapLayersWithFocus(this.MapInfos.PenMapLayers, this.Pens, penFocus)
+      const tempPolyForFocus = this.mapService.GeneratePenPolygon(penFocus);
+      this.Map.fitBounds(tempPolyForFocus.getBounds());
+    }
   }
+
+  // public Focus(job: JobDetailsDto){
+  //   if (!!job.pen){
+  //     const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
+  //     if (!!penMapLayer){
+  //       penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
+  //       this.Map.fitBounds(penMapLayer.poly.getBounds());
+  //     }
+  //   }
+  //   else if(!!job.cow){
+  //     if(!!job.cow?.penId){
+  //       const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
+  //       if (!!penMapLayer){
+  //       penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
+  //       this.Map.fitBounds(penMapLayer.poly.getBounds());
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 export interface MilkingHistoryData {

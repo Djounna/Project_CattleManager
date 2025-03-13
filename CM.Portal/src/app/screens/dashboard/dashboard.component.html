@@ -8,7 +8,7 @@
             </div> -->
             <div class="size-scroll_jobList">
                 <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                (onFocusJob)="Focus($event)"
+                (onFocusJob)="onFocusPolygon($event)"
                 ></app-job-details-list>
             </div>
         </p-panel>
@@ -17,7 +17,7 @@
             [leafletOptions]="MapInfos.MapOptions"
             (leafletMapReady)="onMapReady($event)"
             >
-            <div *ngFor="let pen of MapInfos.PenMapLayers" [leafletLayer]="pen.poly"></div>
+            <!-- <div *ngFor="let pen of MapInfos.PenMapLayers" [leafletLayer]="pen.poly"></div> -->
         </div>
             <!-- [leafletLayers]="MapInfos.MapLayers" -->
 
