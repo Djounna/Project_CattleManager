@@ -7,16 +7,19 @@
                 <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
             </div> -->
             <div class="size-scroll_jobList">
-                <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
+                <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
+                (onFocusJob)="Focus($event)"
+                ></app-job-details-list>
             </div>
         </p-panel>
 
         <div *ngIf="Pens.length > 0" style="width: 600px;" leaflet 
             [leafletOptions]="MapInfos.MapOptions"
-            [leafletLayers]="MapInfos.MapLayers"
             (leafletMapReady)="onMapReady($event)"
             >
+            <div *ngFor="let pen of MapInfos.PenMapLayers" [leafletLayer]="pen.poly"></div>
         </div>
+            <!-- [leafletLayers]="MapInfos.MapLayers" -->
 
         <!-- <div class="fles flex-column gap-3">
             <app-alert-list [Alerts]="Alerts"></app-alert-list>

@@ -8,8 +8,7 @@ import { latLng, LatLngExpression, Polygon, polygon, tileLayer } from "leaflet";
 export class MapService {
 
     public CreateAllPenMapInfos(pens: PenDto[]): MapInfo{
-        
-
+        let penMapLayers = pens.map(p => this.CreatePenMapLayer(p));
         let MapInfo: MapInfo = {
             MapOptions: {
                 layers: [
@@ -18,19 +17,20 @@ export class MapService {
                 zoom: 16,
                 center: latLng(50.491320, 4.971440),
             },
-            MapLayers: 
-            [
-                // polygon([[ 50.467388, 4.871985 ], [ 50.467334, 4.871934 ], [ 50.467398, 4.871967 ]]),
-                ...this.GeneratePenPolygons(pens)
-            ]
+            PenMapLayers: penMapLayers 
         }
         return MapInfo;
     }
 
-    private GeneratePenPolygons(pens : PenDto[]): Polygon<any>[]{
-        return pens.map(p => this.GeneratePenPolygon(p))
+    public CreatePenMapLayer(pen: PenDto): PenMapLayer{
+        let penMapLayer: PenMapLayer =  {
+            pen : pen,
+            poly : this.GeneratePenPolygon(pen)
+        }
+
+        return penMapLayer;
     }
-    
+
     private GeneratePenPolygon(pen : PenDto): Polygon<any>{
         if (pen.coordinates == null){
             return polygon([]);
@@ -39,12 +39,24 @@ export class MapService {
         return polygon(coordinates);
     }
 
+    public GeneratePenPolygonWithFocus(pen : PenDto): Polygon<any>{
+        if (pen.coordinates == null){
+            return polygon([]);
+        }
+        let coordinates = this.parseCoordinates(pen.coordinates) as LatLngExpression[];
+        return polygon(coordinates, {color: 'green', fill:true, fillColor: 'green'});
+    }
+
     private parseCoordinates(input: string): number[][] {
         return input.match(/\[.*?\]/g)?.map(pair => 
             pair.slice(1, -1).split(',').map(Number)
         ) || [];
     }
     
+    private GeneratePenPolygons(pens : PenDto[]): Polygon<any>[]{
+        return pens.map(p => this.GeneratePenPolygon(p))
+    }
+
     public CreatePenMapInfosList(pens: PenDto[]): PenMapInfo[]{
         let penMapInfosList : PenMapInfo[] = [];
 
@@ -76,10 +88,11 @@ export class MapService {
 
 export interface MapInfo{
     MapOptions: any; 
-    MapLayers: any;
+    PenMapLayers: PenMapLayer[];
 }
 
-export interface PenPolygon{
+export interface PenMapLayer{
+    pen: PenDto,
     poly: Polygon<any>,
 }
 

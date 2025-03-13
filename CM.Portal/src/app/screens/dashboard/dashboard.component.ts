@@ -45,6 +45,7 @@ export class DashboardComponent extends BaseComponent {
   public PenDictionnary: Map<number, string> = new Map<number, string>;
   private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.JobsDetails$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$])
 
+  public Map: any;
   public MapInfos!: MapInfo;
 
   constructor(private mapService: MapService){
@@ -106,11 +107,30 @@ export class DashboardComponent extends BaseComponent {
 
   public onMapReady(map: any){
     setTimeout(() => {
-      map.invalidateSize();
+      this.Map = map;
+      this.Map.invalidateSize();
     }, 1000);
   }
-}
 
+  public Focus(job: JobDetailsDto){
+    if (!!job.pen){
+      const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
+      if (!!penMapLayer){
+        penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
+        this.Map.fitBounds(penMapLayer.poly.getBounds());
+      }
+    }
+    else if(!!job.cow){
+      if(!!job.cow?.penId){
+        const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
+        if (!!penMapLayer){
+        penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
+        this.Map.fitBounds(penMapLayer.poly.getBounds());
+        }
+      }
+    }
+  }
+}
 
 export interface MilkingHistoryData {
   date: Date,
