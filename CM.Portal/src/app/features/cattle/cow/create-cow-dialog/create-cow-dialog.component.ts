@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CowDto } from '../../../../api/models';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { races } from '../../../../models/enums/races';
-import { genders } from '../../../../models/enums/genders';
+import { Races } from '../../../../models/enums/races';
+import { Genders } from '../../../../models/enums/genders';
 import { BaseComponent } from '../../../../shared/base-component.component';
 import { CattleState } from '../../../../state/cattle/cattle.store';
 import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
@@ -21,10 +21,11 @@ export class CreateCowDialogComponent extends BaseComponent {
   ){
     super();
   }
-
+  
+  public createCowForm!: FormGroup;
   public newCow : CowDto | undefined;
-  public races : string[] = Object.values(races);
-  public genders : string[] = Object.values(genders);
+  public races : string[] = Object.values(Races);
+  public genders : string[] = Object.values(Genders);
   public groupDict : Map<number, string> = this.store.selectSnapshot(CattleState.groupDict);
   public penDict : Map<number, string> = this.store.selectSnapshot(InfrastructureState.penDict);
   public groups: any[] = [];   
@@ -32,7 +33,10 @@ export class CreateCowDialogComponent extends BaseComponent {
   
   override ngOnInit(): void {
     super.ngOnInit();
+    this.initForm();
+  }
 
+  private initForm(): void{
     this.groupDict.forEach((value, key) => {
       this.groups.push({
         id: key,
@@ -45,19 +49,18 @@ export class CreateCowDialogComponent extends BaseComponent {
         name: value
       });
     }) 
+    this.createCowForm = this.formBuilder.group({
+      identifier:['', Validators.required],
+      name:['', Validators.required],
+      birthdate:[new Date(),Validators.required],
+      race:['', Validators.required],
+      gender:['', Validators.required],
+      penId:[0, Validators.required],
+      groupId:[0, Validators.required]
+    });
   }
 
-  createCowForm = this.formBuilder.group({
-    identifier:['', Validators.required],
-    name:['', Validators.required],
-    birthdate:[new Date(),Validators.required],
-    race:['', Validators.required],
-    gender:['', Validators.required],
-    penId:[0, Validators.required],
-    groupId:[0, Validators.required]
-  })
-
-  OnCreate(): void {
+  public OnCreate(): void {
     this.newCow = {
       id : 0,
       identifier : this.createCowForm.value.identifier, 
