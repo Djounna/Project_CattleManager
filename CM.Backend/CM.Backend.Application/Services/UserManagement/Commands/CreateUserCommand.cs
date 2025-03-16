@@ -23,7 +23,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
 
     public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-
         var createdUserAuth = await _userManagementService.CreateUser(request.dto, cancellationToken);
 
         var user = _mapper.Map<Domain.Users.User>(createdUserAuth);

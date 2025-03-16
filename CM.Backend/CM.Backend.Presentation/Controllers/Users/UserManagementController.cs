@@ -52,8 +52,7 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<UserInput>> Create([FromBody]UserInput dto)
     {
-        throw new NotImplementedException();
-        //return Ok(await _mediator.Send(new CreateUserCommand(dto)));
+        return Ok(await _mediator.Send(new CreateUserCommand(dto)));
     }
 
     /// <summary>
