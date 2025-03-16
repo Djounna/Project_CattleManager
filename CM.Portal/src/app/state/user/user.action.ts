@@ -1,6 +1,3 @@
-import { UserInput } from "../../api/models"
-import { NewUserDto } from "../../models/user/new-user-dto"
-
 export namespace User{
     export class Create{
         static readonly type = '[User] Create User'

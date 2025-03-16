@@ -74,11 +74,9 @@ getToken(ctx: StateContext<UserStateModel>){
           ctx.patchState({ IsWorker: false})
         }
       })
-      // error:(error) => console.error('Token fetch error:', error)
     ) 
     .subscribe({
       error:(err) => {
-        debugger;
         this.authService.loginWithRedirect();
       }
     });

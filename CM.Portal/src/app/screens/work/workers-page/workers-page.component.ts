@@ -43,17 +43,14 @@ export class WorkersPageComponent extends BaseComponent{
     });
 
     dialogRef.onClose.subscribe(result => {
-      debugger;
       if (result == null)
         return;
       this.store.dispatch(new User.Create({body: result})).subscribe({
         next: () => {
-          debugger;
           this.toastSuccess("L'utilisateur a été créé avec succès");
           this.store.dispatch(new Workers.GetAll()).subscribe();
         },
         error: () => {
-          debugger;
           this.toastError("Une erreur s'est produite")
         }
       });

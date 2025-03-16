@@ -1,9 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CowDto, GroupDto, PenDto } from '../../../../api/models';
-import { genders } from '../../../../models/enums/genders';
-import { races } from '../../../../models/enums/races';
+import { MatDialogRef } from '@angular/material/dialog';
+import { GroupDto } from '../../../../api/models';
 
 @Component({
     selector: 'app-create-group-dialog',
