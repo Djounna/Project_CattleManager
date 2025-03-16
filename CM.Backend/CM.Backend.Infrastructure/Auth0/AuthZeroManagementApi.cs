@@ -67,7 +67,7 @@ public class AuthZeroManagementApi : IUserManagementService
             {
                 {"email", userInput.Email},
                 {"email_verified", "false"},
-                {"connection", _configuration["UserPassword:Connection"]},
+                {"connection", "Username-Password-Authentication"},
                 {"verify_email","true"},
                 {"given_name", userInput.Firstname},
                 {"family_name", userInput.Lastname},
@@ -77,6 +77,7 @@ public class AuthZeroManagementApi : IUserManagementService
                 {"username", userInput.Username},
             }), cancellationToken);
 
+        //_configuration["UserPassword:Connection"]
 
         if (!response.IsSuccessStatusCode)
         {
