@@ -5,6 +5,8 @@ import { Select } from '@ngxs/store';
 import * as workStore from '../../../state/work/work.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Workers } from '../../../state/work/work.actions';
+import { CreateUserDialogComponent } from '../../../features/users/user/create-user-dialog/create-user-dialog.component';
+import { User } from '../../../state/user/user.action';
 
 @Component({
     selector: 'app-workers-page',
@@ -19,6 +21,10 @@ export class WorkersPageComponent extends BaseComponent{
 
   override ngOnInit(): void{
     super.ngOnInit();
+    this.getData();
+  }
+
+  private getData():void {
     this.Workers$.pipe(
       takeUntil(this.$OnDestroyed))
       .subscribe({
@@ -28,4 +34,30 @@ export class WorkersPageComponent extends BaseComponent{
 
     this.store.dispatch(new Workers.GetAll());
   }
+
+  public createUserDialog(): void{
+    const dialogRef = this.dialogService.open(CreateUserDialogComponent, {
+      header: 'Créer un utilisateur',
+      height: '450px',
+      width: '500px',
+    });
+
+    dialogRef.onClose.subscribe(result => {
+      debugger;
+      if (result == null)
+        return;
+      this.store.dispatch(new User.Create({body: result})).subscribe({
+        next: () => {
+          debugger;
+          this.toastSuccess("L'utilisateur a été créé avec succès");
+          this.store.dispatch(new Workers.GetAll()).subscribe();
+        },
+        error: () => {
+          debugger;
+          this.toastError("Une erreur s'est produite")
+        }
+      });
+    });
+  }
+  
 }

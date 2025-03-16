@@ -1,0 +1,43 @@
+<div class="dialog_container">
+    <form  [formGroup]="createUserForm">
+
+        <div class="form">
+            <div class="form-columns">
+                <div class="flex flex-column gap-3">
+                    <div class="flex flex-column gap-2">
+                        <label for="firstname">Prénom</label>
+                        <input pInputText id="firstname" formControlName="firstname" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="lastname">Nom</label>
+                        <input pInputText id="lastname" formControlName="lastname" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="username">Pseudo</label>
+                        <input pInputText id="username" formControlName="username" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="email">Email</label>
+                        <input pInputText id="email" formControlName="email" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="password">Mot de passe</label>
+                        <input pInputText id="password" formControlName="password" fluid />
+                    </div>
+                    <div class="flex flex-column gap-2">
+                        <label for="role">Role</label>
+                        <p-select fluid
+                            [options]="RoleSelection" optionLabel="Label" optionValue="Value" formControlName="roleName" placeholder="Rôle" [showClear]="true">
+                        </p-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+                <p-button label="Confirmer" [raised]="true" [disabled]="!createUserForm.valid" (click)="OnCreate()"></p-button>
+            </div>
+        </div>
+
+    </form>
+</div>

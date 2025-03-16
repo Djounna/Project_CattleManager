@@ -1,4 +1,16 @@
 <div class="page_base">
-        <app-workers-list-view *ngIf="Workers.length > 0" [Workers]="Workers"></app-workers-list-view>
+        <div class="flex flex-column">
+
+                <div class="flex flex-row justify-content-start align-content-center">
+                        <div class="flex flex-row justify-content-between gap-3">
+                        <p-button label="Créer" (click)="createUserDialog()" ></p-button> 
+                        </div>
+                </div>
+
+                <p-divider></p-divider>
+
+                <app-workers-list-view *ngIf="Workers.length > 0" [Workers]="Workers"></app-workers-list-view>
+
+        </div>
 </div>
 

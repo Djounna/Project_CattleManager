@@ -141,6 +141,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { TodoListComponent } from './features/work/todo-list/todo-list.component';
 import { UserState } from './state/user/user.store';
+import { CreateUserDialogComponent } from './features/users/user/create-user-dialog/create-user-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -184,7 +185,8 @@ import { UserState } from './state/user/user.store';
         AgeBarChartComponent,
         PenPageComponent,
         LoaderComponent,
-        TodoListComponent
+        TodoListComponent,
+        CreateUserDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
