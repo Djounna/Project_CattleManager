@@ -1,0 +1,2868 @@
+openapi: 3.0.1
+info:
+  title: CM.Backend.Presentation
+  version: '1.0'
+paths:
+  /api/Alert:
+    get:
+      tags:
+        - Alert
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Alert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Alert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AlertDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Alert
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Alert/{id}':
+    get:
+      tags:
+        - Alert
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Condition/{id}':
+    get:
+      tags:
+        - Condition
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Condition:
+    get:
+      tags:
+        - Condition
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConditionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Condition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Condition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConditionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Condition
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Cow/{id}':
+    get:
+      tags:
+        - Cow
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CowDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Cow/{id}/details':
+    get:
+      tags:
+        - Cow
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CowDetailsDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Cow:
+    get:
+      tags:
+        - Cow
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CowDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Cow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CowDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Cow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CowDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CowDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Cow
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Gestation/{id}':
+    get:
+      tags:
+        - Gestation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GestationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Gestation:
+    get:
+      tags:
+        - Gestation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GestationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Gestation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GestationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Gestation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GestationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GestationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Gestation
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Group:
+    get:
+      tags:
+        - Group
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GroupDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Group
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Group/{id}':
+    get:
+      tags:
+        - Group
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Group/assign:
+    post:
+      tags:
+        - Group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignGroupDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AssignGroupDetailsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AssignGroupDetailsDto'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Intervenant/{id}':
+    get:
+      tags:
+        - Intervenant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervenantDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Intervenant:
+    get:
+      tags:
+        - Intervenant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IntervenantDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Intervenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervenantDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Intervenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/IntervenantDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervenantDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Intervenant
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Intervention/{id}':
+    get:
+      tags:
+        - Intervention
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Intervention:
+    get:
+      tags:
+        - Intervention
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InterventionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Intervention
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Intervention
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/InterventionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Intervention
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Job:
+    get:
+      tags:
+        - Job
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/JobDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Job
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Job/details:
+    get:
+      tags:
+        - Job
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobDetailsDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Job/{id}':
+    get:
+      tags:
+        - Job
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/{id}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Milking:
+    get:
+      tags:
+        - Milking
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Milking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Milking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkingDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Milking
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/range/{start}/{end}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: start
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: end
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/volume/range/{start}/{end}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: start
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: end
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkingVolumeDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/{cowId}/{range}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: cowId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: range
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/{cowId}/{start}/{end}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: cowId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: start
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: end
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkingDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Milking/milkingInputs/{date}':
+    get:
+      tags:
+        - Milking
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingInputsDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Milking/milkingInputs:
+    post:
+      tags:
+        - Milking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputsDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingInputsDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Milking/milkingInput:
+    post:
+      tags:
+        - Milking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkingInputDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkingInputDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/MilkProduction/{id}':
+    get:
+      tags:
+        - MilkProduction
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkProductionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/MilkProduction:
+    get:
+      tags:
+        - MilkProduction
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MilkProductionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - MilkProduction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkProductionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - MilkProduction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MilkProductionDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MilkProductionDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - MilkProduction
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Pen:
+    get:
+      tags:
+        - Pen
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PenDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Pen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PenDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Pen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PenDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PenDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Pen
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Pen/{id}':
+    get:
+      tags:
+        - Pen
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PenDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Pen/assign:
+    post:
+      tags:
+        - Pen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignPenDetailsDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AssignPenDetailsDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AssignPenDetailsDto'
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Statistic:
+    get:
+      tags:
+        - Statistic
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CattleStatisticsDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Stock:
+    get:
+      tags:
+        - Stock
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StockDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/StockDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Stock
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Stock/{id}':
+    get:
+      tags:
+        - Stock
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Treatment/{id}':
+    get:
+      tags:
+        - Treatment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Treatment:
+    get:
+      tags:
+        - Treatment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreatmentDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Treatment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Treatment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Treatment
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/UserManagement/user/{userId}/roles':
+    get:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/UserManagement:
+    post:
+      tags:
+        - UserManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInput'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/Vaccination/{id}':
+    get:
+      tags:
+        - Vaccination
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaccinationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Vaccination:
+    get:
+      tags:
+        - Vaccination
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VaccinationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      tags:
+        - Vaccination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaccinationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    put:
+      tags:
+        - Vaccination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VaccinationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaccinationDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      tags:
+        - Vaccination
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Worker:
+    get:
+      tags:
+        - Worker
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/WorkerJob/api/WorkerJob/GetAssignedWorkers/{id}':
+    get:
+      tags:
+        - WorkerJob
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/WorkerJob/api/WorkerJob/AssignJob:
+    post:
+      tags:
+        - WorkerJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkerJobDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WorkerJobDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WorkerJobDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkerJobDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/WorkerJob/api/WorkerJob/UnassignJob/{id}':
+    delete:
+      tags:
+        - WorkerJob
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    AgeGenderGroupStatisticDto:
+      type: object
+      properties:
+        gender:
+          type: string
+          nullable: true
+        ageGroupName:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+      additionalProperties: false
+    AgeGroupStatisticDto:
+      type: object
+      properties:
+        ageGroupName:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+      additionalProperties: false
+    AlertDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        level:
+          type: string
+          nullable: true
+        infos:
+          type: string
+          nullable: true
+        cowId:
+          type: integer
+          format: int32
+          nullable: true
+        penId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    AssignGroupDetailsDto:
+      type: object
+      properties:
+        group1:
+          $ref: '#/components/schemas/GroupDetailsDto'
+        group2:
+          $ref: '#/components/schemas/GroupDetailsDto'
+      additionalProperties: false
+    AssignPenDetailsDto:
+      type: object
+      properties:
+        pen1:
+          $ref: '#/components/schemas/PenDetailsDto'
+        pen2:
+          $ref: '#/components/schemas/PenDetailsDto'
+      additionalProperties: false
+    CattleStatisticsDto:
+      type: object
+      properties:
+        groupStatistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupStatisticDto'
+          nullable: true
+        penStatistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/PenStatisticDto'
+          nullable: true
+        ageGroupStatistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeGroupStatisticDto'
+          nullable: true
+        ageGenderGroupStatisticsFemale:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeGenderGroupStatisticDto'
+          nullable: true
+        ageGenderGroupStatisticsMale:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeGenderGroupStatisticDto'
+          nullable: true
+      additionalProperties: false
+    ConditionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        cowId:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        comment:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    CowDetailsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        identifier:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        milkCow:
+          type: boolean
+        birthDate:
+          type: string
+          format: date-time
+        race:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        imgLink:
+          type: string
+          nullable: true
+        pen:
+          $ref: '#/components/schemas/PenDto'
+        group:
+          $ref: '#/components/schemas/GroupDto'
+        milkings:
+          type: array
+          items:
+            $ref: '#/components/schemas/MilkingDto'
+          nullable: true
+        interventions:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterventionDto'
+          nullable: true
+        vaccinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/VaccinationDto'
+          nullable: true
+        gestations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GestationDto'
+          nullable: true
+        genealogy:
+          $ref: '#/components/schemas/GenealogyDto'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/CowDto'
+          nullable: true
+        penMoves:
+          type: array
+          items:
+            $ref: '#/components/schemas/PenMoveDto'
+          nullable: true
+        groupMoves:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMoveDto'
+          nullable: true
+      additionalProperties: false
+    CowDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        identifier:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        milkCow:
+          type: boolean
+        birthDate:
+          type: string
+          format: date-time
+        race:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        imgLink:
+          type: string
+          nullable: true
+        motherId:
+          type: integer
+          format: int32
+          nullable: true
+        fatherId:
+          type: integer
+          format: int32
+          nullable: true
+        penId:
+          type: integer
+          format: int32
+          nullable: true
+        groupId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    DateOnly:
+      type: object
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        day:
+          type: integer
+          format: int32
+        dayOfWeek:
+          $ref: '#/components/schemas/DayOfWeek'
+        dayOfYear:
+          type: integer
+          format: int32
+          readOnly: true
+        dayNumber:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    DayOfWeek:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      type: integer
+      format: int32
+    GenealogyDto:
+      type: object
+      properties:
+        mother:
+          $ref: '#/components/schemas/ParentDto'
+        father:
+          $ref: '#/components/schemas/ParentDto'
+      additionalProperties: false
+    GestationDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        cowId:
+          type: integer
+          format: int32
+        status:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        calvingDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    GroupDetailsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        imgLink:
+          type: string
+          nullable: true
+        cows:
+          type: array
+          items:
+            $ref: '#/components/schemas/CowDto'
+          nullable: true
+      additionalProperties: false
+    GroupDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        imgLink:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GroupMoveDto:
+      type: object
+      properties:
+        cowId:
+          type: integer
+          format: int32
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        sourceGroupId:
+          type: integer
+          format: int32
+          nullable: true
+        destinationGroupId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    GroupStatisticDto:
+      type: object
+      properties:
+        groupId:
+          type: integer
+          format: int32
+        groupName:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+      additionalProperties: false
+    IntervenantDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        coordinates:
+          type: string
+          nullable: true
+      additionalProperties: false
+    InterventionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        cowId:
+          type: integer
+          format: int32
+        intervenantId:
+          type: integer
+          format: int32
+        type:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    JobDetailsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        length:
+          type: integer
+          format: int32
+          nullable: true
+        pen:
+          $ref: '#/components/schemas/PenDto'
+        cow:
+          $ref: '#/components/schemas/CowDto'
+        workers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+          nullable: true
+      additionalProperties: false
+    JobDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        length:
+          type: integer
+          format: int32
+          nullable: true
+        recurringJobId:
+          type: integer
+          format: int32
+          nullable: true
+        infos:
+          type: string
+          nullable: true
+        penId:
+          type: integer
+          format: int32
+          nullable: true
+        cowId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    MilkProductionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        cowId:
+          type: integer
+          format: int32
+        weeklyProduction:
+          type: number
+          format: double
+        monthlyProduction:
+          type: number
+          format: double
+        lifetimeAverage:
+          type: number
+          format: double
+        totalQuantity:
+          type: number
+          format: double
+        totalDays:
+          type: number
+          format: double
+      additionalProperties: false
+    MilkingDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        cowId:
+          type: integer
+          format: int32
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        volume:
+          type: number
+          format: double
+        cancelled:
+          type: boolean
+      additionalProperties: false
+    MilkingInputDto:
+      type: object
+      properties:
+        cowId:
+          type: integer
+          format: int32
+        done:
+          type: boolean
+        volume:
+          type: number
+          format: double
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        cancelled:
+          type: boolean
+      additionalProperties: false
+    MilkingInputsDto:
+      type: object
+      properties:
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        milkingInputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MilkingInputDto'
+          nullable: true
+      additionalProperties: false
+    MilkingVolumeDto:
+      type: object
+      properties:
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        volume:
+          type: number
+          format: double
+        average:
+          type: number
+          format: double
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+      additionalProperties: false
+    ParentDto:
+      type: object
+      properties:
+        cow:
+          $ref: '#/components/schemas/CowDto'
+        mother:
+          $ref: '#/components/schemas/CowDto'
+        father:
+          $ref: '#/components/schemas/CowDto'
+      additionalProperties: false
+    PenDetailsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        size:
+          type: integer
+          format: int32
+        cows:
+          type: array
+          items:
+            $ref: '#/components/schemas/CowDto'
+          nullable: true
+      additionalProperties: false
+    PenDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        size:
+          type: integer
+          format: int32
+        coordinates:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PenMoveDto:
+      type: object
+      properties:
+        cowId:
+          type: integer
+          format: int32
+        date:
+          $ref: '#/components/schemas/DateOnly'
+        sourcePenId:
+          type: integer
+          format: int32
+          nullable: true
+        destinationPenId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    PenStatisticDto:
+      type: object
+      properties:
+        penId:
+          type: integer
+          format: int32
+        penName:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    RoleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    StockDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+          nullable: true
+        volume:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TreatmentDto:
+      type: object
+      properties:
+        conditionId:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        comment:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        authId:
+          type: integer
+          format: int32
+        roleId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    UserInput:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: true
+        lastname:
+          type: string
+          nullable: true
+        firstname:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        roleName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    VaccinationDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        cowId:
+          type: integer
+          format: int32
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    WorkerJobDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        jobId:
+          type: integer
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Please provide the token
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - Bearer: []
