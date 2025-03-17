@@ -35,6 +35,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # OpenApi-generator
+
+  openapi_generator_annotations: ^6.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -46,6 +50,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
+  #OpenApi-generator
+  openapi_generator: ^6.1.0
+  build_runner: ^2.4.15
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
