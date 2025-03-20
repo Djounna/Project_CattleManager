@@ -84,15 +84,17 @@ public class AuthZeroManagementApi : IUserManagementService
             throw new ValidationException();
         }
 
-        var content = await response.Content.ReadAsStringAsync(cancellationToken);
+            var content = await response.Content.ReadAsStringAsync(cancellationToken);
 
-        var userAuth = JsonConvert.DeserializeObject<UserAuth>(content);
+            UserAuth userAuth = JsonConvert.DeserializeObject<UserAuth>(content);
 
-        //var userDb = _mapper.Map<User>(userAuth);
-        //userDb.IdRole = userInput.IdRole;
-        //userDb.Username = userInput.Username;
+            AssignRole(userAuth, userInput.RoleName, cancellationToken);
 
-        return userAuth;
+            //var userDb = new User();
+            //userDb.RoleId = userInput.RoleId;
+            //userDb.Username = userInput.Username;
+
+            return userAuth;
     }
 
     public async Task<UserAuth> UpdateUser(UserAuth userInput, CancellationToken cancellationToken = default)
@@ -107,10 +109,10 @@ public class AuthZeroManagementApi : IUserManagementService
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            var response = await _httpClient.PatchAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + userInput.IdAuth, new FormUrlEncodedContent(
+            var response = await _httpClient.PatchAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + userInput.user_id, new FormUrlEncodedContent(
            new Dictionary<string, string>
            {
-                {"email", userInput.Email},
+                {"email", userInput.email},
                 {"verify_email","true"}
 
            }), cancellationToken);
@@ -144,7 +146,7 @@ public class AuthZeroManagementApi : IUserManagementService
         }
     }
 
-    public async Task<bool> AssignRole(User user, string role, CancellationToken cancellation)
+    public async Task<bool> AssignRole(UserAuth user, string role, CancellationToken cancellation)
     {
         var token = await GetToken();
         var accessToken = token.access_token;
@@ -162,7 +164,7 @@ public class AuthZeroManagementApi : IUserManagementService
 
         var json = JsonConvert.SerializeObject(rolesRequest);
 
-        var response = await _httpClient.PostAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + user.IdAuth + "/roles", new StringContent(json, Encoding.UTF8, "application/json"), cancellation);
+        var response = await _httpClient.PostAsync(_configuration["Auth0ManagementApi:Audience"] + "users/" + user.user_id + "/roles", new StringContent(json, Encoding.UTF8, "application/json"), cancellation);
 
         if (!response.IsSuccessStatusCode)
         {

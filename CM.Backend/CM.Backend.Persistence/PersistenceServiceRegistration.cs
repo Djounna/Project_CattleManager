@@ -32,6 +32,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IPenMoveRepository, PenMoveRepository>();
         services.AddScoped<IStockRepository, StockRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
         //services.AddScoped<IWorkerRepository, WorkerRepository>();
 
         return services;

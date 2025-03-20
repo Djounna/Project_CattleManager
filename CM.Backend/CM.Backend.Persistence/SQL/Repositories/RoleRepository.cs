@@ -8,4 +8,8 @@ public class RoleRepository : BaseRepository<Role>, IRoleRepository
 {
     public RoleRepository(CMContext context): base(context){}
 
+    public Role GetByName(string name)
+    {
+        return _context.Roles.FirstOrDefault(r => r.Name == name);
+    }
 }

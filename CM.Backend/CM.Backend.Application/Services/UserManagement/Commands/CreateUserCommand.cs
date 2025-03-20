@@ -12,12 +12,14 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
 {
     private readonly IUserManagementService _userManagementService;
     private readonly IUserRepository _userRepository;
+    private readonly IRoleRepository _roleRepository;
     private IMapper _mapper;
 
-    public CreateUserCommandHandler(IUserManagementService userManagementService, IUserRepository userRepository, IMapper mapper)
+    public CreateUserCommandHandler(IUserManagementService userManagementService, IUserRepository userRepository, IRoleRepository roleRepositroy, IMapper mapper)
     {
         _userManagementService = userManagementService;
         _userRepository = userRepository;
+        _roleRepository = roleRepositroy;
         _mapper  = mapper;
     }
 
@@ -25,10 +27,19 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
     {
         var createdUserAuth = await _userManagementService.CreateUser(request.dto, cancellationToken);
 
-        var user = _mapper.Map<Domain.Users.User>(createdUserAuth);
+        var result = await _userManagementService.AssignRole(createdUserAuth, request.dto.RoleName, cancellationToken);
 
-        var result = await _userManagementService.AssignRole(user, request.dto.RoleName, cancellationToken);
-        
+        var role = _roleRepository.GetByName(request.dto.RoleName);
+
+        //var user = _mapper.Map<Domain.Users.User>(createdUserAuth);
+        var user = new Domain.Users.User
+        {
+            IdAuth = createdUserAuth.user_id,
+            Username = createdUserAuth.username,
+            Email = createdUserAuth.email,
+            Role = role
+        };
+
         var createdUserDb = _userRepository.Create(user);
         _userRepository.Save();
 
