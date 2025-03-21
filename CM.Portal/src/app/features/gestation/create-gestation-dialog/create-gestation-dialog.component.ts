@@ -28,7 +28,6 @@ export class CreateGestationDialogComponent extends BaseComponent{
     super.ngOnInit();
     this.Cow = this.dialogConfig.data;
     this.CreateGestationForm = this.formBuilder.group({
-      // cowId: [0, Validators.required],
       identifier: [this.Cow.identifier],
       startDate:[new Date(),Validators.required],
     });

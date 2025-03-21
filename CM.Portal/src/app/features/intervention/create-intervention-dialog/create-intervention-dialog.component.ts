@@ -26,7 +26,7 @@ export class CreateInterventionDialogComponent extends BaseComponent {
     super.ngOnInit();
     this.Cow = this.dialogConfig.data;
     this.CreateInterventionForm = this.formBuilder.group({
-      // cowId: [0, Validators.required],
+      identifier: [this.Cow.identifier, Validators.required],
       intervenantId: [0, Validators.required], 
       description: ['', Validators.required], 
       status: ['', Validators.required],
