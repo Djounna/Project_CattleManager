@@ -1,12 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
 import {FormControl, Validators} from '@angular/forms';
 import {FormBuilder} from '@angular/forms';
 import { CowDto, JobDto, PenDto } from '../../../../api/models';
 import { JobStatus } from '../../../../models/enums/workEnums';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { BaseComponent } from '../../../../shared/base-component.component';
 
 @Component({
     selector: 'app-create-job-dialog',
@@ -14,17 +12,30 @@ import { JobStatus } from '../../../../models/enums/workEnums';
     styleUrl: './create-job-dialog.component.scss',
     standalone: false
 })
-export class CreateJobDialogComponent {
+export class CreateJobDialogComponent extends BaseComponent{
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<CreateJobDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {Cows:CowDto[], Pens: PenDto[]}
-  ){}
 
+    private formBuilder: FormBuilder,
+    public dialogRef: DynamicDialogRef,
+    public dialogConfig: DynamicDialogConfig
+    // public dialogRef: MatDialogRef<CreateJobDialogComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: {Cows:CowDto[], Pens: PenDto[]}
+  )
+  {
+    super();
+  }
+
+  public data: any;
   public newJob : JobDto | undefined;
   public selectedPen : PenDto | undefined;
   public selectedCow : CowDto | undefined;
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+
+    this.data = this.dialogConfig.data;
+  }
 
   jobForm = this.formBuilder.group({
     title:['', Validators.required],

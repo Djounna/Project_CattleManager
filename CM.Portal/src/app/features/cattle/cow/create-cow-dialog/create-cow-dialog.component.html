@@ -2,20 +2,20 @@
     <form  [formGroup]="createCowForm">
         <div class="form-columns">
 
-            <div class="form_base gap-2">
-                <div class="flex flex-column gap-2">
+            <div class="form-column">
+                <div class="form-entry-col">
                     <label for="identifier">Identifiant</label>
-                    <input pInputText id="identifier" formControlName="identifier" />
+                    <input pInputText id="identifier" formControlName="identifier" fluid/>
                 </div>
-                <div class="flex flex-column gap-2">
+                <div class="form-entry-col">
                     <label for="name">Nom</label>
-                    <input pInputText id="name" formControlName="name" />
+                    <input pInputText id="name" formControlName="name" fluid/>
                 </div>
-                <div class="flex flex-column gap-2">
+                <div class="form-entry-col">
                     <label for="birthdate">Date de naissance</label>
                     <p-datepicker type="date" formControlName="birthdate"></p-datepicker>
                 </div>
-                <div class="flex flex-row gap-2">
+                <div class="form-entry-row">
                     <label for="">sex</label>
                     <div *ngFor="let gender of genders" class="flex flex-row field-checkbox">
                         <p-radioButton [inputId]="gender" [value]="gender" formControlName="gender"></p-radioButton>
@@ -24,23 +24,23 @@
                 </div>
             </div>
 
-            <div class="form_base gap-2">
-                <div class="flex flex-column gap-2">
+            <div class="form-column">
+                <div class="form-entry-col">
                     <label for="race">Race</label>
                     <p-select 
-                        [options]="races" formControlName="race" placeholder="race" [showClear]="true">
+                        [options]="races" formControlName="race" placeholder="race" [showClear]="true" fluid>
                     </p-select>
                 </div>
-                <div class="flex flex-column gap-2">
+                <div class="form-entry-col">
                     <label for="group">Groupe</label>
                     <p-select 
-                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
+                        [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true" fluid>
                     </p-select>
                 </div>
-                <div class="flex flex-column gap-2">
+                <div class="form-entry-col">
                     <label for="pen">Enclos</label>
                     <p-select 
-                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
+                        [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true" fluid>
                     </p-select>
                 </div>
             </div>

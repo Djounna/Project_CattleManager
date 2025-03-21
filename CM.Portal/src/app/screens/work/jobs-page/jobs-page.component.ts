@@ -10,7 +10,6 @@ import { InfrastructureState } from '../../../state/infrastructure/infrastructur
 import { Jobs, Workers } from '../../../state/work/work.actions';
 import { WorkState } from '../../../state/work/work.store';
 import { CreateJobDialogComponent } from '../../../features/work/job/create-job-dialog/create-job-dialog.component';
-import { JobListViewComponent } from '../../../features/work/job-list-view/job-list-view.component';
 import { JobDetailsListComponent } from '../../../features/work/job-details-list/job-details-list.component';
 
 @Component({
@@ -57,13 +56,14 @@ export class JobsPageComponent extends BaseComponent {
   }
 
   createJobDialog(): void {
-    const dialogRef = this.dialog.open(CreateJobDialogComponent, {
-      height: '400px',
-      width: '700px',
+    const dialogRef = this.dialogService.open(CreateJobDialogComponent, {
+      header: 'Créer une nouvelle tâche',
+      height: '450px',
+      width: '500px',
       data: {Cows: this.Cows, Pens: this.Pens},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.onClose.subscribe(result => {
       if(result == null)
         return;
       this.store.dispatch(new Jobs.Create({body:result})).subscribe({
@@ -71,6 +71,20 @@ export class JobsPageComponent extends BaseComponent {
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
+    // const dialogRef = this.dialog.open(CreateJobDialogComponent, {
+    //   height: '400px',
+    //   width: '500px',
+    //   data: {Cows: this.Cows, Pens: this.Pens},
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result == null)
+    //     return;
+    //   this.store.dispatch(new Jobs.Create({body:result})).subscribe({
+    //     next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
+    //     error:() => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
   }
 
   public ShowAll(): void{

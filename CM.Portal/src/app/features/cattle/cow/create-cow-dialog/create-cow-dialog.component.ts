@@ -16,7 +16,8 @@ import { InfrastructureState } from '../../../../state/infrastructure/infrastruc
 })
 export class CreateCowDialogComponent extends BaseComponent {
 
-  constructor( private formBuilder: FormBuilder,
+  constructor( 
+    private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
   ){
     super();

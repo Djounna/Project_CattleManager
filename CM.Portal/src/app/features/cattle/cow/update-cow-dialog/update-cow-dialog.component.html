@@ -3,24 +3,24 @@
 
         <div class="form">
             <div class="form-columns">
-                <div class="flex flex-column gap-3">
-                    <div class="flex flex-column gap-2">
+                <div class="form-column">
+                    <div class="form-entry-col">
                         <label for="name">Nom</label>
                         <input pInputText id="name" formControlName="name" fluid />
                     </div>
-                    <div class="flex flex-column gap-2">
+                    <div class="form-entry-col">
                         <label for="group">Groupe</label>
                         <p-select fluid
                             [options]="groups" optionLabel="name" optionValue="id" formControlName="groupId" placeholder="groupe" [showClear]="true">
                         </p-select>
                     </div>
-                    <div class="flex flex-column gap-2">
+                    <div class="form-entry-col">
                         <label for="pen">Enclos</label>
                         <p-select fluid
                             [options]="pens" optionLabel="name" optionValue="id" formControlName="penId" placeholder="enclos" [showClear]="true">
                         </p-select>
                     </div>
-                    <div class="flex flex-row gap-2">
+                    <div class="form-entry-row">
                         <p-checkbox 
                             formControlName="milkcow" [binary]="true">
                         </p-checkbox>

@@ -8,13 +8,28 @@
         .form{
             display: flex;
             flex-direction: column;
-            gap:2rem;
+            gap:4rem;
             &-columns{
                 display: flex; 
                 flex-direction: row;
                 justify-content: space-around;
                 gap:2rem;
                 // padding:1rem;
+                .form-column{
+                    display:flex;
+                    flex-direction: column;
+                    gap:1rem;
+                }
+                .form-entry-col{
+                    display:flex;
+                    flex-direction: column;
+                    gap:0.5rem;
+                }
+                .form-entry-row{
+                    display:flex;
+                    flex-direction: row;
+                    gap:0.5rem;
+                }
             }
             &-actions{
                 display: flex; 
@@ -24,6 +39,7 @@
                 // margin-top: 2rem;
                 // padding:1rem;
             }
+
         }
 
     }
