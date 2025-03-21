@@ -77,24 +77,14 @@ public class AuthZeroManagementApi : IUserManagementService
                 {"username", userInput.Username},
             }), cancellationToken);
 
-        //_configuration["UserPassword:Connection"]
-
         if (!response.IsSuccessStatusCode)
         {
             throw new ValidationException();
         }
 
-            var content = await response.Content.ReadAsStringAsync(cancellationToken);
-
-            UserAuth userAuth = JsonConvert.DeserializeObject<UserAuth>(content);
-
-            AssignRole(userAuth, userInput.RoleName, cancellationToken);
-
-            //var userDb = new User();
-            //userDb.RoleId = userInput.RoleId;
-            //userDb.Username = userInput.Username;
-
-            return userAuth;
+        var content = await response.Content.ReadAsStringAsync(cancellationToken);
+        UserAuth userAuth = JsonConvert.DeserializeObject<UserAuth>(content);
+        return userAuth;
     }
 
     public async Task<UserAuth> UpdateUser(UserAuth userInput, CancellationToken cancellationToken = default)
