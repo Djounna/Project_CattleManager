@@ -38,6 +38,10 @@ dependencies:
   # OpenApi-generator
 
   openapi_generator_annotations: ^6.1.0
+  provider: ^6.1.2
+
+  CM_api:
+    path: CM-Web-api
 
 dev_dependencies:
   flutter_test:
