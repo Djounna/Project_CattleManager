@@ -12,8 +12,6 @@
     padding: 1rem;
 }
 
-.mat-sidenav-container,
-.mat-sidenav-content {
-    height: 100% !important;
-    overflow: auto !important;
-} 
+::ng-deep .p-drawer-left{
+    width:auto !important;    
+}

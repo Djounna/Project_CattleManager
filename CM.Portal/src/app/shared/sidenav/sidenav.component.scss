@@ -6,3 +6,8 @@
     /* text-align: center; */
     margin:1rem;
 }
+
+::ng-deep .p-menu{
+    border: none !important;
+    box-shadow: none !important;
+}

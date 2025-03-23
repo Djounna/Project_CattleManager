@@ -1,28 +1,13 @@
-<!-- <app-toolbar (onShowSidebar)="showSidebar()" stlyeclass=min-w-full ></app-toolbar>
-
-<div class="main">
-    <div class="main-content">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-
-<app-sidebar #sidebar></app-sidebar> -->
 <app-loader></app-loader>
 
 <div class="main">
-  
-  <app-toolbar (onShowSidebar)="drawer.toggle()" stlyeclass=min-w-full ></app-toolbar>
 
-  <mat-sidenav-container>
-      <mat-sidenav #drawer mode="side">
+    <app-toolbar (onShowSidebar)="ToggleDrawer()" stlyeclass=min-w-full ></app-toolbar>
+
+    <p-drawer [(visible)]="DrawerVisible" [modal]="false" [closable]="false" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
         <app-sidenav> </app-sidenav>
-      </mat-sidenav>
+    </p-drawer> 
 
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-          <!-- <div class="main-content">
-          </div> -->
-  </mat-sidenav-container>
+    <router-outlet></router-outlet>
 
 </div>

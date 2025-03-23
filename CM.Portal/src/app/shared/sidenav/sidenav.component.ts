@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
     ngOnInit() {
         this.items = [
             {
-                label:'Acceuil',
+                label:'Général',
                 icon: 'pi pi-fw pi-pencil',
                 items:[
                     {
@@ -22,24 +22,29 @@ export class SidenavComponent implements OnInit {
                         icon: 'pi pi-fw pi-pencil',
                         routerLink:'/dashboard'
                     },
-                ]
-            },
-            {
-                label: 'Statistics',
-                icon: 'pi pi-fw pi-chart-bar',
-                items:[
                     {
-                        label:'Cattle',
+                        label:'Statistiques',
                         icon: 'pi pi-fw pi-chart-pie',
                         routerLink:'/statisticscows'
                     },
-                    {
-                        label:'Jobs',
-                        icon: 'pi pi-fw pi-chart-pie',
-                        routerLink:'/statisticsjobs'
-                    }
                 ]
             },
+            // {
+            //     label: 'Statistiques',
+            //     icon: 'pi pi-fw pi-chart-bar',
+            //     items:[
+            //         {
+            //             label:'Bétail',
+            //             icon: 'pi pi-fw pi-chart-pie',
+            //             routerLink:'/statisticscows'
+            //         },
+            //         {
+            //             label:'Tâches',
+            //             icon: 'pi pi-fw pi-chart-pie',
+            //             routerLink:'/statisticsjobs'
+            //         }
+            //     ]
+            // },
             {
                 label: 'Tâches',
                 icon: 'pi pi-fw pi-pencil',
@@ -52,7 +57,7 @@ export class SidenavComponent implements OnInit {
                 ]
             },
             {
-                label: 'Traite',
+                label: 'Traites',
                 icon: 'pi pi-fw pi-pencil',
                 items: [
                     {
@@ -83,22 +88,22 @@ export class SidenavComponent implements OnInit {
                     }
                 ]
             },
+            // {
+            //     label: 'Stocks',
+            //     icon: 'pi pi-fw pi-calendar',
+            //     items: [
+            //         {
+            //             label: 'Liste',
+            //             icon: 'pi pi-fw pi-pencil',
+            //         },
+            //     ]
+            // },
             {
-                label: 'Stocks',
-                icon: 'pi pi-fw pi-calendar',
-                items: [
-                    {
-                        label: 'Liste',
-                        icon: 'pi pi-fw pi-pencil',
-                    },
-                ]
-            },
-            {
-                label: 'Travailleurs',
+                label: 'Administration',
                 icon: 'pi pi-fw pi-user',
                 items: [
                     {
-                        label: 'Liste',
+                        label: 'Travailleurs',
                         icon: 'pi pi-fw pi-user-plus',
                         routerLink: '/workers'
                     },

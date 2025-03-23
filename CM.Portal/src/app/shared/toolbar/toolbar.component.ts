@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { MenuItem } from 'primeng/api';
-import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-toolbar',

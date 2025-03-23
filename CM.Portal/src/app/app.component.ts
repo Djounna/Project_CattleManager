@@ -19,6 +19,7 @@ export class AppComponent{
   protected store = inject(Store);
   @Select(UserState.IsAdmin) IsAdmin$!: Observable<boolean>;
   @Select(UserState.IsWorker) IsWorker$!: Observable<boolean>;
+  public DrawerVisible: boolean = false;
 
   constructor(
     private authService : AuthService){}
@@ -29,5 +30,9 @@ export class AppComponent{
 
   private checkLogin(): void{
     this.store.dispatch(new User.GetToken());
+  }
+
+  public ToggleDrawer(): void{
+    this.DrawerVisible = !this.DrawerVisible;
   }
 }

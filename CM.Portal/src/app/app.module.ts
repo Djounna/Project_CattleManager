@@ -15,9 +15,6 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 // PrimeNgModules
-import Aura from '@primeng/themes/aura';
-import Nora from '@primeng/themes/nora';
-import { NoraLime } from './styles/mypreset';
 import { AuraLime } from './styles/mypreset';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -49,12 +46,13 @@ import { SelectModule } from 'primeng/select';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { DatePicker, DatePickerModule } from 'primeng/datepicker'; 
+import { DatePickerModule } from 'primeng/datepicker'; 
 import { OrganizationChartModule } from 'primeng/organizationchart';
-import { Timeline, TimelineModule } from 'primeng/timeline'
+import { TimelineModule } from 'primeng/timeline'
 import { CheckboxModule } from 'primeng/checkbox';
 import { ImageModule} from 'primeng/image';
 import { FluidModule } from 'primeng/fluid';
+import { DrawerModule } from 'primeng/drawer'; 
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -102,7 +100,6 @@ import { PicklistToolComponent } from './features/shared/picklist-tool/picklist-
 import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/assign-job-dialog.component';
 import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
 import { PicklistGroupDialogComponent } from './features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { GroupCardSmallComponent } from './features/groups/group-card-small/group-card-small.component';
 import { PenCardSmallComponent } from './features/pens/pen-card-small/pen-card-small.component';
 import { MilkingPageComponent } from './screens/milk/milking-page/milking-page.component';
@@ -123,8 +120,6 @@ import { VaccinationListComponent } from './features/vaccination/vaccination-lis
 import { CreateInterventionDialogComponent } from './features/intervention/create-intervention-dialog/create-intervention-dialog.component';
 import { UpdateInterventionDialogComponent } from './features/intervention/update-intervention-dialog/update-intervention-dialog.component';
 import { GestationsBoardComponent } from './features/gestation/gestations-board/gestations-board.component';
-import { LiteralMapExpr } from '@angular/compiler';
-import { Colors } from 'chart.js';
 import { CowGenealogyComponent } from './features/cattle/cow/cow-genealogy/cow-genealogy.component';
 import { CowTimelineComponent } from './features/cattle/cow/cow-timeline/cow-timeline.component';
 import { CowMonthMilkingsGraphComponent } from './features/graphs/milkings/cow-month-milkings-graph/cow-month-milkings-graph.component';
@@ -154,7 +149,6 @@ import { CreateUserDialogComponent } from './features/users/user/create-user-dia
         CreateGroupDialogComponent,
         PicklistGroupDialogComponent,
         PicklistPenDialogComponent,
-        SidebarComponent,
         GroupCardSmallComponent,
         PenCardSmallComponent,
         MilkingPageComponent,
@@ -241,6 +235,7 @@ import { CreateUserDialogComponent } from './features/users/user/create-user-dia
         CheckboxModule,
         ImageModule,
         FluidModule,
+        DrawerModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt
