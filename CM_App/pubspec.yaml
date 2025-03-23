@@ -41,7 +41,7 @@ dependencies:
   provider: ^6.1.2
 
   CM_api:
-    path: CM-Web-api
+    path: CM-api
 
 dev_dependencies:
   flutter_test:

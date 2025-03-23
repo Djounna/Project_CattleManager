@@ -1,11 +1,10 @@
-import 'package:CM_api/CM_api.dart';
+import 'package:CM_api/api.dart';
 import 'package:cm_app/client.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppContext with ChangeNotifier{
 
   Client clientApi = Client();
-
   List<CowDto>? _cows;
   List<JobDto>? _jobs;
   List<MilkingDto>? _milkings;

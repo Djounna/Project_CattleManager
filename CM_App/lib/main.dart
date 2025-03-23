@@ -1,3 +1,7 @@
+import 'package:cm_app/Screens/Cows/CowsPage.dart';
+import 'package:cm_app/Screens/Jobs/JobsPage.dart';
+import 'package:cm_app/Screens/Home/HomePage.dart';
+import 'package:cm_app/Screens/Milkings/MilkingsPage.dart';
 import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +23,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreenAccent),
       ),
-      home: const HomePage(title: 'Cattle Manager'),
+      home: const HomePage(),
       routes:{
-        '/cows' : (context) => const Page(),
-        '/jobs' : (context) => const Page(),
-        'milkings': (context) => const Page();
+        '/cows' : (context) => const CowsPage(),
+        '/jobs' : (context) => const JobsPage(),
+        '/milkings': (context) => const MilkingsPage()
       }
     )
    );

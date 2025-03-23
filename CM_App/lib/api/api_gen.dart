@@ -1,4 +1,4 @@
-// Openapi Generator last run: : 2025-03-17T19:42:39.907886
+// Openapi Generator last run: : 2025-03-23T18:38:24.586620
 
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
 
@@ -16,8 +16,8 @@ class OtherApiGenerator {}*/
   additionalProperties:
   DioProperties(pubName: 'CM_api', pubAuthor: 'Corentin', useEnumExtension: true),
   inputSpec: InputSpec(path: 'lib/api/swagger.yaml'),
-  generatorName: Generator.dio,
+  generatorName: Generator.dart,
   runSourceGenOnOutput: true,
-  outputDirectory: 'CM-Web-api',
+  outputDirectory: 'CM-api',
 )
 class OpenApiGenerator {}
