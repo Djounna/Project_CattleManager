@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class AppContext with ChangeNotifier{
 
-  Client clientApi = Client();
+  Client clientApi = Client("https://localhost:7276");
   List<CowDto>? _cows;
   List<JobDto>? _jobs;
   List<MilkingDto>? _milkings;
