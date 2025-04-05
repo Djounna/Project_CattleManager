@@ -5,6 +5,10 @@ using CM.Backend.Presentation.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//#if Debug
+//builder.WebHost.UseUrls("http://192.168.1.8:5139");
+//#endif
+
 var configuration = builder.Configuration;
 
 // Add JwtBearer Authentication
@@ -36,7 +40,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerConfig();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,7 +49,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+
+//app.UseHttpsRedirection();
 
 //app.UseStaticFiles(); // Needed if you want to customize the swagger UI page
 
