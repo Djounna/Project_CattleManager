@@ -38,22 +38,22 @@ class _CowsPageState extends State<CowsPage> {
       return;
     }
 
-    Future<List<CowDto>?> GetCows() async{
+    void GetCows() async{
       List<CowDto>? cows = await appContext!.clientApi.cowApi!.apiCowGet();
       cowsList = cows;
     }
 
     // Beginning of display logic
 
-    if(appContext.getCows() != null){
+    /* if(appContext.getCows() != null){
       cowsList = appContext.getCows();
       filteredCowsList = [...cowsList!];
     }
-    else{
-      GetCows();
-      appContext.setCow(cowsList);
-      filteredCowsList = [...cowsList!];
-    }
+    else{ */
+    GetCows();
+    appContext.setCows(cowsList);
+    filteredCowsList = [...cowsList!];
+    //}
 
     search.addListener((){
       filteredCowsList = [...cowsList!];

@@ -42,6 +42,7 @@ dependencies:
 
   CM_api:
     path: CM-api
+  auth0_flutter: ^1.9.0
 
 dev_dependencies:
   flutter_test:
