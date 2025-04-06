@@ -137,6 +137,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { TodoListComponent } from './features/work/todo-list/todo-list.component';
 import { UserState } from './state/user/user.store';
 import { CreateUserDialogComponent } from './features/users/user/create-user-dialog/create-user-dialog.component';
+import { HomeComponent } from './screens/home/home.component';
 
 @NgModule({ 
     declarations: 
@@ -180,7 +181,8 @@ import { CreateUserDialogComponent } from './features/users/user/create-user-dia
         PenPageComponent,
         LoaderComponent,
         TodoListComponent,
-        CreateUserDialogComponent
+        CreateUserDialogComponent,
+        HomeComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

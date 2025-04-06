@@ -10,9 +10,13 @@ import { CowDetailsComponent } from './screens/cows/cow-details/cow-details-page
 import { StatisticsCowsPageComponent } from './screens/statistics/statistics-cows-page/statistics-cows-page.component';
 import { SatisticsJobsPageComponent } from './screens/statistics/satistics-jobs-page/satistics-jobs-page.component';
 import { PenPageComponent } from './screens/cattle/pen-page/pen-page.component';
+import { HomeComponent } from './screens/home/home.component';
+import { TodoListComponent } from './screens/todo-list/todo-list.component';
 
 export const routes: Routes = [
+  { path: 'home', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+  { path: 'todolist', component: TodoListComponent, canActivate:[AuthGuard]},
   { path: 'statisticscows', component: StatisticsCowsPageComponent, canActivate:[AuthGuard]},
   { path: 'statisticsjobs', component: SatisticsJobsPageComponent, canActivate:[AuthGuard]},
   { path: 'workers', component: WorkersPageComponent, canActivate:[AuthGuard]},
