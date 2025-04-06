@@ -29,9 +29,12 @@ export class ToolbarComponent {
         if(event instanceof NavigationEnd){
           switch(event.urlAfterRedirects){
             case '/dashboard' : this.title = 'Dashboard'; break;
+            case '/todolist' : this.title = 'Planning'; break;
+            case '/statistics' : this.title = 'Statistiques'; break;
             case '/jobs' : this.title = 'Tâches'; break;
             case '/cows' : this.title = 'Bétail'; break;
-            case '/groups' : this.title = 'Groupe'; break;
+            case '/groups' : this.title = 'Groupes'; break;
+            case '/pens' : this.title = 'Enclos'; break;
             case '/milking' : this.title = 'Traite'; break;
           }
         }
