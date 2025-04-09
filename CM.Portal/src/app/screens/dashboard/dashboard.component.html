@@ -1,17 +1,53 @@
 <div class="page_base">
 
+        <p-menubar>
+            <ng-template #start>
+                <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                    <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
+                    <span>Date:</span>
+                    <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
+                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />
+                </div>
+            </ng-template>
+            <!-- <ng-template #item let-item let-root="root">
+                <a pRipple class="flex items-center p-menubar-item-link">
+                    <span>{{ item.label }}</span>
+                    <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
+                    <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+                </a>
+            </ng-template> -->
+            <ng-template #end>
+                <!-- <div class="flex gap-4 mt-1">
+                    <p-button (click)="SaveAll()" label="Enregistrer" icon="pi pi-check" iconPos="right"></p-button>
+                </div> -->
+            </ng-template>
+        </p-menubar>
+    
+
     <div class="flex flex-row justify-content-between gap-4">
 
-        <p-panel header="Tâches">
-            <!-- <div class="size-scroll_jobList">
-                <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
+        <!-- <div style="display:flex; flex-direction:column; gap: 1rem; justify-content: spacce-around;">
+
+            <div style="display:flex; flex-direction:row; padding:1rem; gap: 1rem;" *ngIf="Workers != null && Workers.length > 1">
+                <div *ngFor="let worker of Workers" style="display:flex; flex-direction:column; gap:0.5rem; min-height:5rem; min-width: 4rem; border: 1px solid black; border-radius: 3px">
+                    <span>{{worker.username}}</span>
+                    <span>Current task</span>
+                </div>
+                
             </div> -->
-            <div class="size-scroll_jobList">
-                <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                (onFocusJob)="onFocusPolygon($event)"
-                ></app-job-details-list>
-            </div>
-        </p-panel>
+
+            <p-panel header="Tâches">
+                <!-- <div class="size-scroll_jobList">
+                    <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
+                </div> -->
+                <div class="size-scroll_jobList">
+                    <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
+                    (onFocusJob)="onFocusPolygon($event)"
+                    ></app-job-details-list>
+                </div>
+            </p-panel>
+
+        <!-- </div> -->
 
         <div *ngIf="Pens.length > 0" style="width: 600px;" leaflet 
             [leafletOptions]="MapInfos.MapOptions"

@@ -15,12 +15,9 @@ import { BaseComponent } from '../../../../shared/base-component.component';
 export class CreateJobDialogComponent extends BaseComponent{
 
   constructor(
-
     private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
     public dialogConfig: DynamicDialogConfig
-    // public dialogRef: MatDialogRef<CreateJobDialogComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: {Cows:CowDto[], Pens: PenDto[]}
   )
   {
     super();
@@ -40,7 +37,7 @@ export class CreateJobDialogComponent extends BaseComponent{
   jobForm = this.formBuilder.group({
     title:['', Validators.required],
     description:['', Validators.required],
-    length:[''],
+    date:[new Date(), Validators.required],
     pen:new FormControl<PenDto | null>(null),
     cow:new FormControl<CowDto | null>(null)
   })
@@ -51,6 +48,7 @@ export class CreateJobDialogComponent extends BaseComponent{
       title : this.jobForm.value.title, 
       description : this.jobForm.value.description,
       status : JobStatus.ToDo,
+      date : this.jobForm.value.date?.toISOString(),
       penId: this.jobForm.value.pen?.id,
       cowId: this.jobForm.value.cow?.id
     }

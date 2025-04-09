@@ -13,6 +13,7 @@ import { InfrastructureState } from '../../state/infrastructure/infrastructure.s
 import { Pens } from '../../state/infrastructure/infrastructure.action';
 import { MapInfo, MapService } from '../../services/map.service';
 import * as L from 'leaflet';
+import moment from 'moment';
 
 @Component({
     selector: 'app-dashboard',
@@ -48,6 +49,9 @@ export class DashboardComponent extends BaseComponent {
 
   public Map!: L.Map;
   public MapInfos!: MapInfo;
+
+  Date!: Date;
+  SelectedDate!: string;
 
   constructor(private mapService: MapService){
     super();
@@ -98,12 +102,13 @@ export class DashboardComponent extends BaseComponent {
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Alerts.GetAll());
-    this.store.dispatch(new Jobs.GetAll());
-    this.store.dispatch(new Jobs.GetAllDetails());
     this.store.dispatch(new Gestations.GetAll());
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
     this.store.dispatch(new Workers.GetAll());
+    this.SetDateAsToday();
+    // this.store.dispatch(new Jobs.GetAll());
+    // this.store.dispatch(new Jobs.GetAllails());
   }
 
   private initMap(): void{
@@ -135,6 +140,26 @@ export class DashboardComponent extends BaseComponent {
       const tempPolyForFocus = this.mapService.GeneratePenPolygon(penFocus);
       this.Map.fitBounds(tempPolyForFocus.getBounds());
     }
+  }
+
+  public SelectDate(): void{
+    let ddate : string = moment(this.Date).format('YYYY-MM-DD');
+    this.SelectedDate = ddate;
+    this.store.dispatch(new Jobs.GetAllByDate(ddate))
+    this.store.dispatch(new Jobs.GetAllDetailsByDate(ddate))
+  }
+
+  public SelectAll(): void{
+
+  }
+
+  public SelectAllByStatus(status: string): void{
+    
+  }
+
+  public SetDateAsToday(): void{
+    this.Date = new Date();
+    this.SelectDate();
   }
 
   // public Focus(job: JobDetailsDto){
