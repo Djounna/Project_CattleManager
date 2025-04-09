@@ -23,7 +23,7 @@ public class CMContext : DbContext
     public DbSet<Stock> Stocks { get; set; }
 
     public DbSet<Job> Jobs { get; set; }
-    public DbSet<RecurringJob> RecurringJobs { get; set; }
+    //public DbSet<RecurringJob> RecurringJobs { get; set; }
     public DbSet<WorkerJob> WorkerJobs { get; set; }
 
     //public DbSet<Worker> Workers { get; set; }
