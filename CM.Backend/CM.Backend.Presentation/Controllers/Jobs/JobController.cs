@@ -37,6 +37,19 @@ public class JobController : ControllerBase
     }
 
     /// <summary>
+    /// Get All Jobs By Date
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("date")]
+    [Authorize("read:jobs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<JobDto>>> GetListByDate(string date)
+    {
+        return Ok(await _mediator.Send(new GetJobsByDateQuery(date)));
+    }
+
+    /// <summary>
     /// Get All Jobs Details
     /// </summary>
     /// <returns></returns>
@@ -47,6 +60,19 @@ public class JobController : ControllerBase
     public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetails()
     {
         return Ok(await _mediator.Send(new GetJobsDetailsQuery()));
+    }
+
+    /// <summary>
+    /// Get All Jobs Details By Date
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("details/date")]
+    [Authorize("read:jobs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByDate(string date)
+    {
+        return Ok(await _mediator.Send(new GetJobsDetailsByDateQuery(date)));
     }
 
     /// <summary>

@@ -9,10 +9,11 @@ public class Job : BaseEntity
     public string Description { get; set; }
     public string Status { get; set; }
     public string? Infos {get; set;}
+    public DateOnly Date { get; set; }
 
     public int? Length { get; set; }
-    public int? RecurringJobId { get; set; }
-    public virtual RecurringJob RecurringJob { get; set; }
+    //public int? RecurringJobId { get; set; }
+    //public virtual RecurringJob RecurringJob { get; set; }
     public int? PenId { get; set; }
     public virtual Pen Pen { get; set; }
     public int? CowId { get; set; }
