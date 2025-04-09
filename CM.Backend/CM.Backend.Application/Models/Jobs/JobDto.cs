@@ -22,9 +22,9 @@ public class JobDto
     /// </summary>
     public string Status { get; set; }
     /// <summary>
-    /// Excpected length (in hours)
+    /// Date
     /// </summary>
-    public int? Length { get; set; }
+    public DateOnly Date { get; set; }
     /// <summary>
     /// Infos
     /// </summary>
