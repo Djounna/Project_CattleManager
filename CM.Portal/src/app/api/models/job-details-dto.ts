@@ -1,13 +1,15 @@
 /* tslint:disable */
 /* eslint-disable */
 import { CowDto } from './cow-dto';
+import { DateOnly } from './date-only';
 import { PenDto } from './pen-dto';
 import { UserDto } from './user-dto';
 export interface JobDetailsDto {
   cow?: CowDto;
+  date?: DateOnly;
   description?: null | string;
   id?: number;
-  length?: null | number;
+  infos?: null | string;
   pen?: PenDto;
   status?: null | string;
   title?: null | string;

@@ -4190,9 +4190,11 @@
             "type": "string",
             "nullable": true
           },
-          "length": {
-            "type": "integer",
-            "format": "int32",
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "infos": {
+            "type": "string",
             "nullable": true
           },
           "pen": {
@@ -4230,15 +4232,8 @@
             "type": "string",
             "nullable": true
           },
-          "length": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "recurringJobId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "date": {
+            "$ref": "#/components/schemas/DateOnly"
           },
           "infos": {
             "type": "string",

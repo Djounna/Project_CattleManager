@@ -25,6 +25,10 @@ public class JobDetailsDto
     /// Date
     /// </summary>
     public DateOnly Date { get; set; }
+    /// <summary>
+    /// Infos
+    /// </summary>
+    public string? Infos { get; set; }
     
     /// <summary>
     /// Pen dto

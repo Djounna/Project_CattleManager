@@ -1,13 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
+import { DateOnly } from './date-only';
 export interface JobDto {
   cowId?: null | number;
+  date?: DateOnly;
   description?: null | string;
   id?: number;
   infos?: null | string;
-  length?: null | number;
   penId?: null | number;
-  recurringJobId?: null | number;
   status?: null | string;
   title?: null | string;
 }
