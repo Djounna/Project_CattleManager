@@ -26,15 +26,9 @@ public class JobDto
     /// </summary>
     public int? Length { get; set; }
     /// <summary>
-    /// Recurring Job Id
-    /// </summary>
-    public int? RecurringJobId { get; set; }
-    /// <summary>
     /// Infos
     /// </summary>
     public string? Infos { get; set; }
-
-    //public virtual RecurringJob RecurringJob { get; set; }
 
     /// <summary>
     /// Pen Id
