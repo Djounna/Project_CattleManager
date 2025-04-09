@@ -28,7 +28,11 @@ public class MappingProfile : Profile
             .ReverseMap()
             .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate));
 
-        CreateMap<Job, JobDto>().ReverseMap();
+        CreateMap<Job, JobDto>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
+            .ReverseMap()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+
         CreateMap<Group, GroupDto>().ReverseMap();
         CreateMap<Group, GroupDetailsDto>().ReverseMap();
         CreateMap<GroupMove, GroupMoveDto>().ReverseMap();

@@ -42,7 +42,7 @@ public class GetJobsDetailsQueryHandler : IRequestHandler<GetJobsDetailsQuery, I
                 Title = j.Title,
                 Description = j.Description,
                 Status = j.Status,
-                Date = j.Date,
+                Date = j.Date.ToDateTime(TimeOnly.MinValue),
                 Cow = j.CowId != null ? _mapper.Map<CowDto>(_cowRepository.GetById((int)j.CowId)) : null,
                 Pen = j.PenId != null ? _mapper.Map<PenDto>(_penRepository.GetById((int)j.PenId)) : null,
                 Workers = _mapper.Map<List<UserDto>>(_workerJobRepository.GetAssignedWorkers(j.Id))

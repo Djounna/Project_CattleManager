@@ -24,7 +24,7 @@ public class JobDto
     /// <summary>
     /// Date
     /// </summary>
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
     /// <summary>
     /// Infos
     /// </summary>
