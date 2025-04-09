@@ -4191,7 +4191,8 @@
             "nullable": true
           },
           "date": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time"
           },
           "infos": {
             "type": "string",
@@ -4233,7 +4234,8 @@
             "nullable": true
           },
           "date": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date-time"
           },
           "infos": {
             "type": "string",
