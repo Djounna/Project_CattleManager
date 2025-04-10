@@ -49,8 +49,8 @@ export class WorkState{
         );
     }
     @Action(Jobs.GetAllByDate)
-    getAllJobsByDate(ctx: StateContext<WorkStateModel>){
-        return this.jobService.apiJobDateGet().pipe(tap(jobs=>{
+    getAllJobsByDate(ctx: StateContext<WorkStateModel>, action: Jobs.GetAllByDate){
+        return this.jobService.apiJobDateGet({date: action.date}).pipe(tap(jobs=>{
             ctx.patchState({Jobs : jobs});
             })
         );
@@ -64,8 +64,8 @@ export class WorkState{
         );
     }
     @Action(Jobs.GetAllDetailsByDate)
-    getAllJobsDetailsByDate(ctx: StateContext<WorkStateModel>){
-        return this.jobService.apiJobDetailsDateGet().pipe(tap(jobs=>{
+    getAllJobsDetailsByDate(ctx: StateContext<WorkStateModel>, action: Jobs.GetAllDetailsByDate){
+        return this.jobService.apiJobDetailsDateGet({date: action.date}).pipe(tap(jobs=>{
             ctx.patchState({JobsDetails : jobs});
             })
         );

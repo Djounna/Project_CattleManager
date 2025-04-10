@@ -34,9 +34,7 @@ public class GetJobsDetailsByDateQueryHandler : IRequestHandler<GetJobsDetailsBy
 
     public async Task<IList<JobDetailsDto>> Handle(GetJobsDetailsByDateQuery request, CancellationToken cancellationToken)
     {
-
         DateOnly ddate = DateOnly.Parse(request.date);
-
         var jobs = _jobRepository.GetListByDate(ddate);
         var jobDetails = jobs.Select(j =>
         {
