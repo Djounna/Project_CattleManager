@@ -35,18 +35,24 @@ export class AppComponent{
   private checkLogin(): void{
     this.store.dispatch(new User.GetToken())
     this.IsAdmin$.subscribe({ 
-      next: (res) => { this.IsAdmin = res; }
+      next: (res) => { this.IsAdmin = res;
+      if (this.IsAdmin)
+        {
+        this.router.navigate(['/dashboard']);
+        }
+        else{
+          this.router.navigate(['/todolist']);
+        }
+      }
     }) ;
-    this.IsWorker$.subscribe({ 
-      next: (res) => { this.IsWorker = res; }
-    }) ;
-
-    if (this.IsAdmin){
-      this.router.navigate(['/dashboard']);
-    }
-    else{
-      this.router.navigate(['/todolist']);
-    }
+    // this.IsWorker$.subscribe({ 
+    //   next: (res) => { this.IsWorker = res;
+    //   if (this.IsWorker)
+    //     {
+    //       this.router.navigate(['/todolist']);
+    //     }
+    //   }
+    // }) ;
   }
 
   public ToggleDrawer(): void{
