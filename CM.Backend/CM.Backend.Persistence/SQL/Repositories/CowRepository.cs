@@ -34,6 +34,8 @@ public class CowRepository : BaseRepository<Cow>, ICowRepository
             .Include(c => c.Vaccinations)
             .Include(c => c.Interventions)
             .Include(c => c.Gestations)
+            .Include(c => c.Conditions)
+            .Include(c => c.Treatments)
             .Include(c => c.Pen)
             .Include(c => c.PenMoves) // limit number
             .Include(c => c.Group)

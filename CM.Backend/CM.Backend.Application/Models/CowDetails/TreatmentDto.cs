@@ -4,11 +4,15 @@
 /// </summary>
 public class TreatmentDto
 {
+    /// <summary>
+    /// Cow Id
+    /// </summary>
+    public int CowId { get; set; }
 
     /// <summary>
     /// Condition Id
     /// </summary>
-    public int ConditionId { get; set; }
+    public int? ConditionId { get; set; }
 
     /// <summary>
     /// Name

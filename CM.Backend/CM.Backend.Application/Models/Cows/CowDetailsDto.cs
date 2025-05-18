@@ -76,6 +76,16 @@ public class CowDetailsDto
     public List<GestationDto>? Gestations { get; set; }
 
     /// <summary>
+    /// Conditions
+    /// </summary>
+    public List<ConditionDto>? Conditions { get; set; }
+
+    /// <summary>
+    /// Treatments
+    /// </summary>
+    public List<TreatmentDto>? Treatments { get; set; }
+
+    /// <summary>
     /// Genealogy
     /// </summary>
     public GenealogyDto Genealogy { get; set; }
