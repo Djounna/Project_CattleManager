@@ -2,7 +2,8 @@
 /* eslint-disable */
 export interface TreatmentDto {
   comment?: null | string;
-  conditionId?: number;
+  conditionId?: null | number;
+  cowId?: number;
   date?: string;
   name?: null | string;
 }

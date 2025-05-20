@@ -3856,6 +3856,20 @@
             },
             "nullable": true
           },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConditionDto"
+            },
+            "nullable": true
+          },
+          "treatments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentDto"
+            },
+            "nullable": true
+          },
           "genealogy": {
             "$ref": "#/components/schemas/GenealogyDto"
           },
@@ -4544,9 +4558,14 @@
       "TreatmentDto": {
         "type": "object",
         "properties": {
-          "conditionId": {
+          "cowId": {
             "type": "integer",
             "format": "int32"
+          },
+          "conditionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "name": {
             "type": "string",

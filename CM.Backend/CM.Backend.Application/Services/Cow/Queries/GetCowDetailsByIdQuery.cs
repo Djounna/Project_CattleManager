@@ -73,6 +73,8 @@ public class GetCowDetailsByIdQueryHandler: IRequestHandler<GetCowDetailsByIdQue
             Vaccinations = _mapper.Map<List<VaccinationDto>>(cow.Vaccinations),
             Interventions = _mapper.Map<List<InterventionDto>>(cow.Interventions),
             Gestations = _mapper.Map<List<GestationDto>>(cow.Gestations),
+            Conditions = _mapper.Map<List<ConditionDto>>(cow.Conditions),
+            Treatments = _mapper.Map<List<TreatmentDto>>(cow.Treatments),
         };
 
         return cowDetails;
