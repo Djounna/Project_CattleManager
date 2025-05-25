@@ -7,6 +7,7 @@ import { Genders } from '../../../../models/enums/genders';
 import { BaseComponent } from '../../../../shared/base-component.component';
 import { CattleState } from '../../../../state/cattle/cattle.store';
 import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
+import { Cows } from '../../../../state/cattle/cattle.actions';
 
 @Component({
     selector: 'app-create-cow-dialog',
@@ -73,6 +74,11 @@ export class CreateCowDialogComponent extends BaseComponent {
       penId: this.createCowForm.value.penId,
       imgLink: ""
     };
+
+      this.store.dispatch(new Cows.Create({ body: this.newCow })).subscribe({
+        next: () => this.toastSuccess("L'animal a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
 
     this.dialogRef.close(this.newCow);
   }

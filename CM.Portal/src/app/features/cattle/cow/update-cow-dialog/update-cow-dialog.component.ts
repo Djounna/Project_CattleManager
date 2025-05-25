@@ -5,6 +5,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CowDto } from '../../../../api/models';
 import { CattleState } from '../../../../state/cattle/cattle.store';
 import { InfrastructureState } from '../../../../state/infrastructure/infrastructure.store';
+import { Cows } from '../../../../state/cattle/cattle.actions';
 
 @Component({
     selector: 'app-update-cow-dialog',
@@ -62,6 +63,11 @@ export class UpdateCowDialogComponent extends BaseComponent {
       penId: this.updateCowForm.value.penId,
       milkCow: this.updateCowForm.value.milkcow,
     };
+
+      this.store.dispatch(new Cows.Update({ body: this.updatedCow })).subscribe({
+        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
 
     this.dialogRef.close(this.updatedCow);
   }

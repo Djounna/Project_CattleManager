@@ -19,7 +19,7 @@ public class InterventionDto
     /// <summary>
     /// Intervenant Id
     /// </summary>
-    public int IntervenantId { get; set; }
+    public int? IntervenantId { get; set; }
     //public virtual Intervenant Intervenant { get; set; }
 
     /// <summary>
@@ -28,18 +28,12 @@ public class InterventionDto
     public string Type { get; set; }
 
     /// <summary>
-    /// Status
+    /// Description
     /// </summary>
-    public string Status { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Date
     /// </summary>
     public DateTime? Date { get; set; }
-
-    /// <summary>
-    /// Description
-    /// </summary>
-    public string? Description { get; set; }
-
 }

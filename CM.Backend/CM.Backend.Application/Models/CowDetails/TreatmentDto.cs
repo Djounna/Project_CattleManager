@@ -5,6 +5,11 @@
 public class TreatmentDto
 {
     /// <summary>
+    /// Id
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
     /// Cow Id
     /// </summary>
     public int CowId { get; set; }
@@ -20,9 +25,9 @@ public class TreatmentDto
     public string Name { get; set; }
 
     /// <summary>
-    /// Comment
+    /// Name
     /// </summary>
-    public string? Comment { get; set; }
+    public string Type { get; set; }
 
     /// <summary>
     /// Date

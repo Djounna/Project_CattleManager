@@ -1,8 +1,7 @@
 .main{
     display:flex; 
     flex-direction: row; 
-    justify-content: space-between;
-    align-items: stretch; 
+    align-items: flex-start; 
     gap: 2rem;
     padding: 1rem;
 }

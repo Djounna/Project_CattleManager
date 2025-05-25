@@ -4163,23 +4163,20 @@
           },
           "intervenantId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "type": {
             "type": "string",
             "nullable": true
           },
-          "status": {
+          "description": {
             "type": "string",
             "nullable": true
           },
           "date": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -4558,6 +4555,10 @@
       "TreatmentDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "cowId": {
             "type": "integer",
             "format": "int32"
@@ -4571,7 +4572,7 @@
             "type": "string",
             "nullable": true
           },
-          "comment": {
+          "type": {
             "type": "string",
             "nullable": true
           },

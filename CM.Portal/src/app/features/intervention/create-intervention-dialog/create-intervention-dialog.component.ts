@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CowDto, InterventionDto } from '../../../api/models';
+import { Interventions } from '../../../state/cattle/cattle.actions';
 
 @Component({
   selector: 'app-create-intervention-dialog',
@@ -26,7 +27,7 @@ export class CreateInterventionDialogComponent extends BaseComponent {
     super.ngOnInit();
     this.Cow = this.dialogConfig.data;
     this.CreateInterventionForm = this.formBuilder.group({
-      identifier: [this.Cow.identifier, Validators.required],
+      // identifier: [this.Cow.identifier, Validators.required],
       intervenantId: [0, Validators.required], 
       description: ['', Validators.required], 
       status: ['', Validators.required],
@@ -40,12 +41,16 @@ export class CreateInterventionDialogComponent extends BaseComponent {
     this.NewIntervention = {
       id : 0,
       cowId: this.Cow.id,
-      intervenantId: this.CreateInterventionForm.value.intervenantId!,
+      // intervenantId: this.CreateInterventionForm.value.intervenantId!,
       description: this.CreateInterventionForm.value.description,
-      status: this.CreateInterventionForm.value.status,
       type: this.CreateInterventionForm.value.type,
       date:this.CreateInterventionForm.value.date?.toISOString(), 
     };
+
+    this.store.dispatch(new Interventions.Create({ body: this.NewIntervention })).subscribe({
+      next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+      error: () => this.toastError("Une erreur s'est produite")
+    });
 
     this.dialogRef.close(this.NewIntervention);
   }

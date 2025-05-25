@@ -13,6 +13,8 @@ import { UpdateCowDialogComponent } from '../../../features/cattle/cow/update-co
 import { CreateGestationDialogComponent } from '../../../features/gestation/create-gestation-dialog/create-gestation-dialog.component';
 import { CreateInterventionDialogComponent } from '../../../features/intervention/create-intervention-dialog/create-intervention-dialog.component';
 import { CreateVaccinationDialogComponent } from '../../../features/vaccination/create-vaccination-dialog/create-vaccination-dialog.component';
+import { CreateConditionDialogComponent } from '../../../features/condition/create-condition-dialog/create-condition-dialog.component';
+import { CreateTreatmentDialogComponent } from '../../../features/treatment/create-treatment-dialog/create-treatment-dialog.component';
 
 @Component({
   selector: 'app-cows-page',
@@ -59,14 +61,14 @@ export class CowsPageComponent extends BaseComponent {
       width: '500px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if (result == null)
-        return;
-      this.store.dispatch(new Cows.Create({ body: result })).subscribe({
-        next: () => this.toastSuccess("L'animal a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(result => {
+    //   if (result == null)
+    //     return;
+    //   this.store.dispatch(new Cows.Create({ body: result })).subscribe({
+    //     next: () => this.toastSuccess("L'animal a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
   }
 
   public UpdateCowDialog(cow: CowDto): void {
@@ -77,14 +79,14 @@ export class CowsPageComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if (result == null)
-        return;
-      this.store.dispatch(new Cows.Update({ body: result })).subscribe({
-        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(result => {
+    //   if (result == null)
+    //     return;
+    //   this.store.dispatch(new Cows.Update({ body: result })).subscribe({
+    //     next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
   }
 
   public CreateInterventionDialog(cow: CowDto): void {
@@ -92,17 +94,17 @@ export class CowsPageComponent extends BaseComponent {
       data: cow,
       header: 'Ajouter une intervention',
       height: '450px',
-      width: '500px',
+      width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if (result == null)
-        return;
-      this.store.dispatch(new Interventions.Create({ body: result })).subscribe({
-        next: () => this.toastSuccess("L'intervention a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(result => {
+    //   if (result == null)
+    //     return;
+    //   this.store.dispatch(new Interventions.Create({ body: result })).subscribe({
+    //     next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
   }
 
   public CreateVaccinationDialog(cow: CowDto): void {
@@ -110,17 +112,17 @@ export class CowsPageComponent extends BaseComponent {
       data: cow,
       header: 'Ajouter une vaccination',
       height: '450px',
-      width: '500px',
+      width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if (result == null)
-        return;
-      this.store.dispatch(new Vaccinations.Create({ body: result })).subscribe({
-        next: () => this.toastSuccess("La vaccination a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(result => {
+    //   if (result == null)
+    //     return;
+    //   this.store.dispatch(new Vaccinations.Create({ body: result })).subscribe({
+    //     next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
   }
 
   public CreateGestationDialog(cow: CowDto): void {
@@ -128,19 +130,36 @@ export class CowsPageComponent extends BaseComponent {
       data: cow,
       header: 'Ajouter une gestation',
       height: '250px',
-      width: '400px',
+      width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if (result == null)
-        return;
-      this.store.dispatch(new Gestations.Create({ body: result })).subscribe({
-        next: () => this.toastSuccess("La gestation a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
+    // dialogRef.onClose.subscribe(result => {
+    //   if (result == null)
+    //     return;
+    //   this.store.dispatch(new Gestations.Create({ body: result })).subscribe({
+    //     next: () => this.toastSuccess("La gestation a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+  }
+
+  public CreateConditionDialog(cow: CowDto): void {
+    const dialogRef = this.dialogService.open(CreateConditionDialogComponent, {
+      data: cow,
+      header: 'Ajouter une affection',
+      height: '250px',
+      width: '350px',
     });
   }
 
+  public CreateTreatmentDialog(cow: CowDto): void {
+    const dialogRef = this.dialogService.open(CreateTreatmentDialogComponent, {
+      data: cow,
+      header: 'Ajouter un traitement',
+      height: '250px',
+      width: '350px',
+    });
+  }
 
   public ShowAll(): void {
     this.cowList.showAll()

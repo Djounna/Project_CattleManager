@@ -1,7 +1,7 @@
 export enum ActivityType{
     Interventions = "Interventions",
     Vaccinations = "Vaccinations",
-    Conditions = "Conditions",
-    Treatments = "Treatments",
+    Conditions = "Affections",
+    Treatments = "Traitements",
     Gestations = "Gestations",
 }

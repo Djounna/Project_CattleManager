@@ -5,7 +5,6 @@ export interface InterventionDto {
   date?: null | string;
   description?: null | string;
   id?: number;
-  intervenantId?: number;
-  status?: null | string;
+  intervenantId?: null | number;
   type?: null | string;
 }

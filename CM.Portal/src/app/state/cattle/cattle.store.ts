@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Selector, Action, StateContext, State } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { CowDto, GestationDto, GroupDto, InterventionDto, VaccinationDto } from "../../api/models";
-import { CowService, GestationService, GroupService, InterventionService, StatisticService, VaccinationService } from "../../api/services";
-import { CattleStatistics, CowDetails, Cows, Gestations, Groups, Interventions, Vaccinations } from "./cattle.actions";
+import { ConditionDto, CowDto, GestationDto, GroupDto, InterventionDto, TreatmentDto, VaccinationDto } from "../../api/models";
+import { ConditionService, CowService, GestationService, GroupService, InterventionService, StatisticService, TreatmentService, VaccinationService } from "../../api/services";
+import { CattleStatistics, Conditions, CowDetails, Cows, Gestations, Groups, Interventions, Treatments, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 import { CowUtils } from "../../utils/cow-utils";
 
@@ -20,6 +20,8 @@ import { CowUtils } from "../../utils/cow-utils";
     Gestations: [],
     Interventions: [],
     Vaccinations: [],
+    Conditions: [],
+    Treatments: [],
     CattleStatistics: undefined,
   }
 })
@@ -32,6 +34,8 @@ export class CattleState {
     private gestationService: GestationService, 
     private interventionService: InterventionService,
     private vaccinationService: VaccinationService,
+    private conditionService: ConditionService,
+    private treatmentService: TreatmentService,
     private statisticService: StatisticService
     ) { }
 
@@ -78,6 +82,16 @@ export class CattleState {
   @Selector()
   static vaccinations(cattleState: CattleStateModel) {
     return cattleState.Vaccinations;
+  }
+
+  @Selector()
+  static conditions(cattleState: CattleStateModel) {
+    return cattleState.Conditions;
+  }
+
+  @Selector()
+  static treatments(cattleState: CattleStateModel) {
+    return cattleState.Treatments;
   }
 
   @Selector()
@@ -302,6 +316,86 @@ export class CattleState {
       .pipe(
         tap(deleted => {
           ctx.setState(patch<CattleStateModel>({ Vaccinations: removeItem<VaccinationDto>(c => c.id === action.id) }))
+        })
+      );
+  }
+
+  /// Conditions Actions
+  @Action(Conditions.GetAll)
+  getAllConditions(ctx: StateContext<CattleStateModel>) {
+    return this.conditionService.apiConditionGet()
+      .pipe(tap(conditions => {
+        ctx.patchState({ Conditions: conditions })
+      })
+      );
+  }
+
+  @Action(Conditions.Create)
+  createCondition(ctx: StateContext<CattleStateModel>, action: Conditions.Create) {
+    return this.conditionService.apiConditionPost(action.payload)
+      .pipe(
+        tap(newCondition => {
+          ctx.setState(patch<CattleStateModel>({ Conditions: append<ConditionDto>([newCondition]) }))
+        })
+      );
+  }
+
+  @Action(Conditions.Update)
+  updateCondition(ctx: StateContext<CattleStateModel>, action: Conditions.Update) {
+    return this.conditionService.apiConditionPut(action.payload)
+      .pipe(
+        tap(updatedCondition => {
+          ctx.setState(patch<CattleStateModel>({ Conditions: updateItem<ConditionDto>(c => c.id === updatedCondition.id, updatedCondition) }))
+        })
+      );
+  }
+
+  @Action(Conditions.Delete)
+  deleteCondition(ctx: StateContext<CattleStateModel>, action: Conditions.Delete) {
+    return this.conditionService.apiConditionDelete({ id: action.id })
+      .pipe(
+        tap(deleted => {
+          ctx.setState(patch<CattleStateModel>({ Conditions: removeItem<ConditionDto>(c => c.id === action.id) }))
+        })
+      );
+  }
+
+  /// Treatments Actions
+  @Action(Treatments.GetAll)
+  getAllTreatments(ctx: StateContext<CattleStateModel>) {
+    return this.treatmentService.apiTreatmentGet()
+      .pipe(tap(treatments => {
+        ctx.patchState({ Treatments: treatments })
+      })
+      );
+  }
+
+  @Action(Treatments.Create)
+  createTreatment(ctx: StateContext<CattleStateModel>, action: Treatments.Create) {
+    return this.treatmentService.apiTreatmentPost(action.payload)
+      .pipe(
+        tap(newTreatment => {
+          ctx.setState(patch<CattleStateModel>({ Treatments: append<TreatmentDto>([newTreatment]) }))
+        })
+      );
+  }
+
+  @Action(Treatments.Update)
+  updateTreatment(ctx: StateContext<CattleStateModel>, action: Treatments.Update) {
+    return this.treatmentService.apiTreatmentPut(action.payload)
+      .pipe(
+        tap(updatedTreatment => {
+          ctx.setState(patch<CattleStateModel>({ Treatments: updateItem<TreatmentDto>(c => c.id === updatedTreatment.id, updatedTreatment) }))
+        })
+      );
+  }
+
+  @Action(Treatments.Delete)
+  deleteTreatment(ctx: StateContext<CattleStateModel>, action: Treatments.Delete) {
+    return this.treatmentService.apiTreatmentDelete({ id: action.id })
+      .pipe(
+        tap(deleted => {
+          ctx.setState(patch<CattleStateModel>({ Treatments: removeItem<TreatmentDto>(c => c.id === action.id) }))
         })
       );
   }

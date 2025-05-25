@@ -4,8 +4,9 @@
     padding-top:2rem;
     padding-right:1rem;
     gap:1rem;
-    max-height: 25vh;
-    overflow: auto;
+    max-height: 27vh;
+    height: 27vh;
+    overflow-y: auto;
 
     .item{
         display:flex;
@@ -28,8 +29,8 @@
 
             .details{
                 padding-left:0.5rem;
-                width:12rem;
-                max-width: 12rem;
+                width:14rem;
+                max-width: 14rem;
 
                 .label{
 
@@ -42,7 +43,7 @@
             .date{
                 position: absolute;
                 right:-10px;
-                top:-15px;
+                top:-26px;
                 padding:0.2rem;
                 box-shadow:0.5px 0.5px 0.5px 0.5px;
                 border-radius: 3px;

@@ -140,6 +140,8 @@ import { UserState } from './state/user/user.store';
 import { CreateUserDialogComponent } from './features/users/user/create-user-dialog/create-user-dialog.component';
 import { HomeComponent } from './screens/home/home.component';
 import { ActivitiesShortlistComponent } from './features/activities/activities-shortlist/activities-shortlist.component';
+import { CreateConditionDialogComponent } from './features/condition/create-condition-dialog/create-condition-dialog.component';
+import { CreateTreatmentDialogComponent } from './features/treatment/create-treatment-dialog/create-treatment-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -185,7 +187,9 @@ import { ActivitiesShortlistComponent } from './features/activities/activities-s
         TodoListComponent,
         CreateUserDialogComponent,
         HomeComponent,
-        ActivitiesShortlistComponent
+        ActivitiesShortlistComponent,
+        CreateConditionDialogComponent,
+        CreateTreatmentDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

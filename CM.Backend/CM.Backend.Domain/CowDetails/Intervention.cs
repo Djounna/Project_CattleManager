@@ -13,12 +13,10 @@ public class Intervention : BaseEntity
     public int CowId { get; set; }
     public virtual Cow Cow {get; set;}
 
-    public int IntervenantId { get; set; }
+    public int? IntervenantId { get; set; }
     public virtual Intervenant Intervenant { get; set; }
 
     public string Type { get; set; }
-    public string Status { get; set; }
-    public DateOnly? Date { get; set; }
     public string? Description { get; set; }
-
+    public DateOnly? Date { get; set; }
 }

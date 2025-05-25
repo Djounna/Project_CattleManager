@@ -89,6 +89,7 @@ export namespace Interventions{
         constructor(public id: number){}
     }
 }
+
 export namespace Vaccinations{
     export class Create{
         static readonly type = '[Vaccinations] Create Vaccination'
@@ -109,6 +110,49 @@ export namespace Vaccinations{
         constructor(public id: number){}
     }
 }
+
+export namespace Conditions{
+    export class Create{
+        static readonly type = '[Conditions] Create Condition'
+        constructor(public payload : any){}
+    }
+
+    export class Update{
+        static readonly type = '[Conditions] Update Condition'
+        constructor(public payload : any){}
+    }
+
+    export class GetAll{
+        static readonly type ='[Conditions] Get All Conditions'
+    }
+
+    export class Delete{
+        static readonly type = '[Conditions] Delete Condition'
+        constructor(public id: number){}
+    }
+}
+
+export namespace Treatments{
+    export class Create{
+        static readonly type = '[Treatments] Create Treatment'
+        constructor(public payload : any){}
+    }
+
+    export class Update{
+        static readonly type = '[Treatments] Update Treatment'
+        constructor(public payload : any){}
+    }
+
+    export class GetAll{
+        static readonly type ='[Treatments] Get All Treatments'
+    }
+
+    export class Delete{
+        static readonly type = '[Treatments] Delete Treatment'
+        constructor(public id: number){}
+    }
+}
+
 export namespace CattleStatistics{
     export class Get{
         static readonly type = '[Statistics] Get Cattle Statistics'
