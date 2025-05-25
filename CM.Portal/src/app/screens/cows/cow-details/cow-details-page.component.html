@@ -1,65 +1,104 @@
 <div class="page_base">
-    <div style="display:flex; flex-direction: row; align-items: stretch; gap: 2rem">
-        <div class="flex flex-column gap-4 flex-grow-4">
 
-            <div style="display:flex; flex-direction:row; flex-grow:3; gap:0.5rem">
-                <div class="flex flex-column gap-2">
-                    <div>
-                        <p-card>
-                            <p-image src="assets\images\cattle\{{CowDetails.imgLink}}" alt="Image" width="250" />
-                        </p-card>
+    <p-menubar>
+        <ng-template #start>
+            <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
+            </div>
+        </ng-template>
+        <!-- <ng-template>
+        </ng-template> -->
+        <ng-template #end>
+            <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                <p-button icon="pi pi-plus" [raised]="true" size="large" (click)="true" />
+                <p-button icon="pi pi-cog" [raised]="true" size="large" (click)="UpdateCowDialog()" />
+                <p-button icon="pi pi-sitemap" [raised]="true"  size="large" (click)="ShowGenealogy()"/>
+                <p-button icon="pi pi-chart-bar" [raised]="true"  size="large" (click)="ShowStatistics()" *ngIf="CowDetails?.milkCow"/>
+                <p-button icon="pi pi-user" [raised]="true"  size="large" (click)="ShowTimeline()"/>
+            </div>
+        </ng-template>
+    </p-menubar>
+
+    <div class="main" *ngIf="!!CowDetails">
+
+        <div class="container-box animal">
+            <div class="title">
+                Animal
+            </div>
+            <div class="content">
+
+                <div class="infos">
+                    <div class="infos-column-labels">
+                        <p> Naissance : </p>
+                        <p> Race : </p>
+                        <p> Père : </p>
+                        <p> Mère : </p>
                     </div>
-                    <div>
-                        <p-card>
-                            <div style="height: 150px;" leaflet 
-                                [leafletOptions]="mapOptions">
-                            </div>
-                        </p-card>
+                    <div class="infos-column-inputs">
+                        <p> {{CowDetails.birthDate | date:'dd/MM/yyyy'}} </p>
+                        <p> {{CowDetails.race}} </p>
+                        <p> {{CowDetails.race}} </p>
+                        <p> {{CowDetails.race}} </p>
+                    </div>
+                    <p-divider layout="vertical"/>
+                    <div class="infos-column-labels">
+                        <p> Groupe : </p>
+                        <p> Enclos : </p>
+                    </div>
+                    <div class="infos-column-inputs">
+                        <p> {{CowDetails.group?.name}} </p>
+                        <p> {{CowDetails.pen?.name}} </p>
                     </div>
                 </div>
-                <div *ngIf="!!CowDetails">
-                    <p-card header="Details" [style]="{ width: '25rem', overflow: 'hidden' }">
-                        <ng-template #title> {{CowDetails.identifier}} </ng-template>
-                        <ng-template #subtitle> {{CowDetails.name}} </ng-template>
-                        <p-divider/>
-                        <p>
-                            Naissance : {{CowDetails.birthDate | date:'dd/MM/yyyy'}}
-                        </p>
-                        <p>
-                            Race : {{CowDetails.race}}
-                        </p>
-                        <p-divider/>
-                        <p>
-                            Groupe : {{CowDetails.group?.name}}
-                        </p>
-                        <p>
-                            Enclos : {{CowDetails.pen?.name}}
-                        </p>
-                        
-                    </p-card>
+
+                    <p-divider layout="vertical"/>
+
+                <div class="sides">
+                    <p-image src="assets\images\cattle\{{CowDetails.imgLink}}" alt="Image" width="250" [style]="{ 'border-radius': '12px' }" />
+                    <div>
+                        <div style="height: 150px; border-radius: 12px;" leaflet [leafletOptions]="mapOptions"></div>
+                    </div>
                 </div>
-                <div style="display:flex; flex-direction: column; gap:0.5rem;">
-                    <p-button icon="pi pi-cog" [raised]="true" size="large" (click)="UpdateCowDialog()" />
-                    <p-button icon="pi pi-sitemap" [raised]="true"  size="large" (click)="ShowGenealogy()"/>
-                    <p-button icon="pi pi-chart-bar" [raised]="true"  size="large" (click)="ShowStatistics()"/>
-                    <p-button icon="pi pi-user" [raised]="true"  size="large" (click)="ShowTimeline()"/>
+            </div>
+        </div>
+
+        <div class="activities">
+            <div class="content">
+
+                <div class="content-row" *ngIf="this.CowDetails?.conditions!.length > 0 || this.CowDetails?.interventions!.length > 0">
+                    <app-activities-shortlist *ngIf="this.CowDetails?.conditions!.length > 0" 
+                        [ChosenActivityType]="ActivityType.Conditions"
+                        [Activities]="this.CowDetails.conditions">
+                    </app-activities-shortlist>
+                    <app-activities-shortlist *ngIf="this.CowDetails?.interventions!.length > 0"
+                        [ChosenActivityType]="ActivityType.Interventions"
+                        [Activities]="this.CowDetails.interventions">
+                    </app-activities-shortlist>
+                </div>
+                <div class="content-row" *ngIf="this.CowDetails?.treatments!.length > 0 || this.CowDetails?.vaccinations!.length > 0">
+                    <app-activities-shortlist *ngIf="this.CowDetails?.treatments!.length > 0"
+                        [ChosenActivityType]="ActivityType.Treatments"
+                        [Activities]="this.CowDetails.treatments">
+                    </app-activities-shortlist>
+                    <app-activities-shortlist *ngIf="this.CowDetails?.vaccinations!.length > 0"
+                        [ChosenActivityType]="ActivityType.Vaccinations"
+                        [Activities]="this.CowDetails.vaccinations">
+                    </app-activities-shortlist>
                 </div>
 
             </div>
-
-            <!-- <div *ngIf="!!CowMilkingVolumes && CowDetails?.milkCow">
-                <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
-            </div> -->
         </div>
-
-        <!-- <div *ngIf="!!CowDetails" style="max-height:90vh; overflow:auto; display:flex; flex-grow:1">
-            <app-cow-timeline [CowDetails]="CowDetails"></app-cow-timeline>
-        </div> -->
-        <!-- <div style="display: flex; flex-grow:1">
-            <app-cow-genealogy [CowDetails]="CowDetails"></app-cow-genealogy>
-        </div> -->
     </div>
 </div>
+
+
+<!-- <div *ngIf="!!CowDetails" style="max-height:90vh; overflow:auto; display:flex; flex-grow:1">
+    <app-cow-timeline [CowDetails]="CowDetails"></app-cow-timeline>
+</div> -->
+
+<!-- <div *ngIf="!!CowMilkingVolumes && CowDetails?.milkCow">
+    <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
+</div> -->
 
 <ng-container *ngIf="!!CowDetails">
 <p-dialog header="Généalogie" [modal]="true" [(visible)]="ShowGenealogyDialog" [style]="{ width: '50rem' }">

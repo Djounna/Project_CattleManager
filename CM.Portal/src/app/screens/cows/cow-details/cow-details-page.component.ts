@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MilkingState } from '../../../state/milking/milking.store';
 import { Milkings } from '../../../state/milking/milking.actions';
 import { latLng, tileLayer } from 'leaflet';
+import { ActivityType } from '../../../models/enums/activity-type';
 
 @Component({
     selector: 'app-cow-details-page',
@@ -28,6 +29,7 @@ export class CowDetailsComponent extends BaseComponent{
     private Data$ = combineLatest([this.CowDetails$, this.MilkingVolumes$, this.CowMilkingVolumes$])
 
     public mapOptions: any;
+    public ActivityType = ActivityType;
 
     public ShowStatisticsDialog = false;
     public ShowTimelineDialog = false

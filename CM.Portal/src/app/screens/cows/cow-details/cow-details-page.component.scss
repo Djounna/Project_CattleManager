@@ -1,0 +1,63 @@
+.main{
+    display:flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: stretch; 
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.animal{
+    // flex-grow:1;
+
+    .content{
+        padding:1rem;
+        display:flex; 
+        flex-direction: row; 
+        gap:1rem;
+
+        .infos{
+            flex-grow:1;
+            display:flex;
+            flex-direction: row;
+            gap:1rem;
+
+            &-column{
+                display:flex;
+                flex-direction:column;
+                gap:0.2rem;
+
+                &-labels{
+                    text-align:right;
+                    font-style:italic;
+                }
+
+                &-inputs{
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .sides{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.activities{
+    flex-grow:3;
+
+    .content{
+        // padding:1rem;
+        display:flex; 
+        flex-direction: column; 
+        gap: 2rem;
+
+        &-row{
+            display:flex; 
+            flex-direction: row; 
+            gap: 2rem;
+        }
+    }
+}

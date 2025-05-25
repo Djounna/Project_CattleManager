@@ -53,6 +53,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ImageModule} from 'primeng/image';
 import { FluidModule } from 'primeng/fluid';
 import { DrawerModule } from 'primeng/drawer'; 
+import { FieldsetModule } from 'primeng/fieldset';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -138,6 +139,7 @@ import { TodoListComponent } from './features/work/todo-list/todo-list.component
 import { UserState } from './state/user/user.store';
 import { CreateUserDialogComponent } from './features/users/user/create-user-dialog/create-user-dialog.component';
 import { HomeComponent } from './screens/home/home.component';
+import { ActivitiesShortlistComponent } from './features/activities/activities-shortlist/activities-shortlist.component';
 
 @NgModule({ 
     declarations: 
@@ -182,7 +184,8 @@ import { HomeComponent } from './screens/home/home.component';
         LoaderComponent,
         TodoListComponent,
         CreateUserDialogComponent,
-        HomeComponent
+        HomeComponent,
+        ActivitiesShortlistComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -238,6 +241,7 @@ import { HomeComponent } from './screens/home/home.component';
         ImageModule,
         FluidModule,
         DrawerModule,
+        FieldsetModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

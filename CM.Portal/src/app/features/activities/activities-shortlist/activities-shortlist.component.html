@@ -1,0 +1,55 @@
+<div class="container-box">
+    <div class="title">{{ChosenActivityType}}</div>
+
+    <!-- <div  class="list"> -->
+
+        <div [ngSwitch]="ChosenActivityType">
+
+            <div *ngSwitchCase="ActivityType.Gestations" class="list">
+                <div *ngFor="let item of Activities; index as i" class="item">
+                    
+                    <!-- <div class="item-row">
+                        <span class="details">{{item.cowId | cowIdentifier}} </span>
+                    </div> -->
+                    <div class="item-row">
+                        <span class="details"> <p-progressbar [value]="item.progress" /></span>
+                        <!-- <span class="details"></span> -->
+                        <span class="date">{{item.calvingDate | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="ActivityType.Interventions" class="list">
+                <div *ngFor="let item of Activities; index as i" class="item">
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="ActivityType.Vaccinations" class="list">
+                <div *ngFor="let item of Activities; index as i" class="item">
+                    
+                    <div class="item-row">
+                        <span class="details">{{item.name}}</span>
+                        <span class="date">{{item.date | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="ActivityType.Conditions">
+                <div *ngFor="let item of Activities; index as i" class="item">
+
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="ActivityType.Treatments">
+                <div *ngFor="let item of Activities; index as i" class="item">
+
+
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+</div>
