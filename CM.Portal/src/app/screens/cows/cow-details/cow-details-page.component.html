@@ -10,8 +10,11 @@
         </ng-template> -->
         <ng-template #end>
             <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
-                <p-button icon="pi pi-plus" [raised]="true" size="large" (click)="true" />
-                <p-button icon="pi pi-cog" [raised]="true" size="large" (click)="UpdateCowDialog()" />
+                <div>
+                    <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"/>
+                    <p-button icon="pi pi-plus" [raised]="true" size="large" (click)="menu.toggle($event)" />
+                </div>
+                <p-button icon="pi pi-cog" [raised]="true" size="large" (click)="UpdateCowDialog(Cow)" />
                 <p-button icon="pi pi-sitemap" [raised]="true"  size="large" (click)="ShowGenealogy()"/>
                 <p-button icon="pi pi-chart-bar" [raised]="true"  size="large" (click)="ShowStatistics()" *ngIf="CowDetails?.milkCow"/>
                 <p-button icon="pi pi-user" [raised]="true"  size="large" (click)="ShowTimeline()"/>

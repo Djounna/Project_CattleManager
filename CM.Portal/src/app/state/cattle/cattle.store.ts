@@ -11,6 +11,7 @@ import { CowUtils } from "../../utils/cow-utils";
 @State<CattleStateModel>({
   name: 'cattle',
   defaults: {
+    Cow: undefined,
     CowDetails: undefined,
     Cows: [],
     CowIdentifierDictionnary: new Map<number, string>(),
@@ -38,6 +39,11 @@ export class CattleState {
     private treatmentService: TreatmentService,
     private statisticService: StatisticService
     ) { }
+
+  @Selector()
+  static cow(cattleState: CattleStateModel){
+    return cattleState.Cow;
+  }
 
   @Selector()
   static cowDetails(cattleState: CattleStateModel){
@@ -100,6 +106,15 @@ export class CattleState {
   }
 
   /// Cows Actions
+  @Action(Cows.Get)
+  getCow(ctx: StateContext<CattleStateModel>, action: Cows.Get){
+    return this.cowService.apiCowIdGet({ id: action.id})
+      .pipe(
+        tap(cow => 
+          ctx.patchState({ Cow: cow }))
+      );
+  }
+
   @Action(Cows.GetAll)
   getAllCows(ctx: StateContext<CattleStateModel>) {
     return this.cowService.apiCowGet().pipe(tap(cows => {

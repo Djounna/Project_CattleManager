@@ -1,6 +1,7 @@
 import { CattleStatisticsDto, ConditionDto, CowDetailsDto, CowDto, GestationDto, GroupDto, InterventionDto, TreatmentDto, VaccinationDto } from "../../api/models";
 
 export interface CattleStateModel {
+  Cow?: CowDto,
   CowDetails?: CowDetailsDto,
   Cows: CowDto[],
   CowIdentifierDictionnary: Map<number, string>,

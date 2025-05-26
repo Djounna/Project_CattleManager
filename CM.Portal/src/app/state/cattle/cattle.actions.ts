@@ -9,6 +9,11 @@ export namespace Cows{
         constructor(public payload : any){}
     }
 
+    export class Get{
+        static readonly type = '[Cows Get Cow'
+        constructor(public id: number){}    
+    }
+
     export class GetAll{
         static readonly type ='[Cows] Get All Cows'
     }
