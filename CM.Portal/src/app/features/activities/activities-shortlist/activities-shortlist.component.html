@@ -23,6 +23,11 @@
             <div *ngSwitchCase="ActivityType.Interventions" class="list">
                 <div *ngFor="let item of Activities; index as i" class="item">
 
+                    <div class="item-row">
+                        <span class="details">{{item.type}}</span>
+                        <span class="date">{{item.date | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+
                 </div>
             </div>
 
@@ -53,7 +58,7 @@
 
                     <div class="item-row">
                         <span class="details">{{item.name}}</span>
-                        <span class="date">{{item.startDate | date: 'dd/MM/yyyy'}}</span>
+                        <span class="date">{{item.date | date: 'dd/MM/yyyy'}}</span>
                     </div>
 
                 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { ActivityType } from '../../../models/enums/activity-type';
 
 @Component({

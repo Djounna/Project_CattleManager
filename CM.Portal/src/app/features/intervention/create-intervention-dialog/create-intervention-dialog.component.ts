@@ -28,9 +28,8 @@ export class CreateInterventionDialogComponent extends BaseComponent {
     this.Cow = this.dialogConfig.data;
     this.CreateInterventionForm = this.formBuilder.group({
       // identifier: [this.Cow.identifier, Validators.required],
-      intervenantId: [0, Validators.required], 
+      // intervenantId: [0], 
       description: ['', Validators.required], 
-      status: ['', Validators.required],
       type: ['', Validators.required],
       date:[new Date(),Validators.required],
     });

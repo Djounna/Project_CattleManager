@@ -32,12 +32,16 @@
 
                 <div class="infos">
                     <div class="infos-column-labels">
+                        <p> Nom : </p>
+                        <p style="font-weight: bold;"> Identifiant : </p>
                         <p> Naissance : </p>
                         <p> Race : </p>
                         <p> Père : </p>
                         <p> Mère : </p>
                     </div>
                     <div class="infos-column-inputs">
+                        <p> {{CowDetails.name}} </p>
+                        <p style="font-weight: bold;"> {{CowDetails.identifier}} </p>
                         <p> {{CowDetails.birthDate | date:'dd/MM/yyyy'}} </p>
                         <p> {{CowDetails.race}} </p>
                         <p> {{CowDetails.race}} </p>
@@ -54,7 +58,7 @@
                     </div>
                 </div>
 
-                    <p-divider layout="vertical"/>
+                <p-divider layout="vertical"/>
 
                 <div class="sides">
                     <p-image src="assets\images\cattle\{{CowDetails.imgLink}}" alt="Image" width="250" [style]="{ 'border-radius': '12px' }" />

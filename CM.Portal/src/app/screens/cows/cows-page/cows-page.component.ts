@@ -93,7 +93,7 @@ export class CowsPageComponent extends BaseComponent {
     const dialogRef = this.dialogService.open(CreateGestationDialogComponent, {
       data: cow,
       header: 'Ajouter une gestation',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
   }
@@ -102,7 +102,7 @@ export class CowsPageComponent extends BaseComponent {
     const dialogRef = this.dialogService.open(CreateConditionDialogComponent, {
       data: cow,
       header: 'Ajouter une affection',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
   }
@@ -111,7 +111,7 @@ export class CowsPageComponent extends BaseComponent {
     const dialogRef = this.dialogService.open(CreateTreatmentDialogComponent, {
       data: cow,
       header: 'Ajouter un traitement',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
   }

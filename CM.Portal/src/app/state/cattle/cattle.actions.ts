@@ -29,6 +29,10 @@ export namespace CowDetails{
         static readonly type = '[CowDetails] Get Cow Details'
         constructor(public id: number){}
     }
+
+    export class Reset{
+        static readonly type = '[CowDetails] Reset Dow Details'
+    }
 }
 
 export namespace Groups{

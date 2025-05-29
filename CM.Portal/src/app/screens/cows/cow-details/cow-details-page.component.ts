@@ -35,7 +35,8 @@ export class CowDetailsComponent extends BaseComponent{
     public MilkingVolumes! : MilkingVolumeDto[];
     @Select(MilkingState.selectedCowMonthMilkings) CowMilkingVolumes$!: Observable<MilkingDto[]>;
     public CowMilkingVolumes! : MilkingDto[];
-    private Data$ = combineLatest([this.Cow$, this.CowDetails$, this.MilkingVolumes$, this.CowMilkingVolumes$])
+    private CowData$ = combineLatest([this.Cow$, this.CowDetails$])
+    private MilkingData$ = combineLatest([this.MilkingVolumes$, this.CowMilkingVolumes$])
 
     public mapOptions: any;
     public ActivityType = ActivityType;
@@ -53,23 +54,33 @@ export class CowDetailsComponent extends BaseComponent{
         });
         this.iniMenuItems();
         this.initMap();
-        this.GetData(); 
+
+        this.store.dispatch(new CowDetails.Reset).subscribe();
+        this.GetCowData(); 
     }
 
-    public GetData(): void{
-        this.Data$.pipe(
-            tap(([c, cd, mv, cmv]) => {
+    public GetCowData(): void{
+          this.CowData$.pipe(
+            tap(([c, cd]) => {
                 this.Cow = c;
                 this.CowDetails = cd;
+            }),
+            takeUntil(this.$OnDestroyed),
+        )
+        .subscribe({ error:(err) => { console.log(err); }});
+        this.store.dispatch(new Cows.Get(this.cowId));
+        this.store.dispatch(new CowDetails.Get(this.cowId)); 
+    }
+
+    private GetMilkingData(){
+          this.MilkingData$.pipe(
+            tap(([mv, cmv]) => {
                 this.MilkingVolumes = mv;
                 this.CowMilkingVolumes = cmv;
             }),
             takeUntil(this.$OnDestroyed),
         )
         .subscribe({ error:(err) => { console.log(err); }});
-
-        this.store.dispatch(new Cows.Get(this.cowId));
-        this.store.dispatch(new CowDetails.Get(this.cowId)); 
         this.store.dispatch(new Milkings.GetAllLastMonth);
         this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
     }
@@ -128,7 +139,7 @@ export class CowDetailsComponent extends BaseComponent{
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }
@@ -137,13 +148,13 @@ export class CowDetailsComponent extends BaseComponent{
     const dialogRef = this.dialogService.open(CreateInterventionDialogComponent, {
       data: cow,
       header: 'Ajouter une intervention',
-      height: '450px',
+      // height: '450px',
       width: '350px',
     });
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }
@@ -158,7 +169,7 @@ export class CowDetailsComponent extends BaseComponent{
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }
@@ -167,13 +178,13 @@ export class CowDetailsComponent extends BaseComponent{
     const dialogRef = this.dialogService.open(CreateGestationDialogComponent, {
       data: cow,
       header: 'Ajouter une gestation',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }
@@ -182,13 +193,13 @@ export class CowDetailsComponent extends BaseComponent{
     const dialogRef = this.dialogService.open(CreateConditionDialogComponent, {
       data: cow,
       header: 'Ajouter une affection',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }
@@ -197,13 +208,13 @@ export class CowDetailsComponent extends BaseComponent{
     const dialogRef = this.dialogService.open(CreateTreatmentDialogComponent, {
       data: cow,
       header: 'Ajouter un traitement',
-      height: '250px',
+      height: '450px',
       width: '350px',
     });
 
     dialogRef.onClose.subscribe(result => {
       if(result != null){
-        this.GetData();
+        this.GetCowData();
       }
     });
   }

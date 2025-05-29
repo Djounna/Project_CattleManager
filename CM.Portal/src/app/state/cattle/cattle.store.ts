@@ -169,6 +169,11 @@ export class CattleState {
       );
     }
 
+  @Action(CowDetails.Reset)
+    resetCowDetails(ctx: StateContext<CattleStateModel>) {
+      ctx.patchState({CowDetails : undefined, Cow: undefined});
+    }
+
   /// Groups Actions
   @Action(Groups.GetAll)
   getAllGroups(ctx: StateContext<CattleStateModel>) {
