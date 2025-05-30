@@ -49,6 +49,18 @@ public class TreatmentController : ControllerBase
     }
 
     /// <summary>
+    /// Get Treatments By Cow Id
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<TreatmentDto>>> GetListByCowId(int cowId)
+    {
+        return Ok(await _mediator.Send(new GetTreatmentsByCowIdQuery(cowId)));
+    }
+
+    /// <summary>
     /// Create a treatment
     /// </summary>
     /// <param name="dto"></param>

@@ -49,6 +49,18 @@ public class ConditionController : ControllerBase
     }
 
     /// <summary>
+    /// Get Conditions By Cow Id
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<ConditionDto>>> GetListByCowId(int cowId)
+    {
+        return Ok(await _mediator.Send(new GetConditionsByCowIdQuery(cowId)));
+    }
+
+    /// <summary>
     /// Create a condition
     /// </summary>
     /// <param name="dto"></param>

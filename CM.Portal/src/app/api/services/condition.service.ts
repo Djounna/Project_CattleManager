@@ -274,4 +274,55 @@ export class ConditionService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiConditionCowIdGet
+   */
+  static readonly ApiConditionCowIdGetPath = '/api/Condition/{cowId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiConditionCowIdGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiConditionCowIdGet$Response(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<ConditionDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ConditionService.ApiConditionCowIdGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<ConditionDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiConditionCowIdGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiConditionCowIdGet(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<Array<ConditionDto>> {
+
+    return this.apiConditionCowIdGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<ConditionDto>>) => r.body as Array<ConditionDto>)
+    );
+  }
+
 }

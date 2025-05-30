@@ -274,4 +274,55 @@ export class GestationService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiGestationCowIdGet
+   */
+  static readonly ApiGestationCowIdGetPath = '/api/Gestation/{cowId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiGestationCowIdGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGestationCowIdGet$Response(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<GestationDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GestationService.ApiGestationCowIdGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<GestationDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiGestationCowIdGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiGestationCowIdGet(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<Array<GestationDto>> {
+
+    return this.apiGestationCowIdGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<GestationDto>>) => r.body as Array<GestationDto>)
+    );
+  }
+
 }

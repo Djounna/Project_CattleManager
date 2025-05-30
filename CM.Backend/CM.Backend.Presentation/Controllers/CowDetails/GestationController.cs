@@ -20,7 +20,7 @@ public class GestationController : ControllerBase
     /// <param name="mediator"></param>
     public GestationController(IMediator mediator)
     {
-        _mediator = mediator;  
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -49,6 +49,18 @@ public class GestationController : ControllerBase
     }
 
     /// <summary>
+    /// Get Gestations By Cow Id
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<GestationDto>>> GetListByCowId(int cowId)
+    {
+        return Ok(await _mediator.Send(new GetGestationsByCowIdQuery(cowId)));
+    }
+
+    /// <summary>
     /// Create a gestation
     /// </summary>
     /// <param name="dto"></param>
@@ -56,7 +68,7 @@ public class GestationController : ControllerBase
     [HttpPost]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GestationDto>> Create([FromBody]GestationDto dto)
+    public async Task<ActionResult<GestationDto>> Create([FromBody] GestationDto dto)
     {
         return Ok(await _mediator.Send(new CreateGestationCommand(dto)));
     }
@@ -69,7 +81,7 @@ public class GestationController : ControllerBase
     [HttpPut]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GestationDto>> Update([FromBody]GestationDto dto)
+    public async Task<ActionResult<GestationDto>> Update([FromBody] GestationDto dto)
     {
         return Ok(await _mediator.Send(new UpdateGestationCommand(dto)));
     }

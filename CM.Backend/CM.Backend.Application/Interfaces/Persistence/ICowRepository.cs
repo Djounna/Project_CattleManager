@@ -7,4 +7,5 @@ public interface ICowRepository : IBaseRepository<Cow>
     IEnumerable<Cow> GetListWithDetails();
     IEnumerable<Cow> GetMilkCowList();
     IEnumerable<Cow> GetCowChildrenById(int id);
+    Cow GetCowGenealogyById(int id);
 }

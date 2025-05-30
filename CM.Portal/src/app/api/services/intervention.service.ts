@@ -274,4 +274,55 @@ export class InterventionService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiInterventionCowIdGet
+   */
+  static readonly ApiInterventionCowIdGetPath = '/api/Intervention/{cowId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiInterventionCowIdGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiInterventionCowIdGet$Response(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<InterventionDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionCowIdGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<InterventionDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiInterventionCowIdGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiInterventionCowIdGet(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<Array<InterventionDto>> {
+
+    return this.apiInterventionCowIdGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<InterventionDto>>) => r.body as Array<InterventionDto>)
+    );
+  }
+
 }

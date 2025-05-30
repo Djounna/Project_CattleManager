@@ -20,7 +20,7 @@ public class InterventionController : ControllerBase
     /// <param name="mediator"></param>
     public InterventionController(IMediator mediator)
     {
-        _mediator = mediator;  
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -49,6 +49,18 @@ public class InterventionController : ControllerBase
     }
 
     /// <summary>
+    /// Get Interventions By Cow Id
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<InterventionDto>>> GetListByCowId(int cowId)
+    {
+        return Ok(await _mediator.Send(new GetInterventionsByCowIdQuery(cowId)));
+    }
+
+    /// <summary>
     /// Create a intervention
     /// </summary>
     /// <param name="dto"></param>
@@ -56,7 +68,7 @@ public class InterventionController : ControllerBase
     [HttpPost]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<InterventionDto>> Create([FromBody]InterventionDto dto)
+    public async Task<ActionResult<InterventionDto>> Create([FromBody] InterventionDto dto)
     {
         return Ok(await _mediator.Send(new CreateInterventionCommand(dto)));
     }
@@ -69,7 +81,7 @@ public class InterventionController : ControllerBase
     [HttpPut]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<InterventionDto>> Update([FromBody]InterventionDto dto)
+    public async Task<ActionResult<InterventionDto>> Update([FromBody] InterventionDto dto)
     {
         return Ok(await _mediator.Send(new UpdateInterventionCommand(dto)));
     }

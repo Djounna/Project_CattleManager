@@ -274,4 +274,55 @@ export class VaccinationService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation apiVaccinationCowIdGet
+   */
+  static readonly ApiVaccinationCowIdGetPath = '/api/Vaccination/{cowId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiVaccinationCowIdGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiVaccinationCowIdGet$Response(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<VaccinationDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationCowIdGetPath, 'get');
+    if (params) {
+      rb.path('cowId', params.cowId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<VaccinationDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiVaccinationCowIdGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiVaccinationCowIdGet(params: {
+    cowId: number;
+    context?: HttpContext
+  }
+): Observable<Array<VaccinationDto>> {
+
+    return this.apiVaccinationCowIdGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<VaccinationDto>>) => r.body as Array<VaccinationDto>)
+    );
+  }
+
 }

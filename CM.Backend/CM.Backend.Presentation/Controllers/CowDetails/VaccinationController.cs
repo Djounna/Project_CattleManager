@@ -49,6 +49,18 @@ public class VaccinationController : ControllerBase
     }
 
     /// <summary>
+    /// Get Vaccinations By Cow Id
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{cowId}")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<VaccinationDto>>> GetListByCowId(int cowId)
+    {
+        return Ok(await _mediator.Send(new GetVaccinationsByCowIdQuery(cowId)));
+    }
+
+    /// <summary>
     /// Create a vaccination
     /// </summary>
     /// <param name="dto"></param>

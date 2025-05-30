@@ -3,4 +3,5 @@
 namespace CM.Backend.Application.Interfaces.Persistence;
 public interface IGestationRepository: IBaseRepository<Gestation>
 {
+    IEnumerable<Gestation> GetListByCowId(int cowId);
 }
