@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CM.Backend.Application.Services.Cow.Queries;
 using CM.Backend.Application.Services.Cow.Commands;
 using CM.Backend.Application.Models.Cows;
+using CM.Backend.Application.Models.CowDetails;
 
 namespace CM.Backend.Presentation.Controllers.Cows;
 
@@ -47,6 +48,19 @@ public class CowController : ControllerBase
     public async Task<ActionResult<CowDetailsDto>> GetDetailsById(int id)
     {
         return Ok(await _mediator.Send(new GetCowDetailsByIdQuery(id)));
+    }
+
+    /// <summary>
+    /// Get Cow Genealogy By Cow Id
+    /// </summary>
+    /// <param name="id">Id</param>
+    /// <returns></returns>
+    [HttpGet("{id}/genealogy")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<CowGenealogyDto>> GetGenealogyById(int id)
+    {
+        return Ok(await _mediator.Send(new GetCowGenealogyByIdQuery(id)));
     }
 
     /// <summary>

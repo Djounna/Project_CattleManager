@@ -56,11 +56,6 @@ public class CowDetailsDto
     public GroupDto Group { get; set; }
 
     /// <summary>
-    /// Milk production
-    /// </summary>
-    public List<MilkingDto>? Milkings {  get; set; }
-
-    /// <summary>
     /// Interventions
     /// </summary>
     public List<InterventionDto>? Interventions { get; set; }
@@ -86,11 +81,6 @@ public class CowDetailsDto
     public List<TreatmentDto>? Treatments { get; set; }
 
     /// <summary>
-    /// Genealogy
-    /// </summary>
-    public GenealogyDto Genealogy { get; set; }
-
-    /// <summary>
     /// Children
     /// </summary>
     public List<CowDto>? Children { get; set; }
@@ -104,4 +94,14 @@ public class CowDetailsDto
     /// Group Moves
     /// </summary>
     public List<GroupMoveDto> GroupMoves { get; set;}
+
+    // /// <summary>
+    // /// Genealogy
+    // /// </summary>
+    // public GenealogyDto Genealogy { get; set; }
+
+    // /// <summary>
+    // /// Milk production
+    // /// </summary>
+    // public List<MilkingDto>? Milkings {  get; set; }
 }

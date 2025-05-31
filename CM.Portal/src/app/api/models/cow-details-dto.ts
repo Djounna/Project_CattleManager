@@ -2,12 +2,10 @@
 /* eslint-disable */
 import { ConditionDto } from './condition-dto';
 import { CowDto } from './cow-dto';
-import { GenealogyDto } from './genealogy-dto';
 import { GestationDto } from './gestation-dto';
 import { GroupDto } from './group-dto';
 import { GroupMoveDto } from './group-move-dto';
 import { InterventionDto } from './intervention-dto';
-import { MilkingDto } from './milking-dto';
 import { PenDto } from './pen-dto';
 import { PenMoveDto } from './pen-move-dto';
 import { TreatmentDto } from './treatment-dto';
@@ -17,7 +15,6 @@ export interface CowDetailsDto {
   children?: null | Array<CowDto>;
   conditions?: null | Array<ConditionDto>;
   gender?: null | string;
-  genealogy?: GenealogyDto;
   gestations?: null | Array<GestationDto>;
   group?: GroupDto;
   groupMoves?: null | Array<GroupMoveDto>;
@@ -26,7 +23,6 @@ export interface CowDetailsDto {
   imgLink?: null | string;
   interventions?: null | Array<InterventionDto>;
   milkCow?: boolean;
-  milkings?: null | Array<MilkingDto>;
   name?: null | string;
   pen?: PenDto;
   penMoves?: null | Array<PenMoveDto>;

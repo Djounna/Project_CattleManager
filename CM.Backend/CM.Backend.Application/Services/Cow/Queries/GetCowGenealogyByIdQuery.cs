@@ -6,9 +6,9 @@ using MediatR;
 
 namespace CM.Backend.Application.Services.Cow.Queries;
 
-public record GetCowGenealogyByIdQuery(int id) : IRequest<GenealogyDto>;
+public record GetCowGenealogyByIdQuery(int id) : IRequest<CowGenealogyDto>;
 
-public class GetCowGenealogyByIdQueryHandler : IRequestHandler<GetCowGenealogyByIdQuery, GenealogyDto>
+public class GetCowGenealogyByIdQueryHandler : IRequestHandler<GetCowGenealogyByIdQuery, CowGenealogyDto>
 {
     private readonly ICowRepository _cowRepository;
     private readonly IMapper _mapper;
@@ -19,12 +19,13 @@ public class GetCowGenealogyByIdQueryHandler : IRequestHandler<GetCowGenealogyBy
         _mapper = mapper;
     }
 
-    public async Task<GenealogyDto> Handle(GetCowGenealogyByIdQuery request, CancellationToken cancellationToken)
+    public async Task<CowGenealogyDto> Handle(GetCowGenealogyByIdQuery request, CancellationToken cancellationToken)
     {
         var cow = _cowRepository.GetCowGenealogyById(request.id);
 
-        GenealogyDto genealogy = new()
+        CowGenealogyDto genealogy = new()
         {
+            Cow = _mapper.Map<CowDto>(cow),
             Father = cow.Father != null ? new ParentDto()
             {
                 Cow = _mapper.Map<CowDto>(cow.Father),

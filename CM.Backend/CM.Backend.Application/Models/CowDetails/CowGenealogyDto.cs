@@ -1,8 +1,9 @@
 ﻿using CM.Backend.Application.Models.Cows;
 
 namespace CM.Backend.Application.Models.CowDetails;
-public class GenealogyDto
+public class CowGenealogyDto
 {
+    public CowDto Cow { get; set; }
     public ParentDto? Mother { get; set; }
     public ParentDto? Father { get; set; }
 }
