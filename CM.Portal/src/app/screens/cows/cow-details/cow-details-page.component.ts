@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { Select } from '@ngxs/store';
-import { combineLatest, finalize, Observable, takeUntil, tap } from 'rxjs';
-import { CowDetailsDto, CowDto, MilkingDto, MilkingVolumeDto } from '../../../api/models';
-import { CowDetails, Cows } from '../../../state/cattle/cattle.actions';
+import { combineLatest, Observable, takeUntil, tap } from 'rxjs';
+import { CowDetailsDto, CowDto, CowGenealogyDto, MilkingDto, MilkingVolumeDto } from '../../../api/models';
+import { Conditions, CowDetails, CowGenealogy, Cows, Gestations, Interventions, Treatments, Vaccinations } from '../../../state/cattle/cattle.actions';
 import { ActivatedRoute } from '@angular/router';
 import { MilkingState } from '../../../state/milking/milking.store';
 import { Milkings } from '../../../state/milking/milking.actions';
@@ -19,115 +19,128 @@ import { CreateVaccinationDialogComponent } from '../../../features/vaccination/
 import { MenuItem } from 'primeng/api';
 
 @Component({
-    selector: 'app-cow-details-page',
-    templateUrl: './cow-details-page.component.html',
-    styleUrl: './cow-details-page.component.scss',
-    standalone: false
+  selector: 'app-cow-details-page',
+  templateUrl: './cow-details-page.component.html',
+  styleUrl: './cow-details-page.component.scss',
+  standalone: false
 })
-export class CowDetailsComponent extends BaseComponent{
-    private route = inject(ActivatedRoute);
-    cowId = 0;
-    @Select(CattleState.cow) Cow$!: Observable<CowDto>; 
-    public Cow!: CowDto
-    @Select(CattleState.cowDetails) CowDetails$!: Observable<CowDetailsDto>; 
-    public CowDetails!: CowDetailsDto
-    @Select(MilkingState.milkingVolumesLastMonth) MilkingVolumes$!: Observable<MilkingVolumeDto[]>;
-    public MilkingVolumes! : MilkingVolumeDto[];
-    @Select(MilkingState.selectedCowMonthMilkings) CowMilkingVolumes$!: Observable<MilkingDto[]>;
-    public CowMilkingVolumes! : MilkingDto[];
-    private CowData$ = combineLatest([this.Cow$, this.CowDetails$])
-    private MilkingData$ = combineLatest([this.MilkingVolumes$, this.CowMilkingVolumes$])
+export class CowDetailsComponent extends BaseComponent {
+  private route = inject(ActivatedRoute);
+  cowId = 0;
+  @Select(CattleState.cow) Cow$!: Observable<CowDto>;
+  public Cow!: CowDto
+  @Select(CattleState.cowDetails) CowDetails$!: Observable<CowDetailsDto>;
+  public CowDetails!: CowDetailsDto
+  @Select(MilkingState.milkingVolumesLastMonth) MilkingVolumes$!: Observable<MilkingVolumeDto[]>;
+  public MilkingVolumes!: MilkingVolumeDto[];
+  @Select(MilkingState.selectedCowMonthMilkings) CowMilkingVolumes$!: Observable<MilkingDto[]>;
+  public CowMilkingVolumes!: MilkingDto[];
+  private CowData$ = combineLatest([this.Cow$, this.CowDetails$])
+  private MilkingData$ = combineLatest([this.MilkingVolumes$, this.CowMilkingVolumes$])
+  @Select(CattleState.cowGenealogy) CowGenealogy$!: Observable<CowGenealogyDto>;
+  public CowGenealogy!: CowGenealogyDto;
 
-    public mapOptions: any;
-    public ActivityType = ActivityType;
-    public menuItems:MenuItem[] | undefined;
+  public mapOptions: any;
+  public ActivityType = ActivityType;
+  public menuItems: MenuItem[] | undefined;
 
-    public ShowStatisticsDialog = false;
-    public ShowTimelineDialog = false
-    public ShowGenealogyDialog = false
+  public ShowStatisticsDialog = false;
+  public ShowTimelineDialog = false
+  public ShowGenealogyDialog = false
 
-    override ngOnInit(): void {
-        super.ngOnInit();
+  override ngOnInit(): void {
+    super.ngOnInit();
 
-        this.route.params.subscribe(params => {
-            this.cowId = +params['id'];
-        });
-        this.iniMenuItems();
-        this.initMap();
+    this.route.params.subscribe(params => {
+      this.cowId = +params['id'];
+    });
+    this.iniMenuItems();
+    this.initMap();
 
-        this.store.dispatch(new CowDetails.Reset).subscribe();
-        this.GetCowData(); 
-    }
+    this.store.dispatch(new CowDetails.Reset).subscribe();
+    this.GetCowData();
+  }
 
-    public GetCowData(): void{
-          this.CowData$.pipe(
-            tap(([c, cd]) => {
-                this.Cow = c;
-                this.CowDetails = cd;
-            }),
-            takeUntil(this.$OnDestroyed),
-        )
-        .subscribe({ error:(err) => { console.log(err); }});
-        this.store.dispatch(new Cows.Get(this.cowId));
-        this.store.dispatch(new CowDetails.Get(this.cowId)); 
-    }
+  public GetCowData(): void {
+    this.CowData$.pipe(
+      tap(([c, cd]) => {
+        this.Cow = c;
+        this.CowDetails = cd;
+      }),
+      takeUntil(this.$OnDestroyed),
+    )
+      .subscribe({ error: (err) => { console.log(err); } });
+    this.store.dispatch(new Cows.Get(this.cowId));
+    this.store.dispatch(new CowDetails.Get(this.cowId));
+  }
 
-    private GetMilkingData(){
-          this.MilkingData$.pipe(
-            tap(([mv, cmv]) => {
-                this.MilkingVolumes = mv;
-                this.CowMilkingVolumes = cmv;
-            }),
-            takeUntil(this.$OnDestroyed),
-        )
-        .subscribe({ error:(err) => { console.log(err); }});
-        this.store.dispatch(new Milkings.GetAllLastMonth);
-        this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
-    }
+  private GetMilkingData() {
+    this.MilkingData$.pipe(
+      tap(([mv, cmv]) => {
+        this.MilkingVolumes = mv;
+        this.CowMilkingVolumes = cmv;
+      }),
+      takeUntil(this.$OnDestroyed),
+    )
+      .subscribe({ error: (err) => { console.log(err); } });
+    this.store.dispatch(new Milkings.GetAllLastMonth);
+    this.store.dispatch(new Milkings.GetAllLastMonthForSelectedCow(this.cowId))
+  }
 
-    private iniMenuItems(): void{
-        this.menuItems = [ 
-        {
-        label:'Options',
-        items:[
-            {
+  private GetCowGenealogy(){
+    this.CowGenealogy$.pipe(
+      tap((res) => {
+        this.CowGenealogy = res;
+      }),
+      takeUntil(this.$OnDestroyed),
+    )
+      .subscribe({ error: (err) => { console.log(err); } });
+    this.store.dispatch(new CowGenealogy.Get(this.cowId));
+  }
+
+  private iniMenuItems(): void {
+    this.menuItems = [
+      {
+        label: 'Options',
+        items: [
+          {
             label: 'Intervention',
             icon: 'pi pi-plus-circle',
-            command: () => {this.CreateInterventionDialog(this.Cow)}
-            },
-            {
+            command: () => { this.CreateInterventionDialog(this.Cow) }
+          },
+          {
             label: 'Vaccination',
             icon: 'pi pi-plus-circle',
-            command: () => {this.CreateVaccinationDialog(this.Cow)}
-            },
-            {
+            command: () => { this.CreateVaccinationDialog(this.Cow) }
+          },
+          {
             label: 'Gestation',
             icon: 'pi pi-plus-circle',
-            command: () => {this.CreateGestationDialog(this.Cow)}
-            },
-            {
+            command: () => { this.CreateGestationDialog(this.Cow) }
+          },
+          {
             label: 'Affection',
             icon: 'pi pi-plus-circle',
-            command: () => {this.CreateConditionDialog(this.Cow)}
-            },
-            {
+            command: () => { this.CreateConditionDialog(this.Cow) }
+          },
+          {
             label: 'Traitement',
             icon: 'pi pi-plus-circle',
-            command: () => {this.CreateTreatmentDialog(this.Cow)}
-            },
+            command: () => { this.CreateTreatmentDialog(this.Cow) }
+          },
         ]
-        }]
-    }
+      }]
+  }
 
-    private initMap(): void{
-        this.mapOptions = {
-            layers: [
-            tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-            ],
-            zoom: 5,
-            center: latLng(46.879966, -121.726909)
-        }
+  private initMap(): void {
+    this.mapOptions = {
+      layers: [
+        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      ],
+      zoom: 5,
+      center: latLng(46.879966, -121.726909)
     }
+  }
 
   public UpdateCowDialog(cow: CowDto): void {
     const dialogRef = this.dialogService.open(UpdateCowDialogComponent, {
@@ -137,11 +150,14 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(updatedCow => {
+      this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
+        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateInterventionDialog(cow: CowDto): void {
@@ -152,11 +168,13 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(newIntervention => {
+      this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
+        next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateVaccinationDialog(cow: CowDto): void {
@@ -167,11 +185,13 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(newVaccination => {
+      this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
+        next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateGestationDialog(cow: CowDto): void {
@@ -182,11 +202,13 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(newGestation => {
+      this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
+        next: () => this.toastSuccess("La gestation a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateConditionDialog(cow: CowDto): void {
@@ -197,11 +219,14 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(newCondition => {
+      debugger;
+      this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
+        next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateTreatmentDialog(cow: CowDto): void {
@@ -212,22 +237,38 @@ export class CowDetailsComponent extends BaseComponent{
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(result => {
-      if(result != null){
-        this.GetCowData();
-      }
+    dialogRef.onClose.subscribe(newTreatment => {
+      this.store.dispatch(new Treatments.Create({ body: newTreatment })).subscribe({
+        next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
+    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
-    public ShowStatistics(): void{
-        this.ShowStatisticsDialog = true;
-    }
+  public ShowStatistics(): void {
+    this.GetMilkingData();
+    this.ShowStatisticsDialog = true;
+    // const dialogRef = this.dialogService.open(CowMonthMilkingsGraphDialogComponent, {
+    //   data: cow,
+    //   header: 'Statistiques traites',
+    // });
+  }
 
-    public ShowTimeline(): void{
-        this.ShowTimelineDialog = true;
-    }
+  public ShowTimeline(): void {
+    this.ShowTimelineDialog = true;
+    // const dialogRef = this.dialogService.open(CowTimelineDialogComponent, {
+    //   data: cow,
+    //   header: 'Ajouter un traitement',
+    // });
+  }
 
-    public ShowGenealogy():void{
-        this.ShowGenealogyDialog = true;
-    }
+  public ShowGenealogy(): void {
+    this.GetCowGenealogy();
+    this.ShowGenealogyDialog = true;
+    //   const dialogRef = this.dialogService.open(CowGenealogyDialogComponent, {
+    //     data: cow,
+    //     header: 'Généalogie',
+    //   });
+  }
 }

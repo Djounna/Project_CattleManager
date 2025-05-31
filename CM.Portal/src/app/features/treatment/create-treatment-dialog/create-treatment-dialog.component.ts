@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CowDto, TreatmentDto } from '../../../api/models';
-import { Treatments } from '../../../state/cattle/cattle.actions';
 import { BaseComponent } from '../../../shared/base-component.component';
 
 @Component({
@@ -46,11 +45,6 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
       type: this.CreateTreatmentForm.value.type!,
       date:this.CreateTreatmentForm.value.date?.toISOString(), 
     };
-
-      this.store.dispatch(new Treatments.Create({ body: this.NewTreatment })).subscribe({
-        next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
 
     this.dialogRef.close(this.NewTreatment);
   }

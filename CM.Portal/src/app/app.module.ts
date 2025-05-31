@@ -142,6 +142,9 @@ import { HomeComponent } from './screens/home/home.component';
 import { ActivitiesShortlistComponent } from './features/activities/activities-shortlist/activities-shortlist.component';
 import { CreateConditionDialogComponent } from './features/condition/create-condition-dialog/create-condition-dialog.component';
 import { CreateTreatmentDialogComponent } from './features/treatment/create-treatment-dialog/create-treatment-dialog.component';
+import { CowGenealogyDialogComponent } from './features/cattle/cow/cow-genealogy-dialog/cow-genealogy-dialog.component';
+import { CowTimelineDialogComponent } from './features/cattle/cow/cow-timeline-dialog/cow-timeline-dialog.component';
+import { CowMonthMilkingsGraphDialogComponent } from './features/cattle/cow/cow-month-milkings-graph-dialog/cow-month-milkings-graph-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -189,7 +192,10 @@ import { CreateTreatmentDialogComponent } from './features/treatment/create-trea
         HomeComponent,
         ActivitiesShortlistComponent,
         CreateConditionDialogComponent,
-        CreateTreatmentDialogComponent
+        CreateTreatmentDialogComponent,
+        CowGenealogyDialogComponent,
+        CowTimelineDialogComponent,
+        CowMonthMilkingsGraphDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

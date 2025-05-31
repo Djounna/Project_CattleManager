@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CowDto, GroupDto, PenDto } from '../../../api/models';
 import { Observable, combineLatest, finalize, takeUntil, tap } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { Cows, Gestations, Groups, Interventions, Vaccinations } from '../../../state/cattle/cattle.actions';
+import { Conditions, Cows, Gestations, Groups, Interventions, Treatments, Vaccinations } from '../../../state/cattle/cattle.actions';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CreateCowDialogComponent } from '../../../features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
@@ -69,14 +69,28 @@ export class CowsPageComponent extends BaseComponent {
       height: '450px',
       width: '350px',
     });
+
+    dialogRef.onClose.subscribe(updatedCow => {
+      this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
+        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
+    });
   }
 
   public CreateInterventionDialog(cow: CowDto): void {
     const dialogRef = this.dialogService.open(CreateInterventionDialogComponent, {
       data: cow,
       header: 'Ajouter une intervention',
-      height: '450px',
+      // height: '450px',
       width: '350px',
+    });
+
+    dialogRef.onClose.subscribe(newIntervention => {
+      this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
+        next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
   }
 
@@ -87,6 +101,13 @@ export class CowsPageComponent extends BaseComponent {
       height: '450px',
       width: '350px',
     });
+
+    dialogRef.onClose.subscribe(newVaccination => {
+      this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
+        next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
+    });
   }
 
   public CreateGestationDialog(cow: CowDto): void {
@@ -95,6 +116,13 @@ export class CowsPageComponent extends BaseComponent {
       header: 'Ajouter une gestation',
       height: '450px',
       width: '350px',
+    });
+
+    dialogRef.onClose.subscribe(newGestation => {
+      this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
+        next: () => this.toastSuccess("La gestation a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
   }
 
@@ -105,6 +133,13 @@ export class CowsPageComponent extends BaseComponent {
       height: '450px',
       width: '350px',
     });
+
+    dialogRef.onClose.subscribe(newCondition => {
+      this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
+        next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
+    });
   }
 
   public CreateTreatmentDialog(cow: CowDto): void {
@@ -113,6 +148,13 @@ export class CowsPageComponent extends BaseComponent {
       header: 'Ajouter un traitement',
       height: '450px',
       width: '350px',
+    });
+
+    dialogRef.onClose.subscribe(newTreatment => {
+      this.store.dispatch(new Treatments.Create({ body: newTreatment })).subscribe({
+        next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { CowDetailsDto } from '../../../../api/models';
+import { CowGenealogyDto } from '../../../../api/models';
 
 @Component({
   selector: 'app-cow-genealogy',
@@ -10,75 +10,72 @@ import { CowDetailsDto } from '../../../../api/models';
 })
 export class CowGenealogyComponent{
   public data : TreeNode[] = [];
-  private cowDetails!: CowDetailsDto;
-  get CowDetails(): CowDetailsDto{
-    return this.cowDetails;
-  }
-  @Input() set CowDetails(value:CowDetailsDto){
-    this.cowDetails = value;
+  private genealogy!: CowGenealogyDto;
+  @Input() set CowGenealogy(value:CowGenealogyDto){
+    this.genealogy = value;
     this.data = [
       {
-        label: `${this.CowDetails.name}` ,
-        expanded : !!this.CowDetails.genealogy?.father || !!this.CowDetails.genealogy?.mother,
+        label: `${this.genealogy?.cow?.name}` ,
+        expanded : !!this.genealogy?.father || !!this.genealogy?.mother,
         type: 'cow',
         data:{
-          identifier: this.CowDetails.identifier, 
-          img : this.CowDetails?.imgLink,
+          identifier: this.genealogy?.cow?.identifier, 
+          img : this.genealogy?.cow?.imgLink,
         } ,
         children:
         [
           {
-            label: `${this.CowDetails.genealogy?.father?.cow?.name}` ,
-            expanded: !!this.CowDetails.genealogy?.father?.father || !!this.CowDetails.genealogy?.father?.mother,
+            label: `${this.genealogy?.father?.cow?.name}` ,
+            expanded: !!this.genealogy?.father?.father || !!this.genealogy?.father?.mother,
             type: 'cow',
             data: {
-              identifier:this.CowDetails.genealogy?.father?.cow?.identifier ,
-              img: this.CowDetails.genealogy?.father?.cow?.imgLink,
+              identifier:this.genealogy?.father?.cow?.identifier ,
+              img: this.genealogy?.father?.cow?.imgLink,
             },
             children: 
             [
               {
-                label: `${this.CowDetails.genealogy?.father?.father?.name}` ,
+                label: `${this.genealogy?.father?.father?.name}` ,
                 type: 'cow',
                 data: {
-                  identifier: this.CowDetails.genealogy?.father?.father?.identifier ,
-                  img: this.CowDetails.genealogy?.father?.father?.imgLink,
+                  identifier: this.genealogy?.father?.father?.identifier ,
+                  img: this.genealogy?.father?.father?.imgLink,
                 }
               },
               {
-                label: `${this.CowDetails.genealogy?.father?.mother?.name}`,
+                label: `${this.genealogy?.father?.mother?.name}`,
                 type: 'cow',
                 data:{
-                  identifier: this.CowDetails.genealogy?.father?.mother?.identifier,
-                  img: this.CowDetails.genealogy?.father?.mother?.imgLink,
+                  identifier: this.genealogy?.father?.mother?.identifier,
+                  img: this.genealogy?.father?.mother?.imgLink,
                 } 
               }
             ]
           },
           {
-            label: `${this.CowDetails.genealogy?.mother?.cow?.name}` ,
-            expanded: !!this.CowDetails.genealogy?.mother?.father || !!this.CowDetails.genealogy?.mother?.mother,
+            label: `${this.genealogy?.mother?.cow?.name}` ,
+            expanded: !!this.genealogy?.mother?.father || !!this.genealogy?.mother?.mother,
             type: 'cow',
             data: {
-              identifier: this.CowDetails.genealogy?.mother?.cow?.identifier,
-              img: this.CowDetails.genealogy?.mother?.cow?.imgLink,
+              identifier: this.genealogy?.mother?.cow?.identifier,
+              img: this.genealogy?.mother?.cow?.imgLink,
             },
             children: 
             [
               {
-                label: `${this.CowDetails.genealogy?.mother?.father?.name}`,
+                label: `${this.genealogy?.mother?.father?.name}`,
                 type: 'cow',
                 data: {
-                  identifier:this.CowDetails.genealogy?.mother?.father?.identifier,
-                  img:this.CowDetails.genealogy?.mother?.father?.imgLink,
+                  identifier:this.genealogy?.mother?.father?.identifier,
+                  img:this.genealogy?.mother?.father?.imgLink,
                 } 
               },
               {
-                label: `${this.CowDetails.genealogy?.mother?.mother?.name}` ,
+                label: `${this.genealogy?.mother?.mother?.name}` ,
                 type: 'cow',
                 data: {
-                  identifier: this.CowDetails.genealogy?.mother?.mother?.identifier,
-                  img: this.CowDetails.genealogy?.mother?.mother?.imgLink,
+                  identifier: this.genealogy?.mother?.mother?.identifier,
+                  img: this.genealogy?.mother?.mother?.imgLink,
                 }
               }
             ]

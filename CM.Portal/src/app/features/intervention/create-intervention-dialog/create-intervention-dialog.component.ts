@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CowDto, InterventionDto } from '../../../api/models';
-import { Interventions } from '../../../state/cattle/cattle.actions';
 
 @Component({
   selector: 'app-create-intervention-dialog',
@@ -45,11 +44,6 @@ export class CreateInterventionDialogComponent extends BaseComponent {
       type: this.CreateInterventionForm.value.type,
       date:this.CreateInterventionForm.value.date?.toISOString(), 
     };
-
-    this.store.dispatch(new Interventions.Create({ body: this.NewIntervention })).subscribe({
-      next: () => this.toastSuccess("L'intervention a été créé avec succès"),
-      error: () => this.toastError("Une erreur s'est produite")
-    });
 
     this.dialogRef.close(this.NewIntervention);
   }

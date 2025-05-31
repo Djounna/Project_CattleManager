@@ -109,7 +109,7 @@
 
 <ng-container *ngIf="!!CowDetails">
 <p-dialog header="Généalogie" [modal]="true" [(visible)]="ShowGenealogyDialog" [style]="{ width: '50rem' }">
-    <app-cow-genealogy [CowDetails]="CowDetails"></app-cow-genealogy>
+    <app-cow-genealogy [CowGenealogy]="CowGenealogy"></app-cow-genealogy>
 </p-dialog>
 </ng-container>
 
@@ -120,7 +120,9 @@
 </ng-container>
 
 <ng-container *ngIf="!!CowMilkingVolumes && CowDetails?.milkCow">
-<p-dialog header="Production laitère" [modal]="true" [(visible)]="ShowStatisticsDialog" [style]="{ width: '100rem' }">
-    <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
-</p-dialog>
-</ng-container>
+    <p-dialog header="Production laitère" [modal]="true" [(visible)]="ShowStatisticsDialog" [style]="{ width: '80rem' }">
+        <app-cow-month-milkings-graph [Milkings]="CowMilkingVolumes" [MilkingVolumes]="MilkingVolumes" ></app-cow-month-milkings-graph>
+    </p-dialog>
+</ng-container> 
+
+<p-toast></p-toast>
