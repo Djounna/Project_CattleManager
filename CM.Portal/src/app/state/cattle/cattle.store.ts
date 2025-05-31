@@ -4,7 +4,7 @@ import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { ConditionDto, CowDto, GestationDto, GroupDto, InterventionDto, TreatmentDto, VaccinationDto } from "../../api/models";
 import { ConditionService, CowService, GestationService, GroupService, InterventionService, StatisticService, TreatmentService, VaccinationService } from "../../api/services";
-import { CattleStatistics, Conditions, CowDetails, Cows, Gestations, Groups, Interventions, Treatments, Vaccinations } from "./cattle.actions";
+import { CattleStatistics, Conditions, CowDetails, CowGenealogy, Cows, Gestations, Groups, Interventions, Treatments, Vaccinations } from "./cattle.actions";
 import { CattleStateModel } from "./cattle.state";
 import { CowUtils } from "../../utils/cow-utils";
 
@@ -13,6 +13,7 @@ import { CowUtils } from "../../utils/cow-utils";
   defaults: {
     Cow: undefined,
     CowDetails: undefined,
+    CowGenealogy: undefined,
     Cows: [],
     CowIdentifierDictionnary: new Map<number, string>(),
     CowNameDictionnary: new Map<number, string>(),
@@ -48,6 +49,11 @@ export class CattleState {
   @Selector()
   static cowDetails(cattleState: CattleStateModel){
     return cattleState.CowDetails;
+  }
+
+  @Selector()
+  static cowGenealogy(cattleState: CattleStateModel){
+    return cattleState.CowGenealogy;
   }
 
   @Selector()
@@ -171,7 +177,17 @@ export class CattleState {
 
   @Action(CowDetails.Reset)
     resetCowDetails(ctx: StateContext<CattleStateModel>) {
-      ctx.patchState({CowDetails : undefined, Cow: undefined});
+      ctx.patchState({CowDetails : undefined, Cow: undefined, CowGenealogy: undefined});
+    }
+
+  /// Cow Genealogy
+  @Action(CowGenealogy.Get)
+    getCowGenealogy(ctx: StateContext<CattleStateModel>, action: CowDetails.Get) {
+      return this.cowService.apiCowIdGenealogyGet({ id: action.id})
+      .pipe(
+        tap(cowGenealogy => 
+          ctx.patchState({ CowGenealogy: cowGenealogy }))
+      );
     }
 
   /// Groups Actions

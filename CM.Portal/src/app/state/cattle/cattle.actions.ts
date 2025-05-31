@@ -35,6 +35,14 @@ export namespace CowDetails{
     }
 }
 
+export namespace CowGenealogy{
+    export class Get{
+        static readonly type = '[CowGenealogy] Get Cow Genealogy'
+        constructor(public id: number){}
+    }
+}
+
+
 export namespace Groups{
     export class Create{
         static readonly type = '[Groups] Create Group'

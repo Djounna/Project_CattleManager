@@ -393,6 +393,49 @@
         }
       }
     },
+    "/api/Condition/{cowId}": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "parameters": [
+          {
+            "name": "cowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConditionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Cow/{id}": {
       "get": {
         "tags": [
@@ -466,6 +509,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CowDetailsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Cow/{id}/genealogy": {
+      "get": {
+        "tags": [
+          "Cow"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CowGenealogyDto"
                 }
               }
             }
@@ -817,6 +900,49 @@
           },
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Gestation/{cowId}": {
+      "get": {
+        "tags": [
+          "Gestation"
+        ],
+        "parameters": [
+          {
+            "name": "cowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GestationDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1437,6 +1563,49 @@
           },
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Intervention/{cowId}": {
+      "get": {
+        "tags": [
+          "Intervention"
+        ],
+        "parameters": [
+          {
+            "name": "cowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterventionDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3132,6 +3301,49 @@
         }
       }
     },
+    "/api/Treatment/{cowId}": {
+      "get": {
+        "tags": [
+          "Treatment"
+        ],
+        "parameters": [
+          {
+            "name": "cowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TreatmentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/UserManagement/user/{userId}/roles": {
       "get": {
         "tags": [
@@ -3453,6 +3665,49 @@
           },
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Vaccination/{cowId}": {
+      "get": {
+        "tags": [
+          "Vaccination"
+        ],
+        "parameters": [
+          {
+            "name": "cowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VaccinationDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3828,13 +4083,6 @@
           "group": {
             "$ref": "#/components/schemas/GroupDto"
           },
-          "milkings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MilkingDto"
-            },
-            "nullable": true
-          },
           "interventions": {
             "type": "array",
             "items": {
@@ -3869,9 +4117,6 @@
               "$ref": "#/components/schemas/TreatmentDto"
             },
             "nullable": true
-          },
-          "genealogy": {
-            "$ref": "#/components/schemas/GenealogyDto"
           },
           "children": {
             "type": "array",
@@ -3954,6 +4199,21 @@
         },
         "additionalProperties": false
       },
+      "CowGenealogyDto": {
+        "type": "object",
+        "properties": {
+          "cow": {
+            "$ref": "#/components/schemas/CowDto"
+          },
+          "mother": {
+            "$ref": "#/components/schemas/ParentDto"
+          },
+          "father": {
+            "$ref": "#/components/schemas/ParentDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "DateOnly": {
         "type": "object",
         "properties": {
@@ -3997,18 +4257,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "GenealogyDto": {
-        "type": "object",
-        "properties": {
-          "mother": {
-            "$ref": "#/components/schemas/ParentDto"
-          },
-          "father": {
-            "$ref": "#/components/schemas/ParentDto"
-          }
-        },
-        "additionalProperties": false
       },
       "GestationDto": {
         "type": "object",
