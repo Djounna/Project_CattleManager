@@ -11,6 +11,7 @@ import { AlertStateModel } from "./alert.state";
     name:'alerts',
     defaults:{
         Alerts : [],
+        AlertsActive: [],
     }
 })
 
@@ -23,11 +24,24 @@ export class AlertState{
         return alertState.Alerts;
     }
 
+    @Selector()
+    static activeAlerts(alertState:AlertStateModel){
+        return alertState.AlertsActive;
+    }
+
     /// Alerts Actions
     @Action(Alerts.GetAll)
     getAllAlerts(ctx: StateContext<AlertStateModel>){
         return this.alertService.apiAlertGet().pipe(tap(alerts=>{
             ctx.patchState({Alerts : alerts});
+            })
+        );
+    }
+
+    @Action(Alerts.GetAllActive)
+    getAllActiveAlerts(ctx: StateContext<AlertStateModel>){
+        return this.alertService.apiAlertActiveGet().pipe(tap(alerts=>{
+            ctx.patchState({AlertsActive : alerts});
             })
         );
     }

@@ -159,6 +159,38 @@
         }
       }
     },
+    "/api/Alert/active": {
+      "get": {
+        "tags": [
+          "Alert"
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlertDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alert/{id}": {
       "get": {
         "tags": [

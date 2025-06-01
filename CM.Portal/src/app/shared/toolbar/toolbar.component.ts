@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng/api';
 export class ToolbarComponent {
 
     @Output() onShowSidebar : EventEmitter<boolean> = new EventEmitter<boolean>()
+    @Output() onShowSideAlerts : EventEmitter<boolean> = new EventEmitter<boolean>()
 
     items: MenuItem[] | undefined;
     title: string = '';
@@ -33,6 +34,7 @@ export class ToolbarComponent {
             case '/statistics' : this.title = 'Statistiques'; break;
             case '/jobs' : this.title = 'Tâches'; break;
             case '/cows' : this.title = 'Bétail'; break;
+            case '/events' : this.title = 'Evènements'; break;
             case '/groups' : this.title = 'Groupes'; break;
             case '/pens' : this.title = 'Enclos'; break;
             case '/milking' : this.title = 'Traite'; break;
@@ -51,6 +53,10 @@ export class ToolbarComponent {
 
     showSidebar(): void{
       this.onShowSidebar.emit(true);
+    }
+
+    showSideAlerts(): void{
+      this.onShowSideAlerts.emit(true);
     }
 }
 

@@ -1,4 +1,4 @@
-.list{
+.shortlist{
     display:flex;
     flex-direction: column;
     padding-top:2rem;
@@ -52,6 +52,21 @@
                 font-size: small;
                 font-style: italic;
                 color:darkgreen
+            }
+
+            .infos{
+                position: absolute;
+                bottom: -28px;
+                left: 20px;
+                padding:0.2rem;
+                box-shadow:0.5px 0.5px 0.5px 0.5px;
+                border-radius: 3px;
+
+                font-size: small;
+                font-style: italic;
+                color:darkblue;
+                background-color: white;
+                z-index: 1;
             }
         }
     }

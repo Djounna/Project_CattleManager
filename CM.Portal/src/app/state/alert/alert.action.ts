@@ -13,6 +13,10 @@ export namespace Alerts{
         static readonly type ='[Alerts] Get All Alerts'
     }
 
+    export class GetAllActive{
+        static readonly type ='[Alerts] Get All Active Alerts'
+    }
+
     export class Delete{
         static readonly type = '[Alerts] Delete Alert'
         constructor(public id: number){}

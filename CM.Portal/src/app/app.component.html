@@ -2,10 +2,14 @@
 
 <div class="main">
 
-    <app-toolbar (onShowSidebar)="ToggleDrawer()" stlyeclass=min-w-full ></app-toolbar>
+    <app-toolbar (onShowSidebar)="ToggleDrawer()" (onShowSideAlerts)="ToggleAlertDrawer()" stlyeclass=min-w-full ></app-toolbar>
 
-    <p-drawer [(visible)]="DrawerVisible" [modal]="false" [closable]="false" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
+    <p-drawer [(visible)]="DrawerVisible" [modal]="false" [closable]="true" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
         <app-sidenav> </app-sidenav>
+    </p-drawer> 
+
+    <p-drawer [(visible)]="AlertsDrawerVisible" position="right" [modal]="false" [closable]="true" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
+        <app-side-alerts [Alerts]="Alerts"> </app-side-alerts>
     </p-drawer> 
 
     <router-outlet></router-outlet>
