@@ -35,6 +35,19 @@ public class AlertController : ControllerBase
     {
         return Ok(await _mediator.Send(new GetAlertsQuery()));
     }
+
+    /// <summary>
+    /// Get All Active Alerts
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("active")]
+    [Authorize("read:events")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<AlertDto>>> GetListActive()
+    {
+        return Ok(await _mediator.Send(new GetAlertsQuery()));
+    }
     
     /// <summary>
     /// Get Alert By Id 

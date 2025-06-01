@@ -10,4 +10,14 @@ public class AlertRepository : BaseRepository<Alert>, IAlertRepository
     {
         return _context.Alerts.Where(gm => gm.CowId == cowId).ToList();
     }
+
+    public IEnumerable<Alert> GetListByPenId(int penId)
+    {
+        return _context.Alerts.Where(a => a.PenId == penId).ToList();
+    }
+
+    public IEnumerable<Alert> GetListActive()
+    {
+        return _context.Alerts.Where(a => !a.Done).ToList();
+    }
 }

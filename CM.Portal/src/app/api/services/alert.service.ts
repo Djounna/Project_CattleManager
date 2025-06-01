@@ -224,6 +224,54 @@ export class AlertService extends BaseService {
   }
 
   /**
+   * Path part for operation apiAlertActiveGet
+   */
+  static readonly ApiAlertActiveGetPath = '/api/Alert/active';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiAlertActiveGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAlertActiveGet$Response(params?: {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<AlertDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AlertService.ApiAlertActiveGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<AlertDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiAlertActiveGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiAlertActiveGet(params?: {
+    context?: HttpContext
+  }
+): Observable<Array<AlertDto>> {
+
+    return this.apiAlertActiveGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<AlertDto>>) => r.body as Array<AlertDto>)
+    );
+  }
+
+  /**
    * Path part for operation apiAlertIdGet
    */
   static readonly ApiAlertIdGetPath = '/api/Alert/{id}';
