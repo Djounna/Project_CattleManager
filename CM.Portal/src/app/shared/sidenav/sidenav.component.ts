@@ -19,7 +19,7 @@ export class SidenavComponent implements OnInit {
                 items:[
                     {
                         label:'Dashboard',
-                        icon: 'pi pi-fw pi-pencil',
+                        icon: 'pi pi-fw pi-calendar',
                         routerLink:'/dashboard'
                     },
                     {
@@ -51,7 +51,7 @@ export class SidenavComponent implements OnInit {
                 items: [
                     {
                         label: 'Liste',
-                        icon: 'pi pi-fw pi-align-left',
+                        icon: 'pi pi-fw pi-list-check',
                         routerLink:'/jobs'
                     },
                 ]
@@ -62,7 +62,7 @@ export class SidenavComponent implements OnInit {
                 items: [
                     {
                         label: 'Encoder',
-                        icon: 'pi pi-fw pi-align-left',
+                        icon: 'pi pi-fw pi-pen-to-square',
                         routerLink:'/milking'
                     },
                 ]
@@ -73,17 +73,22 @@ export class SidenavComponent implements OnInit {
                 items:[
                     {
                         label: 'Liste',
-                        icon: 'pi pi-fw pi-pencil',
+                        icon: 'pi pi-fw pi-id-card',
                         routerLink: '/cows'
                     },
                     {
+                        label: 'Evènements',
+                        icon: 'pi pi-fw pi-clipboard',
+                        routerLink: '/events'
+                    },
+                    {
                         label: 'Groupes',
-                        icon: 'pi pi-fw pi-pencil',
+                        icon: 'pi pi-fw pi-folder-plus',
                         routerLink: '/groups'
                     },
                     {
                         label: 'Enclos',
-                        icon: 'pi pi-fw pi-pencil',
+                        icon: 'pi pi-fw pi-warehouse',
                         routerLink:'/pens'
                     }
                 ]
