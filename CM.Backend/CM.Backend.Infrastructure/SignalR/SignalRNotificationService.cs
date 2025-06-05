@@ -1,0 +1,19 @@
+﻿using CM.Backend.Application.Interfaces.Infrastructure;
+using CM.Backend.Application.Models.Notifications;
+using Microsoft.AspNetCore.SignalR;
+
+namespace CM.Backend.Infrastructure.SignalR;
+public class SignalRNotificationService : INotificationService
+{
+    private readonly IHubContext<CMHub> _hub;
+
+    public SignalRNotificationService(IHubContext<CMHub> hub)
+    {
+        _hub = hub;
+    }
+
+    public async Task NotifyNewAlert(AlertDto newAlert)
+    {
+        await _hub.Clients.All.SendAsync("NewAlert", newAlert);
+    }
+}

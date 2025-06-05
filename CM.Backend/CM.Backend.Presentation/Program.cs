@@ -1,5 +1,6 @@
 using CM.Backend.Application;
 using CM.Backend.Infrastructure;
+using CM.Backend.Infrastructure.SignalR;
 using CM.Backend.Persistence;
 using CM.Backend.Presentation.Configurations;
 
@@ -32,7 +33,8 @@ builder.Services.AddCors(options =>
       builder => builder
       .WithOrigins("http://localhost:4200")
       .AllowAnyHeader()
-      .AllowAnyMethod());
+      .AllowAnyMethod()
+      .AllowCredentials());
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -61,4 +63,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHub<CMHub>("/CMhub");
 app.Run();
