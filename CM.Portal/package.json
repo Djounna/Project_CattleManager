@@ -23,6 +23,7 @@
     "@angular/router": "^19.0.6",
     "@auth0/auth0-angular": "^2.2.2",
     "@bluehalo/ngx-leaflet": "^19.0.0",
+    "@microsoft/signalr": "^8.0.7",
     "@ngxs/store": "^19.0.0",
     "@primeng/themes": "^19.0.5",
     "chart.js": "^4.4.2",

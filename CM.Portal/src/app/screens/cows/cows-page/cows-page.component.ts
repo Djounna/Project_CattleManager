@@ -15,6 +15,7 @@ import { CreateInterventionDialogComponent } from '../../../features/interventio
 import { CreateVaccinationDialogComponent } from '../../../features/vaccination/create-vaccination-dialog/create-vaccination-dialog.component';
 import { CreateConditionDialogComponent } from '../../../features/condition/create-condition-dialog/create-condition-dialog.component';
 import { CreateTreatmentDialogComponent } from '../../../features/treatment/create-treatment-dialog/create-treatment-dialog.component';
+import { CreateAlertDialogComponent } from '../../../features/alerts/create-alert-dialog/create-alert-dialog.component';
 
 @Component({
   selector: 'app-cows-page',
@@ -75,6 +76,15 @@ export class CowsPageComponent extends BaseComponent {
         next: () => this.toastSuccess("L'animal a été modifié avec succès"),
         error: () => this.toastError("Une erreur s'est produite")
       });
+    });
+  }
+
+  public CreateCowAlertDialog(cow: CowDto): void {
+    const dialogRef = this.dialogService.open(CreateAlertDialogComponent, {
+      data: cow,
+      header: 'Ajouter une alerte',
+      height: '450px',
+      width: '500px',
     });
   }
 

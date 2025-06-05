@@ -37,6 +37,7 @@
         <div class="flex flex-column" *ngIf="!!SelectedCow">
             <app-cow-card [Cow]="SelectedCow"
                 (onUpdate)="UpdateCowDialog($event)"
+                (onAddAlert)="CreateCowAlertDialog($event)"
                 (onAddIntervention)="CreateInterventionDialog($event)"
                 (onAddVaccination)="CreateVaccinationDialog($event)"
                 (onAddGestation)="CreateGestationDialog($event)"

@@ -31,12 +31,8 @@ export class DashboardComponent extends BaseComponent {
   public JobsDetails: JobDetailsDto[] = []
   @Select(WorkState.jobs) Workers$!: Observable<UserDto[]>
   public Workers: UserDto[] = []
-  @Select(AlertState.alerts) Alerts$!: Observable<AlertDto[]>
-  public Alerts: AlertDto[] = []
   @Select(CattleState.gestations) Gestations$!: Observable<GestationDto[]>
   public Gestations: GestationDto[] = []
-  @Select(CattleState.interventions) Interventions$!: Observable<InterventionDto[]>
-  public Interventions: InterventionDto[] = []
   @Select(CattleState.groups) Groups$!: Observable<GroupDto[]>
   public Groups: GroupDto[] = []
   @Select(CattleState.groupDict) GroupDictionnary$!: Observable<Map<number, string>>
@@ -45,7 +41,16 @@ export class DashboardComponent extends BaseComponent {
   public Pens: PenDto[] = []
   @Select(InfrastructureState.penDict) PenDictionnary$!: Observable<Map<number, string>>
   public PenDictionnary: Map<number, string> = new Map<number, string>;
-  private Data$ = combineLatest([this.CowIdentifierDictionnary$, this.CowNameDictionnary$, this.Alerts$, this.JobsDetails$, this.Workers$, this.Gestations$, this.Groups$, this.GroupDictionnary$])
+  private Data$ = combineLatest([
+    this.CowIdentifierDictionnary$, 
+    this.CowNameDictionnary$,
+    this.JobsDetails$, 
+    this.Workers$, 
+    this.Gestations$, 
+    this.Groups$, 
+    this.GroupDictionnary$, 
+    this.Pens$, 
+    this.PenDictionnary$])
 
   public Map!: L.Map;
   public MapInfos!: MapInfo;
@@ -69,17 +74,16 @@ export class DashboardComponent extends BaseComponent {
   private getData(): void{
     this.Data$.pipe(
       takeUntil(this.$OnDestroyed),
-      tap(([cid, cnd, a, j, w, ge, g, gd]) => {
+      tap(([cid, cnd, j, w, ge, g, gd, p, pd]) => {
         this.CowIdentifierDictionnary = cid;
         this.CowNameDictionnary = cnd;
-        this.Alerts = a;
         this.JobsDetails = j;
         this.Workers = w;
         this.Gestations = ge;
         this.Groups = g;
         this.GroupDictionnary = gd;
-        // this.Pens = p;
-        // this.PenDictionnary = pd;
+        this.Pens = p;
+        this.PenDictionnary = pd;
       })).subscribe();
 
       this.Pens$
@@ -101,14 +105,11 @@ export class DashboardComponent extends BaseComponent {
       .subscribe();
 
     this.store.dispatch(new Cows.GetAll());
-    this.store.dispatch(new Alerts.GetAll());
     this.store.dispatch(new Gestations.GetAll());
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
     this.store.dispatch(new Workers.GetAll());
     this.SetDateAsToday();
-    // this.store.dispatch(new Jobs.GetAll());
-    // this.store.dispatch(new Jobs.GetAllails());
   }
 
   private initMap(): void{

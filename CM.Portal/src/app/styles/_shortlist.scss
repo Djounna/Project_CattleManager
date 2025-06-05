@@ -51,13 +51,16 @@
 
                 font-size: small;
                 font-style: italic;
-                color:darkgreen
+                color:darkgreen;
+                z-index: 1;
             }
 
             .infos{
                 position: absolute;
-                bottom: -28px;
-                left: 20px;
+                // top: -28px;
+                // left: -5px;
+                right:-10px;
+                top:-26px;
                 padding:0.2rem;
                 box-shadow:0.5px 0.5px 0.5px 0.5px;
                 border-radius: 3px;

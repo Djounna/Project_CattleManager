@@ -21,8 +21,9 @@
                 <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"/>
                 <p-button (click)="menu.toggle($event)" icon="pi pi-plus"/>
             </div>
+            <p-button (onClick)="AddAlert(Cow)" severity="warn" icon="pi pi-bell"></p-button>
             <p-button (onClick)="UpdateCow(Cow)" icon="pi pi-pencil"></p-button>
-            <p-button (onClick)="navigateToCowDetails(Cow)" icon="pi pi-eye"></p-button>
+            <p-button (onClick)="navigateToCowDetails(Cow)" severity="secondary" icon="pi pi-eye"></p-button>
         </div>
     </ng-template>
 </p-card>

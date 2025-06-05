@@ -51,7 +51,18 @@ export class AlertState{
         return this.alertService.apiAlertPost(action.payload)
         .pipe(
             tap(newAlert=>{
-                ctx.setState(patch<AlertStateModel>({Alerts: append<AlertDto>([newAlert])}))
+                ctx.setState(patch<AlertStateModel>({
+                    Alerts: append<AlertDto>([newAlert]), 
+                    // AlertsActive:append<AlertDto>([newAlert]) 
+                }))
+            })
+        );
+    }
+
+    @Action(Alerts.ReceiveNew)
+        receiveNewAlert(ctx: StateContext<AlertStateModel>, action: Alerts.ReceiveNew){
+            ctx.setState(patch<AlertStateModel>({
+                AlertsActive:append<AlertDto>([action.payload]) 
             })
         );
     }

@@ -1,3 +1,5 @@
+import { AlertDto } from "../../api/models"
+
 export namespace Alerts{
     export class Create{
         static readonly type = '[Alerts] Create Alert'
@@ -15,6 +17,11 @@ export namespace Alerts{
 
     export class GetAllActive{
         static readonly type ='[Alerts] Get All Active Alerts'
+    }
+
+    export class ReceiveNew{
+        static readonly type = '[Alerts] Receive New Alert'
+        constructor(public payload: AlertDto){}
     }
 
     export class Delete{

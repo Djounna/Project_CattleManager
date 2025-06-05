@@ -146,6 +146,7 @@ import { CowGenealogyDialogComponent } from './features/cattle/cow/cow-genealogy
 import { CowTimelineDialogComponent } from './features/cattle/cow/cow-timeline-dialog/cow-timeline-dialog.component';
 import { CowMonthMilkingsGraphDialogComponent } from './features/cattle/cow/cow-month-milkings-graph-dialog/cow-month-milkings-graph-dialog.component';
 import { SideAlertsComponent } from './features/alerts/side-alerts/side-alerts.component';
+import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialog/create-alert-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -197,7 +198,8 @@ import { SideAlertsComponent } from './features/alerts/side-alerts/side-alerts.c
         CowGenealogyDialogComponent,
         CowTimelineDialogComponent,
         CowMonthMilkingsGraphDialogComponent,
-        SideAlertsComponent
+        SideAlertsComponent,
+        CreateAlertDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

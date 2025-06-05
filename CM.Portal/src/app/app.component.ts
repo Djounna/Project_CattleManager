@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AlertState } from './state/alert/alert.store';
 import { AlertDto } from './api/models';
 import { Alerts } from './state/alert/alert.action';
+import { SignalRService } from './services/signalr.service';
 
 @Component({
     selector: 'app-root',
@@ -31,11 +32,14 @@ export class AppComponent{
 
   constructor(
     private router: Router,
+    private signalRService : SignalRService,
     private authService : AuthService){}
 
   ngOnInit(): void {
     this.checkLogin();
     this.checkAlerts();
+    this.signalRService.startConnection();
+    this.signalRService.addMessageListener();
   }
 
   private checkLogin(): void{
@@ -66,8 +70,17 @@ export class AppComponent{
     this.Alerts$.subscribe({
       next: (res) => this.Alerts = res
     })
-    this.store.dispatch(new Alerts.GetAll())
+    this.store.dispatch(new Alerts.GetAllActive())
   }
+
+  // private loadData(){
+  //   this.store.dispatch(new Cows.GetAll());
+  //   this.store.dispatch(new Gestations.GetAll());
+  //   this.store.dispatch(new Groups.GetAll());
+  //   this.store.dispatch(new Pens.GetAll());
+  //   this.store.dispatch(new Workers.GetAll());
+  // this.store.dispatch(new Alerts.GetAllActive())
+  // }
 
   public ToggleDrawer(): void{
     this.DrawerVisible = !this.DrawerVisible;

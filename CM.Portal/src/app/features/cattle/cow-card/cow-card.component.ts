@@ -13,6 +13,7 @@ export class CowCardComponent implements OnInit {
   private router = inject(Router);
   @Input('Cow') Cow! : CowDto;
   @Output() onUpdate: EventEmitter<CowDto> = new EventEmitter<CowDto>();
+  @Output() onAddAlert: EventEmitter<CowDto> = new EventEmitter<CowDto>();
   @Output() onAddIntervention: EventEmitter<CowDto> = new EventEmitter<CowDto>();
   @Output() onAddVaccination: EventEmitter<CowDto> = new EventEmitter<CowDto>();
   @Output() onAddGestation: EventEmitter<CowDto> = new EventEmitter<CowDto>();
@@ -57,6 +58,10 @@ export class CowCardComponent implements OnInit {
 
   public UpdateCow(cow: CowDto){
     this.onUpdate.emit(cow);
+  }
+
+  public AddAlert(cow: CowDto){
+    this.onAddAlert.emit(cow);
   }
 
   public navigateToCowDetails(cow: CowDto){
