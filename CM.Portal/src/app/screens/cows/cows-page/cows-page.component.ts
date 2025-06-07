@@ -16,6 +16,7 @@ import { CreateVaccinationDialogComponent } from '../../../features/vaccination/
 import { CreateConditionDialogComponent } from '../../../features/condition/create-condition-dialog/create-condition-dialog.component';
 import { CreateTreatmentDialogComponent } from '../../../features/treatment/create-treatment-dialog/create-treatment-dialog.component';
 import { CreateAlertDialogComponent } from '../../../features/alerts/create-alert-dialog/create-alert-dialog.component';
+import { Alerts } from '../../../state/alert/alert.action';
 
 @Component({
   selector: 'app-cows-page',
@@ -81,11 +82,22 @@ export class CowsPageComponent extends BaseComponent {
 
   public CreateCowAlertDialog(cow: CowDto): void {
     const dialogRef = this.dialogService.open(CreateAlertDialogComponent, {
-      data: cow,
+      data: {
+        cow: cow,
+        pen: null
+      },
       header: 'Ajouter une alerte',
-      height: '450px',
+      height: '400px',
       width: '500px',
     });
+
+    dialogRef.onClose.subscribe(newAlert => {
+      this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
+        next: () => this.toastSuccess("L'alerte a été créée avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
+
+    })
   }
 
   public CreateInterventionDialog(cow: CowDto): void {

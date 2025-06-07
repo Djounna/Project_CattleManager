@@ -54,6 +54,8 @@ import { ImageModule} from 'primeng/image';
 import { FluidModule } from 'primeng/fluid';
 import { DrawerModule } from 'primeng/drawer'; 
 import { FieldsetModule } from 'primeng/fieldset';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -256,6 +258,8 @@ import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialo
         FluidModule,
         DrawerModule,
         FieldsetModule,
+        BadgeModule,
+        OverlayBadgeModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

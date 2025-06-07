@@ -1,16 +1,11 @@
+    <!-- <div> </div> -->
 
-    <!-- <div>
-
-    </div> -->
-
-
-    <div class="shortlist">
-        <div *ngFor="let alert of Alerts; index as i" class="item">
+    <div class="alertSideList">
+        <div *ngFor="let alert of Alerts; index as i" class="item"
+            [ngClass]="{'bg-orange': alert.level === 'Haut', 'bg-lightorange' : alert.level === 'Moyen', 'bg-green' : alert.level === 'Bas'}">
 
             <div class="item-row">
                 <span class="details">{{ alert.title }}</span>
-                <span class="date">{{alert.level}}</span>
-
                 <span class="infos" *ngIf="!!alert.cowId">{{alert.cowId}}</span>
                 <span class="infos" *ngIf="!alert.cowId && !!alert.penId">{{alert.penId}}</span>
             </div>

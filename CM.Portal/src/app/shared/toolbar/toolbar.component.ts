@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService, User } from '@auth0/auth0-angular';
+import { AuthService } from '@auth0/auth0-angular';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -14,14 +14,20 @@ export class ToolbarComponent {
     @Output() onShowSidebar : EventEmitter<boolean> = new EventEmitter<boolean>()
     @Output() onShowSideAlerts : EventEmitter<boolean> = new EventEmitter<boolean>()
 
+  private alertsCount : number = 0;
+  @Input() set AlertsCount(value : number){
+    this.alertsCount = value;
+  }
+  public get Alerts(){
+    return this.alertsCount;
+  }
+
     items: MenuItem[] | undefined;
     title: string = '';
-    // public user: any = null;
 
     constructor(
       private router: Router, 
       public auth: AuthService) {}
-
 
     ngOnInit() {
       this.router.events

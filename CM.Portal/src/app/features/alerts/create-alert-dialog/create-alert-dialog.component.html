@@ -1,39 +1,31 @@
 <div class="dialog_container">
     <form  [formGroup]="createAlertForm">
         <div class="form-header">
-            <div *ngIf="cowId !== undefined">
-                <span>Animal : {{ cowId | cowIdentifier }}</span>
+            <div *ngIf="Cow !== undefined">
+                <span>Animal : {{ Cow.id | cowIdentifier }}</span>
             </div>
-            <div *ngIf="cowId === undefined && penId !== undefined">
-                <span>Enclos : {{ penId | penName }} </span>
+            <div *ngIf="Cow === undefined && Pen !== undefined">
+                <span>Enclos : {{ Pen.id | penName }} </span>
             </div>
         </div>
 
         <div class="form-columns">
             <div class="form-column">
-                <!-- <ng-container *ngIf="cowId !== undefined">
-                    <div class="form-entry-col">
-                        <label for="cow">Animal</label>
-                        <input pInputText id="cowId" formControlName="cowId" fluid/>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="cowId === undefined && penId !== undefined">
-                    <div class="form-entry-col">
-                        <label for="pen">Enclos</label>
-                        <input pInputText id="penId" formControlName="penId" fluid/>
-                    </div>
-                </ng-container> -->
                 <div class="form-entry-col">
                     <label for="name">Titre</label>
                     <input pInputText id="title" formControlName="title" fluid/>
                 </div>
                 <div class="form-entry-col">
-                    <label for="description">Description</label>
-                    <input pInputText type="description" formControlName="description" fluid/>
-                </div>
-                <div class="form-entry-col">
                     <label for="level">Niveau</label>
-                    <input pInputText type="level" formControlName="level" fluid/>
+                    <p-select fluid
+                        [options]="AlertLevelSelection" optionLabel="Label" optionValue="Value" formControlName="level" placeholder="Niveau" [showClear]="true">
+                    </p-select>
+                </div>
+            </div>
+            <div class="form-column">
+                <div class="form-entry-col">
+                    <label for="description">Description</label>
+                    <textarea rows="5" cols="25" pInputTextarea formControlName="description"></textarea>
                 </div>
             </div>
         </div>

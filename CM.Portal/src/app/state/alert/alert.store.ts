@@ -6,6 +6,7 @@ import { AlertDto } from "../../api/models";
 import { AlertService, GroupService } from "../../api/services";
 import { Alerts } from "./alert.action";
 import { AlertStateModel } from "./alert.state";
+import { SortUtils } from "../../utils/sort-utils";
 
 @State<AlertStateModel>({
     name:'alerts',
@@ -41,7 +42,7 @@ export class AlertState{
     @Action(Alerts.GetAllActive)
     getAllActiveAlerts(ctx: StateContext<AlertStateModel>){
         return this.alertService.apiAlertActiveGet().pipe(tap(alerts=>{
-            ctx.patchState({AlertsActive : alerts});
+            ctx.patchState({AlertsActive : SortUtils.SortAlertsByPriorityLevel(alerts)});
             })
         );
     }

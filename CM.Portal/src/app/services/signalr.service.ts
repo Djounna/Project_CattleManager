@@ -30,7 +30,7 @@ export class SignalRService{
 
     public addMessageListener = () => {
         this.hubConnection.on('NewAlert', (newAlert: AlertDto) => {
-            this.messageService.add({ severity: 'success', summary: 'Important', detail: 'Une nouvelle alerte est arrivée'}); 
+            this.messageService.add({ severity: 'warn', summary: 'Nouvelle alerte', detail: newAlert.title!}); 
             this.store.dispatch(new Alerts.ReceiveNew(newAlert));
         });
     }

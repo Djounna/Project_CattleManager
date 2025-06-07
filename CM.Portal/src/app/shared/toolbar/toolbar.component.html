@@ -7,9 +7,9 @@
             </div>
         </ng-template>
         <ng-template  pTemplate="end">
-            <p-button *ngIf="auth.isAuthenticated$ | async;" icon="pi pi-bell" [rounded]="true" [text]="true" severity="warn"
-                (click)="showSideAlerts()"
-            />
+            <!-- <p-overlaybadge value="" severity="danger"> -->
+                <p-button *ngIf="auth.isAuthenticated$ | async;" icon="pi pi-bell" [rounded]="true" [text]="true" severity="warn" badge="{{AlertsCount}}" (click)="showSideAlerts()"/>
+            <!-- </p-overlaybadge>. -->
             <app-auth-button></app-auth-button>
         </ng-template>
     </p-menubar>

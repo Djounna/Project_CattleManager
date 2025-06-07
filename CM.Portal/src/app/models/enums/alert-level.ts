@@ -1,5 +1,5 @@
 export enum AlertLevel{
-    High = 'Elevé',
+    High = 'Haut',
     Medium = 'Moyen',
     Low = 'Bas'
 }

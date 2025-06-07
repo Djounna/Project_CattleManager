@@ -16,12 +16,10 @@
                         </div>
                         <div class="flex flex-row justify-content-end gap-2">
                             <span class="p-buttonset">
-                                <p-button icon="pi pi-user" severity="info" 
-                                pTooltip="Assigner" (click)="picklistPenDialog(penInfo.Pen)"></p-button>
-                                <p-button icon="pi pi-bookmark" severity="secondary"
-                                pTooltip="Modifier"></p-button>
-                                <p-button icon="pi pi-times" severity="danger"
-                                pTooltip="Supprimer"></p-button>
+                                <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
+                                <p-button (click)="CreatePenAlertDialog(penInfo.Pen)" severity="warn" icon="pi pi-bell"></p-button>
+                                <p-button (click)="picklistPenDialog(penInfo.Pen)" icon="pi pi-list" severity="info" pTooltip="Assigner" ></p-button>
+                                <!-- <p-button icon="pi pi-times" severity="danger" pTooltip="Supprimer"></p-button> -->
                             </span>
                         </div>
                     </div>
@@ -30,3 +28,5 @@
         </ng-template>
     </p-dataView>
 </div>
+
+<p-toast></p-toast>

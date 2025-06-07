@@ -1,0 +1,90 @@
+
+.alertSideList{
+    display:flex;
+    flex-direction: column;
+    padding-top:2rem;
+    padding-right:1rem;
+    gap:1rem;
+    max-height: 75vh;
+    height: 75vh;
+    overflow-y: auto;
+    overflow-x: none;
+
+    .item{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 2.5rem;
+        // border-bottom: 0.2px solid rgb(226,232,249); ;
+        // border-left: 0.2px solid rgb(226,232,249); ;
+        border: 0.2px solid rgb(226,232,249); ;
+        border-radius: 4px;
+        box-shadow:1px 1px 1px 1px;
+        // border-color: rgb(226,232,249);
+        // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        &-row{
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            .details{
+                padding-left:0.5rem;
+                width:14rem;
+                max-width: 14rem;
+
+                .label{
+
+                }
+                .input{
+
+                }
+            }
+
+            .date{
+                position: absolute;
+                right:-10px;
+                top:-26px;
+                padding:0.2rem;
+                box-shadow:0.5px 0.5px 0.5px 0.5px;
+                border-radius: 3px;
+
+                font-size: small;
+                font-style: italic;
+                color:darkgreen;
+                z-index: 1;
+            }
+
+            .infos{
+                position: absolute;
+                // top: -28px;
+                // left: -5px;
+                right:-10px;
+                top:-26px;
+                padding:0.2rem;
+                box-shadow:0.5px 0.5px 0.5px 0.5px;
+                border-radius: 3px;
+
+                font-size: small;
+                font-style: italic;
+                color:darkblue;
+                background-color: white;
+                z-index: 1;
+            }
+        }
+    }
+}
+
+.bg{
+    &-orange{
+        background-color: orange ;
+    }
+    &-lightorange{
+        background-color: #f6c874;
+    }
+    &-green{
+        background-color: lightgreen  ;
+    }
+}

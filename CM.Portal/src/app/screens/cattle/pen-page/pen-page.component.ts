@@ -9,6 +9,8 @@ import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { InfrastructureState } from '../../../state/infrastructure/infrastructure.store';
 import { MapService, PenMapInfo } from '../../../services/map.service';
 import { PicklistPenDialogComponent } from '../../../features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
+import { CreateAlertDialogComponent } from '../../../features/alerts/create-alert-dialog/create-alert-dialog.component';
+import { Alerts } from '../../../state/alert/alert.action';
 
 @Component({
   selector: 'app-pen-page',
@@ -64,5 +66,24 @@ export class PenPageComponent extends BaseComponent{
       if(result == null)
         return;
     });
+  }
+
+  public CreatePenAlertDialog(pen: PenDto): void {
+    const dialogRef = this.dialogService.open(CreateAlertDialogComponent, {
+      data: {
+        cow: null,
+        pen: pen
+      },
+      header: 'Ajouter une alerte',
+      height: '400px',
+      width: '500px',
+    });
+
+    dialogRef.onClose.subscribe(newAlert => {
+      this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
+        next: () => this.toastSuccess("L'alerte a été créée avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
+    })
   }
 }

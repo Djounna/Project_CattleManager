@@ -45,6 +45,10 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.messageService.add({ severity: 'success', summary: 'Succès', detail: msg }); 
     }
 
+    protected toastWarning(msg:string): void {
+        this.messageService.add({ severity: 'warn', summary: 'Attention', detail: msg }); 
+    }
+
     protected toastError(msg:string): void {
         this.messageService.add({ severity: 'error', summary: 'Erreur', detail: msg }); 
     }

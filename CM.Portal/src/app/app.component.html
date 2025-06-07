@@ -2,7 +2,7 @@
 
 <div class="main">
 
-    <app-toolbar (onShowSidebar)="ToggleDrawer()" (onShowSideAlerts)="ToggleAlertDrawer()" stlyeclass=min-w-full ></app-toolbar>
+    <app-toolbar (onShowSidebar)="ToggleDrawer()" (onShowSideAlerts)="ToggleAlertDrawer()" [AlertsCount]="Alerts.length" stlyeclass=min-w-full ></app-toolbar>
 
     <p-drawer [(visible)]="DrawerVisible" [modal]="false" [closable]="true" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
         <app-sidenav> </app-sidenav>
