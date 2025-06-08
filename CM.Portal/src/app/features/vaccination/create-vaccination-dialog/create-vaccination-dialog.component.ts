@@ -3,6 +3,7 @@ import { BaseComponent } from '../../../shared/base-component.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CowDto, VaccinationDto } from '../../../api/models';
+import { Vaccinations } from '../../../state/cattle/cattle.actions';
 
 @Component({
   selector: 'app-create-vaccination-dialog',
@@ -43,6 +44,11 @@ export class CreateVaccinationDialogComponent extends BaseComponent {
       name: this.CreateVaccinationForm.value.name!,
       date:this.CreateVaccinationForm.value.date?.toISOString(), 
     };
+
+    this.store.dispatch(new Vaccinations.Create({ body: this.NewVaccination })).subscribe({
+      next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+      error: () => this.toastError("Une erreur s'est produite")
+    });
 
     this.dialogRef.close(this.NewVaccination);
   }

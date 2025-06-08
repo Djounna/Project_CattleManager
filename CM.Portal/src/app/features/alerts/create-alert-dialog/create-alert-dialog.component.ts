@@ -80,6 +80,11 @@ export class CreateAlertDialogComponent extends BaseComponent{
       penId: this.Pen !== undefined ? this.createAlertForm.value.penId : null
     };
 
+    this.store.dispatch(new Alerts.Create({ body: this.newAlert })).subscribe({
+      next: () => this.toastSuccess("L'alerte a été créée avec succès"),
+      error: () => this.toastError("Une erreur s'est produite")
+    });
+
     this.dialogRef.close(this.newAlert);
   }
 

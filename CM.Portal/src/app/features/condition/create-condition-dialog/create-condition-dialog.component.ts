@@ -3,6 +3,7 @@ import { BaseComponent } from '../../../shared/base-component.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CowDto, ConditionDto } from '../../../api/models';
+import { Conditions } from '../../../state/cattle/cattle.actions';
 
 @Component({
   selector: 'app-create-condition-dialog',
@@ -47,6 +48,11 @@ export class CreateConditionDialogComponent extends BaseComponent{
       status: this.CreateConditionForm.value.status!,
       startDate:this.CreateConditionForm.value.date?.toISOString(), 
     };
+
+    this.store.dispatch(new Conditions.Create({ body: this.NewCondition })).subscribe({
+      next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
+      error: () => this.toastError("Une erreur s'est produite")
+    });
 
     this.dialogRef.close(this.NewCondition);
   }

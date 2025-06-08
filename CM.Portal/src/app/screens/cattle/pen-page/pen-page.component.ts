@@ -63,8 +63,13 @@ export class PenPageComponent extends BaseComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == null)
-        return;
+      console.log(result);
+      if(result === true){
+        this.toastSuccess("Modification enregistrée");
+      } else if(result === false){
+
+        this.toastError("Une erreur est survenue");
+      }
     });
   }
 
@@ -79,11 +84,11 @@ export class PenPageComponent extends BaseComponent{
       width: '500px',
     });
 
-    dialogRef.onClose.subscribe(newAlert => {
-      this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
-        next: () => this.toastSuccess("L'alerte a été créée avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    })
+    // dialogRef.onClose.subscribe(newAlert => {
+    //   this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
+    //     next: () => this.toastSuccess("L'alerte a été créée avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // })
   }
 }

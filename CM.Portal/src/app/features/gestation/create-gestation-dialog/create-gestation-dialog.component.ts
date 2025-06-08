@@ -4,6 +4,7 @@ import { CowDto, GestationDto } from '../../../api/models';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CowUtils } from '../../../utils/cow-utils';
+import { Gestations } from '../../../state/cattle/cattle.actions';
 
 @Component({
   selector: 'app-create-gestation-dialog',
@@ -44,6 +45,11 @@ export class CreateGestationDialogComponent extends BaseComponent{
       startDate: startDate, 
       calvingDate: calvingDate
     };
+
+      this.store.dispatch(new Gestations.Create({ body: this.NewGestation })).subscribe({
+        next: () => this.toastSuccess("La gestation a été créé avec succès"),
+        error: () => this.toastError("Une erreur s'est produite")
+      });
 
     this.dialogRef.close(this.NewGestation);
   }

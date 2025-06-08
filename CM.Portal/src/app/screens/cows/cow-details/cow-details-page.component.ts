@@ -150,12 +150,12 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(updatedCow => {
-      this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
-        next: () => this.toastSuccess("L'animal a été modifié avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(updatedCow => {
+    //   this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
+    //     next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
 
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
@@ -168,12 +168,13 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(newIntervention => {
-      this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
-        next: () => this.toastSuccess("L'intervention a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(newIntervention => {
+    //   this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
+    //     next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
@@ -185,12 +186,13 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(newVaccination => {
-      this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
-        next: () => this.toastSuccess("La vaccination a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(newVaccination => {
+    //   this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
+    //     next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
@@ -202,12 +204,13 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(newGestation => {
-      this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
-        next: () => this.toastSuccess("La gestation a été créé avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(newGestation => {
+    //   this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
+    //     next: () => this.toastSuccess("La gestation a été créé avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
@@ -219,13 +222,13 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    dialogRef.onClose.subscribe(newCondition => {
-      debugger;
-      this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
-        next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose.subscribe(newCondition => {
+    //   this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
+    //     next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
+    //     error: () => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+    
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
