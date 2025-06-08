@@ -8,8 +8,30 @@
 
     <p-divider></p-divider>
 
-    <div class="flex flex-column gap-4">
-        <app-group-datagrid [Cows]="Cows" [Groups]="Groups"></app-group-datagrid>
-    </div>
+    <p-dataView #dv [value]="Groups" [layout]="'grid'">
+        <ng-template #grid let-groups>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" *ngFor="let group of groups">
+                    <div class="p-2 border-1 surface-border surface-card border-round">
+                        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                            <span class="flex align-items-center gap-2">
+                                <i class="pi pi-tag"></i>
+                                <span class="font-semibold">{{ group.name }}</span>
+                            </span>
+                        </div>
+                        <div class="flex flex-column align-items-center p-3">
+                            <img class="w-10rem h-7rem shadow-2 border-round" [src]="'assets/images/cattle/'+ group?.imgLink" [alt]="group.name" />
+                        </div>
+                        <div class="flex flex-row justify-content-end gap-2">
+                            <span>
+                                <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
+                                <p-button icon="pi pi-list" severity="info" pTooltip="Assigner" (click)="picklistGroupDialog(group)"></p-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
 
 </div>

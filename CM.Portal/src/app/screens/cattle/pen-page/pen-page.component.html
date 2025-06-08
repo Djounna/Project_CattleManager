@@ -15,11 +15,10 @@
                             [leafletLayers]="penInfo.MapLayers">
                         </div>
                         <div class="flex flex-row justify-content-end gap-2">
-                            <span class="p-buttonset">
+                            <span>
                                 <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
                                 <p-button (click)="CreatePenAlertDialog(penInfo.Pen)" severity="warn" icon="pi pi-bell"></p-button>
                                 <p-button (click)="picklistPenDialog(penInfo.Pen)" icon="pi pi-list" severity="info" pTooltip="Assigner" ></p-button>
-                                <!-- <p-button icon="pi pi-times" severity="danger" pTooltip="Supprimer"></p-button> -->
                             </span>
                         </div>
                     </div>

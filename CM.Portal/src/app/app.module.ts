@@ -97,8 +97,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateJobDialogComponent } from './features/work/job/create-job-dialog/create-job-dialog.component';
 import { CreateCowDialogComponent } from './features/cattle/cow/create-cow-dialog/create-cow-dialog.component';
 import { JobDetailsListComponent } from './features/work/job-details-list/job-details-list.component';
-import { GroupDatagridComponent } from './features/groups/group-datagrid/group-datagrid.component';
-import { PenDatagridComponent } from './features/pens/pen-datagrid/pen-datagrid.component';
 import { PicklistToolComponent } from './features/shared/picklist-tool/picklist-tool.component';
 import { AssignJobDialogComponent } from './features/work/job/assign-job-dialog/assign-job-dialog.component';
 import { CreateGroupDialogComponent } from './features/groups/group/create-group-dialog/create-group-dialog.component';
@@ -156,7 +154,7 @@ import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialo
         WorkersPageComponent, CowsPageComponent, GroupPageComponent, DashboardComponent, JobsPageComponent,
         CowsListViewComponent, WorkersListViewComponent, AlertListComponent, CowCardComponent, GroupCardComponent, GroupCardViewComponent,
         AlertListComponent, JobListViewComponent, InterventionListComponent, GestationsListComponent, JobDetailsListComponent,
-        CreateJobDialogComponent, CreateCowDialogComponent, GroupDatagridComponent, PenDatagridComponent, PicklistToolComponent,
+        CreateJobDialogComponent, CreateCowDialogComponent,  PicklistToolComponent,
         AssignJobDialogComponent,
         CreateGroupDialogComponent,
         PicklistGroupDialogComponent,

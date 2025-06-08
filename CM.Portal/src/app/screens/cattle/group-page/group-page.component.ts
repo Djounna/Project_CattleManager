@@ -42,6 +42,19 @@ export class GroupPageComponent extends BaseComponent {
     this.store.dispatch(new Pens.GetAll());
   }
 
+  picklistGroupDialog(group: any): void{
+    const dialogRef2 = this.dialog.open(PicklistGroupDialogComponent, {
+      height: '80vh',
+      width: '80vw',
+      data: {Cows: this.Cows, Groups: this.Groups, SourceId: group.id} 
+    });
+
+    dialogRef2.afterClosed().subscribe(result => {
+      if(result == null)
+        return;
+    });
+  }
+
   createGroupDialog(): void {
     const dialogRef = this.dialog.open(CreateGroupDialogComponent, {
       height: '400px',

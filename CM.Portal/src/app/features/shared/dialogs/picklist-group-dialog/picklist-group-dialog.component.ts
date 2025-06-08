@@ -30,8 +30,8 @@ export class PicklistGroupDialogComponent {
     this.SelectedSourceGroup = this.data.Groups.find(g => g.id === this.data.SourceId)!;
   }
 
-  Close(): void{
-    this.dialogRef.close();
+  Close(saved: boolean): void{
+    this.dialogRef.close(saved);
   }
 
   Save(): void{

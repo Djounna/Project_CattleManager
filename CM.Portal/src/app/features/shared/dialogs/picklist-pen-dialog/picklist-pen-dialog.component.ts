@@ -30,8 +30,8 @@ export class PicklistPenDialogComponent {
     this.SelectedSourcePen = this.data.Pens.find(g => g.id === this.data.SourceId)!;
   }
 
-  Close(): void{
-    this.dialogRef.close();
+  Close(saved: boolean): void{
+    this.dialogRef.close(saved);
   }
 
   Save(): void{

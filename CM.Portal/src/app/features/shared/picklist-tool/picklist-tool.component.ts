@@ -20,7 +20,7 @@ export class PicklistToolComponent extends BaseComponent {
   @Input() Groups : GroupDto[] = [];
   @Input() Pens : PenDto[] = [];
   @Input() Mode: string = 'Group';
-  @Output() onClose : EventEmitter<void> = new EventEmitter<void>
+  @Output() onSave : EventEmitter<boolean> = new EventEmitter<boolean>
 
   sourceId: number = 0;
   targetId: number = 0;
@@ -86,7 +86,7 @@ export class PicklistToolComponent extends BaseComponent {
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
           next:(res) => this.store.dispatch(new Cows.GetAll()),
-          error:(err) => console.log(err) 
+          error:(err) => this.onSave.next(false) 
         })
       break;
 
@@ -109,10 +109,10 @@ export class PicklistToolComponent extends BaseComponent {
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
           next:(res) => this.store.dispatch(new Cows.GetAll()),
-          error:(err) => console.log(err) 
+          error:(err) => this.onSave.next(false) 
         })
       break;
       }
-      this.onClose.next();
+      this.onSave.next(true);
     }
 }
