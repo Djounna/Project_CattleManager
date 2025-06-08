@@ -1,6 +1,5 @@
 <div class="dialog_container">
-    <form  [formGroup]="GroupForm">
-
+    <form  [formGroup]="UpdatePenForm">
         <div class="form">
             <div class="form-columns">
                 <div class="form-column">
@@ -12,18 +11,15 @@
                         <label for="description">Description</label>
                         <textarea rows="5" cols="25" pInputTextarea formControlName="description"></textarea>
                     </div>
-                    <div class="form-entry-col">
-                        <label for="image">Image</label>
-                        <input pInputText id="imglink" formControlName="imglink" />
-                    </div>
                 </div>
             </div>
 
             <div class="form-actions">
                 <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
-                <p-button label="Confirmer" [raised]="true" severity="primary" [disabled]="!GroupForm.valid" (click)="OnCreate()"></p-button>
+                <p-button label="Confirmer" [raised]="true" severity="primary" [disabled]="!UpdatePenForm.valid" (click)="OnUpdate()"></p-button>
             </div>
         </div>
-
     </form>
 </div>
+
+

@@ -2,7 +2,7 @@
 
     <div class="flex flex-row justify-content-start align-content-center">
         <div class="flex flex-row justify-content-end gap-3">
-            <p-button label="Ajouter" (click)="createGroupDialog()"></p-button> 
+            <p-button label="Ajouter" (click)="CreateGroupDialog()"></p-button> 
         </div>
     </div>
 
@@ -24,7 +24,7 @@
                         </div>
                         <div class="flex flex-row justify-content-end gap-2">
                             <span>
-                                <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
+                                <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier" (click)="UpdateGroupDialog(group)"></p-button>
                                 <p-button icon="pi pi-list" severity="info" pTooltip="Assigner" (click)="picklistGroupDialog(group)"></p-button>
                             </span>
                         </div>
@@ -35,3 +35,5 @@
     </p-dataView>
 
 </div>
+
+<p-toast></p-toast>

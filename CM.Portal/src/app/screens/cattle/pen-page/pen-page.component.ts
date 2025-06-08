@@ -10,7 +10,8 @@ import { InfrastructureState } from '../../../state/infrastructure/infrastructur
 import { MapService, PenMapInfo } from '../../../services/map.service';
 import { PicklistPenDialogComponent } from '../../../features/shared/dialogs/picklist-pen-dialog/picklist-pen-dialog.component';
 import { CreateAlertDialogComponent } from '../../../features/alerts/create-alert-dialog/create-alert-dialog.component';
-import { Alerts } from '../../../state/alert/alert.action';
+import { CreatePenDialogComponent } from '../../../features/pens/pen/create-pen-dialog/create-pen-dialog.component';
+import { UpdatePenDialogComponent } from '../../../features/pens/pen/update-pen-dialog/update-pen-dialog.component';
 
 @Component({
   selector: 'app-pen-page',
@@ -63,13 +64,8 @@ export class PenPageComponent extends BaseComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result === true){
-        this.toastSuccess("Modification enregistrée");
-      } else if(result === false){
-
-        this.toastError("Une erreur est survenue");
-      }
+      if(result === true)
+        this.store.dispatch(new Pens.GetAll())
     });
   }
 
@@ -83,12 +79,22 @@ export class PenPageComponent extends BaseComponent{
       height: '400px',
       width: '500px',
     });
+  }
 
-    // dialogRef.onClose.subscribe(newAlert => {
-    //   this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
-    //     next: () => this.toastSuccess("L'alerte a été créée avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // })
+  public CreatePenDialog(): void {
+    const dialogRef = this.dialogService.open(CreatePenDialogComponent, {
+      header: 'Créer un enclos',
+      height: '400px',
+      width: '350px',
+    });
+  }
+
+  public UpdatePenDialog(group: PenDto): void{
+    const dialogref = this.dialogService.open(UpdatePenDialogComponent, {
+      header: 'Mettre à jour un enclos',
+      height: '400px',
+      width: '350px',
+      data: group
+    })
   }
 }

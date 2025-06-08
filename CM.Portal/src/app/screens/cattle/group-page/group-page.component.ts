@@ -8,6 +8,7 @@ import { CattleState } from '../../../state/cattle/cattle.store';
 import { CreateGroupDialogComponent } from '../../../features/groups/group/create-group-dialog/create-group-dialog.component';
 import { Pens } from '../../../state/infrastructure/infrastructure.action';
 import { PicklistGroupDialogComponent } from '../../../features/shared/dialogs/picklist-group-dialog/picklist-group-dialog.component';
+import { UpdateGroupDialogComponent } from '../../../features/groups/group/update-group-dialog/update-group-dialog.component';
 
 @Component({
     selector: 'app-group-page',
@@ -42,32 +43,42 @@ export class GroupPageComponent extends BaseComponent {
     this.store.dispatch(new Pens.GetAll());
   }
 
-  picklistGroupDialog(group: any): void{
-    const dialogRef2 = this.dialog.open(PicklistGroupDialogComponent, {
+  public picklistGroupDialog(group: any): void{
+    const dialogRef = this.dialog.open(PicklistGroupDialogComponent, {
       height: '80vh',
       width: '80vw',
       data: {Cows: this.Cows, Groups: this.Groups, SourceId: group.id} 
     });
 
-    dialogRef2.afterClosed().subscribe(result => {
-      if(result == null)
-        return;
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true)
+        this.store.dispatch(new Groups.GetAll())
     });
   }
 
-  createGroupDialog(): void {
-    const dialogRef = this.dialog.open(CreateGroupDialogComponent, {
+  public CreateGroupDialog(): void {
+    const dialogRef = this.dialogService.open(CreateGroupDialogComponent, {
+      header: 'Créer un groupe',
       height: '400px',
       width: '350px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == null)
-        return;
-      this.store.dispatch(new Groups.Create({body:result})).subscribe({
-        next:() => this.toastSuccess("Le groupe a été ajoutée avec succès"),
-        error:() => this.toastError("Une erreur s'est produite")
-      });
-    });
+    // dialogRef.onClose().subscribe(result => {
+    //   if(result == null)
+    //     return;
+    //   this.store.dispatch(new Groups.Create({body:result})).subscribe({
+    //     next:() => this.toastSuccess("Le groupe a été ajoutée avec succès"),
+    //     error:() => this.toastError("Une erreur s'est produite")
+    //   });
+    // });
+  }
+
+  public UpdateGroupDialog(group: GroupDto): void{
+    const dialogref = this.dialogService.open(UpdateGroupDialogComponent, {
+      header: 'Mettre à jour un groupe',
+      height: '400px',
+      width: '350px',
+      data: group
+    })
   }
 }

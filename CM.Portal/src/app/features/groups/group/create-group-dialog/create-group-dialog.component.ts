@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupDto } from '../../../../api/models';
+import { BaseComponent } from '../../../../shared/base-component.component';
+import { Groups } from '../../../../state/cattle/cattle.actions';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
     selector: 'app-create-group-dialog',
@@ -9,29 +11,45 @@ import { GroupDto } from '../../../../api/models';
     styleUrl: './create-group-dialog.component.scss',
     standalone: false
 })
-export class CreateGroupDialogComponent {
+export class CreateGroupDialogComponent extends BaseComponent{
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<CreateGroupDialogComponent>,
-  ){}
+    public dialogRef: DynamicDialogRef,
+  ){
+    super();
+  }
 
-  public newGroup : GroupDto | undefined;
+  public NewGroup : GroupDto | undefined;
+  public GroupForm!: FormGroup
 
-  groupForm = this.formBuilder.group({
-    name:['', Validators.required],
-    description:['', Validators.required],
-    imgLink:[''],
-  })
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.initForm();
+  }
+
+  private initForm(): void{
+    this.GroupForm = this.formBuilder.group({
+      name:['', Validators.required],
+      description:['', Validators.required],
+      imgLink:[''],
+    })
+  }
 
   OnCreate(): void {
-    this.newGroup = {
+    this.NewGroup = {
       id : 0,
-      name : this.groupForm.value.name,
-      description : this.groupForm.value.description,
-      imgLink: this.groupForm.value?.imgLink
+      name : this.GroupForm.value.name,
+      description : this.GroupForm.value.description,
+      imgLink: this.GroupForm.value?.imgLink
     };
-    this.dialogRef.close(this.newGroup);
+
+    this.store.dispatch(new Groups.Create({body:this.NewGroup})).subscribe({
+      next:() => this.toastSuccess("Le groupe a été ajoutée avec succès"),
+      error:() => this.toastError("Une erreur s'est produite")
+    });
+
+    this.dialogRef.close(this.NewGroup);
   }
 
   OnCancel(): void{

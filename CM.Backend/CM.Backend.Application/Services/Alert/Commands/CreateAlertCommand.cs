@@ -31,5 +31,4 @@ public class CreateAlertCommandHandler : IRequestHandler<CreateAlertCommand, Ale
 
         return newAlert;
     }
-        
 }

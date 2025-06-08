@@ -1,4 +1,13 @@
 <div class="page_base">
+
+    <div class="flex flex-row justify-content-start align-content-center">
+        <div class="flex flex-row justify-content-end gap-3">
+            <p-button label="Ajouter" (click)="CreatePenDialog()"></p-button> 
+        </div>
+    </div>
+
+    <p-divider></p-divider>
+
     <p-dataView #dv [value]="PenMapInfos" [layout]="'grid'">
         <ng-template #grid let-penInfos>
             <div class="grid grid-nogutter">
@@ -16,7 +25,7 @@
                         </div>
                         <div class="flex flex-row justify-content-end gap-2">
                             <span>
-                                <p-button icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
+                                <p-button (click)="UpdatePenDialog(penInfo.Pen)" icon="pi pi-cog" severity="secondary" pTooltip="Modifier"></p-button>
                                 <p-button (click)="CreatePenAlertDialog(penInfo.Pen)" severity="warn" icon="pi pi-bell"></p-button>
                                 <p-button (click)="picklistPenDialog(penInfo.Pen)" icon="pi pi-list" severity="info" pTooltip="Assigner" ></p-button>
                             </span>

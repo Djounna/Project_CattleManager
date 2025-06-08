@@ -1,0 +1,20 @@
+<div class="dialog_container">
+    <form  [formGroup]="NewPenForm">
+        <div class="form">
+            <div class="form-columns">
+                <div class="form-column">
+                    <div class="form-entry-col">
+                        <label for="name">Nom</label>
+                        <input pInputText id="name" formControlName="name" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+                <p-button label="Confirmer" [raised]="true" severity="primary" [disabled]="!NewPenForm.valid" (click)="OnCreate()"></p-button>
+            </div>
+        </div>
+    </form>
+</div>
+

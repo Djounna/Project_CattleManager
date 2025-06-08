@@ -147,6 +147,9 @@ import { CowTimelineDialogComponent } from './features/cattle/cow/cow-timeline-d
 import { CowMonthMilkingsGraphDialogComponent } from './features/cattle/cow/cow-month-milkings-graph-dialog/cow-month-milkings-graph-dialog.component';
 import { SideAlertsComponent } from './features/alerts/side-alerts/side-alerts.component';
 import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialog/create-alert-dialog.component';
+import { UpdateGroupDialogComponent } from './features/groups/group/update-group-dialog/update-group-dialog.component';
+import { CreatePenDialogComponent } from './features/pens/pen/create-pen-dialog/create-pen-dialog.component';
+import { UpdatePenDialogComponent } from './features/pens/pen/update-pen-dialog/update-pen-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -199,7 +202,10 @@ import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialo
         CowTimelineDialogComponent,
         CowMonthMilkingsGraphDialogComponent,
         SideAlertsComponent,
-        CreateAlertDialogComponent
+        CreateAlertDialogComponent,
+        UpdateGroupDialogComponent,
+        CreatePenDialogComponent,
+        UpdatePenDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

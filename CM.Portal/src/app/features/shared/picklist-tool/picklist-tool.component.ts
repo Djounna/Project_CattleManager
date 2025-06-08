@@ -85,8 +85,8 @@ export class PicklistToolComponent extends BaseComponent {
         this.groupService.apiGroupAssignPost({body: dto})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
-          next:(res) => this.store.dispatch(new Cows.GetAll()),
-          error:(err) => this.onSave.next(false) 
+          next:(res) => this.onSuccess(),
+          error:(err) => this.onError() 
         })
       break;
 
@@ -108,11 +108,21 @@ export class PicklistToolComponent extends BaseComponent {
         this.penService.apiPenAssignPost({body: dto2})
         .pipe(takeUntil(this.$OnDestroyed))
         .subscribe({
-          next:(res) => this.store.dispatch(new Cows.GetAll()),
-          error:(err) => this.onSave.next(false) 
+          next:(res) => this.onSuccess(),
+          error:(err) => this.onError() 
         })
       break;
       }
+    }
+
+    private onSuccess(): void {
+      this.toastSuccess("La modificaiton a été réalisée avec succès");
+      this.store.dispatch(new Cows.GetAll());
       this.onSave.next(true);
+    }
+
+    private onError(): void{
+      this.toastError("Une erreur s'est produite");
+      this.onSave.next(false);
     }
 }
