@@ -94,7 +94,6 @@ export class MapService {
     
     public CreatePenMapInfos(pen: PenDto): PenMapInfo{
         let penMapLayers : FeatureGroup = L.featureGroup();
-        debugger;
         let poly = this.GeneratePenPolygon(pen);
         penMapLayers.addLayer(poly);
         let penMapInfos: PenMapInfo = {

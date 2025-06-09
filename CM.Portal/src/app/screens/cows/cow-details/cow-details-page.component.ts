@@ -4,11 +4,10 @@ import { CattleState } from '../../../state/cattle/cattle.store';
 import { Select } from '@ngxs/store';
 import { combineLatest, Observable, takeUntil, tap } from 'rxjs';
 import { CowDetailsDto, CowDto, CowGenealogyDto, MilkingDto, MilkingVolumeDto } from '../../../api/models';
-import { Conditions, CowDetails, CowGenealogy, Cows, Gestations, Interventions, Treatments, Vaccinations } from '../../../state/cattle/cattle.actions';
+import { CowDetails, CowGenealogy, Cows } from '../../../state/cattle/cattle.actions';
 import { ActivatedRoute } from '@angular/router';
 import { MilkingState } from '../../../state/milking/milking.store';
 import { Milkings } from '../../../state/milking/milking.actions';
-import { latLng, tileLayer } from 'leaflet';
 import { ActivityType } from '../../../models/enums/activity-type';
 import { UpdateCowDialogComponent } from '../../../features/cattle/cow/update-cow-dialog/update-cow-dialog.component';
 import { CreateConditionDialogComponent } from '../../../features/condition/create-condition-dialog/create-condition-dialog.component';
@@ -17,6 +16,7 @@ import { CreateInterventionDialogComponent } from '../../../features/interventio
 import { CreateTreatmentDialogComponent } from '../../../features/treatment/create-treatment-dialog/create-treatment-dialog.component';
 import { CreateVaccinationDialogComponent } from '../../../features/vaccination/create-vaccination-dialog/create-vaccination-dialog.component';
 import { MenuItem } from 'primeng/api';
+import { MapService, PenMapInfo } from '../../../services/map.service';
 
 @Component({
   selector: 'app-cow-details-page',
@@ -40,13 +40,18 @@ export class CowDetailsComponent extends BaseComponent {
   @Select(CattleState.cowGenealogy) CowGenealogy$!: Observable<CowGenealogyDto>;
   public CowGenealogy!: CowGenealogyDto;
 
-  public mapOptions: any;
+  public Map! : L.Map;
+  public MapInfo!: PenMapInfo;
   public ActivityType = ActivityType;
   public menuItems: MenuItem[] | undefined;
 
   public ShowStatisticsDialog = false;
   public ShowTimelineDialog = false
   public ShowGenealogyDialog = false
+
+  constructor(private mapService: MapService){
+    super();
+  }
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -55,8 +60,6 @@ export class CowDetailsComponent extends BaseComponent {
       this.cowId = +params['id'];
     });
     this.iniMenuItems();
-    this.initMap();
-
     this.store.dispatch(new CowDetails.Reset).subscribe();
     this.GetCowData();
   }
@@ -66,10 +69,14 @@ export class CowDetailsComponent extends BaseComponent {
       tap(([c, cd]) => {
         this.Cow = c;
         this.CowDetails = cd;
+        if(this.CowDetails != null)
+          this.initMap();
       }),
-      takeUntil(this.$OnDestroyed),
-    )
-      .subscribe({ error: (err) => { console.log(err); } });
+      takeUntil(this.$OnDestroyed))
+      .subscribe({ 
+        error: (err) => { console.log(err); } 
+      });
+
     this.store.dispatch(new Cows.Get(this.cowId));
     this.store.dispatch(new CowDetails.Get(this.cowId));
   }
@@ -133,13 +140,15 @@ export class CowDetailsComponent extends BaseComponent {
   }
 
   private initMap(): void {
-    this.mapOptions = {
-      layers: [
-        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-      ],
-      zoom: 5,
-      center: latLng(46.879966, -121.726909)
-    }
+    debugger;
+    this.MapInfo = this.mapService.CreatePenMapInfos(this.CowDetails.pen!);
+    // = {
+    //   layers: [
+    //     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    //   ],
+    //   zoom: 5,
+    //   center: latLng(46.879966, -121.726909)
+    // }
   }
 
   public UpdateCowDialog(cow: CowDto): void {
@@ -151,13 +160,13 @@ export class CowDetailsComponent extends BaseComponent {
     });
 
     // dialogRef.onClose.subscribe(updatedCow => {
+    //   if(updatedCow != null)
+    //     this.store.dispatch(new CowDetails.Get(this.cowId));
     //   this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
     //     next: () => this.toastSuccess("L'animal a été modifié avec succès"),
     //     error: () => this.toastError("Une erreur s'est produite")
     //   });
     // });
-
-    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public CreateInterventionDialog(cow: CowDto): void {
@@ -168,14 +177,14 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    // dialogRef.onClose.subscribe(newIntervention => {
-    //   this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
-    //     next: () => this.toastSuccess("L'intervention a été créé avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
-
-    this.store.dispatch(new CowDetails.Get(this.cowId));
+    dialogRef.onClose.subscribe(newIntervention => {
+      if(newIntervention != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
+      //   this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
+      //     next: () => this.toastSuccess("L'intervention a été créé avec succès"),
+      //     error: () => this.toastError("Une erreur s'est produite")
+      //   });
+    });
   }
 
   public CreateVaccinationDialog(cow: CowDto): void {
@@ -186,14 +195,14 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    // dialogRef.onClose.subscribe(newVaccination => {
-    //   this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
-    //     next: () => this.toastSuccess("La vaccination a été créé avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
-
-    this.store.dispatch(new CowDetails.Get(this.cowId));
+    dialogRef.onClose.subscribe(newVaccination => {
+      if(newVaccination != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
+      //   this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
+      //     next: () => this.toastSuccess("La vaccination a été créé avec succès"),
+      //     error: () => this.toastError("Une erreur s'est produite")
+      //   });
+    });
   }
 
   public CreateGestationDialog(cow: CowDto): void {
@@ -204,14 +213,14 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    // dialogRef.onClose.subscribe(newGestation => {
-    //   this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
-    //     next: () => this.toastSuccess("La gestation a été créé avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
-
-    this.store.dispatch(new CowDetails.Get(this.cowId));
+    dialogRef.onClose.subscribe(newGestation => {
+      if(newGestation != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
+      // this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
+      //     next: () => this.toastSuccess("La gestation a été créé avec succès"),
+      //     error: () => this.toastError("Une erreur s'est produite")
+      //   });
+    });
   }
 
   public CreateConditionDialog(cow: CowDto): void {
@@ -222,14 +231,14 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    // dialogRef.onClose.subscribe(newCondition => {
+    dialogRef.onClose.subscribe(newCondition => {
+      if(newCondition != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
     //   this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
     //     next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
     //     error: () => this.toastError("Une erreur s'est produite")
     //   });
-    // });
-    
-    this.store.dispatch(new CowDetails.Get(this.cowId));
+    });
   }
 
   public CreateTreatmentDialog(cow: CowDto): void {
@@ -241,12 +250,13 @@ export class CowDetailsComponent extends BaseComponent {
     });
 
     dialogRef.onClose.subscribe(newTreatment => {
-      this.store.dispatch(new Treatments.Create({ body: newTreatment })).subscribe({
-        next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
-        error: () => this.toastError("Une erreur s'est produite")
-      });
+      if(newTreatment != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
+      // this.store.dispatch(new Treatments.Create({ body: newTreatment })).subscribe({
+      //   next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
+      //   error: () => this.toastError("Une erreur s'est produite")
+      // });
     });
-    this.store.dispatch(new CowDetails.Get(this.cowId));
   }
 
   public ShowStatistics(): void {
@@ -273,5 +283,12 @@ export class CowDetailsComponent extends BaseComponent {
     //     data: cow,
     //     header: 'Généalogie',
     //   });
+  }
+
+  public onMapReady(map: any){
+    setTimeout(() => {
+      this.Map = map;
+      this.Map.invalidateSize();
+    }, 1000);
   }
 }
