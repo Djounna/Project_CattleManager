@@ -108,9 +108,6 @@ export class MapService {
                 center: latLng(50.491320, 4.971440),
             },
             MapLayers : penMapLayers 
-            // [
-            //     polygon([[ 46.8, -121.85 ], [ 46.92, -121.92 ], [ 46.87, -121.8 ]])
-            // ]
         } 
         return penMapInfos;
     }
@@ -119,7 +116,6 @@ export class MapService {
 export interface MapInfo{
     MapOptions: any; 
     PenMapLayers: FeatureGroup;
-    // PenMapLayers: PenMapLayer[];
 }
 
 export interface PenMapLayer{
