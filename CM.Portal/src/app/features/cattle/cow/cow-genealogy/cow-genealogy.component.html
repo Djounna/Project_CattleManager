@@ -2,9 +2,9 @@
     <ng-template let-node pTemplate="cow">
     <div class="flex flex-column">
         <div class="flex flex-column align-items-center">
-            <img src="assets\images\cattle\{{node?.data.img}}" [alt]="node.label" width="32" />
-            <div class="font-bold mb-2">{{ node.label }}</div>
-            <div>{{ node.data.identifier }}</div>
+            <img src="assets\images\cattle\{{node?.data?.img}}" [alt]="node?.label ?? '/'" width="32" />
+            <div class="font-bold mb-2">{{ node?.label ?? 'unknown' }}</div>
+            <div>{{ node?.data?.identifier ?? '/' }}</div>
         </div>
     </div> 
     </ng-template>

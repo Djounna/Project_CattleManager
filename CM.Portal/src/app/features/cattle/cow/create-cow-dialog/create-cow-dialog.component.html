@@ -15,6 +15,20 @@
                     <label for="birthdate">Date de naissance</label>
                     <p-datepicker type="date" formControlName="birthdate"></p-datepicker>
                 </div>
+                <div class="form-entry-col">
+                    <label for="mother">Mère</label>
+                    <!-- <input pInputText id="mother" formControlName="mother" fluid/> -->
+                    <p-select 
+                        [options]="females" optionLabel="name" optionValue="id" formControlName="motherId" placeholder="père" [showClear]="true" fluid>
+                    </p-select>
+                </div>
+                <div class="form-entry-col">
+                    <label for="father">Père</label>
+                    <!-- <input pInputText id="father" formControlName="father" fluid/> -->
+                    <p-select 
+                        [options]="males" optionLabel="name" optionValue="id" formControlName="fatherId" placeholder="père" [showClear]="true" fluid>
+                    </p-select>
+                </div>
                 <div class="form-entry-row">
                     <label for="">sex</label>
                     <div *ngFor="let gender of genders" class="flex flex-row field-checkbox">

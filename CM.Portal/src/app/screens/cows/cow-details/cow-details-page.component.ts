@@ -140,7 +140,6 @@ export class CowDetailsComponent extends BaseComponent {
   }
 
   private initMap(): void {
-    debugger;
     this.MapInfo = this.mapService.CreatePenMapInfos(this.CowDetails.pen!);
     // = {
     //   layers: [
@@ -159,14 +158,14 @@ export class CowDetailsComponent extends BaseComponent {
       width: '350px',
     });
 
-    // dialogRef.onClose.subscribe(updatedCow => {
-    //   if(updatedCow != null)
-    //     this.store.dispatch(new CowDetails.Get(this.cowId));
-    //   this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
-    //     next: () => this.toastSuccess("L'animal a été modifié avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
+    dialogRef.onClose.subscribe(updatedCow => {
+      if(updatedCow != null)
+        this.store.dispatch(new CowDetails.Get(this.cowId));
+      // this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
+      //   next: () => this.toastSuccess("L'animal a été modifié avec succès"),
+      //   error: () => this.toastError("Une erreur s'est produite")
+      // });
+    });
   }
 
   public CreateInterventionDialog(cow: CowDto): void {
@@ -233,6 +232,7 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newCondition => {
       if(newCondition != null)
+        debugger;
         this.store.dispatch(new CowDetails.Get(this.cowId));
     //   this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
     //     next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),

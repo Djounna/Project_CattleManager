@@ -30,8 +30,12 @@ export class CreateCowDialogComponent extends BaseComponent {
   public genders : string[] = Object.values(Genders);
   public groupDict : Map<number, string> = this.store.selectSnapshot(CattleState.groupDict);
   public penDict : Map<number, string> = this.store.selectSnapshot(InfrastructureState.penDict);
+  public maleDict : Map<number, string> = this.store.selectSnapshot(CattleState.cowIdentifierMaleDict);
+  public femaleDict : Map<number, string> = this.store.selectSnapshot(CattleState.cowIdentifierFemaleDict);
   public groups: any[] = [];   
   public pens: any[] = []
+  public males: any[] = []
+  public females: any[] = []
   
   override ngOnInit(): void {
     super.ngOnInit();
@@ -51,14 +55,28 @@ export class CreateCowDialogComponent extends BaseComponent {
         name: value
       });
     }) 
+    this.maleDict.forEach((value, key) => {
+      this.males.push({
+        id: key,
+        name: value
+      });
+    }) 
+    this.femaleDict.forEach((value, key) => {
+      this.females.push({
+        id: key,
+        name: value
+      });
+    }) 
     this.createCowForm = this.formBuilder.group({
       identifier:['', Validators.required],
       name:['', Validators.required],
       birthdate:[new Date(),Validators.required],
       race:['', Validators.required],
       gender:['', Validators.required],
-      penId:[0, Validators.required],
-      groupId:[0, Validators.required]
+      fatherId:[],
+      motherId:[],
+      penId:[],
+      groupId:[],
     });
   }
 
@@ -70,8 +88,10 @@ export class CreateCowDialogComponent extends BaseComponent {
       birthDate:this.createCowForm.value.birthdate?.toISOString(), 
       race : this.createCowForm.value.race,
       gender : this.createCowForm.value.gender,
-      groupId: this.createCowForm.value.groupId,
-      penId: this.createCowForm.value.penId,
+      motherId: this.createCowForm.value.fatherId ?? null,
+      fatherId: this.createCowForm.value.motherId ?? null,
+      groupId: this.createCowForm.value.groupId ?? null,
+      penId: this.createCowForm.value.penId ?? null,
       imgLink: ""
     };
 

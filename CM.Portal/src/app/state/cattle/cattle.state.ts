@@ -6,6 +6,8 @@ export interface CattleStateModel {
   CowGenealogy?: CowGenealogyDto,
   Cows: CowDto[],
   CowIdentifierDictionnary: Map<number, string>,
+  CowIdentifierMaleDictionnary: Map<number, string>,
+  CowIdentifierFemaleDictionnary: Map<number, string>,
   CowNameDictionnary: Map<number, string>,
   Groups: GroupDto[],
   GroupDictionnary: Map<number, string>,

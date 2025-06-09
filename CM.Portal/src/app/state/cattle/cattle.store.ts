@@ -16,6 +16,8 @@ import { CowUtils } from "../../utils/cow-utils";
     CowGenealogy: undefined,
     Cows: [],
     CowIdentifierDictionnary: new Map<number, string>(),
+    CowIdentifierMaleDictionnary: new Map<number, string>(),
+    CowIdentifierFemaleDictionnary: new Map<number, string>(),
     CowNameDictionnary: new Map<number, string>(),
     Groups: [],
     GroupDictionnary: new Map<number, string>(),
@@ -64,6 +66,16 @@ export class CattleState {
   @Selector()
   static cowIdentifierDict(cattleState: CattleStateModel) {
     return cattleState.CowIdentifierDictionnary;
+  }
+
+  @Selector()
+  static cowIdentifierFemaleDict(cattleState: CattleStateModel) {
+    return cattleState.CowIdentifierFemaleDictionnary;
+  }
+
+  @Selector()
+  static cowIdentifierMaleDict(cattleState: CattleStateModel) {
+    return cattleState.CowIdentifierMaleDictionnary;
   }
 
   @Selector()
@@ -126,7 +138,9 @@ export class CattleState {
     return this.cowService.apiCowGet().pipe(tap(cows => {
       ctx.patchState({ Cows: cows });
       ctx.patchState({
-        CowIdentifierDictionnary: new Map(cows.map(c => [c.id as number, c.identifier as string]))
+        CowIdentifierDictionnary: new Map(cows.map(c => [c.id as number, c.identifier as string])),
+        CowIdentifierMaleDictionnary: new Map(cows.filter(c => c.gender === 'M').map(c => [c.id as number, c.identifier as string])),
+        CowIdentifierFemaleDictionnary: new Map(cows.filter(c => c.gender === 'F').map(c => [c.id as number, c.identifier as string])),
       });
       ctx.patchState({
         CowNameDictionnary: new Map(cows.map(c => [c.id as number, c.name as string]))
