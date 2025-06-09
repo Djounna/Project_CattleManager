@@ -32,8 +32,8 @@ export class CreatePenDialogComponent extends BaseComponent{
   private initForm(): void{
     this.NewPenForm = this.formBuilder.group({
       name:['', Validators.required],
-      description:['', Validators.required],
-      imgLink:[''],
+      size:[0, Validators.required],
+      coordinates:['']
     })
   }
 
@@ -41,6 +41,8 @@ export class CreatePenDialogComponent extends BaseComponent{
     this.NewPen = {
       id : 0,
       name : this.NewPenForm.value.name,
+      size : this.NewPenForm.value.size,
+      coordinates : this.NewPenForm.value.coordinates,
     };
 
     this.store.dispatch(new Pens.Create({body:this.NewPen})).subscribe({

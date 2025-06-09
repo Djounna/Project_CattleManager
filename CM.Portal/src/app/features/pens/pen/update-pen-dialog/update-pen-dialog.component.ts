@@ -35,6 +35,8 @@ export class UpdatePenDialogComponent extends BaseComponent {
   private initForm(): void{
     this.UpdatePenForm = this.formBuilder.group({
       name:[this.Pen.name, Validators.required],
+      size:[this.Pen.size, Validators.required],
+      coordinates:[this.Pen.coordinates]
     })
   }
 
@@ -42,6 +44,8 @@ export class UpdatePenDialogComponent extends BaseComponent {
     this.UpdatedPen = {
       ... this.Pen,
       name : this.UpdatePenForm.value.name,
+      size : this.UpdatePenForm.value.size,
+      coordinates : this.UpdatePenForm.value.coordinates,
     };
 
     this.store.dispatch(new Pens.Update({body:this.UpdatedPen})).subscribe({
@@ -55,5 +59,4 @@ export class UpdatePenDialogComponent extends BaseComponent {
   OnCancel(): void{
     this.dialogRef.close();
   }
-
 }
