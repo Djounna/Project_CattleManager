@@ -32,6 +32,7 @@ export class MapService {
         });
     }
 
+
     public CreatePenMapLayersWithFocus(featureGroup: FeatureGroup, pens: PenDto[], pen: PenDto): void{
         pens.forEach(p => {
             let poly: Polygon;
@@ -56,7 +57,7 @@ export class MapService {
 
     public GeneratePenPolygon(pen : PenDto): Polygon<any>{
         if (pen.coordinates == null){
-            return polygon([]);
+            return polygon([[50.491320, 4.971440], [50.491320, 4.971440]]);
         }
         let coordinates = this.parseCoordinates(pen.coordinates) as LatLngExpression[];
         return polygon(coordinates);
@@ -92,18 +93,24 @@ export class MapService {
     }
     
     public CreatePenMapInfos(pen: PenDto): PenMapInfo{
+        let penMapLayers : FeatureGroup = L.featureGroup();
+        debugger;
+        let poly = this.GeneratePenPolygon(pen);
+        penMapLayers.addLayer(poly);
         let penMapInfos: PenMapInfo = {
             Pen : pen,
             MapOptions : {
                 layers: [
-                tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+                tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
+                penMapLayers
                 ],
-                zoom: 5,
-                center: latLng(46.879966, -121.726909)
+                zoom: 16,
+                center: latLng(50.491320, 4.971440),
             },
-            MapLayers : [
-                polygon([[ 46.8, -121.85 ], [ 46.92, -121.92 ], [ 46.87, -121.8 ]])
-            ]
+            MapLayers : penMapLayers 
+            // [
+            //     polygon([[ 46.8, -121.85 ], [ 46.92, -121.92 ], [ 46.87, -121.8 ]])
+            // ]
         } 
         return penMapInfos;
     }
@@ -123,5 +130,5 @@ export interface PenMapLayer{
 export interface PenMapInfo{
     Pen: PenDto
     MapOptions: any; 
-    MapLayers: any;
+    MapLayers: FeatureGroup;
 }

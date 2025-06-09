@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
-import { Observable, combineLatest, forkJoin, takeUntil, tap } from 'rxjs';
-import { AlertDto, GestationDto, InterventionDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto } from '../../api/models';
-import { AlertState } from '../../state/alert/alert.store';
+import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
+import { GestationDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto } from '../../api/models';
 import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
-import { Alerts } from '../../state/alert/alert.action';
 import { Jobs, Workers } from '../../state/work/work.actions';
 import { Cows, Gestations, Groups } from '../../state/cattle/cattle.actions';
 import { InfrastructureState } from '../../state/infrastructure/infrastructure.store';
@@ -114,7 +112,7 @@ export class DashboardComponent extends BaseComponent {
 
   private initMap(): void{
     this.MapInfos = this.mapService.CreateAllPenMapInfos(this.Pens);
-    this.mapService.CreatePenMapLayers(this.MapInfos.MapOptions.penMapLayers, this.Pens);
+    // this.mapService.CreatePenMapLayers(this.MapInfos.MapOptions.penMapLayers, this.Pens);
   }
 
   public onMapReady(map: any){

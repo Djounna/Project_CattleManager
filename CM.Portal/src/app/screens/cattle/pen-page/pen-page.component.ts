@@ -44,8 +44,9 @@ export class PenPageComponent extends BaseComponent{
         this.Cows = c;
         this.Groups = g;
         this.Pens = p;
-        this.initMapOptions();
-        })).subscribe();
+        })).subscribe({
+          next:() => this.initMapOptions()
+        });
 
     this.store.dispatch(new Cows.GetAll());
     this.store.dispatch(new Groups.GetAll());
@@ -96,5 +97,11 @@ export class PenPageComponent extends BaseComponent{
       width: '350px',
       data: group
     })
+  }
+
+  public onMapReady(map: any){
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 1000);
   }
 }
