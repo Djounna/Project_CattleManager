@@ -1,5 +1,9 @@
 export enum Races{
-    BelgianBlue = 'Blanc-Bleu-Belge',
+    BlancBleuBelge = 'Blanc-Bleu-Belge',
     Holstein = 'Holstein',
     Normande = 'Normande',
+    Charolaise = 'Charolaise',
+    BlondeAquitaine = "Blonde d'Aquitiane",
+    Limousine = 'Limousine',
+    Salers = 'Salers'
 }

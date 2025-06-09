@@ -36,6 +36,7 @@ export class UpdateGroupDialogComponent extends BaseComponent{
     this.UpdateGroupForm = this.formBuilder.group({
       name:[this.Group.name, Validators.required],
       description:[this.Group.description, Validators.required],
+      imgLink:[this.Group?.imgLink ?? null]
     })
   }
 
@@ -44,6 +45,7 @@ export class UpdateGroupDialogComponent extends BaseComponent{
       ... this.Group,
       name : this.UpdateGroupForm.value.name,
       description : this.UpdateGroupForm.value.description,
+      imgLink: this.UpdateGroupForm.value.imgLink ?? null
     };
 
     this.store.dispatch(new Groups.Update({body:this.UpdatedGroup})).subscribe({

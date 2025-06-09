@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CowDto, ConditionDto } from '../../../api/models';
 import { Conditions } from '../../../state/cattle/cattle.actions';
+import { SelectOption } from '../../../models/interfaces/common';
+import { ConditionType } from '../../../models/enums/condition-type';
+import { EventStatus } from '../../../models/enums/event-status';
 
 @Component({
   selector: 'app-create-condition-dialog',
@@ -17,6 +20,14 @@ export class CreateConditionDialogComponent extends BaseComponent{
   public Cow!: CowDto;
   public CreateConditionForm!: FormGroup;
   public NewCondition: ConditionDto | undefined;
+  public EventStatus : string[] = Object.values(EventStatus);
+  public ConditionTypeSelection : string[] = Object.values(ConditionType);
+  // public ConditionTypeSelection : SelectOption<string>[] = Object.values(ConditionType).map(r => {
+  //   return {
+  //     Label: r.toString(),
+  //     Value: r.toString()
+  //   }
+  // });
 
   constructor( private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,

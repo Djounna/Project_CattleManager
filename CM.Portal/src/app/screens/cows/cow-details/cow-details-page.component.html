@@ -3,7 +3,7 @@
     <p-menubar>
         <ng-template #start>
             <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
-                <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
+                <img width="33px" heigt="35px" src="assets\icons\cow_head_stylized_icon.png"/>
             </div>
         </ng-template>
         <!-- <ng-template>
@@ -36,16 +36,16 @@
                         <p style="font-weight: bold;"> Identifiant : </p>
                         <p> Naissance : </p>
                         <p> Race : </p>
-                        <p> Père : </p>
-                        <p> Mère : </p>
+                        <!-- <p> Père : </p>
+                        <p> Mère : </p> -->
                     </div>
                     <div class="infos-column-inputs">
                         <p> {{CowDetails.name}} </p>
                         <p style="font-weight: bold;"> {{CowDetails.identifier}} </p>
                         <p> {{CowDetails.birthDate | date:'dd/MM/yyyy'}} </p>
                         <p> {{CowDetails.race}} </p>
-                        <p> {{CowDetails.race}} </p>
-                        <p> {{CowDetails.race}} </p>
+                        <!-- <p> {{CowDetails.father.name}} </p>
+                        <p> {{CowDetails.mother.name}} </p> -->
                     </div>
                     <p-divider layout="vertical"/>
                     <div class="infos-column-labels">
@@ -61,9 +61,9 @@
                 <p-divider layout="vertical"/>
 
                 <div class="sides">
-                    <p-image src="assets\images\cattle\{{CowDetails?.imgLink}}" alt="Image" width="250" [style]="{ 'border-radius': '12px' }" />
+                    <p-image src="assets\images\group\{{CowDetails?.group?.imgLink}}" alt="Image" width="250" height="175px" [style]="{ 'border-radius': '12px' }" />
                     <div *ngIf="CowDetails?.pen !== null">
-                        <div style="height: 150px; border-radius: 12px;" leaflet 
+                        <div style="height: 150px; width:250px; border-radius: 12px;" leaflet 
                         [leafletOptions]="MapInfo.MapOptions"
                         (leafletMapReady)="onMapReady($event)">
                         </div>

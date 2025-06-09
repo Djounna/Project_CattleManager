@@ -9,11 +9,17 @@
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="name">Type</label>
-                    <input pInputText id="type" formControlName="type" />
+                    <!-- <input pInputText id="type" formControlName="type" /> -->
+                    <p-select 
+                        [options]="ConditionTypeSelection" formControlName="type" placeholder="type" [showClear]="true" fluid>
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="name">Statut</label>
-                    <input pInputText id="status" formControlName="status" />
+                    <!-- <input pInputText id="status" formControlName="status" /> -->
+                    <p-select 
+                        [options]="EventStatus" formControlName="status" placeholder="status" [showClear]="true" fluid>
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="date">Date</label>

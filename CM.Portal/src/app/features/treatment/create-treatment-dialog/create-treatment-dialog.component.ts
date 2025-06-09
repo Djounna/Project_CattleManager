@@ -4,6 +4,8 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CowDto, TreatmentDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { Treatments } from '../../../state/cattle/cattle.actions';
+import { SelectOption } from '../../../models/interfaces/common';
+import { TreatmentType } from '../../../models/enums/treatment-type';
 
 @Component({
   selector: 'app-create-treatment-dialog',
@@ -18,6 +20,14 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
   public CreateTreatmentForm!: FormGroup;
   public NewTreatment: TreatmentDto | undefined;
 
+  public TreatmentTypeSelection : string[] = Object.values(TreatmentType);
+  // public TreatmentTypeSelection : SelectOption<string>[] = Object.values(TreatmentType).map(r => {
+  //   return {
+  //     Label: r.toString(),
+  //     Value: r.toString()
+  //   }
+  // });
+
   constructor( private formBuilder: FormBuilder,
     public dialogRef: DynamicDialogRef,
     public dialogConfig: DynamicDialogConfig,
@@ -27,6 +37,7 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
 
   override ngOnInit(): void {
     super.ngOnInit();
+
 
     this.Cow = this.dialogConfig.data;
     this.CreateTreatmentForm = this.formBuilder.group({

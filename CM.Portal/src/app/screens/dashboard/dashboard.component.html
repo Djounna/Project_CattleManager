@@ -5,7 +5,6 @@
         <p-menubar>
             <ng-template #start>
                 <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
-                    <img width="33px" heigt="35px" src="assets\icons\milking_icon.jpg"/>
                     <span>Date:</span>
                     <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
                     <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />

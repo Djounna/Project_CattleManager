@@ -9,7 +9,10 @@
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="name">Type</label>
-                    <input pInputText id="name" formControlName="type" />
+                    <!-- <input pInputText id="name" formControlName="type" /> -->
+                    <p-select 
+                        [options]="TreatmentTypeSelection" formControlName="type" placeholder="type" [showClear]="true" fluid>
+                    </p-select>
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="date">Date</label>
