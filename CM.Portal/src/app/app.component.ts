@@ -9,14 +9,16 @@ import { AlertState } from './state/alert/alert.store';
 import { AlertDto } from './api/models';
 import { Alerts } from './state/alert/alert.action';
 import { SignalRService } from './services/signalr.service';
+import { MenuItem } from 'primeng/api/menuitem';
+import { MenuService } from './services/menu.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    standalone: false
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  standalone: false
 })
-export class AppComponent{
+export class AppComponent {
   public Title = 'CM.Portal';
 
   protected store = inject(Store);
@@ -25,15 +27,17 @@ export class AppComponent{
   @Select(UserState.IsWorker) IsWorker$!: Observable<boolean>;
   IsWorker = false;
   @Select(AlertState.activeAlerts) Alerts$!: Observable<AlertDto[]>;
-  public Alerts!: AlertDto[];
+  public Alerts: AlertDto[] = [];
+  public MenuItems: MenuItem[] = [];
 
   public DrawerVisible: boolean = false;
   public AlertsDrawerVisible: boolean = false;
 
   constructor(
     private router: Router,
-    private signalRService : SignalRService,
-    private authService : AuthService){}
+    private signalRService: SignalRService,
+    private menuService: MenuService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.checkLogin();
@@ -42,21 +46,23 @@ export class AppComponent{
     this.signalRService.addMessageListener();
   }
 
-  private checkLogin(): void{
-    this.IsAdmin$.subscribe({ 
-      next: (res) => { this.IsAdmin = res;
-      if (this.IsAdmin)
-        {
-        this.router.navigate(['/dashboard']);
+  private checkLogin(): void {
+    this.IsAdmin$.subscribe({
+      next: (res) => {
+        this.IsAdmin = res;
+        if (this.IsAdmin) {
+          this.MenuItems = this.menuService.GetAdminMenu()
+          this.router.navigate(['/dashboard']);
         }
-        else{
-          this.router.navigate(['/todolist']);
+        else {
+          this.MenuItems = this.menuService.GetWorkerMenu()
+          this.router.navigate(['/dashboard']);
         }
       }
-    }) ;
+    });
     this.store.dispatch(new User.GetToken())
 
-    // this.IsWorker$.subscribe({ 
+    // this.IsWorker$.subscribe({
     //   next: (res) => { this.IsWorker = res;
     //   if (this.IsWorker)
     //     {
@@ -66,7 +72,7 @@ export class AppComponent{
     // }) ;
   }
 
-  private checkAlerts(){
+  private checkAlerts() {
     this.Alerts$.subscribe({
       next: (res) => this.Alerts = res
     })
@@ -82,11 +88,11 @@ export class AppComponent{
   // this.store.dispatch(new Alerts.GetAllActive())
   // }
 
-  public ToggleDrawer(): void{
+  public ToggleDrawer(): void {
     this.DrawerVisible = !this.DrawerVisible;
   }
 
-  public ToggleAlertDrawer(): void{
+  public ToggleAlertDrawer(): void {
     this.AlertsDrawerVisible = !this.AlertsDrawerVisible;
   }
 }

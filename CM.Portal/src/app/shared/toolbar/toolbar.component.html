@@ -2,13 +2,13 @@
     <p-menubar>
         <ng-template  pTemplate="start" >
             <div class="flex flex-row align-items-center">
-                <p-button *ngIf="auth.isAuthenticated$ | async;" icon="pi pi-bars" (click)="showSidebar()"></p-button>
+                <p-button *ngIf="auth.isAuthenticated$ | async" icon="pi pi-bars" (click)="showSidebar()"></p-button>
                 <span style="font-size:x-large; margin-left:2rem">{{title}}</span>
             </div>
         </ng-template>
         <ng-template  pTemplate="end">
             <!-- <p-overlaybadge value="" severity="danger"> -->
-                <p-button *ngIf="auth.isAuthenticated$ | async;" icon="pi pi-bell" [rounded]="true" [text]="true" severity="warn" badge="{{AlertsCount}}" (click)="showSideAlerts()"/>
+                <p-button *ngIf="auth.isAuthenticated$ | async" icon="pi pi-bell" [rounded]="true" [text]="true" severity="warn" badge="{{AlertsCount}}" (click)="showSideAlerts()"/>
             <!-- </p-overlaybadge>. -->
             <app-auth-button></app-auth-button>
         </ng-template>

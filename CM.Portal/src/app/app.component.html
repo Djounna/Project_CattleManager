@@ -2,15 +2,15 @@
 
 <div class="main">
 
-    <app-toolbar (onShowSidebar)="ToggleDrawer()" (onShowSideAlerts)="ToggleAlertDrawer()" [AlertsCount]="Alerts.length" stlyeclass=min-w-full ></app-toolbar>
+  <app-toolbar (onShowSidebar)="ToggleDrawer()" (onShowSideAlerts)="ToggleAlertDrawer()" [AlertsCount]="Alerts.length" [ShowMenu]="MenuItems.length > 0" [ShowAlerts]="Alerts.length > 0" stlyeclass=min-w-full ></app-toolbar>
 
     <p-drawer [(visible)]="DrawerVisible" [modal]="false" [closable]="true" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
-        <app-sidenav> </app-sidenav>
-    </p-drawer> 
+        <app-sidenav [MenuItems]="MenuItems"> </app-sidenav>
+    </p-drawer>
 
     <p-drawer [(visible)]="AlertsDrawerVisible" position="right" [modal]="false" [closable]="true" [style]="{ top: '54px', height: 'calc(100% - 54px)' }">
         <app-side-alerts [Alerts]="Alerts"> </app-side-alerts>
-    </p-drawer> 
+    </p-drawer>
 
     <router-outlet></router-outlet>
 

@@ -26,20 +26,8 @@
 
         <div class="flex flex-row justify-content-center gap-4">
 
-            <!-- <div style="display:flex; flex-direction:column; gap: 1rem; justify-content: spacce-around;">
-
-                <div style="display:flex; flex-direction:row; padding:1rem; gap: 1rem;" *ngIf="Workers != null && Workers.length > 1">
-                    <div *ngFor="let worker of Workers" style="display:flex; flex-direction:column; gap:0.5rem; min-height:5rem; min-width: 4rem; border: 1px solid black; border-radius: 3px">
-                        <span>{{worker.username}}</span>
-                        <span>Current task</span>
-                    </div>
-                    
-                </div> -->
-
-                <p-panel header="Tâches" [style]="{width: '600px'}">
-                    <!-- <div class="size-scroll_jobList">
-                        <app-job-list-view [Jobs]="Jobs"></app-job-list-view>
-                    </div> -->
+                <!-- <p-panel header="Tâches" [style]="{width: '600px'}"> -->
+                <p-panel header="Tâches">
                     <div class="size-scroll_jobList">
                         <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
                         (onFocusJob)="onFocusPolygon($event)"
@@ -47,19 +35,10 @@
                     </div>
                 </p-panel>
 
-            <!-- </div> -->
-
-            <!-- <p-panel header="Gestations">
-                <app-gestations-board [Gestations]="Gestations"></app-gestations-board>
-            </p-panel> -->
-
             <div style="display:flex; flex-direction: column; gap: 1rem;">
                 <div *ngIf="Pens.length > 0" style="width: 600px; height: 300px" leaflet 
                     [leafletOptions]="MapInfos.MapOptions"
-                    (leafletMapReady)="onMapReady($event)"
-                    >
-                    <!-- <div *ngFor="let pen of MapInfos.PenMapLayers" [leafletLayer]="pen.poly"></div> -->
-                <!-- [leafletLayers]="MapInfos.MapLayers" -->
+                    (leafletMapReady)="onMapReady($event)">
                 </div>
 
                 <div style="display:flex; flex-direction: row; gap: 1rem;;">
