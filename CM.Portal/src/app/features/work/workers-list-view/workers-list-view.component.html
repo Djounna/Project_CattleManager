@@ -3,13 +3,15 @@
 
     <ng-template pTemplate="header">
         <tr>
-        <th>Name</th>
-    </tr>
+            <th>Nom</th>
+            <th>Email</th>
+        </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-worker>
         <tr>
             <td>{{worker.username}}</td>
+            <td>{{worker.email}}</td>
         </tr>
     </ng-template>
 
