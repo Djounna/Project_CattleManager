@@ -30,7 +30,7 @@
                 <p-panel header="Tâches">
                     <div class="size-scroll_jobList">
                         <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                        (onFocusJob)="onFocusPolygon($event)"
+                        (onFocusJob)="onFocusPolygon($event)" (onJobAssigned)="SelectDate()"
                         ></app-job-details-list>
                     </div>
                 </p-panel>

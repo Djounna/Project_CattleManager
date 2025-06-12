@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
@@ -12,6 +12,7 @@ import { Pens } from '../../state/infrastructure/infrastructure.action';
 import { MapInfo, MapService } from '../../services/map.service';
 import * as L from 'leaflet';
 import moment from 'moment';
+import { JobDetailsListComponent } from '../../features/work/job-details-list/job-details-list.component';
 
 @Component({
     selector: 'app-dashboard',
@@ -21,13 +22,15 @@ import moment from 'moment';
 })
 export class DashboardComponent extends BaseComponent {
 
+  @ViewChild('jobList') jobList!: JobDetailsListComponent
+
   @Select(CattleState.cowIdentifierDict) CowIdentifierDictionnary$!: Observable<Map<number,string>>
   public CowIdentifierDictionnary: Map<number, string> = new Map<number, string>;
   @Select(CattleState.cowNameDict) CowNameDictionnary$!: Observable<Map<number,string>>
   public CowNameDictionnary: Map<number, string> = new Map<number, string>;
   @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDto[]>
   public JobsDetails: JobDetailsDto[] = []
-  @Select(WorkState.jobs) Workers$!: Observable<UserDto[]>
+  @Select(WorkState.workers) Workers$!: Observable<UserDto[]>
   public Workers: UserDto[] = []
   @Select(CattleState.gestations) Gestations$!: Observable<GestationDto[]>
   public Gestations: GestationDto[] = []

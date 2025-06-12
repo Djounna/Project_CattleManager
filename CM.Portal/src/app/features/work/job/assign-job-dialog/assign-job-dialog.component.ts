@@ -1,6 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { JobDetailsDto, UserDto, WorkerJobDto } from '../../../../api/models';
+import { JobDetailsDto, JobDto, UserDto, WorkerJobDto } from '../../../../api/models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { BaseComponent } from '../../../../shared/base-component.component';
+import { FormBuilder } from '@angular/forms';
+import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { Jobs } from '../../../../state/work/work.actions';
 
 @Component({
     selector: 'app-assign-job-dialog',
@@ -8,22 +12,39 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     styleUrl: './assign-job-dialog.component.scss',
     standalone: false
 })
-export class AssignJobDialogComponent {
+export class AssignJobDialogComponent extends BaseComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<AssignJobDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {Job:JobDetailsDto, Workers: UserDto[]}
-  ){}
+    private formBuilder: FormBuilder,
+    public dialogRef: DynamicDialogRef,
+    public dialogConfig: DynamicDialogConfig,
+  ){
+    super();
+  }
 
+  public Job : JobDetailsDto | undefined;
+  public Workers: UserDto[] = [];
   public newWorkerJob : WorkerJobDto | undefined;
   public selectedWorker : UserDto | undefined;
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.Job = this.dialogConfig.data.Job;
+    this.Workers = this.dialogConfig.data.Workers; 
+  }
 
   OnConfirm(): void {
     this.newWorkerJob = {
       id : 0,
       userId: this.selectedWorker!.id,
-      jobId: this.data.Job.id,
+      jobId: this.Job?.id,
     }
+
+    this.store.dispatch(new Jobs.Assign({body:this.newWorkerJob})).subscribe({
+      next:() => this.toastSuccess("La tâche a été modifiée avec succès"),
+      error:() => this.toastError("Une erreur s'est produite")
+    });
+
     this.dialogRef.close(this.newWorkerJob);
   }
 

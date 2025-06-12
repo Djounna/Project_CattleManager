@@ -11,6 +11,7 @@ import { Jobs, Workers } from '../../../state/work/work.actions';
 import { WorkState } from '../../../state/work/work.store';
 import { CreateJobDialogComponent } from '../../../features/work/job/create-job-dialog/create-job-dialog.component';
 import { JobDetailsListComponent } from '../../../features/work/job-details-list/job-details-list.component';
+import moment from 'moment';
 
 @Component({
     selector: 'app-jobs-page',
@@ -34,6 +35,9 @@ export class JobsPageComponent extends BaseComponent {
   public Workers : UserDto[] = [];
 
   public Data$ = combineLatest([this.JobsDetails$, this.Jobs$, this.Cows$, this.Pens$, this.Workers$])
+
+  Date: Date | undefined;
+  SelectedDate!: string;
 
   override ngOnInit(): void{
     super.ngOnInit();
@@ -88,12 +92,29 @@ export class JobsPageComponent extends BaseComponent {
   }
 
   public ShowAll(): void{
+    this.Date = undefined;
+    this.store.dispatch(new Jobs.GetAll());
+    this.store.dispatch(new Jobs.GetAllDetails());
     this.jobList.showAll()
   }
+
   public SelectWorker(worker:UserDto): void{
     this.jobList.filterByWorker(worker);
   }
   public SelectPen(pen:PenDto): void{
     this.jobList.filterByPen(pen);
   }
+
+  public SelectDate(): void{
+    let ddate : string = moment(this.Date).format('YYYY-MM-DD');
+    this.SelectedDate = ddate;
+    this.store.dispatch(new Jobs.GetAllByDate(ddate))
+    this.store.dispatch(new Jobs.GetAllDetailsByDate(ddate))
+  }
+
+  public SetDateAsToday(): void{
+    this.Date = new Date();
+    this.SelectDate();
+  }
+
 }

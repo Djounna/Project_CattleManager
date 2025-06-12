@@ -1,55 +1,81 @@
 <div class="page_base">
 
-    <div class="flex flex-row justify-content-start gap-4">
+    <div style="display: flex; flex-direction:column; gap: 1rem;">
 
-        <div class="flex flex-column">
+        <p-menubar>
+            <ng-template #start>
+                <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                    <span>Date:</span>
+                    <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
+                    <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />
+                </div>
+            </ng-template>
+            <!-- <ng-template #item let-item let-root="root">
+                <a pRipple class="flex items-center p-menubar-item-link">
+                    <span>{{ item.label }}</span>
+                    <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
+                    <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+                </a>
+            </ng-template> -->
+            <ng-template #end>
+                <!-- <div class="flex gap-4 mt-1">
+                    <p-button (click)="SaveAll()" label="Enregistrer" icon="pi pi-check" iconPos="right"></p-button>
+                </div> -->
+            </ng-template>
+        </p-menubar>
+        <div class="flex flex-row justify-content-start gap-4">
 
-            <div class="flex flex-row justify-content-start align-content-center">
-                <div class="flex flex-row justify-content-between gap-3">
-                    <p-button label="Tout" (click)="ShowAll()"></p-button>
-                    <p-button label="Créer" (click)="createJobDialog()" ></p-button> 
+            <div class="flex flex-column">
+
+                <div class="flex flex-row justify-content-start align-content-center">
+                    <div class="flex flex-row justify-content-between gap-3">
+                        <p-button label="Tout" (click)="ShowAll()"></p-button>
+                        <p-button label="Créer" (click)="createJobDialog()" ></p-button> 
+                    </div>
+                </div>
+
+            <p-divider></p-divider>
+
+                <div class="panel_border">
+                    <p-tabs value="0">
+                        <p-tablist>
+                            <p-tab value="0">Travailleurs</p-tab>
+                            <p-tab value="1">Enclos</p-tab>
+                        </p-tablist>
+
+                        <p-tabpanels>
+                            <p-tabpanel value="0">
+                                <div
+                                class="flex flex-column m-2 g-2"
+                                *ngFor="let worker of Workers;">
+                                    <p-button (click)="SelectWorker(worker)">
+                                        <b>{{worker.username}}</b>
+                                    </p-button>
+                                </div>
+                            </p-tabpanel>
+
+                            <p-tabpanel value="1">
+                                <div
+                                class="flex flex-column m-2 g-2"
+                                *ngFor="let pen of Pens;">
+                                    <p-button (click)="SelectPen(pen)">
+                                        <b>{{pen.name}}</b>
+                                    </p-button>
+                                </div>
+                            </p-tabpanel>
+                        </p-tabpanels>
+
+                    </p-tabs>
                 </div>
             </div>
 
-        <p-divider></p-divider>
-
-            <div class="panel_border">
-                <p-tabs value="0">
-                    <p-tablist>
-                        <p-tab value="0">Travailleurs</p-tab>
-                        <p-tab value="1">Enclos</p-tab>
-                    </p-tablist>
-
-                    <p-tabpanels>
-                        <p-tabpanel value="0">
-                            <div
-                            class="flex flex-column m-2 g-2"
-                            *ngFor="let worker of Workers;">
-                                <p-button (click)="SelectWorker(worker)">
-                                    <b>{{worker.username}}</b>
-                                </p-button>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="1">
-                            <div
-                            class="flex flex-column m-2 g-2"
-                            *ngFor="let pen of Pens;">
-                                <p-button (click)="SelectPen(pen)">
-                                    <b>{{pen.name}}</b>
-                                </p-button>
-                            </div>
-                        </p-tabpanel>
-                    </p-tabpanels>
-
-                </p-tabs>
-            </div>
+        <div class="flex flex-column">
+            <p-panel header="Tâches">
+                <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
+                    (onJobAssigned)="SelectDate()"
+                ></app-job-details-list>
+            </p-panel>
         </div>
-
-    <div class="flex flex-column">
-        <p-panel header="Tâches">
-            <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"></app-job-details-list>
-        </p-panel>
     </div>
 </div>
 

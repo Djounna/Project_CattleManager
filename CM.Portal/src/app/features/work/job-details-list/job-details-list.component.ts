@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { JobDetailsDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { AssignJobDialogComponent } from '../job/assign-job-dialog/assign-job-dialog.component';
-import { Jobs } from '../../../state/work/work.actions';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -13,6 +12,7 @@ import { Table } from 'primeng/table';
 })
 export class JobDetailsListComponent extends BaseComponent {
   @Input() Workers : UserDto[] = []
+  @Output() onJobAssigned: EventEmitter<void> = new EventEmitter<void>()
 
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
@@ -51,19 +51,16 @@ export class JobDetailsListComponent extends BaseComponent {
   }
 
   public assignJobDialog(job:any) : void{
-    const dialogRef = this.dialog.open(AssignJobDialogComponent, {
-      height: '200px',
+    const dialogRef = this.dialogService.open(AssignJobDialogComponent, {
+      header: 'Assigner un travailleur',
+      height: '450px',
       width: '300px',
       data: {Job: job, Workers: this.Workers},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == null)
-        return;
-      this.store.dispatch(new Jobs.Assign({body:result})).subscribe({
-        next:() => this.toastSuccess("La tâche a été modifiée avec succès"),
-        error:() => this.toastError("Une erreur s'est produite")
-      });
+    dialogRef.onClose.subscribe(result => {
+      if(result !== null)
+        this.onJobAssigned.next();
     });
   }
 }
