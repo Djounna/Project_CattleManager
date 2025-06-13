@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { JobDetailsDto, PenDto, UserDto } from '../../../api/models';
+import { JobDetailsDto, JobDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { AssignJobDialogComponent } from '../job/assign-job-dialog/assign-job-dialog.component';
 import { Table } from 'primeng/table';
+import { MenuItem } from 'primeng/api/menuitem';
+import { Jobs } from '../../../state/work/work.actions';
+import { JobStatus } from '../../../models/enums/workEnums';
+import { UpdateJobDialogComponent } from '../job/update-job-dialog/update-job-dialog.component';
 
 @Component({
     selector: 'app-job-details-list',
@@ -12,7 +16,8 @@ import { Table } from 'primeng/table';
 })
 export class JobDetailsListComponent extends BaseComponent {
   @Input() Workers : UserDto[] = []
-  @Output() onJobAssigned: EventEmitter<void> = new EventEmitter<void>()
+  @Output() onJobUpdated: EventEmitter<void> = new EventEmitter<void>()
+  @Output() onFocusJob : EventEmitter<JobDetailsDto> = new EventEmitter<JobDetailsDto>();
 
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
@@ -26,7 +31,8 @@ export class JobDetailsListComponent extends BaseComponent {
     return this.jobs;
   }
 
-  @Output() onFocusJob : EventEmitter<JobDetailsDto> = new EventEmitter<JobDetailsDto>();
+  public menuItems:MenuItem[] | undefined;
+
 
   applyFilterGlobal(event: any) {
     return event.target.value;
@@ -60,7 +66,60 @@ export class JobDetailsListComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(result => {
       if(result !== null)
-        this.onJobAssigned.next();
+        this.onJobUpdated.next();
     });
   }
+
+  public updateJobDialog(job: any): void{
+    const dialogRef = this.dialogService.open(UpdateJobDialogComponent, {
+      header: 'Mettre à jour une tâche',
+      height: '450px',
+      width: '300px',
+      data: {Job: job},
+    });
+
+    dialogRef.onClose.subscribe(result => {
+      if(result !== null)
+        this.onJobUpdated.next();
+    });
+  }
+
+  /* ****************************************** */
+
+  // override ngOnInit(): void {
+  //   this.menuItems = [ 
+  //   {
+  //     label:'Options',
+  //     items:[
+  //       {
+  //         label: 'En cours',
+  //         icon: 'pi pi-plus-circle',
+  //         command: (job) => {this.SetJobOngoing(job)}
+  //       },
+  //       {
+  //         label: 'Vaccination',
+  //         icon: 'pi pi-plus-circle',
+  //         command: (job) => {this.SetJobDone(job)}
+  //       },
+  //     ]
+  //   }]
+  // }
+
+  // SetJobOngoing(job: any){
+  //   debugger;
+  //   let updatedJob: JobDto = {
+  //     ... job,
+  //     status : JobStatus.OnGoing
+  //   }
+  //   this.store.dispatch(new Jobs.Update(updatedJob))
+  // }
+
+  // SetJobDone(job: any){
+  //   debugger;
+  //   let updatedJob: JobDto = {
+  //     ... job,
+  //     status : JobStatus.Done
+  //   }
+  //   this.store.dispatch(new Jobs.Update(updatedJob))
+  // }
 }

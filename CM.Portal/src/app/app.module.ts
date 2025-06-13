@@ -150,6 +150,7 @@ import { CreateAlertDialogComponent } from './features/alerts/create-alert-dialo
 import { UpdateGroupDialogComponent } from './features/groups/group/update-group-dialog/update-group-dialog.component';
 import { CreatePenDialogComponent } from './features/pens/pen/create-pen-dialog/create-pen-dialog.component';
 import { UpdatePenDialogComponent } from './features/pens/pen/update-pen-dialog/update-pen-dialog.component';
+import { UpdateJobDialogComponent } from './features/work/job/update-job-dialog/update-job-dialog.component';
 
 @NgModule({ 
     declarations: 
@@ -205,7 +206,8 @@ import { UpdatePenDialogComponent } from './features/pens/pen/update-pen-dialog/
         CreateAlertDialogComponent,
         UpdateGroupDialogComponent,
         CreatePenDialogComponent,
-        UpdatePenDialogComponent
+        UpdatePenDialogComponent,
+        UpdateJobDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,

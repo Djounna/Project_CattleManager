@@ -147,8 +147,8 @@ export class DashboardComponent extends BaseComponent {
   public SelectDate(): void{
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
-    this.store.dispatch(new Jobs.GetAllByDate(ddate))
-    this.store.dispatch(new Jobs.GetAllDetailsByDate(ddate))
+    this.store.dispatch(new Jobs.GetAllByDate(ddate));
+    this.store.dispatch(new Jobs.GetAllDetailsByDate(ddate));
   }
 
   public SelectAll(): void{
@@ -163,25 +163,6 @@ export class DashboardComponent extends BaseComponent {
     this.Date = new Date();
     this.SelectDate();
   }
-
-  // public Focus(job: JobDetailsDto){
-  //   if (!!job.pen){
-  //     const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
-  //     if (!!penMapLayer){
-  //       penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
-  //       this.Map.fitBounds(penMapLayer.poly.getBounds());
-  //     }
-  //   }
-  //   else if(!!job.cow){
-  //     if(!!job.cow?.penId){
-  //       const penMapLayer = this.MapInfos.PenMapLayers.find(p => p.pen.id === job.pen?.id);
-  //       if (!!penMapLayer){
-  //       penMapLayer.poly = this.mapService.GeneratePenPolygonWithFocus(penMapLayer.pen);
-  //       this.Map.fitBounds(penMapLayer.poly.getBounds());
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 export interface MilkingHistoryData {

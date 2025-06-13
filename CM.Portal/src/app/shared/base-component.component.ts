@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogService } from "primeng/dynamicdialog";
-import { Select, Store } from "@ngxs/store";
+import { Store } from "@ngxs/store";
 import { MessageService } from "primeng/api";
-import { Observable, Subject, tap } from "rxjs";
+import { Subject } from "rxjs";
 import { LoaderService } from "../services/loader.service";
 import { UserState } from "../state/user/user.store";
 
@@ -20,6 +20,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     protected dialogService =  inject(DialogService);
     protected messageService = inject(MessageService);
     protected loader = inject(LoaderService);
+    protected cdref = inject(ChangeDetectorRef)
 
     protected $OnDestroyed : Subject<void> = new Subject<void>();
     // @Select(UserState.IsAdmin) IsAdmin$! : Observable<boolean>;

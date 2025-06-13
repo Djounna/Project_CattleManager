@@ -1,0 +1,25 @@
+<div class="dialog_container">
+    <form [formGroup]="UpdatedJobForm">
+        <div class="form">
+
+            <div class="form-columns">
+                <div class="form-column">
+                    <div class="form-entry-col">
+                        <label for="status">Statut</label>
+                        <p-select 
+                            formControlName="status" [options]="status"
+                            [showClear]="true" placeholder="status">
+                        </p-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <p-button label="Annuler" [raised]="true" severity="warn" (click)="OnCancel()"></p-button>
+                <p-button label="Confirmer" [raised]="true" severity="primary" (click)="OnConfirm()"></p-button>
+            </div>
+
+        </div>
+    </form>
+</div>
+

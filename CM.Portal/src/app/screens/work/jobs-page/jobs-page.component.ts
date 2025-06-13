@@ -116,5 +116,4 @@ export class JobsPageComponent extends BaseComponent {
     this.Date = new Date();
     this.SelectDate();
   }
-
 }

@@ -10,27 +10,16 @@
                     <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />
                 </div>
             </ng-template>
-            <!-- <ng-template #item let-item let-root="root">
-                <a pRipple class="flex items-center p-menubar-item-link">
-                    <span>{{ item.label }}</span>
-                    <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
-                    <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
-                </a>
-            </ng-template> -->
             <ng-template #end>
-                <!-- <div class="flex gap-4 mt-1">
-                    <p-button (click)="SaveAll()" label="Enregistrer" icon="pi pi-check" iconPos="right"></p-button>
-                </div> -->
             </ng-template>
         </p-menubar>
 
         <div class="flex flex-row justify-content-center gap-4">
 
-                <!-- <p-panel header="Tâches" [style]="{width: '600px'}"> -->
                 <p-panel header="Tâches">
                     <div class="size-scroll_jobList">
                         <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                        (onFocusJob)="onFocusPolygon($event)" (onJobAssigned)="SelectDate()"
+                        (onFocusJob)="onFocusPolygon($event)" (onJobUpdated)="SelectDate()"
                         ></app-job-details-list>
                     </div>
                 </p-panel>
@@ -39,10 +28,6 @@
                 <div *ngIf="Pens.length > 0" style="width: 600px; height: 300px" leaflet 
                     [leafletOptions]="MapInfos.MapOptions"
                     (leafletMapReady)="onMapReady($event)">
-                </div>
-
-                <div style="display:flex; flex-direction: row; gap: 1rem;;">
-
                 </div>
             </div>
             
