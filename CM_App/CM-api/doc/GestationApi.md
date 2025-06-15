@@ -9,12 +9,60 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**apiGestationCowIdGet**](GestationApi.md#apigestationcowidget) | **GET** /api/Gestation/{cowId} | 
 [**apiGestationDelete**](GestationApi.md#apigestationdelete) | **DELETE** /api/Gestation | 
 [**apiGestationGet**](GestationApi.md#apigestationget) | **GET** /api/Gestation | 
 [**apiGestationIdGet**](GestationApi.md#apigestationidget) | **GET** /api/Gestation/{id} | 
 [**apiGestationPost**](GestationApi.md#apigestationpost) | **POST** /api/Gestation | 
 [**apiGestationPut**](GestationApi.md#apigestationput) | **PUT** /api/Gestation | 
 
+
+# **apiGestationCowIdGet**
+> List<GestationDto> apiGestationCowIdGet(cowId)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = GestationApi();
+final cowId = 56; // int | 
+
+try {
+    final result = api_instance.apiGestationCowIdGet(cowId);
+    print(result);
+} catch (e) {
+    print('Exception when calling GestationApi->apiGestationCowIdGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cowId** | **int**|  | 
+
+### Return type
+
+[**List<GestationDto>**](GestationDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiGestationDelete**
 > apiGestationDelete(id)

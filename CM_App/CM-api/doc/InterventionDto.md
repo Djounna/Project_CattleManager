@@ -12,9 +12,8 @@ Name | Type | Description | Notes
 **cowId** | **int** |  | [optional] 
 **intervenantId** | **int** |  | [optional] 
 **type** | **String** |  | [optional] 
-**status** | **String** |  | [optional] 
-**date** | [**DateTime**](DateTime.md) |  | [optional] 
 **description** | **String** |  | [optional] 
+**date** | [**DateTime**](DateTime.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

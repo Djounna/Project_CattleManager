@@ -17,7 +17,8 @@ class JobDetailsDto {
     this.title,
     this.description,
     this.status,
-    this.length,
+    this.date,
+    this.infos,
     this.pen,
     this.cow,
     this.workers = const [],
@@ -37,7 +38,15 @@ class JobDetailsDto {
 
   String? status;
 
-  int? length;
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  DateTime? date;
+
+  String? infos;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -65,7 +74,8 @@ class JobDetailsDto {
           other.title == title &&
           other.description == description &&
           other.status == status &&
-          other.length == length &&
+          other.date == date &&
+          other.infos == infos &&
           other.pen == pen &&
           other.cow == cow &&
           _deepEquality.equals(other.workers, workers);
@@ -77,14 +87,15 @@ class JobDetailsDto {
       (title == null ? 0 : title!.hashCode) +
       (description == null ? 0 : description!.hashCode) +
       (status == null ? 0 : status!.hashCode) +
-      (length == null ? 0 : length!.hashCode) +
+      (date == null ? 0 : date!.hashCode) +
+      (infos == null ? 0 : infos!.hashCode) +
       (pen == null ? 0 : pen!.hashCode) +
       (cow == null ? 0 : cow!.hashCode) +
       (workers == null ? 0 : workers!.hashCode);
 
   @override
   String toString() =>
-      'JobDetailsDto[id=$id, title=$title, description=$description, status=$status, length=$length, pen=$pen, cow=$cow, workers=$workers]';
+      'JobDetailsDto[id=$id, title=$title, description=$description, status=$status, date=$date, infos=$infos, pen=$pen, cow=$cow, workers=$workers]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -108,10 +119,15 @@ class JobDetailsDto {
     } else {
       json[r'status'] = null;
     }
-    if (this.length != null) {
-      json[r'length'] = this.length;
+    if (this.date != null) {
+      json[r'date'] = this.date!.toUtc().toIso8601String();
     } else {
-      json[r'length'] = null;
+      json[r'date'] = null;
+    }
+    if (this.infos != null) {
+      json[r'infos'] = this.infos;
+    } else {
+      json[r'infos'] = null;
     }
     if (this.pen != null) {
       json[r'pen'] = this.pen;
@@ -156,7 +172,8 @@ class JobDetailsDto {
         title: mapValueOfType<String>(json, r'title'),
         description: mapValueOfType<String>(json, r'description'),
         status: mapValueOfType<String>(json, r'status'),
-        length: mapValueOfType<int>(json, r'length'),
+        date: mapDateTime(json, r'date', r''),
+        infos: mapValueOfType<String>(json, r'infos'),
         pen: PenDto.fromJson(json[r'pen']),
         cow: CowDto.fromJson(json[r'cow']),
         workers: UserDto.listFromJson(json[r'workers']),

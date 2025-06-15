@@ -247,12 +247,12 @@ class ApiClient {
           return CowDetailsDto.fromJson(value);
         case 'CowDto':
           return CowDto.fromJson(value);
+        case 'CowGenealogyDto':
+          return CowGenealogyDto.fromJson(value);
         case 'DateOnly':
           return DateOnly.fromJson(value);
         case 'DayOfWeek':
           return DayOfWeekTypeTransformer().decode(value);
-        case 'GenealogyDto':
-          return GenealogyDto.fromJson(value);
         case 'GestationDto':
           return GestationDto.fromJson(value);
         case 'GroupDetailsDto':

@@ -17,8 +17,7 @@ class JobDto {
     this.title,
     this.description,
     this.status,
-    this.length,
-    this.recurringJobId,
+    this.date,
     this.infos,
     this.penId,
     this.cowId,
@@ -38,9 +37,13 @@ class JobDto {
 
   String? status;
 
-  int? length;
-
-  int? recurringJobId;
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  DateTime? date;
 
   String? infos;
 
@@ -56,8 +59,7 @@ class JobDto {
           other.title == title &&
           other.description == description &&
           other.status == status &&
-          other.length == length &&
-          other.recurringJobId == recurringJobId &&
+          other.date == date &&
           other.infos == infos &&
           other.penId == penId &&
           other.cowId == cowId;
@@ -69,15 +71,14 @@ class JobDto {
       (title == null ? 0 : title!.hashCode) +
       (description == null ? 0 : description!.hashCode) +
       (status == null ? 0 : status!.hashCode) +
-      (length == null ? 0 : length!.hashCode) +
-      (recurringJobId == null ? 0 : recurringJobId!.hashCode) +
+      (date == null ? 0 : date!.hashCode) +
       (infos == null ? 0 : infos!.hashCode) +
       (penId == null ? 0 : penId!.hashCode) +
       (cowId == null ? 0 : cowId!.hashCode);
 
   @override
   String toString() =>
-      'JobDto[id=$id, title=$title, description=$description, status=$status, length=$length, recurringJobId=$recurringJobId, infos=$infos, penId=$penId, cowId=$cowId]';
+      'JobDto[id=$id, title=$title, description=$description, status=$status, date=$date, infos=$infos, penId=$penId, cowId=$cowId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -101,15 +102,10 @@ class JobDto {
     } else {
       json[r'status'] = null;
     }
-    if (this.length != null) {
-      json[r'length'] = this.length;
+    if (this.date != null) {
+      json[r'date'] = this.date!.toUtc().toIso8601String();
     } else {
-      json[r'length'] = null;
-    }
-    if (this.recurringJobId != null) {
-      json[r'recurringJobId'] = this.recurringJobId;
-    } else {
-      json[r'recurringJobId'] = null;
+      json[r'date'] = null;
     }
     if (this.infos != null) {
       json[r'infos'] = this.infos;
@@ -154,8 +150,7 @@ class JobDto {
         title: mapValueOfType<String>(json, r'title'),
         description: mapValueOfType<String>(json, r'description'),
         status: mapValueOfType<String>(json, r'status'),
-        length: mapValueOfType<int>(json, r'length'),
-        recurringJobId: mapValueOfType<int>(json, r'recurringJobId'),
+        date: mapDateTime(json, r'date', r''),
         infos: mapValueOfType<String>(json, r'infos'),
         penId: mapValueOfType<int>(json, r'penId'),
         cowId: mapValueOfType<int>(json, r'cowId'),

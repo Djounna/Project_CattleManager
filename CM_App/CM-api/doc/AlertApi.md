@@ -9,12 +9,56 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**apiAlertActiveGet**](AlertApi.md#apialertactiveget) | **GET** /api/Alert/active | 
 [**apiAlertDelete**](AlertApi.md#apialertdelete) | **DELETE** /api/Alert | 
 [**apiAlertGet**](AlertApi.md#apialertget) | **GET** /api/Alert | 
 [**apiAlertIdGet**](AlertApi.md#apialertidget) | **GET** /api/Alert/{id} | 
 [**apiAlertPost**](AlertApi.md#apialertpost) | **POST** /api/Alert | 
 [**apiAlertPut**](AlertApi.md#apialertput) | **PUT** /api/Alert | 
 
+
+# **apiAlertActiveGet**
+> List<AlertDto> apiAlertActiveGet()
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = AlertApi();
+
+try {
+    final result = api_instance.apiAlertActiveGet();
+    print(result);
+} catch (e) {
+    print('Exception when calling AlertApi->apiAlertActiveGet: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List<AlertDto>**](AlertDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiAlertDelete**
 > apiAlertDelete(id)

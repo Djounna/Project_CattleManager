@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**apiCowDelete**](CowApi.md#apicowdelete) | **DELETE** /api/Cow | 
 [**apiCowGet**](CowApi.md#apicowget) | **GET** /api/Cow | 
 [**apiCowIdDetailsGet**](CowApi.md#apicowiddetailsget) | **GET** /api/Cow/{id}/details | 
+[**apiCowIdGenealogyGet**](CowApi.md#apicowidgenealogyget) | **GET** /api/Cow/{id}/genealogy | 
 [**apiCowIdGet**](CowApi.md#apicowidget) | **GET** /api/Cow/{id} | 
 [**apiCowPost**](CowApi.md#apicowpost) | **POST** /api/Cow | 
 [**apiCowPut**](CowApi.md#apicowput) | **PUT** /api/Cow | 
@@ -141,6 +142,53 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CowDetailsDto**](CowDetailsDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiCowIdGenealogyGet**
+> CowGenealogyDto apiCowIdGenealogyGet(id)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = CowApi();
+final id = 56; // int | 
+
+try {
+    final result = api_instance.apiCowIdGenealogyGet(id);
+    print(result);
+} catch (e) {
+    print('Exception when calling CowApi->apiCowIdGenealogyGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**CowGenealogyDto**](CowGenealogyDto.md)
 
 ### Authorization
 

@@ -9,12 +9,60 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**apiVaccinationCowIdGet**](VaccinationApi.md#apivaccinationcowidget) | **GET** /api/Vaccination/{cowId} | 
 [**apiVaccinationDelete**](VaccinationApi.md#apivaccinationdelete) | **DELETE** /api/Vaccination | 
 [**apiVaccinationGet**](VaccinationApi.md#apivaccinationget) | **GET** /api/Vaccination | 
 [**apiVaccinationIdGet**](VaccinationApi.md#apivaccinationidget) | **GET** /api/Vaccination/{id} | 
 [**apiVaccinationPost**](VaccinationApi.md#apivaccinationpost) | **POST** /api/Vaccination | 
 [**apiVaccinationPut**](VaccinationApi.md#apivaccinationput) | **PUT** /api/Vaccination | 
 
+
+# **apiVaccinationCowIdGet**
+> List<VaccinationDto> apiVaccinationCowIdGet(cowId)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = VaccinationApi();
+final cowId = 56; // int | 
+
+try {
+    final result = api_instance.apiVaccinationCowIdGet(cowId);
+    print(result);
+} catch (e) {
+    print('Exception when calling VaccinationApi->apiVaccinationCowIdGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cowId** | **int**|  | 
+
+### Return type
+
+[**List<VaccinationDto>**](VaccinationDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiVaccinationDelete**
 > apiVaccinationDelete(id)

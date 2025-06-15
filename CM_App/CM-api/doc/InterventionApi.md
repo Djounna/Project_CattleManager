@@ -9,12 +9,60 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**apiInterventionCowIdGet**](InterventionApi.md#apiinterventioncowidget) | **GET** /api/Intervention/{cowId} | 
 [**apiInterventionDelete**](InterventionApi.md#apiinterventiondelete) | **DELETE** /api/Intervention | 
 [**apiInterventionGet**](InterventionApi.md#apiinterventionget) | **GET** /api/Intervention | 
 [**apiInterventionIdGet**](InterventionApi.md#apiinterventionidget) | **GET** /api/Intervention/{id} | 
 [**apiInterventionPost**](InterventionApi.md#apiinterventionpost) | **POST** /api/Intervention | 
 [**apiInterventionPut**](InterventionApi.md#apiinterventionput) | **PUT** /api/Intervention | 
 
+
+# **apiInterventionCowIdGet**
+> List<InterventionDto> apiInterventionCowIdGet(cowId)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = InterventionApi();
+final cowId = 56; // int | 
+
+try {
+    final result = api_instance.apiInterventionCowIdGet(cowId);
+    print(result);
+} catch (e) {
+    print('Exception when calling InterventionApi->apiInterventionCowIdGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cowId** | **int**|  | 
+
+### Return type
+
+[**List<InterventionDto>**](InterventionDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiInterventionDelete**
 > apiInterventionDelete(id)

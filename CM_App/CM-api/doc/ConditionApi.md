@@ -9,12 +9,60 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**apiConditionCowIdGet**](ConditionApi.md#apiconditioncowidget) | **GET** /api/Condition/{cowId} | 
 [**apiConditionDelete**](ConditionApi.md#apiconditiondelete) | **DELETE** /api/Condition | 
 [**apiConditionGet**](ConditionApi.md#apiconditionget) | **GET** /api/Condition | 
 [**apiConditionIdGet**](ConditionApi.md#apiconditionidget) | **GET** /api/Condition/{id} | 
 [**apiConditionPost**](ConditionApi.md#apiconditionpost) | **POST** /api/Condition | 
 [**apiConditionPut**](ConditionApi.md#apiconditionput) | **PUT** /api/Condition | 
 
+
+# **apiConditionCowIdGet**
+> List<ConditionDto> apiConditionCowIdGet(cowId)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = ConditionApi();
+final cowId = 56; // int | 
+
+try {
+    final result = api_instance.apiConditionCowIdGet(cowId);
+    print(result);
+} catch (e) {
+    print('Exception when calling ConditionApi->apiConditionCowIdGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cowId** | **int**|  | 
+
+### Return type
+
+[**List<ConditionDto>**](ConditionDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiConditionDelete**
 > apiConditionDelete(id)

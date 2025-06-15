@@ -23,11 +23,11 @@ class CowDetailsDto {
     this.imgLink,
     this.pen,
     this.group,
-    this.milkings = const [],
     this.interventions = const [],
     this.vaccinations = const [],
     this.gestations = const [],
-    this.genealogy,
+    this.conditions = const [],
+    this.treatments = const [],
     this.children = const [],
     this.penMoves = const [],
     this.groupMoves = const [],
@@ -83,21 +83,15 @@ class CowDetailsDto {
   ///
   GroupDto? group;
 
-  List<MilkingDto>? milkings;
-
   List<InterventionDto>? interventions;
 
   List<VaccinationDto>? vaccinations;
 
   List<GestationDto>? gestations;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  GenealogyDto? genealogy;
+  List<ConditionDto>? conditions;
+
+  List<TreatmentDto>? treatments;
 
   List<CowDto>? children;
 
@@ -119,11 +113,11 @@ class CowDetailsDto {
           other.imgLink == imgLink &&
           other.pen == pen &&
           other.group == group &&
-          _deepEquality.equals(other.milkings, milkings) &&
           _deepEquality.equals(other.interventions, interventions) &&
           _deepEquality.equals(other.vaccinations, vaccinations) &&
           _deepEquality.equals(other.gestations, gestations) &&
-          other.genealogy == genealogy &&
+          _deepEquality.equals(other.conditions, conditions) &&
+          _deepEquality.equals(other.treatments, treatments) &&
           _deepEquality.equals(other.children, children) &&
           _deepEquality.equals(other.penMoves, penMoves) &&
           _deepEquality.equals(other.groupMoves, groupMoves);
@@ -141,18 +135,18 @@ class CowDetailsDto {
       (imgLink == null ? 0 : imgLink!.hashCode) +
       (pen == null ? 0 : pen!.hashCode) +
       (group == null ? 0 : group!.hashCode) +
-      (milkings == null ? 0 : milkings!.hashCode) +
       (interventions == null ? 0 : interventions!.hashCode) +
       (vaccinations == null ? 0 : vaccinations!.hashCode) +
       (gestations == null ? 0 : gestations!.hashCode) +
-      (genealogy == null ? 0 : genealogy!.hashCode) +
+      (conditions == null ? 0 : conditions!.hashCode) +
+      (treatments == null ? 0 : treatments!.hashCode) +
       (children == null ? 0 : children!.hashCode) +
       (penMoves == null ? 0 : penMoves!.hashCode) +
       (groupMoves == null ? 0 : groupMoves!.hashCode);
 
   @override
   String toString() =>
-      'CowDetailsDto[id=$id, identifier=$identifier, name=$name, milkCow=$milkCow, birthDate=$birthDate, race=$race, gender=$gender, imgLink=$imgLink, pen=$pen, group=$group, milkings=$milkings, interventions=$interventions, vaccinations=$vaccinations, gestations=$gestations, genealogy=$genealogy, children=$children, penMoves=$penMoves, groupMoves=$groupMoves]';
+      'CowDetailsDto[id=$id, identifier=$identifier, name=$name, milkCow=$milkCow, birthDate=$birthDate, race=$race, gender=$gender, imgLink=$imgLink, pen=$pen, group=$group, interventions=$interventions, vaccinations=$vaccinations, gestations=$gestations, conditions=$conditions, treatments=$treatments, children=$children, penMoves=$penMoves, groupMoves=$groupMoves]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -206,11 +200,6 @@ class CowDetailsDto {
     } else {
       json[r'group'] = null;
     }
-    if (this.milkings != null) {
-      json[r'milkings'] = this.milkings;
-    } else {
-      json[r'milkings'] = null;
-    }
     if (this.interventions != null) {
       json[r'interventions'] = this.interventions;
     } else {
@@ -226,10 +215,15 @@ class CowDetailsDto {
     } else {
       json[r'gestations'] = null;
     }
-    if (this.genealogy != null) {
-      json[r'genealogy'] = this.genealogy;
+    if (this.conditions != null) {
+      json[r'conditions'] = this.conditions;
     } else {
-      json[r'genealogy'] = null;
+      json[r'conditions'] = null;
+    }
+    if (this.treatments != null) {
+      json[r'treatments'] = this.treatments;
+    } else {
+      json[r'treatments'] = null;
     }
     if (this.children != null) {
       json[r'children'] = this.children;
@@ -280,11 +274,11 @@ class CowDetailsDto {
         imgLink: mapValueOfType<String>(json, r'imgLink'),
         pen: PenDto.fromJson(json[r'pen']),
         group: GroupDto.fromJson(json[r'group']),
-        milkings: MilkingDto.listFromJson(json[r'milkings']),
         interventions: InterventionDto.listFromJson(json[r'interventions']),
         vaccinations: VaccinationDto.listFromJson(json[r'vaccinations']),
         gestations: GestationDto.listFromJson(json[r'gestations']),
-        genealogy: GenealogyDto.fromJson(json[r'genealogy']),
+        conditions: ConditionDto.listFromJson(json[r'conditions']),
+        treatments: TreatmentDto.listFromJson(json[r'treatments']),
         children: CowDto.listFromJson(json[r'children']),
         penMoves: PenMoveDto.listFromJson(json[r'penMoves']),
         groupMoves: GroupMoveDto.listFromJson(json[r'groupMoves']),

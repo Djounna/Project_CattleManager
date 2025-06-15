@@ -10,15 +10,12 @@
 
 part of openapi.api;
 
-class TreatmentDto {
-  /// Returns a new [TreatmentDto] instance.
-  TreatmentDto({
-    this.id,
-    this.cowId,
-    this.conditionId,
-    this.name,
-    this.type,
-    this.date,
+class CowGenealogyDto {
+  /// Returns a new [CowGenealogyDto] instance.
+  CowGenealogyDto({
+    this.cow,
+    this.mother,
+    this.father,
   });
 
   ///
@@ -27,7 +24,7 @@ class TreatmentDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  int? id;
+  CowDto? cow;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -35,13 +32,7 @@ class TreatmentDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  int? cowId;
-
-  int? conditionId;
-
-  String? name;
-
-  String? type;
+  ParentDto? mother;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -49,72 +40,51 @@ class TreatmentDto {
   /// source code must fall back to having a nullable type.
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
-  DateTime? date;
+  ParentDto? father;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TreatmentDto &&
-          other.id == id &&
-          other.cowId == cowId &&
-          other.conditionId == conditionId &&
-          other.name == name &&
-          other.type == type &&
-          other.date == date;
+      other is CowGenealogyDto &&
+          other.cow == cow &&
+          other.mother == mother &&
+          other.father == father;
 
   @override
   int get hashCode =>
       // ignore: unnecessary_parenthesis
-      (id == null ? 0 : id!.hashCode) +
-      (cowId == null ? 0 : cowId!.hashCode) +
-      (conditionId == null ? 0 : conditionId!.hashCode) +
-      (name == null ? 0 : name!.hashCode) +
-      (type == null ? 0 : type!.hashCode) +
-      (date == null ? 0 : date!.hashCode);
+      (cow == null ? 0 : cow!.hashCode) +
+      (mother == null ? 0 : mother!.hashCode) +
+      (father == null ? 0 : father!.hashCode);
 
   @override
   String toString() =>
-      'TreatmentDto[id=$id, cowId=$cowId, conditionId=$conditionId, name=$name, type=$type, date=$date]';
+      'CowGenealogyDto[cow=$cow, mother=$mother, father=$father]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (this.id != null) {
-      json[r'id'] = this.id;
+    if (this.cow != null) {
+      json[r'cow'] = this.cow;
     } else {
-      json[r'id'] = null;
+      json[r'cow'] = null;
     }
-    if (this.cowId != null) {
-      json[r'cowId'] = this.cowId;
+    if (this.mother != null) {
+      json[r'mother'] = this.mother;
     } else {
-      json[r'cowId'] = null;
+      json[r'mother'] = null;
     }
-    if (this.conditionId != null) {
-      json[r'conditionId'] = this.conditionId;
+    if (this.father != null) {
+      json[r'father'] = this.father;
     } else {
-      json[r'conditionId'] = null;
-    }
-    if (this.name != null) {
-      json[r'name'] = this.name;
-    } else {
-      json[r'name'] = null;
-    }
-    if (this.type != null) {
-      json[r'type'] = this.type;
-    } else {
-      json[r'type'] = null;
-    }
-    if (this.date != null) {
-      json[r'date'] = this.date!.toUtc().toIso8601String();
-    } else {
-      json[r'date'] = null;
+      json[r'father'] = null;
     }
     return json;
   }
 
-  /// Returns a new [TreatmentDto] instance and imports its values from
+  /// Returns a new [CowGenealogyDto] instance and imports its values from
   /// [value] if it's a [Map], null otherwise.
   // ignore: prefer_constructors_over_static_methods
-  static TreatmentDto? fromJson(dynamic value) {
+  static CowGenealogyDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
@@ -124,33 +94,30 @@ class TreatmentDto {
       assert(() {
         requiredKeys.forEach((key) {
           assert(json.containsKey(key),
-              'Required key "TreatmentDto[$key]" is missing from JSON.');
+              'Required key "CowGenealogyDto[$key]" is missing from JSON.');
           assert(json[key] != null,
-              'Required key "TreatmentDto[$key]" has a null value in JSON.');
+              'Required key "CowGenealogyDto[$key]" has a null value in JSON.');
         });
         return true;
       }());
 
-      return TreatmentDto(
-        id: mapValueOfType<int>(json, r'id'),
-        cowId: mapValueOfType<int>(json, r'cowId'),
-        conditionId: mapValueOfType<int>(json, r'conditionId'),
-        name: mapValueOfType<String>(json, r'name'),
-        type: mapValueOfType<String>(json, r'type'),
-        date: mapDateTime(json, r'date', r''),
+      return CowGenealogyDto(
+        cow: CowDto.fromJson(json[r'cow']),
+        mother: ParentDto.fromJson(json[r'mother']),
+        father: ParentDto.fromJson(json[r'father']),
       );
     }
     return null;
   }
 
-  static List<TreatmentDto> listFromJson(
+  static List<CowGenealogyDto> listFromJson(
     dynamic json, {
     bool growable = false,
   }) {
-    final result = <TreatmentDto>[];
+    final result = <CowGenealogyDto>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
-        final value = TreatmentDto.fromJson(row);
+        final value = CowGenealogyDto.fromJson(row);
         if (value != null) {
           result.add(value);
         }
@@ -159,12 +126,12 @@ class TreatmentDto {
     return result.toList(growable: growable);
   }
 
-  static Map<String, TreatmentDto> mapFromJson(dynamic json) {
-    final map = <String, TreatmentDto>{};
+  static Map<String, CowGenealogyDto> mapFromJson(dynamic json) {
+    final map = <String, CowGenealogyDto>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = TreatmentDto.fromJson(entry.value);
+        final value = CowGenealogyDto.fromJson(entry.value);
         if (value != null) {
           map[entry.key] = value;
         }
@@ -173,17 +140,17 @@ class TreatmentDto {
     return map;
   }
 
-  // maps a json object with a list of TreatmentDto-objects as value to a dart map
-  static Map<String, List<TreatmentDto>> mapListFromJson(
+  // maps a json object with a list of CowGenealogyDto-objects as value to a dart map
+  static Map<String, List<CowGenealogyDto>> mapListFromJson(
     dynamic json, {
     bool growable = false,
   }) {
-    final map = <String, List<TreatmentDto>>{};
+    final map = <String, List<CowGenealogyDto>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = TreatmentDto.listFromJson(
+        map[entry.key] = CowGenealogyDto.listFromJson(
           entry.value,
           growable: growable,
         );

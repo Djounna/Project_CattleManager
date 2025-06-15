@@ -1,4 +1,4 @@
-# CM_api.model.AlertDto
+# CM_api.model.CowGenealogyDto
 
 ## Load the model package
 ```dart
@@ -8,14 +8,9 @@ import 'package:CM_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** |  | [optional] 
-**title** | **String** |  | [optional] 
-**description** | **String** |  | [optional] 
-**level** | **String** |  | [optional] 
-**done** | **bool** |  | [optional] 
-**infos** | **String** |  | [optional] 
-**cowId** | **int** |  | [optional] 
-**penId** | **int** |  | [optional] 
+**cow** | [**CowDto**](CowDto.md) |  | [optional] 
+**mother** | [**ParentDto**](ParentDto.md) |  | [optional] 
+**father** | [**ParentDto**](ParentDto.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

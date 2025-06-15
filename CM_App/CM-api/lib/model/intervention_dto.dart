@@ -17,9 +17,8 @@ class InterventionDto {
     this.cowId,
     this.intervenantId,
     this.type,
-    this.status,
-    this.date,
     this.description,
+    this.date,
   });
 
   ///
@@ -38,21 +37,13 @@ class InterventionDto {
   ///
   int? cowId;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
   int? intervenantId;
 
   String? type;
 
-  String? status;
+  String? description;
 
   DateTime? date;
-
-  String? description;
 
   @override
   bool operator ==(Object other) =>
@@ -62,9 +53,8 @@ class InterventionDto {
           other.cowId == cowId &&
           other.intervenantId == intervenantId &&
           other.type == type &&
-          other.status == status &&
-          other.date == date &&
-          other.description == description;
+          other.description == description &&
+          other.date == date;
 
   @override
   int get hashCode =>
@@ -73,13 +63,12 @@ class InterventionDto {
       (cowId == null ? 0 : cowId!.hashCode) +
       (intervenantId == null ? 0 : intervenantId!.hashCode) +
       (type == null ? 0 : type!.hashCode) +
-      (status == null ? 0 : status!.hashCode) +
-      (date == null ? 0 : date!.hashCode) +
-      (description == null ? 0 : description!.hashCode);
+      (description == null ? 0 : description!.hashCode) +
+      (date == null ? 0 : date!.hashCode);
 
   @override
   String toString() =>
-      'InterventionDto[id=$id, cowId=$cowId, intervenantId=$intervenantId, type=$type, status=$status, date=$date, description=$description]';
+      'InterventionDto[id=$id, cowId=$cowId, intervenantId=$intervenantId, type=$type, description=$description, date=$date]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -103,20 +92,15 @@ class InterventionDto {
     } else {
       json[r'type'] = null;
     }
-    if (this.status != null) {
-      json[r'status'] = this.status;
+    if (this.description != null) {
+      json[r'description'] = this.description;
     } else {
-      json[r'status'] = null;
+      json[r'description'] = null;
     }
     if (this.date != null) {
       json[r'date'] = this.date!.toUtc().toIso8601String();
     } else {
       json[r'date'] = null;
-    }
-    if (this.description != null) {
-      json[r'description'] = this.description;
-    } else {
-      json[r'description'] = null;
     }
     return json;
   }
@@ -146,9 +130,8 @@ class InterventionDto {
         cowId: mapValueOfType<int>(json, r'cowId'),
         intervenantId: mapValueOfType<int>(json, r'intervenantId'),
         type: mapValueOfType<String>(json, r'type'),
-        status: mapValueOfType<String>(json, r'status'),
-        date: mapDateTime(json, r'date', r''),
         description: mapValueOfType<String>(json, r'description'),
+        date: mapDateTime(json, r'date', r''),
       );
     }
     return null;

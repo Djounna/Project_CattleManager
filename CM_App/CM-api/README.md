@@ -48,12 +48,12 @@ import 'package:CM_api/api.dart';
 //defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
 
 final api_instance = AlertApi();
-final id = 56; // int | 
 
 try {
-    api_instance.apiAlertDelete(id);
+    final result = api_instance.apiAlertActiveGet();
+    print(result);
 } catch (e) {
-    print('Exception when calling AlertApi->apiAlertDelete: $e\n');
+    print('Exception when calling AlertApi->apiAlertActiveGet: $e\n');
 }
 
 ```
@@ -64,11 +64,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AlertApi* | [**apiAlertActiveGet**](doc//AlertApi.md#apialertactiveget) | **GET** /api/Alert/active | 
 *AlertApi* | [**apiAlertDelete**](doc//AlertApi.md#apialertdelete) | **DELETE** /api/Alert | 
 *AlertApi* | [**apiAlertGet**](doc//AlertApi.md#apialertget) | **GET** /api/Alert | 
 *AlertApi* | [**apiAlertIdGet**](doc//AlertApi.md#apialertidget) | **GET** /api/Alert/{id} | 
 *AlertApi* | [**apiAlertPost**](doc//AlertApi.md#apialertpost) | **POST** /api/Alert | 
 *AlertApi* | [**apiAlertPut**](doc//AlertApi.md#apialertput) | **PUT** /api/Alert | 
+*ConditionApi* | [**apiConditionCowIdGet**](doc//ConditionApi.md#apiconditioncowidget) | **GET** /api/Condition/{cowId} | 
 *ConditionApi* | [**apiConditionDelete**](doc//ConditionApi.md#apiconditiondelete) | **DELETE** /api/Condition | 
 *ConditionApi* | [**apiConditionGet**](doc//ConditionApi.md#apiconditionget) | **GET** /api/Condition | 
 *ConditionApi* | [**apiConditionIdGet**](doc//ConditionApi.md#apiconditionidget) | **GET** /api/Condition/{id} | 
@@ -77,9 +79,11 @@ Class | Method | HTTP request | Description
 *CowApi* | [**apiCowDelete**](doc//CowApi.md#apicowdelete) | **DELETE** /api/Cow | 
 *CowApi* | [**apiCowGet**](doc//CowApi.md#apicowget) | **GET** /api/Cow | 
 *CowApi* | [**apiCowIdDetailsGet**](doc//CowApi.md#apicowiddetailsget) | **GET** /api/Cow/{id}/details | 
+*CowApi* | [**apiCowIdGenealogyGet**](doc//CowApi.md#apicowidgenealogyget) | **GET** /api/Cow/{id}/genealogy | 
 *CowApi* | [**apiCowIdGet**](doc//CowApi.md#apicowidget) | **GET** /api/Cow/{id} | 
 *CowApi* | [**apiCowPost**](doc//CowApi.md#apicowpost) | **POST** /api/Cow | 
 *CowApi* | [**apiCowPut**](doc//CowApi.md#apicowput) | **PUT** /api/Cow | 
+*GestationApi* | [**apiGestationCowIdGet**](doc//GestationApi.md#apigestationcowidget) | **GET** /api/Gestation/{cowId} | 
 *GestationApi* | [**apiGestationDelete**](doc//GestationApi.md#apigestationdelete) | **DELETE** /api/Gestation | 
 *GestationApi* | [**apiGestationGet**](doc//GestationApi.md#apigestationget) | **GET** /api/Gestation | 
 *GestationApi* | [**apiGestationIdGet**](doc//GestationApi.md#apigestationidget) | **GET** /api/Gestation/{id} | 
@@ -96,12 +100,15 @@ Class | Method | HTTP request | Description
 *IntervenantApi* | [**apiIntervenantIdGet**](doc//IntervenantApi.md#apiintervenantidget) | **GET** /api/Intervenant/{id} | 
 *IntervenantApi* | [**apiIntervenantPost**](doc//IntervenantApi.md#apiintervenantpost) | **POST** /api/Intervenant | 
 *IntervenantApi* | [**apiIntervenantPut**](doc//IntervenantApi.md#apiintervenantput) | **PUT** /api/Intervenant | 
+*InterventionApi* | [**apiInterventionCowIdGet**](doc//InterventionApi.md#apiinterventioncowidget) | **GET** /api/Intervention/{cowId} | 
 *InterventionApi* | [**apiInterventionDelete**](doc//InterventionApi.md#apiinterventiondelete) | **DELETE** /api/Intervention | 
 *InterventionApi* | [**apiInterventionGet**](doc//InterventionApi.md#apiinterventionget) | **GET** /api/Intervention | 
 *InterventionApi* | [**apiInterventionIdGet**](doc//InterventionApi.md#apiinterventionidget) | **GET** /api/Intervention/{id} | 
 *InterventionApi* | [**apiInterventionPost**](doc//InterventionApi.md#apiinterventionpost) | **POST** /api/Intervention | 
 *InterventionApi* | [**apiInterventionPut**](doc//InterventionApi.md#apiinterventionput) | **PUT** /api/Intervention | 
+*JobApi* | [**apiJobDateGet**](doc//JobApi.md#apijobdateget) | **GET** /api/Job/date | 
 *JobApi* | [**apiJobDelete**](doc//JobApi.md#apijobdelete) | **DELETE** /api/Job | 
+*JobApi* | [**apiJobDetailsDateGet**](doc//JobApi.md#apijobdetailsdateget) | **GET** /api/Job/details/date | 
 *JobApi* | [**apiJobDetailsGet**](doc//JobApi.md#apijobdetailsget) | **GET** /api/Job/details | 
 *JobApi* | [**apiJobGet**](doc//JobApi.md#apijobget) | **GET** /api/Job | 
 *JobApi* | [**apiJobIdGet**](doc//JobApi.md#apijobidget) | **GET** /api/Job/{id} | 
@@ -136,6 +143,7 @@ Class | Method | HTTP request | Description
 *StockApi* | [**apiStockIdGet**](doc//StockApi.md#apistockidget) | **GET** /api/Stock/{id} | 
 *StockApi* | [**apiStockPost**](doc//StockApi.md#apistockpost) | **POST** /api/Stock | 
 *StockApi* | [**apiStockPut**](doc//StockApi.md#apistockput) | **PUT** /api/Stock | 
+*TreatmentApi* | [**apiTreatmentCowIdGet**](doc//TreatmentApi.md#apitreatmentcowidget) | **GET** /api/Treatment/{cowId} | 
 *TreatmentApi* | [**apiTreatmentDelete**](doc//TreatmentApi.md#apitreatmentdelete) | **DELETE** /api/Treatment | 
 *TreatmentApi* | [**apiTreatmentGet**](doc//TreatmentApi.md#apitreatmentget) | **GET** /api/Treatment | 
 *TreatmentApi* | [**apiTreatmentIdGet**](doc//TreatmentApi.md#apitreatmentidget) | **GET** /api/Treatment/{id} | 
@@ -144,6 +152,7 @@ Class | Method | HTTP request | Description
 *UserManagementApi* | [**apiUserManagementPost**](doc//UserManagementApi.md#apiusermanagementpost) | **POST** /api/UserManagement | 
 *UserManagementApi* | [**apiUserManagementPut**](doc//UserManagementApi.md#apiusermanagementput) | **PUT** /api/UserManagement | 
 *UserManagementApi* | [**apiUserManagementUserUserIdRolesGet**](doc//UserManagementApi.md#apiusermanagementuseruseridrolesget) | **GET** /api/UserManagement/user/{userId}/roles | 
+*VaccinationApi* | [**apiVaccinationCowIdGet**](doc//VaccinationApi.md#apivaccinationcowidget) | **GET** /api/Vaccination/{cowId} | 
 *VaccinationApi* | [**apiVaccinationDelete**](doc//VaccinationApi.md#apivaccinationdelete) | **DELETE** /api/Vaccination | 
 *VaccinationApi* | [**apiVaccinationGet**](doc//VaccinationApi.md#apivaccinationget) | **GET** /api/Vaccination | 
 *VaccinationApi* | [**apiVaccinationIdGet**](doc//VaccinationApi.md#apivaccinationidget) | **GET** /api/Vaccination/{id} | 
@@ -166,9 +175,9 @@ Class | Method | HTTP request | Description
  - [ConditionDto](doc//ConditionDto.md)
  - [CowDetailsDto](doc//CowDetailsDto.md)
  - [CowDto](doc//CowDto.md)
+ - [CowGenealogyDto](doc//CowGenealogyDto.md)
  - [DateOnly](doc//DateOnly.md)
  - [DayOfWeek](doc//DayOfWeek.md)
- - [GenealogyDto](doc//GenealogyDto.md)
  - [GestationDto](doc//GestationDto.md)
  - [GroupDetailsDto](doc//GroupDetailsDto.md)
  - [GroupDto](doc//GroupDto.md)

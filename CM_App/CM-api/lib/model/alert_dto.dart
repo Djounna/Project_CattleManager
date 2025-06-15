@@ -17,6 +17,7 @@ class AlertDto {
     this.title,
     this.description,
     this.level,
+    this.done,
     this.infos,
     this.cowId,
     this.penId,
@@ -36,6 +37,14 @@ class AlertDto {
 
   String? level;
 
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  bool? done;
+
   String? infos;
 
   int? cowId;
@@ -50,6 +59,7 @@ class AlertDto {
           other.title == title &&
           other.description == description &&
           other.level == level &&
+          other.done == done &&
           other.infos == infos &&
           other.cowId == cowId &&
           other.penId == penId;
@@ -61,13 +71,14 @@ class AlertDto {
       (title == null ? 0 : title!.hashCode) +
       (description == null ? 0 : description!.hashCode) +
       (level == null ? 0 : level!.hashCode) +
+      (done == null ? 0 : done!.hashCode) +
       (infos == null ? 0 : infos!.hashCode) +
       (cowId == null ? 0 : cowId!.hashCode) +
       (penId == null ? 0 : penId!.hashCode);
 
   @override
   String toString() =>
-      'AlertDto[id=$id, title=$title, description=$description, level=$level, infos=$infos, cowId=$cowId, penId=$penId]';
+      'AlertDto[id=$id, title=$title, description=$description, level=$level, done=$done, infos=$infos, cowId=$cowId, penId=$penId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -90,6 +101,11 @@ class AlertDto {
       json[r'level'] = this.level;
     } else {
       json[r'level'] = null;
+    }
+    if (this.done != null) {
+      json[r'done'] = this.done;
+    } else {
+      json[r'done'] = null;
     }
     if (this.infos != null) {
       json[r'infos'] = this.infos;
@@ -134,6 +150,7 @@ class AlertDto {
         title: mapValueOfType<String>(json, r'title'),
         description: mapValueOfType<String>(json, r'description'),
         level: mapValueOfType<String>(json, r'level'),
+        done: mapValueOfType<bool>(json, r'done'),
         infos: mapValueOfType<String>(json, r'infos'),
         cowId: mapValueOfType<int>(json, r'cowId'),
         penId: mapValueOfType<int>(json, r'penId'),
