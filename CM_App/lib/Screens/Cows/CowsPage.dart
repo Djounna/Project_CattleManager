@@ -6,6 +6,8 @@ import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../Shared/DrawerContent.dart';
+
 class CowsPage extends StatefulWidget {
   const CowsPage({super.key});
 
@@ -41,6 +43,7 @@ class _CowsPageState extends State<CowsPage> {
     void GetCows() async{
       List<CowDto>? cows = await appContext!.clientApi.cowApi!.apiCowGet();
       cowsList = cows;
+      appContext.setCows(cowsList);
     }
 
     // Beginning of display logic
@@ -51,7 +54,6 @@ class _CowsPageState extends State<CowsPage> {
     }
     else{ */
     GetCows();
-    appContext.setCows(cowsList);
     filteredCowsList = [...cowsList!];
     //}
 
@@ -67,6 +69,7 @@ class _CowsPageState extends State<CowsPage> {
 
     return Scaffold(
       appBar: const TopAppBar(),
+      drawer: const DrawerContent(),
       body: Column(
         children: [
           Row(

@@ -11,6 +11,7 @@ class CowListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Icon(Icons.info),
       title: Text(cow.identifier!),
       subtitle: Text(cow.name!),
       onTap:() => {onSelect(cow)}
