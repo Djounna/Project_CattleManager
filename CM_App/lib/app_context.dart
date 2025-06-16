@@ -10,8 +10,13 @@ class AppContext with ChangeNotifier{
   //Client clientApi = Client("http://192.168.1.8:5139");
   Credentials? _credentials;
   List<CowDto>? _cows;
+  CowDetailsDto? _selectedCow;
+  List<PenDto>? _pens;
+  PenDetailsDto? _selectedPen;
   List<JobDto>? _jobs;
+  JobDto? _selectedJob;
   List<MilkingDto>? _milkings;
+
 
   AppContext();
 
@@ -25,9 +30,29 @@ class AppContext with ChangeNotifier{
     _cows = cows;
   }
 
+  getSelectedCow() => _selectedCow;
+  setSelectedCow(CowDetailsDto? cow) {
+    _selectedCow = cow;
+  }
+
+  getPens() => _pens;
+  setPens(List<PenDto>? pens){
+    _pens = pens;
+  }
+
+  getSelectedPen() => _selectedPen;
+  setSelectedPen(PenDetailsDto? pen) {
+    _selectedPen = pen;
+  }
+
   getJobs() => _jobs;
   setJobs(List<JobDto>? jobs){
     _jobs = jobs;
+  }
+
+  getSelectedJob() => _selectedJob;
+  setSelectedJob(JobDto? job) {
+    _selectedJob = job;
   }
 
   getMilkings() => _milkings;
