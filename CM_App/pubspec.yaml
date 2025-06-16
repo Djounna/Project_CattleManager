@@ -43,6 +43,7 @@ dependencies:
   CM_api:
     path: CM-api
   auth0_flutter: ^1.9.0
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
