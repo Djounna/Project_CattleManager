@@ -17,6 +17,8 @@ import { CreateTreatmentDialogComponent } from '../../../features/treatment/crea
 import { CreateVaccinationDialogComponent } from '../../../features/vaccination/create-vaccination-dialog/create-vaccination-dialog.component';
 import { MenuItem } from 'primeng/api';
 import { MapService, PenMapInfo } from '../../../services/map.service';
+import { HistoryService } from '../../../services/history.service';
+import { HistoryEvent } from '../../../models/history/historyEvent';
 
 @Component({
   selector: 'app-cow-details-page',
@@ -26,6 +28,7 @@ import { MapService, PenMapInfo } from '../../../services/map.service';
 })
 export class CowDetailsComponent extends BaseComponent {
   private route = inject(ActivatedRoute);
+  historyService = inject(HistoryService); 
   cowId = 0;
   @Select(CattleState.cow) Cow$!: Observable<CowDto>;
   public Cow!: CowDto
@@ -39,11 +42,12 @@ export class CowDetailsComponent extends BaseComponent {
   private MilkingData$ = combineLatest([this.MilkingVolumes$, this.CowMilkingVolumes$])
   @Select(CattleState.cowGenealogy) CowGenealogy$!: Observable<CowGenealogyDto>;
   public CowGenealogy!: CowGenealogyDto;
+  public HistoryEvents! : HistoryEvent[];
 
   public Map! : L.Map;
   public MapInfo!: PenMapInfo;
   public ActivityType = ActivityType;
-  public menuItems: MenuItem[] | undefined;
+  public menuItems: MenuItem[] = [];
 
   public ShowStatisticsDialog = false;
   public ShowTimelineDialog = false
@@ -59,9 +63,9 @@ export class CowDetailsComponent extends BaseComponent {
     this.route.params.subscribe(params => {
       this.cowId = +params['id'];
     });
-    this.iniMenuItems();
     this.store.dispatch(new CowDetails.Reset).subscribe();
     this.GetCowData();
+    this.iniMenuItems();
   }
 
   public GetCowData(): void {
@@ -69,8 +73,20 @@ export class CowDetailsComponent extends BaseComponent {
       tap(([c, cd]) => {
         this.Cow = c;
         this.CowDetails = cd;
-        if(this.CowDetails != null)
+        if (this.CowDetails != null) {
+
+          if (this.Cow.gender === 'f') {
+            this.menuItems.push(
+              {
+                label: 'Gestation',
+                icon: 'pi pi-plus-circle',
+                command: () => { this.CreateGestationDialog(this.Cow) }
+              },
+            );
+          }
+
           this.initMap();
+        }
       }),
       takeUntil(this.$OnDestroyed))
       .subscribe({ 
@@ -121,11 +137,6 @@ export class CowDetailsComponent extends BaseComponent {
             command: () => { this.CreateVaccinationDialog(this.Cow) }
           },
           {
-            label: 'Gestation',
-            icon: 'pi pi-plus-circle',
-            command: () => { this.CreateGestationDialog(this.Cow) }
-          },
-          {
             label: 'Affection',
             icon: 'pi pi-plus-circle',
             command: () => { this.CreateConditionDialog(this.Cow) }
@@ -137,17 +148,11 @@ export class CowDetailsComponent extends BaseComponent {
           },
         ]
       }]
+
   }
 
   private initMap(): void {
     this.MapInfo = this.mapService.CreatePenMapInfos(this.CowDetails.pen!);
-    // = {
-    //   layers: [
-    //     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    //   ],
-    //   zoom: 5,
-    //   center: latLng(46.879966, -121.726909)
-    // }
   }
 
   public UpdateCowDialog(cow: CowDto): void {
@@ -269,6 +274,9 @@ export class CowDetailsComponent extends BaseComponent {
   }
 
   public ShowTimeline(): void {
+    this.loader.show();
+    this.HistoryEvents = this.historyService.GenerateHistoryEvents(this.CowDetails); 
+    this.loader.hide();
     this.ShowTimelineDialog = true;
     // const dialogRef = this.dialogService.open(CowTimelineDialogComponent, {
     //   data: cow,

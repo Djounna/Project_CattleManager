@@ -21,7 +21,7 @@ export class HistoryService {
 
         let events : HistoryEvent[] = [];
         let birthEvent: HistoryEvent = {
-            Title: 'Birth',
+            Title: 'Naissance',
             Type: HistoryEventType.Birth,
             Date: cowDetails.birthDate as string
         }
@@ -30,7 +30,7 @@ export class HistoryService {
         cowDetails.conditions?.forEach(i => {
             let event: HistoryEvent = 
             {
-                Title: 'Affection' + i.type,
+                Title: 'Affection :' + i.type,
                 Type: HistoryEventType.Intervention,
                 Date: i.startDate as string
             };
@@ -39,7 +39,7 @@ export class HistoryService {
         cowDetails.treatments?.forEach(i => {
             let event: HistoryEvent = 
             {
-                Title: 'Traitement' + i.name,
+                Title: 'Traitement :' + i.name,
                 Type: HistoryEventType.Intervention,
                 Date: i.date as string
             };
@@ -49,7 +49,7 @@ export class HistoryService {
         cowDetails.interventions?.forEach(i => {
             let event: HistoryEvent = 
             {
-                Title: 'Intervention' + i.type,
+                Title: 'Intervention :' + i.type,
                 Type: HistoryEventType.Intervention,
                 Date: i.date as string
             };
@@ -59,7 +59,7 @@ export class HistoryService {
         cowDetails.vaccinations?.forEach(v => {
             let event: HistoryEvent = 
             {
-                Title: 'Vaccination' + v.name,
+                Title: 'Vaccination :' + v.name,
                 Type: HistoryEventType.Vaccination,
                 Date: v.date as string
             }
@@ -70,7 +70,7 @@ export class HistoryService {
             if(!!g.calvingDate)
             {
                 let event: HistoryEvent = {
-                    Title: 'Calving',
+                    Title: 'Vélage',
                     Type: HistoryEventType.Gestation,
                     Date: g.calvingDate as string
                 }
@@ -79,7 +79,7 @@ export class HistoryService {
         });
         cowDetails.penMoves?.forEach(pm => {
             let event: HistoryEvent = {
-                Title: 'Move to ' + this.penNamePipe.transform(pm.destinationPenId),
+                Title: 'Déplacé vers enclos : ' + this.penNamePipe.transform(pm.destinationPenId),
                 Type: HistoryEventType.PenMove,
                 Date: pm.date as string
             }
@@ -87,7 +87,7 @@ export class HistoryService {
         });
         cowDetails.groupMoves?.forEach(gm => {
             let event: HistoryEvent = {
-                Title: 'Moved to ' + this.groupNamePipe.transform(gm.destinationGroupId),
+                Title: 'Assigné au groupe : ' + this.groupNamePipe.transform(gm.destinationGroupId),
                 Type: HistoryEventType.GroupMove,
                 Date: gm.date as string,
             }

@@ -22,16 +22,20 @@
             gap:1rem;
 
             &-column{
-                display:flex;
-                flex-direction:column;
-                gap:0.2rem;
-
                 &-labels{
-                    text-align:right;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    text-align:left;
+                    text-wrap: nowrap;
                     font-style:italic;
                 }
 
                 &-inputs{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    text-wrap: nowrap;
                     font-weight: 400;
                 }
             }
