@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { State, Selector, Action, StateContext } from "@ngxs/store";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
-import { JobDto, UserDto, WorkerJobDto } from "../../api/models";
+import { JobDto, WorkerJobDto } from "../../api/models";
 import { JobService, WorkerJobService, WorkerService } from "../../api/services";
 import { Jobs, Workers } from "./work.actions";
 import { WorkStateModel } from "./work.state";
@@ -12,6 +12,7 @@ import { WorkStateModel } from "./work.state";
     defaults:{
         Jobs : [],
         JobsDetails: [],
+        CurrentUserJobsDetails: [],
         Workers : []
     }
 })
@@ -32,6 +33,11 @@ export class WorkState{
     @Selector()
     static jobsDetails(cattleState:WorkStateModel){
         return cattleState.JobsDetails;
+    }
+
+    @Selector()
+    static currentUserJobsDetails(cattleState:WorkStateModel){
+        return cattleState.CurrentUserJobsDetails;
     }
 
     @Selector()
@@ -70,6 +76,15 @@ export class WorkState{
             })
         );
     }
+
+    @Action(Jobs.GetAllDetailsByUserByDate)
+    getAllJobsDetailsByUserByDate(ctx: StateContext<WorkStateModel>, action: Jobs.GetAllDetailsByUserByDate){
+        return this.jobService.apiJobDetailsUserAuthDateGet({userAuth : action.authId, date: action.date}).pipe(tap(jobs=>{
+            ctx.patchState({CurrentUserJobsDetails : jobs});
+            })
+        );
+    }
+
 
     @Action(Jobs.Create)
     createJob(ctx: StateContext<WorkStateModel>, action: Jobs.Create){

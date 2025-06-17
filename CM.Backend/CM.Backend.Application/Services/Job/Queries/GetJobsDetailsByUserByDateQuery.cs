@@ -22,20 +22,29 @@ public class GetJobsDetailsByUserByDateQueryHandler : IRequestHandler<GetJobsDet
         IPenRepository penRepository,
         ICowRepository cowRepository,
         IWorkerJobRepository workerJobRepository,
+        IUserRepository userRepository,
         IMapper mapper)
     {
         _jobRepository = jobRepository;
         _workerJobRepository = workerJobRepository;
         _penRepository = penRepository;
         _cowRepository = cowRepository;
+        _userRepository = userRepository;
         _mapper = mapper;
     }
 
     public async Task<IList<JobDetailsDto>> Handle(GetJobsDetailsByUserByDateQuery request, CancellationToken cancellationToken)
     {
         DateOnly ddate = DateOnly.Parse(request.date);
+
         var user = _userRepository.GetUserByIdAuth(request.userAuth);
+        if (user == null)
+            return null;
+
         var jobs = _jobRepository.GetListByUserByDate(user.Id, ddate);
+        if (jobs == null)
+            return null;
+
         var jobDetails = jobs.Select(j =>
         {
             return new JobDetailsDto()

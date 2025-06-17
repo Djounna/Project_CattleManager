@@ -11,6 +11,9 @@ import { Alerts } from './state/alert/alert.action';
 import { SignalRService } from './services/signalr.service';
 import { MenuItem } from 'primeng/api/menuitem';
 import { MenuService } from './services/menu.service';
+import { Cows, Groups } from './state/cattle/cattle.actions';
+import { Pens } from './state/infrastructure/infrastructure.action';
+import { Workers } from './state/work/work.actions';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +44,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.checkLogin();
-    this.checkAlerts();
     this.signalRService.startConnection();
     this.signalRService.addMessageListener();
   }
@@ -52,41 +54,31 @@ export class AppComponent {
         this.IsAdmin = res;
         if (this.IsAdmin) {
           this.MenuItems = this.menuService.GetAdminMenu()
+          this.loadData();
           this.router.navigate(['/dashboard']);
         }
         else {
           this.MenuItems = this.menuService.GetWorkerMenu()
+          this.loadData();
           this.router.navigate(['/dashboard']);
         }
       }
     });
     this.store.dispatch(new User.GetToken())
+  }
 
-    // this.IsWorker$.subscribe({
-    //   next: (res) => { this.IsWorker = res;
-    //   if (this.IsWorker)
-    //     {
-    //       this.router.navigate(['/todolist']);
-    //     }
-    //   }
-    // }) ;
+  private loadData(){
+    this.store.dispatch(new Cows.GetAll());
+    this.store.dispatch(new Groups.GetAll());
+    this.store.dispatch(new Pens.GetAll());
+    this.store.dispatch(new Workers.GetAll());
+    this.checkAlerts();
   }
 
   private checkAlerts() {
-    this.Alerts$.subscribe({
-      next: (res) => this.Alerts = res
-    })
+    this.Alerts$.subscribe({ next: (res) => this.Alerts = res });
     this.store.dispatch(new Alerts.GetAllActive())
   }
-
-  // private loadData(){
-  //   this.store.dispatch(new Cows.GetAll());
-  //   this.store.dispatch(new Gestations.GetAll());
-  //   this.store.dispatch(new Groups.GetAll());
-  //   this.store.dispatch(new Pens.GetAll());
-  //   this.store.dispatch(new Workers.GetAll());
-  // this.store.dispatch(new Alerts.GetAllActive())
-  // }
 
   public ToggleDrawer(): void {
     this.DrawerVisible = !this.DrawerVisible;

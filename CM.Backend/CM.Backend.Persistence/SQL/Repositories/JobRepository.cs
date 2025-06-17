@@ -2,6 +2,7 @@
 using CM.Backend.Domain.Jobs;
 using CM.Backend.Domain.Users;
 using CM.Backend.Persistence.EF;
+using Microsoft.EntityFrameworkCore;
 
 namespace CM.Backend.Persistence.SQL.Repositories;
 public class JobRepository : BaseRepository<Job>, IJobRepository
@@ -15,6 +16,6 @@ public class JobRepository : BaseRepository<Job>, IJobRepository
 
     public IEnumerable<Job> GetListByUserByDate(int userId, DateOnly date)
     {
-        return _context.Jobs.Where(j => j.Date == date && j.WorkerJobs.Any(wj => wj.UserId == userId));
+        return _context.Jobs.Include(j => j.WorkerJobs).Where(j => j.Date == date).Where(j =>j.WorkerJobs.Any(wj => wj.UserId == userId)).ToList();
     }
 }
