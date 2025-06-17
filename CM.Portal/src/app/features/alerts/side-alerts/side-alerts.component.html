@@ -6,8 +6,8 @@
 
             <div class="item-row">
                 <span class="details">{{ alert.title }}</span>
-                <span class="infos" *ngIf="!!alert.cowId">{{alert.cowId}}</span>
-                <span class="infos" *ngIf="!alert.cowId && !!alert.penId">{{alert.penId}}</span>
+                <span class="infos" *ngIf="!!alert.cowId">{{alert.cowId | cowIdentifier}}</span>
+                <span class="infos" *ngIf="!alert.cowId && !!alert.penId">{{alert.penId | penName}}</span>
             </div>
 
         </div>
