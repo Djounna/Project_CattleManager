@@ -5,7 +5,7 @@
             [ngClass]="{'bg-orange': alert.level === 'Haut', 'bg-lightorange' : alert.level === 'Moyen', 'bg-green' : alert.level === 'Bas'}">
 
             <div class="item-row">
-                <span class="details">{{ alert.title }}</span>
+                <span class="details" pTooltip="{{alert?.description ?? ''}}" tooltipPosition="left" >{{ alert.title }}</span>
                 <span class="infos" *ngIf="!!alert.cowId">{{alert.cowId | cowIdentifier}}</span>
                 <span class="infos" *ngIf="!alert.cowId && !!alert.penId">{{alert.penId | penName}}</span>
             </div>

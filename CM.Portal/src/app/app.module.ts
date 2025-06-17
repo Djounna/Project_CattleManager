@@ -56,6 +56,7 @@ import { DrawerModule } from 'primeng/drawer';
 import { FieldsetModule } from 'primeng/fieldset';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { TooltipModule } from 'primeng/tooltip';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -266,6 +267,7 @@ import { UpdateJobDialogComponent } from './features/work/job/update-job-dialog/
         FieldsetModule,
         BadgeModule,
         OverlayBadgeModule,
+        TooltipModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt
