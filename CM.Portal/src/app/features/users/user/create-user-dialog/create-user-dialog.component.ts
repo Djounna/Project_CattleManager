@@ -22,7 +22,6 @@ export class CreateUserDialogComponent extends BaseComponent {
 
   public createUserForm!: FormGroup; 
   private newUser! : UserInput;
-  // public roles : string[] = Object.values(Roles);
   Roles = Roles;
   public RoleSelection : SelectOption<string>[] = Object.values(this.Roles).map(r => {
     return {
@@ -37,18 +36,17 @@ export class CreateUserDialogComponent extends BaseComponent {
 
   private initForm(): void{
     this.createUserForm = this.formBuilder.group({
-      roleName:['', Validators.required],
-      email:['', Validators.required],
+      email:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(25)])],
       firstname:['', Validators.required],
       lastname:['', Validators.required],
-      username:['', Validators.required],
+      username:['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(25)])],
       password: ['', Validators.required]
     });
   }
 
   public OnCreate(): void {
     this.newUser = {
-      roleName: this.createUserForm.value.roleName,
+      roleName: "Worker",
       email:  this.createUserForm.value.email,
       firstname: this.createUserForm.value.firstname,
       lastname: this.createUserForm.value.lastname,
