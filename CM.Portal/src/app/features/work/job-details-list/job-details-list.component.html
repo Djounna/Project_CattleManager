@@ -40,7 +40,7 @@
                 </span>
             </td>
             <td class="flex flex-row justify-content-center gap-2">
-                <p-button icon="pi pi-user" severity="info" pTooltip="Assigner un utilisateur" (click)="assignJobDialog(job)"></p-button>
+                <p-button *ngIf="IsAdmin" icon="pi pi-user" severity="info" pTooltip="Assigner un utilisateur" (click)="assignJobDialog(job)"></p-button>
                 <p-button icon="pi pi-cog" severity="secondary" pTooltip="Mettre à jour" (click)="updateJobDialog(job)"></p-button>
                 <p-button icon="pi pi-map-marker" severity="success" pTooltip="Zoomer" (click)="FocusOnJob(job)"></p-button>
             </td>
