@@ -7,7 +7,7 @@
             <div class="flex flex-row justify-content-start align-content-center">
                 <div class="flex flex-row justify-content-between gap-3">
                     <p-button label="Tout" (click)="ShowAll()"></p-button>
-                    <p-button label="Ajouter" (click)="CreateCowDialog()"></p-button>
+                    <p-button *ngIf="IsAdmin" label="Ajouter" (click)="CreateCowDialog()"></p-button>
                 </div>
             </div>
 
