@@ -237,7 +237,6 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newCondition => {
       if(newCondition != null)
-        debugger;
         this.store.dispatch(new CowDetails.Get(this.cowId));
     //   this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
     //     next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),

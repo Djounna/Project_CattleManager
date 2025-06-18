@@ -24,10 +24,6 @@ export class DashboardComponent extends BaseComponent {
 
   @ViewChild('jobList') jobList!: JobDetailsListComponent
 
-  // @Select(CattleState.cowIdentifierDict) CowIdentifierDictionnary$!: Observable<Map<number,string>>
-  // public CowIdentifierDictionnary: Map<number, string> = new Map<number, string>;
-  // @Select(CattleState.cowNameDict) CowNameDictionnary$!: Observable<Map<number,string>>
-  // public CowNameDictionnary: Map<number, string> = new Map<number, string>;
   @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDetailsDto[]>
   @Select(WorkState.currentUserJobsDetails) CurrentUserJobsDetails$!: Observable<JobDetailsDto[]>
   public JobsDetails: JobDetailsDto[] = []
@@ -35,8 +31,6 @@ export class DashboardComponent extends BaseComponent {
   public Workers: UserDto[] = []
   @Select(CattleState.groups) Groups$!: Observable<GroupDto[]>
   public Groups: GroupDto[] = []
-  // @Select(CattleState.groupDict) GroupDictionnary$!: Observable<Map<number, string>>
-  // public GroupDictionnary: Map<number, string> = new Map<number, string>;
   @Select(InfrastructureState.pens) Pens$!: Observable<PenDto[]>
   public Pens: PenDto[] = []
   @Select(InfrastructureState.penDict) PenDictionnary$!: Observable<Map<number, string>>
@@ -115,17 +109,11 @@ export class DashboardComponent extends BaseComponent {
         tap((p) => this.PenDictionnary = p))
       .subscribe();
 
-    // this.store.dispatch(new Cows.GetAll());
-    // this.store.dispatch(new Gestations.GetAll());
-    // this.store.dispatch(new Groups.GetAll());
-    // this.store.dispatch(new Pens.GetAll());
-    // this.store.dispatch(new Workers.GetAll());
     this.SetDateAsToday();
   }
 
   private initMap(): void{
     this.MapInfos = this.mapService.CreateAllPenMapInfos(this.Pens);
-    // this.mapService.CreatePenMapLayers(this.MapInfos.MapOptions.penMapLayers, this.Pens);
   }
 
   public onMapReady(map: any){
@@ -162,11 +150,9 @@ export class DashboardComponent extends BaseComponent {
 
   private getJobDetails(){
     if(this.IsAdmin){
-      // this.store.dispatch(new Jobs.GetAllByDate(this.SelectedDate));
       this.store.dispatch(new Jobs.GetAllDetailsByDate(this.SelectedDate));
     }
     else{
-      // this.store.dispatch(new Jobs.GetAllByDate(this.SelectedDate));
       this.store.dispatch(new Jobs.GetAllDetailsByUserByDate(this.IdAuth, this.SelectedDate));
     }
   }
