@@ -50,7 +50,8 @@ export class JobsPageComponent extends BaseComponent {
         this.Pens = p;
         this.Workers = w;
       })).subscribe({
-      })
+        next:() => this.cdref.detectChanges()
+      });
 
     this.store.dispatch(new Jobs.GetAll());
     this.store.dispatch(new Jobs.GetAllDetails());
@@ -70,25 +71,18 @@ export class JobsPageComponent extends BaseComponent {
     dialogRef.onClose.subscribe(result => {
       if(result == null)
         return;
+      console.log(result);
       this.store.dispatch(new Jobs.Create({body:result})).subscribe({
         next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
-    // const dialogRef = this.dialog.open(CreateJobDialogComponent, {
-    //   height: '400px',
-    //   width: '500px',
-    //   data: {Cows: this.Cows, Pens: this.Pens},
-    // });
+  }
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result == null)
-    //     return;
-    //   this.store.dispatch(new Jobs.Create({body:result})).subscribe({
-    //     next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
-    //     error:() => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
+  public updateJobs(){
+    this.store.dispatch(new Jobs.GetAllDetails());
+    this.jobList.showAll();
+    this.cdref.detectChanges();
   }
 
   public ShowAll(): void{

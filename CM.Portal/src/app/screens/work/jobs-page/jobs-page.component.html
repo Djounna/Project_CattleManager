@@ -62,7 +62,7 @@
         <div class="flex flex-column">
             <p-panel header="Tâches">
                 <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                    (onJobUpdated)="ShowAll()"
+                    [ShowZoomOption]="false" (onJobUpdated)="updateJobs()"
                 ></app-job-details-list>
             </p-panel>
         </div>

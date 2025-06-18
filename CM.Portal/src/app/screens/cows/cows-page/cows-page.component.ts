@@ -58,7 +58,7 @@ export class CowsPageComponent extends BaseComponent {
   public CreateCowDialog(): void {
     const dialogRef = this.dialogService.open(CreateCowDialogComponent, {
       header: 'Ajouter un animal',
-      height: '450px',
+      height: '600px',
       width: '500px',
     });
   }
@@ -70,13 +70,6 @@ export class CowsPageComponent extends BaseComponent {
       height: '450px',
       width: '350px',
     });
-
-    // dialogRef.onClose.subscribe(updatedCow => {
-    //   this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
-    //     next: () => this.toastSuccess("L'animal a été modifié avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
   }
 
   public CreateCowAlertDialog(cow: CowDto): void {
@@ -89,13 +82,6 @@ export class CowsPageComponent extends BaseComponent {
       height: '400px',
       width: '500px',
     });
-
-    // dialogRef.onClose.subscribe(newAlert => {
-    //   this.store.dispatch(new Alerts.Create({ body: newAlert })).subscribe({
-    //     next: () => this.toastSuccess("L'alerte a été créée avec succès"),
-    //     error: () => this.toastError("Une erreur s'est produite")
-    //   });
-    // })
   }
 
   public CreateInterventionDialog(cow: CowDto): void {

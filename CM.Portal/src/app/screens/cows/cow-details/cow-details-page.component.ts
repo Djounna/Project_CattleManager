@@ -75,7 +75,7 @@ export class CowDetailsComponent extends BaseComponent {
         this.CowDetails = cd;
         if (this.CowDetails != null) {
 
-          if (this.Cow.gender === 'f') {
+          if (this.Cow.gender === 'F') {
             this.menuItems.push(
               {
                 label: 'Gestation',
