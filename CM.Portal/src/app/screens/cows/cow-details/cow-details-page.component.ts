@@ -219,7 +219,7 @@ export class CowDetailsComponent extends BaseComponent {
       data: cow,
       header: 'Ajouter une gestation',
       height: '450px',
-      width: '350px',
+      width: '650px',
     });
 
     dialogRef.onClose.subscribe(newGestation => {
