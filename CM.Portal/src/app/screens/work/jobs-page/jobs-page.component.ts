@@ -71,7 +71,6 @@ export class JobsPageComponent extends BaseComponent {
     dialogRef.onClose.subscribe(result => {
       if(result == null)
         return;
-      console.log(result);
       this.store.dispatch(new Jobs.Create({body:result})).subscribe({
         next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
         error:() => this.toastError("Une erreur s'est produite")
