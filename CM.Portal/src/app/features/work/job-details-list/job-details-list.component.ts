@@ -67,7 +67,7 @@ export class JobDetailsListComponent extends BaseComponent {
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result !== null)
+      if(result != null)
         this.onJobUpdated.next();
     });
   }
@@ -81,7 +81,7 @@ export class JobDetailsListComponent extends BaseComponent {
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result !== null)
+      if(result != null)
         this.onJobUpdated.next();
     });
   }
