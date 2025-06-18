@@ -63,8 +63,8 @@ export class JobsPageComponent extends BaseComponent {
   createJobDialog(): void {
     const dialogRef = this.dialogService.open(CreateJobDialogComponent, {
       header: 'Créer une nouvelle tâche',
-      height: '450px',
-      width: '500px',
+      height: '550px',
+      width: '600px',
       data: {Cows: this.Cows, Pens: this.Pens},
     });
 
