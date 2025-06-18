@@ -59,7 +59,7 @@
                 <p-divider layout="vertical"/>
 
                 <div class="sides">
-                    <p-image src="assets\images\group\{{CowDetails?.group?.imgLink}}" alt="Image" width="250" height="175px" [style]="{ 'border-radius': '12px' }" />
+                    <p-image src="assets\images\cattle\{{CowDetails?.imgLink}}" alt="Image" width="250" height="175px" [style]="{ 'border-radius': '12px' }" />
                     <div *ngIf="CowDetails?.pen !== null">
                         <div style="height: 150px; width:250px; border-radius: 12px;" leaflet 
                         [leafletOptions]="MapInfo.MapOptions"
