@@ -78,10 +78,15 @@ export class CowDetailsComponent extends BaseComponent {
           if (this.Cow.gender === 'F') {
             this.menuItems.push(
               {
-                label: 'Gestation',
-                icon: 'pi pi-plus-circle',
-                command: () => { this.CreateGestationDialog(this.Cow) }
-              },
+                label:'Options',
+                items:[
+                  {
+                    label: 'Gestation',
+                    icon: 'pi pi-plus-circle',
+                    command: () => {this.CreateGestationDialog(this.Cow)}
+                  }
+                ]
+              }
             );
           }
 

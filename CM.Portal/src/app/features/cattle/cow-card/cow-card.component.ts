@@ -53,10 +53,15 @@ export class CowCardComponent implements OnInit {
     if(this.Cow.gender === 'F'){
       this.menuItems.push(
         {
-          label: 'Gestation',
-          icon: 'pi pi-plus-circle',
-          command: () => {this.onAddGestation.emit(this.Cow)}
-        },
+          label:'Options',
+          items:[
+            {
+              label: 'Gestation',
+              icon: 'pi pi-plus-circle',
+              command: () => {this.onAddGestation.emit(this.Cow)}
+            }
+          ]
+        }
       );
     }
   }
