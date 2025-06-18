@@ -75,7 +75,7 @@ export class JobDetailsListComponent extends BaseComponent {
   public updateJobDialog(job: any): void{
     const dialogRef = this.dialogService.open(UpdateJobDialogComponent, {
       header: 'Mettre à jour une tâche',
-      height: '450px',
+      height: '300px',
       width: '300px',
       data: {Job: job},
     });
