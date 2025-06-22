@@ -76,6 +76,19 @@ public class JobController : ControllerBase
     }
 
     /// <summary>
+    /// Get All Jobs Details By User By Date
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("details/{userAuth}/{date}")]
+    [Authorize("read:jobs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)
+    {
+        return Ok(await _mediator.Send(new GetJobsDetailsByUserByDateQuery(userAuth, date)));
+    }
+
+    /// <summary>
     /// Get Job By Id 
     /// </summary>
     /// <param name="id">Id</param>
@@ -109,7 +122,7 @@ public class JobController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut]
-    [Authorize("write:jobs")]
+    [Authorize("read:jobs")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<JobDto>> Update([FromBody]JobDto dto)

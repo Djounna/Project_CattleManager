@@ -21,24 +21,8 @@
             <tr>
                 <th>Identifiant</th>
                 <th>Name</th>
-                    <!-- <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="header">
-                            <div class="px-3 pt-3 pb-0">
-                                <span class="font-bold">Agent Picker</span>
-                            </div>
-                        </ng-template>
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.name }}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter> -->
                 <th>Naissance</th>
+                <th>Genre</th>
                 <th>Actions</th>
             </tr>
         </ng-template>
@@ -49,13 +33,9 @@
                 <td>{{cow.identifier}}</td>
                 <td>{{cow.name}}</td>
                 <td>{{cow.birthDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{cow.gender}}</td>
                 <td style="display:flex; flex-direction:row; justify-content: flex-start; gap:0.1rem;">
-                    <!-- <p-button (onClick)="op.toggle($event)" icon="pi pi-eye"/>
-                    <p-popover #op>
-                        <app-cow-card [Cow]="cow"></app-cow-card>
-                    </p-popover> -->
                     <p-button (onClick)="SelectCow(cow)" severity="secondary" icon="pi pi-eye"/>
-                    <!-- <p-button (onClick)="UpdateCow(cow)" icon="pi pi-pencil"/> -->
                 </td>
             </tr>
         </ng-template>

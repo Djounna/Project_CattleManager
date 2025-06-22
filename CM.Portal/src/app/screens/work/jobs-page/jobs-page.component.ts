@@ -50,7 +50,8 @@ export class JobsPageComponent extends BaseComponent {
         this.Pens = p;
         this.Workers = w;
       })).subscribe({
-      })
+        next:() => this.cdref.detectChanges()
+      });
 
     this.store.dispatch(new Jobs.GetAll());
     this.store.dispatch(new Jobs.GetAllDetails());
@@ -62,8 +63,8 @@ export class JobsPageComponent extends BaseComponent {
   createJobDialog(): void {
     const dialogRef = this.dialogService.open(CreateJobDialogComponent, {
       header: 'Créer une nouvelle tâche',
-      height: '450px',
-      width: '500px',
+      height: '550px',
+      width: '600px',
       data: {Cows: this.Cows, Pens: this.Pens},
     });
 
@@ -75,20 +76,12 @@ export class JobsPageComponent extends BaseComponent {
         error:() => this.toastError("Une erreur s'est produite")
       });
     });
-    // const dialogRef = this.dialog.open(CreateJobDialogComponent, {
-    //   height: '400px',
-    //   width: '500px',
-    //   data: {Cows: this.Cows, Pens: this.Pens},
-    // });
+  }
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result == null)
-    //     return;
-    //   this.store.dispatch(new Jobs.Create({body:result})).subscribe({
-    //     next:() => this.toastSuccess("La tâche a été ajoutée avec succès"),
-    //     error:() => this.toastError("Une erreur s'est produite")
-    //   });
-    // });
+  public updateJobs(){
+    this.store.dispatch(new Jobs.GetAllDetails());
+    this.jobList.showAll();
+    this.cdref.detectChanges();
   }
 
   public ShowAll(): void{

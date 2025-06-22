@@ -23,7 +23,7 @@ public class UserDto
     /// <summary>
     /// AuthId
     /// </summary>
-    public int AuthId { get; set; }
+    public string IdAuth { get; set; }
 
     /// <summary>
     /// Role Id

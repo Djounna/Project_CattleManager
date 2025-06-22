@@ -24,34 +24,24 @@ export class DashboardComponent extends BaseComponent {
 
   @ViewChild('jobList') jobList!: JobDetailsListComponent
 
-  @Select(CattleState.cowIdentifierDict) CowIdentifierDictionnary$!: Observable<Map<number,string>>
-  public CowIdentifierDictionnary: Map<number, string> = new Map<number, string>;
-  @Select(CattleState.cowNameDict) CowNameDictionnary$!: Observable<Map<number,string>>
-  public CowNameDictionnary: Map<number, string> = new Map<number, string>;
-  @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDto[]>
+  @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDetailsDto[]>
+  @Select(WorkState.currentUserJobsDetails) CurrentUserJobsDetails$!: Observable<JobDetailsDto[]>
   public JobsDetails: JobDetailsDto[] = []
   @Select(WorkState.workers) Workers$!: Observable<UserDto[]>
   public Workers: UserDto[] = []
-  @Select(CattleState.gestations) Gestations$!: Observable<GestationDto[]>
-  public Gestations: GestationDto[] = []
   @Select(CattleState.groups) Groups$!: Observable<GroupDto[]>
   public Groups: GroupDto[] = []
-  @Select(CattleState.groupDict) GroupDictionnary$!: Observable<Map<number, string>>
-  public GroupDictionnary: Map<number, string> = new Map<number, string>;
   @Select(InfrastructureState.pens) Pens$!: Observable<PenDto[]>
   public Pens: PenDto[] = []
   @Select(InfrastructureState.penDict) PenDictionnary$!: Observable<Map<number, string>>
   public PenDictionnary: Map<number, string> = new Map<number, string>;
-  private Data$ = combineLatest([
-    this.CowIdentifierDictionnary$, 
-    this.CowNameDictionnary$,
-    this.JobsDetails$, 
-    this.Workers$, 
-    this.Gestations$, 
-    this.Groups$, 
-    this.GroupDictionnary$, 
-    this.Pens$, 
-    this.PenDictionnary$])
+  // private Data$ = combineLatest([
+  //   this.CowIdentifierDictionnary$, 
+  //   this.CowNameDictionnary$,
+  //   this.Workers$, 
+  //   this.Groups$, 
+  //   this.GroupDictionnary$, 
+  //   ])
 
   public Map!: L.Map;
   public MapInfos!: MapInfo;
@@ -73,19 +63,33 @@ export class DashboardComponent extends BaseComponent {
   // }
 
   private getData(): void{
-    this.Data$.pipe(
-      takeUntil(this.$OnDestroyed),
-      tap(([cid, cnd, j, w, ge, g, gd, p, pd]) => {
-        this.CowIdentifierDictionnary = cid;
-        this.CowNameDictionnary = cnd;
-        this.JobsDetails = j;
-        this.Workers = w;
-        this.Gestations = ge;
-        this.Groups = g;
-        this.GroupDictionnary = gd;
-        this.Pens = p;
-        this.PenDictionnary = pd;
-      })).subscribe();
+    // this.Data$.pipe(
+    //   takeUntil(this.$OnDestroyed),
+    //   tap(([cid, cnd, w, g, gd]) => {
+        // this.CowIdentifierDictionnary = cid;
+        // this.CowNameDictionnary = cnd;
+        // this.Workers = w;
+        // this.Groups = g;
+        // this.GroupDictionnary = gd;
+      // })).subscribe();
+
+      this.Workers$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        tap((w) => this.Workers = w))
+      .subscribe();
+
+      this.JobsDetails$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        tap((j) => this.JobsDetails = j))
+      .subscribe();
+
+      this.CurrentUserJobsDetails$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        tap((j) => this.JobsDetails = j))
+      .subscribe();
 
       this.Pens$
       .pipe(
@@ -105,17 +109,11 @@ export class DashboardComponent extends BaseComponent {
         tap((p) => this.PenDictionnary = p))
       .subscribe();
 
-    this.store.dispatch(new Cows.GetAll());
-    this.store.dispatch(new Gestations.GetAll());
-    this.store.dispatch(new Groups.GetAll());
-    this.store.dispatch(new Pens.GetAll());
-    this.store.dispatch(new Workers.GetAll());
     this.SetDateAsToday();
   }
 
   private initMap(): void{
     this.MapInfos = this.mapService.CreateAllPenMapInfos(this.Pens);
-    // this.mapService.CreatePenMapLayers(this.MapInfos.MapOptions.penMapLayers, this.Pens);
   }
 
   public onMapReady(map: any){
@@ -147,8 +145,16 @@ export class DashboardComponent extends BaseComponent {
   public SelectDate(): void{
     let ddate : string = moment(this.Date).format('YYYY-MM-DD');
     this.SelectedDate = ddate;
-    this.store.dispatch(new Jobs.GetAllByDate(ddate));
-    this.store.dispatch(new Jobs.GetAllDetailsByDate(ddate));
+    this.getJobDetails();
+  }
+
+  private getJobDetails(){
+    if(this.IsAdmin){
+      this.store.dispatch(new Jobs.GetAllDetailsByDate(this.SelectedDate));
+    }
+    else{
+      this.store.dispatch(new Jobs.GetAllDetailsByUserByDate(this.IdAuth, this.SelectedDate));
+    }
   }
 
   public SelectAll(): void{

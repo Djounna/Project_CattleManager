@@ -1910,6 +1910,56 @@
         }
       }
     },
+    "/api/Job/details/{userAuth}/{date}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "parameters": [
+          {
+            "name": "userAuth",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JobDetailsDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Job/{id}": {
       "get": {
         "tags": [
@@ -4881,9 +4931,9 @@
             "type": "string",
             "nullable": true
           },
-          "authId": {
-            "type": "integer",
-            "format": "int32"
+          "idAuth": {
+            "type": "string",
+            "nullable": true
           },
           "roleId": {
             "type": "integer",

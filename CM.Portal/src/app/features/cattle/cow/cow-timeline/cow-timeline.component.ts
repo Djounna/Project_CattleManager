@@ -1,7 +1,5 @@
-import { Component, inject, Input } from '@angular/core';
-import { CowDetailsDto } from '../../../../api/models';
+import { Component, Input } from '@angular/core';
 import { HistoryEvent } from '../../../../models/history/historyEvent';
-import { HistoryService } from '../../../../services/history.service';
 
 @Component({
   selector: 'app-cow-timeline',
@@ -11,14 +9,12 @@ import { HistoryService } from '../../../../services/history.service';
   styleUrl: './cow-timeline.component.scss'
 })
 export class CowTimelineComponent {
-  historyService = inject(HistoryService); 
 
-  public events: HistoryEvent[]=[];
-  private cowDetails!: CowDetailsDto;
-  get CowDetails(): CowDetailsDto{
-    return this.cowDetails;
+  private historyEvents: HistoryEvent[] = [];
+  @Input() set HistoryEvents (value: HistoryEvent[]){
+    this.historyEvents = value
   }
-  @Input() set CowDetails(value:CowDetailsDto){
-    this.events = this.historyService.GenerateHistoryEvents(value); 
+  get HistoryEvents(): HistoryEvent[]{
+    return this.historyEvents
   }
 }

@@ -59,7 +59,7 @@ export class GroupPageComponent extends BaseComponent {
   public CreateGroupDialog(): void {
     const dialogRef = this.dialogService.open(CreateGroupDialogComponent, {
       header: 'Créer un groupe',
-      height: '400px',
+      height: '500px',
       width: '350px',
     });
 
@@ -76,7 +76,7 @@ export class GroupPageComponent extends BaseComponent {
   public UpdateGroupDialog(group: GroupDto): void{
     const dialogref = this.dialogService.open(UpdateGroupDialogComponent, {
       header: 'Mettre à jour un groupe',
-      height: '400px',
+      height: '500px',
       width: '350px',
       data: group
     })

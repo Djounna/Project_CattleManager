@@ -49,6 +49,11 @@ export namespace Jobs{
         constructor(public date: string){}
     }
 
+    export class GetAllDetailsByUserByDate{
+        static readonly type ='[Jobs] Get All Jobs Details By User By Date'
+        constructor(public authId: string, public date: string){}
+    }
+
     export class Delete{
         static readonly type = '[Jobs] Delete Job'
         constructor(public id: number){}

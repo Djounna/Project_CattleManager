@@ -13,6 +13,7 @@ import { WorkStateModel } from "../work/work.state";
 @State<UserStateModel>({
   name: 'user',
   defaults: {
+    CurrentUserAuthId: '',
     UserRoles: [], 
     IsAdmin : false,
     IsWorker: false,
@@ -25,6 +26,11 @@ export class UserState {
     private authService: AuthService,
     private userService: UserManagementService
   ) { }
+
+  @Selector()
+  static CurrentUserAuthId(userState: UserStateModel){
+    return userState.CurrentUserAuthId;
+  }
 
   @Selector()
   static UserRoles(userState: UserStateModel){
@@ -60,7 +66,11 @@ getToken(ctx: StateContext<UserStateModel>){
     tap((token) =>{
         console.log('Final Token:', token);
         const decoded = jwtDecode<cmJwtPayload>(token);
+        console.log(decoded);
+        // const autId = decoded['cattlemanager/authId'];
         const roles = decoded['cattlemanager/roles'];
+        const sub = decoded['sub'];
+        ctx.patchState({ CurrentUserAuthId: sub });
         if (roles.includes('Manager')){
           ctx.patchState({IsAdmin : true})
         }

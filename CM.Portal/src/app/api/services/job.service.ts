@@ -375,6 +375,60 @@ export class JobService extends BaseService {
   }
 
   /**
+   * Path part for operation apiJobDetailsUserAuthDateGet
+   */
+  static readonly ApiJobDetailsUserAuthDateGetPath = '/api/Job/details/{userAuth}/{date}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiJobDetailsUserAuthDateGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiJobDetailsUserAuthDateGet$Response(params: {
+    userAuth: string;
+    date: string;
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<JobDetailsDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, JobService.ApiJobDetailsUserAuthDateGetPath, 'get');
+    if (params) {
+      rb.path('userAuth', params.userAuth, {});
+      rb.path('date', params.date, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<JobDetailsDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiJobDetailsUserAuthDateGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiJobDetailsUserAuthDateGet(params: {
+    userAuth: string;
+    date: string;
+    context?: HttpContext
+  }
+): Observable<Array<JobDetailsDto>> {
+
+    return this.apiJobDetailsUserAuthDateGet$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<JobDetailsDto>>) => r.body as Array<JobDetailsDto>)
+    );
+  }
+
+  /**
    * Path part for operation apiJobIdGet
    */
   static readonly ApiJobIdGetPath = '/api/Job/{id}';

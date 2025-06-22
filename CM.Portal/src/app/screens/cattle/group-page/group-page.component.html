@@ -2,7 +2,7 @@
 
     <div class="flex flex-row justify-content-start align-content-center">
         <div class="flex flex-row justify-content-end gap-3">
-            <p-button label="Ajouter" (click)="CreateGroupDialog()"></p-button> 
+            <p-button *ngIf="IsAdmin" label="Ajouter" (click)="CreateGroupDialog()"></p-button> 
         </div>
     </div>
 

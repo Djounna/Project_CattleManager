@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { JobDetailsDto, JobDto, PenDto, UserDto } from '../../../api/models';
+import { JobDetailsDto, PenDto, UserDto } from '../../../api/models';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { AssignJobDialogComponent } from '../job/assign-job-dialog/assign-job-dialog.component';
 import { Table } from 'primeng/table';
 import { MenuItem } from 'primeng/api/menuitem';
-import { Jobs } from '../../../state/work/work.actions';
-import { JobStatus } from '../../../models/enums/workEnums';
 import { UpdateJobDialogComponent } from '../job/update-job-dialog/update-job-dialog.component';
 
 @Component({
@@ -18,6 +16,7 @@ export class JobDetailsListComponent extends BaseComponent {
   @Input() Workers : UserDto[] = []
   @Output() onJobUpdated: EventEmitter<void> = new EventEmitter<void>()
   @Output() onFocusJob : EventEmitter<JobDetailsDto> = new EventEmitter<JobDetailsDto>();
+  @Input() ShowZoomOption: boolean = true;
 
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
@@ -29,6 +28,9 @@ export class JobDetailsListComponent extends BaseComponent {
   }   
   public get Jobs(): JobDetailsDto[] {
     return this.jobs;
+  }
+  public get FilteredJobs(): JobDetailsDto[]{
+    return this.filteredJobs;
   }
 
   public menuItems:MenuItem[] | undefined;
@@ -65,7 +67,7 @@ export class JobDetailsListComponent extends BaseComponent {
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result !== null)
+      if(result != null)
         this.onJobUpdated.next();
     });
   }
@@ -73,13 +75,13 @@ export class JobDetailsListComponent extends BaseComponent {
   public updateJobDialog(job: any): void{
     const dialogRef = this.dialogService.open(UpdateJobDialogComponent, {
       header: 'Mettre à jour une tâche',
-      height: '450px',
+      height: '300px',
       width: '300px',
       data: {Job: job},
     });
 
     dialogRef.onClose.subscribe(result => {
-      if(result !== null)
+      if(result != null)
         this.onJobUpdated.next();
     });
   }

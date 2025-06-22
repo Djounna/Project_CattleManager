@@ -2,12 +2,12 @@
 
     <div class="flex flex-row justify-content-between gap-4">
 
-        <div class="flex flex-column" style="flex-grow:1">
+        <div class="flex flex-column">
 
             <div class="flex flex-row justify-content-start align-content-center">
                 <div class="flex flex-row justify-content-between gap-3">
                     <p-button label="Tout" (click)="ShowAll()"></p-button>
-                    <p-button label="Ajouter" (click)="CreateCowDialog()"></p-button>
+                    <p-button *ngIf="IsAdmin" label="Ajouter" (click)="CreateCowDialog()"></p-button>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="flex flex-column" style="flex-grow:3;">
+        <div class="flex flex-column" style="flex-grow:4;">
             <app-cows-list-view #cowList [Cows]="Cows" (onUpdate)="UpdateCowDialog($event)" (onSelectCow)="SelectCow($event)"></app-cows-list-view>
         </div>
 

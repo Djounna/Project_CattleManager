@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogService } from "primeng/dynamicdialog";
-import { Store } from "@ngxs/store";
+import { Select, Store } from "@ngxs/store";
 import { MessageService } from "primeng/api";
-import { Subject } from "rxjs";
+import { Observable, Subject, tap } from "rxjs";
 import { LoaderService } from "../services/loader.service";
 import { UserState } from "../state/user/user.store";
 
@@ -27,14 +27,17 @@ export class BaseComponent implements OnInit, OnDestroy {
     // @Select(UserState.IsWorker) IsWorker$! : Observable<boolean>;
     public IsAdmin: boolean = false;
     public IsWorker: boolean = false;
+    public IdAuth: string = ''
 
     ngOnInit(): void{
         // this.IsAdmin$.pipe(tap((res) => this.IsAdmin = res)).subscribe();
         // this.IsWorker$.pipe(tap((res) => this.IsWorker = res)).subscribe();
         this.IsAdmin = this.store.selectSnapshot(UserState.IsAdmin);
         this.IsWorker = this.store.selectSnapshot(UserState.IsWorker);
+        this.IdAuth = this.store.selectSnapshot(UserState.CurrentUserAuthId);
         console.log('IsAdmin : '); console.log(this.IsAdmin);
         console.log('IsWorker : '); console.log(this.IsWorker);
+        console.log('IdAuth : '); console.log(this.IdAuth);
     }
 
     ngOnDestroy(): void {

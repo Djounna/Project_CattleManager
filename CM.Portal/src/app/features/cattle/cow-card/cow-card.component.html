@@ -1,6 +1,6 @@
 <p-card [style]="{ width: '20rem', overflow: 'hidden' }">
     <ng-template #header>
-        <img alt="Card" src="assets\images\group\cow_icon.webp" />
+        <img alt="Card" src="assets\images\cattle\{{Cow?.imgLink}}" />
     </ng-template>
     <ng-template #title> {{Cow.identifier}} </ng-template>
     <ng-template #subtitle> {{Cow.name}} </ng-template>
@@ -9,10 +9,10 @@
     </p>
     <p-divider/>
     <p>
-        Group : {{Cow.groupId | groupName}}
+        Groupe : {{Cow.groupId | groupName}}
     </p>
     <p>
-        Pen : {{Cow.penId | penName}}
+        Enclos : {{Cow.penId | penName}}
     </p>
     <p-divider/>
     <ng-template #footer>

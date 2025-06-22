@@ -38,11 +38,6 @@ export class CowCardComponent implements OnInit {
           command: () => {this.onAddVaccination.emit(this.Cow)}
         },
         {
-          label: 'Gestation',
-          icon: 'pi pi-plus-circle',
-          command: () => {this.onAddGestation.emit(this.Cow)}
-        },
-        {
           label: 'Affection',
           icon: 'pi pi-plus-circle',
           command: () => {this.onAddCondition.emit(this.Cow)}
@@ -54,6 +49,21 @@ export class CowCardComponent implements OnInit {
         },
       ]
     }]
+
+    if(this.Cow.gender === 'F'){
+      this.menuItems.push(
+        {
+          label:'Options',
+          items:[
+            {
+              label: 'Gestation',
+              icon: 'pi pi-plus-circle',
+              command: () => {this.onAddGestation.emit(this.Cow)}
+            }
+          ]
+        }
+      );
+    }
   }
 
   public UpdateCow(cow: CowDto){
