@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**apiJobDelete**](JobApi.md#apijobdelete) | **DELETE** /api/Job | 
 [**apiJobDetailsDateGet**](JobApi.md#apijobdetailsdateget) | **GET** /api/Job/details/date | 
 [**apiJobDetailsGet**](JobApi.md#apijobdetailsget) | **GET** /api/Job/details | 
+[**apiJobDetailsUserAuthDateGet**](JobApi.md#apijobdetailsuserauthdateget) | **GET** /api/Job/details/{userAuth}/{date} | 
 [**apiJobGet**](JobApi.md#apijobget) | **GET** /api/Job | 
 [**apiJobIdGet**](JobApi.md#apijobidget) | **GET** /api/Job/{id} | 
 [**apiJobPost**](JobApi.md#apijobpost) | **POST** /api/Job | 
@@ -186,6 +187,55 @@ try {
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+[**List<JobDetailsDto>**](JobDetailsDto.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiJobDetailsUserAuthDateGet**
+> List<JobDetailsDto> apiJobDetailsUserAuthDateGet(userAuth, date)
+
+
+
+### Example
+```dart
+import 'package:CM_api/api.dart';
+// TODO Configure HTTP Bearer authorization: Bearer
+// Case 1. Use String Token
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken('YOUR_ACCESS_TOKEN');
+// Case 2. Use Function which generate token.
+// String yourTokenGeneratorFunction() { ... }
+//defaultApiClient.getAuthentication<HttpBearerAuth>('Bearer').setAccessToken(yourTokenGeneratorFunction);
+
+final api_instance = JobApi();
+final userAuth = userAuth_example; // String | 
+final date = date_example; // String | 
+
+try {
+    final result = api_instance.apiJobDetailsUserAuthDateGet(userAuth, date);
+    print(result);
+} catch (e) {
+    print('Exception when calling JobApi->apiJobDetailsUserAuthDateGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userAuth** | **String**|  | 
+ **date** | **String**|  | 
 
 ### Return type
 

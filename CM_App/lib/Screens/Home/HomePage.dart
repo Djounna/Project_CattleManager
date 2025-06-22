@@ -47,7 +47,10 @@ class _HomePageState extends State<HomePage> {
 
     void GetWorkerJobs() async{
       try{
-        List<JobDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDateGet()
+        //List<JobDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDateGet()
+      }
+      catch(exception){
+
       }
     }
 
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   //Map<String, dynamic> decodedToken = JwtDecoder.decode(_credentials);
 
                   GetCows();
-                  GetWorkerJobs(_credentials);
+                  GetWorkerJobs();
 
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(

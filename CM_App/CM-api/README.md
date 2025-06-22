@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *JobApi* | [**apiJobDelete**](doc//JobApi.md#apijobdelete) | **DELETE** /api/Job | 
 *JobApi* | [**apiJobDetailsDateGet**](doc//JobApi.md#apijobdetailsdateget) | **GET** /api/Job/details/date | 
 *JobApi* | [**apiJobDetailsGet**](doc//JobApi.md#apijobdetailsget) | **GET** /api/Job/details | 
+*JobApi* | [**apiJobDetailsUserAuthDateGet**](doc//JobApi.md#apijobdetailsuserauthdateget) | **GET** /api/Job/details/{userAuth}/{date} | 
 *JobApi* | [**apiJobGet**](doc//JobApi.md#apijobget) | **GET** /api/Job | 
 *JobApi* | [**apiJobIdGet**](doc//JobApi.md#apijobidget) | **GET** /api/Job/{id} | 
 *JobApi* | [**apiJobPost**](doc//JobApi.md#apijobpost) | **POST** /api/Job | 

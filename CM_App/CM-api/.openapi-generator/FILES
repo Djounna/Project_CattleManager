@@ -127,4 +127,3 @@ lib/model/user_input.dart
 lib/model/vaccination_dto.dart
 lib/model/worker_job_dto.dart
 pubspec.yaml
-test/cow_genealogy_dto_test.dart

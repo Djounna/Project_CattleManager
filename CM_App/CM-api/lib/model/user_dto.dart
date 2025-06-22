@@ -16,7 +16,7 @@ class UserDto {
     this.id,
     this.username,
     this.email,
-    this.authId,
+    this.idAuth,
     this.roleId,
   });
 
@@ -32,13 +32,7 @@ class UserDto {
 
   String? email;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  int? authId;
+  String? idAuth;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -55,7 +49,7 @@ class UserDto {
           other.id == id &&
           other.username == username &&
           other.email == email &&
-          other.authId == authId &&
+          other.idAuth == idAuth &&
           other.roleId == roleId;
 
   @override
@@ -64,12 +58,12 @@ class UserDto {
       (id == null ? 0 : id!.hashCode) +
       (username == null ? 0 : username!.hashCode) +
       (email == null ? 0 : email!.hashCode) +
-      (authId == null ? 0 : authId!.hashCode) +
+      (idAuth == null ? 0 : idAuth!.hashCode) +
       (roleId == null ? 0 : roleId!.hashCode);
 
   @override
   String toString() =>
-      'UserDto[id=$id, username=$username, email=$email, authId=$authId, roleId=$roleId]';
+      'UserDto[id=$id, username=$username, email=$email, idAuth=$idAuth, roleId=$roleId]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -88,10 +82,10 @@ class UserDto {
     } else {
       json[r'email'] = null;
     }
-    if (this.authId != null) {
-      json[r'authId'] = this.authId;
+    if (this.idAuth != null) {
+      json[r'idAuth'] = this.idAuth;
     } else {
-      json[r'authId'] = null;
+      json[r'idAuth'] = null;
     }
     if (this.roleId != null) {
       json[r'roleId'] = this.roleId;
@@ -125,7 +119,7 @@ class UserDto {
         id: mapValueOfType<int>(json, r'id'),
         username: mapValueOfType<String>(json, r'username'),
         email: mapValueOfType<String>(json, r'email'),
-        authId: mapValueOfType<int>(json, r'authId'),
+        idAuth: mapValueOfType<String>(json, r'idAuth'),
         roleId: mapValueOfType<int>(json, r'roleId'),
       );
     }
