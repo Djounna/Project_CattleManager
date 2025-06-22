@@ -99,8 +99,9 @@ class _CowsPageState extends State<CowsPage> {
         appContext.setSelectedCow(result);
         //Navigator.of(context).pop();
         if (appContext.getSelectedCow() != null) {
+          Navigator.of(context).pop();
           showDialog(
-              barrierDismissible: false,
+              barrierDismissible: true,
               context: context,
               builder: (_) {
                 //return CowDetailsDialog(cowDetails: selectedCow);
@@ -111,25 +112,12 @@ class _CowsPageState extends State<CowsPage> {
         }
       }
       catch(e){
+        Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content: Text(e.toString()),
                 duration: const Duration(seconds :3)
             )
-        );
-      }
-
-      Navigator.of(context).pop();
-      //await GetSelectedCowDetails(cow.id!);
-      //if(selectedCow != null){
-      if(appContext.getSelectedCow() != null){
-        showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (_) {
-            //return CowDetailsDialog(cowDetails: selectedCow);
-            return CowDetailsDialog(cowDetails: appContext.getSelectedCow());
-          }
         );
       }
     }
