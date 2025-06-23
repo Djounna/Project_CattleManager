@@ -18,8 +18,8 @@ class JobsPage extends StatefulWidget {
 
 class _JobsPageState extends State<JobsPage> {
 
-  List<JobDto>? jobsList = [];
-  List<JobDto>? filteredJobsList = [];
+  List<JobDetailsDto>? jobsList = [];
+  List<JobDetailsDto>? filteredJobsList = [];
   JobDetailsDto? selectedJob;
   ValueNotifier<String> search = ValueNotifier<String>('');
 
@@ -45,7 +45,6 @@ class _JobsPageState extends State<JobsPage> {
             barrierDismissible: false,
             context: context,
             builder: (_) {
-              //return CowDetailsDialog(cowDetails: selectedCow);
               return UpdateJobDialog(
                   job: appContext.getSelectedCow());
             }
@@ -54,9 +53,9 @@ class _JobsPageState extends State<JobsPage> {
     }
 
     // Beginning of logic
-    if(appContext.getJobs() != null){
+    if(appContext.getWorkerJobs()!= null){
       setState(() {
-        jobsList = appContext.getJobs();
+        jobsList = appContext.getWorkerJobs();
         filteredJobsList = [...jobsList!];
       });
     }
@@ -83,16 +82,6 @@ class _JobsPageState extends State<JobsPage> {
                       padding: const EdgeInsets.all(5.0),
                       child: CustomSearchBar(onSearch: _onSearch),
                     )),
-                Container(
-                    padding: const EdgeInsets.all(5.0),
-                    margin: const EdgeInsets.only(right: 20.0),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey
-                        ),
-                        onPressed: () => {},
-                        child: const Icon(Icons.refresh))
-                )
               ],
             ),
             Expanded(
@@ -111,10 +100,11 @@ class _JobsPageState extends State<JobsPage> {
                                   shrinkWrap: true,
                                   itemCount: filteredJobsList!.length,
                                   prototypeItem: JobListItem(
-                                      job: filteredJobsList!.first,
-                                      onSelect : onSelect),
+                                      job: filteredJobsList!.first
+                                  ),
                                   itemBuilder: (context, index){
-                                    return JobListItem(job: filteredJobsList![index], onSelect: onSelect); },
+                                    return JobListItem(
+                                        job: filteredJobsList![index]); },
                                 ),
                               );
                             }

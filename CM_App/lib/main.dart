@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       routes:{
         '/cows' : (context) => const CowsPage(),
         '/jobs' : (context) => const JobsPage(),
-        '/milkings': (context) => const MilkingsPage()
+        //'/milkings': (context) => const MilkingsPage()
       }
     )
    );
