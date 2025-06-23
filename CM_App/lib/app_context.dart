@@ -14,6 +14,7 @@ class AppContext with ChangeNotifier{
   List<PenDto>? _pens;
   PenDetailsDto? _selectedPen;
   List<JobDto>? _jobs;
+  List<JobDetailsDto>? _workerJobs;
   JobDto? _selectedJob;
   List<MilkingDto>? _milkings;
 
@@ -53,6 +54,11 @@ class AppContext with ChangeNotifier{
   getSelectedJob() => _selectedJob;
   setSelectedJob(JobDto? job) {
     _selectedJob = job;
+  }
+
+  getWorkerJobs() => _workerJobs;
+  setWorkerJobs(List<JobDetailsDto>? jobs){
+    _workerJobs = jobs;
   }
 
   getMilkings() => _milkings;

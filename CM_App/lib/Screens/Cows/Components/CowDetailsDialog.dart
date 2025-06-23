@@ -13,14 +13,14 @@ class CowDetailsDialog extends StatelessWidget {
     final sizeY = MediaQuery.of(context).size.height;
 
     return SimpleDialog(
-        title: Text('Nom : ${cowDetails!.identifier}'),
+        title: Text('Nom : ${cowDetails!.name}'),
         children: [
           SizedBox(
-            height: sizeY/3,
+            height: sizeY/4,
             width: sizeX/2,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Padding(

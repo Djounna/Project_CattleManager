@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Shared/Dialog/Loading_Dialog.dart';
 import '../../Shared/DrawerContent.dart';
+import 'Components/CreateCowAlertDialog.dart';
 
 class CowsPage extends StatefulWidget {
   const CowsPage({super.key});
@@ -97,14 +98,12 @@ class _CowsPageState extends State<CowsPage> {
             .apiCowIdDetailsGet(cow.id!);
         selectedCow = result;
         appContext.setSelectedCow(result);
-        //Navigator.of(context).pop();
         if (appContext.getSelectedCow() != null) {
           Navigator.of(context).pop();
           showDialog(
               barrierDismissible: true,
               context: context,
               builder: (_) {
-                //return CowDetailsDialog(cowDetails: selectedCow);
                 return CowDetailsDialog(
                     cowDetails: appContext.getSelectedCow());
               }
@@ -120,6 +119,18 @@ class _CowsPageState extends State<CowsPage> {
             )
         );
       }
+    }
+
+    void CreateAlert(CowDto cow){
+      showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (_) {
+            //return CowDetailsDialog(cowDetails: selectedCow);
+            return CreateCowAlertDialog(
+                cow: cow);
+          }
+      );
     }
 
     // Beginning of display logic
@@ -156,16 +167,6 @@ class _CowsPageState extends State<CowsPage> {
                     padding: const EdgeInsets.all(5.0),
                     child: CustomSearchBar(onSearch: _onSearch),
                   )),
-              Container(
-                padding: const EdgeInsets.all(5.0),
-                margin: const EdgeInsets.only(right: 20.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey
-                  ),
-                   onPressed: () => {},
-                    child: const Icon(Icons.refresh))
-              )
             ],
           ),
           Expanded(
@@ -185,9 +186,16 @@ class _CowsPageState extends State<CowsPage> {
                             itemCount: filteredCowsList!.length,
                             prototypeItem: CowListItem(
                               cow: filteredCowsList!.first,
-                              onSelect : onSelect),
+                              onSelect : onSelect,
+                              createAlert: CreateAlert,
+                            ),
                             itemBuilder: (context, index){
-                              return CowListItem(cow: filteredCowsList![index], onSelect: onSelect);
+                              return CowListItem(
+                                  cow: filteredCowsList![index],
+                                  onSelect: onSelect,
+                                  createAlert:  CreateAlert,
+
+                              );
                             },
                           ),
                         );
@@ -201,11 +209,3 @@ class _CowsPageState extends State<CowsPage> {
     );
   }
 }
-
-  //showDialog(
-  //barrierDismissible: false,
-  //context: context,
-  //builder: (_) {
-  //return const LoadingDialog(text:'Chargement');
-  //});
-

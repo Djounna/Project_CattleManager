@@ -1,11 +1,8 @@
 import 'package:CM_api/api.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:cm_app/Screens/Cows/CowsPage.dart';
-import 'package:cm_app/Shared/DrawerContent.dart';
-import 'package:cm_app/Shared/TopAppBar.dart';
 import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,10 +27,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final appContext = Provider.of<AppContext>(context);
 
-    void GetCows() async{
+    Future<void> GetCows() async{
       try{
         List<CowDto>? cows = await appContext.clientApi.cowApi!.apiCowGet();
         appContext.setCows(cows);
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+
+            )
+        );
+      }
+    }
+
+    Future<void> GetWorkerJobs() async{
+      try{
+        DateTime today = DateTime.now();
+        List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet(_credentials!.user.sub, today.toString());
+        appContext.setWorkerJobs(workerJobs);
       }
       catch(e){
         ScaffoldMessenger.of(context).showSnackBar(
@@ -45,18 +59,9 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    void GetWorkerJobs() async{
-      try{
-        //List<JobDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDateGet()
-      }
-      catch(exception){
-
-      }
-    }
-
     return Scaffold(
-      appBar: const TopAppBar(),
-      drawer: const DrawerContent(),
+      //appBar: const TopAppBar(),
+      //drawer: const DrawerContent(),
       body:
       Center(
         child: ElevatedButton(
@@ -77,8 +82,8 @@ class _HomePageState extends State<HomePage> {
 
                   //Map<String, dynamic> decodedToken = JwtDecoder.decode(_credentials);
 
-                  GetCows();
-                  GetWorkerJobs();
+                  await GetCows();
+                  await GetWorkerJobs();
 
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
