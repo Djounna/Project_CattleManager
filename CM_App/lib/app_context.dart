@@ -70,5 +70,6 @@ class AppContext with ChangeNotifier{
     setCows(null);
     setMilkings(null);
     setJobs(null);
+    setWorkerJobs(null);
   }
 }
