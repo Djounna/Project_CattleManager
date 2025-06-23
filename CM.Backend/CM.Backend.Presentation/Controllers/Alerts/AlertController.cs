@@ -69,7 +69,7 @@ public class AlertController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPost]
-    [Authorize("write:events")]
+    //[Authorize("write:events")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AlertDto>> Create([FromBody]AlertDto dto)
