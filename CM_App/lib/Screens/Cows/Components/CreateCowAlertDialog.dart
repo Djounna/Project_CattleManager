@@ -20,7 +20,7 @@ class _CreateCowAlertDialogState extends State<CreateCowAlertDialog> {
   final List<String> _options = ['Haut', 'Moyen', 'Bas'];
   String? _title = "";
   String? _description = "";
-  String _level = "";
+  String _level = "Bas";
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -49,16 +49,17 @@ class _CreateCowAlertDialogState extends State<CreateCowAlertDialog> {
           title : _title,
           description: _description,
           level: _level,
+          done: false
         );
 
-          appContext.clientApi.alertApi!.apiAlertPost(alertDto: newAlert);
-          Navigator.of(context).pop();
+          await appContext.clientApi.alertApi!.apiAlertPost(alertDto: newAlert);
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                   content: Text("L'alerte a été ajoutée avec succès"),
                   duration: const Duration(seconds :3)
               )
           );
+          Navigator.of(context).pop();
           Navigator.of(context).pop();
       }
       catch(e){
@@ -73,7 +74,7 @@ class _CreateCowAlertDialogState extends State<CreateCowAlertDialog> {
     }
 
     return SimpleDialog(
-        title: Text('Créer une alarme pour  ${widget.cow.name}'),
+        title: Text('Créer une alarme pour  ${widget.cow.identifier}'),
         children: [
           SizedBox(
               height: sizeY/3,
@@ -101,6 +102,7 @@ class _CreateCowAlertDialogState extends State<CreateCowAlertDialog> {
                                 }
                                 return null;
                               },
+                              onSaved: (value) => _title = value!
                             ),
 
                             TextFormField(
@@ -114,6 +116,7 @@ class _CreateCowAlertDialogState extends State<CreateCowAlertDialog> {
                                 }
                                 return null;
                               },
+                                onSaved: (value) => _description = value!
                             ),
 
                             DropdownButtonFormField<String>(

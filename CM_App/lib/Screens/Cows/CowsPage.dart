@@ -194,7 +194,6 @@ class _CowsPageState extends State<CowsPage> {
                                   cow: filteredCowsList![index],
                                   onSelect: onSelect,
                                   createAlert:  CreateAlert,
-
                               );
                             },
                           ),
