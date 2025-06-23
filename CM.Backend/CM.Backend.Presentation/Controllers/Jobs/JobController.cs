@@ -80,7 +80,7 @@ public class JobController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet, Route("details/{userAuth}/{date}")]
-    [Authorize("read:jobs")]
+    //[Authorize("read:jobs")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)

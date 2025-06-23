@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
             SnackBar(
                 content: Text(e.toString()),
                 duration: const Duration(seconds :3)
-
             )
         );
       }
@@ -45,8 +44,9 @@ class _HomePageState extends State<HomePage> {
 
     Future<void> GetWorkerJobs() async{
       try{
-        DateTime today = DateTime.now();
-        List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet(_credentials!.user.sub, today.toString());
+        DateTime now = DateTime.now();
+        String dateOnly = now.toIso8601String().split('T').first;
+        List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet(_credentials!.user.sub, dateOnly);
         appContext.setWorkerJobs(workerJobs);
       }
       catch(e){
@@ -60,39 +60,31 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      //appBar: const TopAppBar(),
-      //drawer: const DrawerContent(),
       body:
       Center(
         child: ElevatedButton(
             onPressed:() async {
               final credentials =
-                  await auth0.webAuthentication(scheme:"cm").login(useHTTPS: true);
+              await auth0.webAuthentication(scheme:"cm").login(useHTTPS: true);
 
-              //setState(() {
+              _credentials = credentials;
+              appContext.setCredentials(_credentials!);
+              if (_credentials!.accessToken != null){
 
-                _credentials = credentials;
-                appContext.setCredentials(_credentials!);
-                if (_credentials!.accessToken != null){
+                appContext.clientApi.apiClient?.addDefaultHeader(
+                    'authorization',
+                    'Bearer ${_credentials!.accessToken}'
+                );
 
-                  appContext.clientApi.apiClient?.addDefaultHeader(
-                      'authorization',
-                      'Bearer ${_credentials!.accessToken}'
-                  );
+                await GetCows();
+                await GetWorkerJobs();
 
-                  //Map<String, dynamic> decodedToken = JwtDecoder.decode(_credentials);
-
-                  await GetCows();
-                  await GetWorkerJobs();
-
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const CowsPage()),
-                      ModalRoute.withName('cows')
-                  );
-                }
-
-              //});
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const CowsPage()),
+                    ModalRoute.withName('cows')
+                );
+              }
             },
             child: const Text("Log in")
         ),
