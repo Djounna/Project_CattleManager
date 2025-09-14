@@ -14,7 +14,7 @@ var configuration = builder.Configuration;
 
 // Add JwtBearer Authentication
 builder.Services.AddAuthenticationJwtBearer(configuration);
-
+builder.Services.AddUserContext(configuration);
 // Add Application Services
 builder.Services.AddApplicationServices();
 // Add Persistence Services
