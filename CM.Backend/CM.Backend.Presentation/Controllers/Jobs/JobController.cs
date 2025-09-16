@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using CM.Backend.Application.Services.Job.Queries;
 using CM.Backend.Application.Services.Job.Commands;
 using CM.Backend.Application.Models.Jobs;
+using CM.Backend.Presentation.Services;
 
 namespace CM.Backend.Presentation.Controllers.Jobs;
 
@@ -13,14 +14,16 @@ namespace CM.Backend.Presentation.Controllers.Jobs;
 public class JobController : ControllerBase
 {
     public readonly IMediator _mediator;
+    public readonly UserContext _userContext;
 
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="mediator"></param>
-    public JobController(IMediator mediator)
+    public JobController(IMediator mediator, UserContext userContext)
     {
         _mediator = mediator;  
+        _userContext = userContext;
     }
 
     /// <summary>
@@ -83,9 +86,13 @@ public class JobController : ControllerBase
     //[Authorize("read:jobs")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)
+    //public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)
+    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string date)
     {
-        return Ok(await _mediator.Send(new GetJobsDetailsByUserByDateQuery(userAuth, date)));
+        var userAuthId = _userContext.GetAuth0Id();
+        var roles = _userContext.GetCurrentUserRoles();
+
+        return Ok(await _mediator.Send(new GetJobsDetailsByUserByDateQuery(userAuthId, date)));
     }
 
     /// <summary>

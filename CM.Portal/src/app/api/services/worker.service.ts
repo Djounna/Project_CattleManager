@@ -1,30 +1,25 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiWorkerGet } from '../fn/worker/api-worker-get';
+import { ApiWorkerGet$Params } from '../fn/worker/api-worker-get';
 import { UserDto } from '../models/user-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class WorkerService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiWorkerGet
-   */
+  /** Path part for operation `apiWorkerGet()` */
   static readonly ApiWorkerGetPath = '/api/Worker';
 
   /**
@@ -33,40 +28,19 @@ export class WorkerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiWorkerGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<UserDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, WorkerService.ApiWorkerGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<UserDto>>;
-      })
-    );
+  apiWorkerGet$Response(params?: ApiWorkerGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<UserDto>>> {
+    return apiWorkerGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiWorkerGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiWorkerGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<UserDto>> {
-
-    return this.apiWorkerGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<UserDto>>) => r.body as Array<UserDto>)
+  apiWorkerGet(params?: ApiWorkerGet$Params, context?: HttpContext): Observable<Array<UserDto>> {
+    return this.apiWorkerGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<UserDto>>): Array<UserDto> => r.body)
     );
   }
 

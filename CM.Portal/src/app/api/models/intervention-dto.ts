@@ -2,9 +2,9 @@
 /* eslint-disable */
 export interface InterventionDto {
   cowId?: number;
-  date?: null | string;
-  description?: null | string;
+  date?: string | null;
+  description?: string | null;
   id?: number;
-  intervenantId?: null | number;
-  type?: null | string;
+  intervenantId?: number | null;
+  type?: string | null;
 }

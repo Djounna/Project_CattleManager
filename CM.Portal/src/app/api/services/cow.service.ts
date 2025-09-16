@@ -1,32 +1,39 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiCowDelete } from '../fn/cow/api-cow-delete';
+import { ApiCowDelete$Params } from '../fn/cow/api-cow-delete';
+import { apiCowGet } from '../fn/cow/api-cow-get';
+import { ApiCowGet$Params } from '../fn/cow/api-cow-get';
+import { apiCowIdDetailsGet } from '../fn/cow/api-cow-id-details-get';
+import { ApiCowIdDetailsGet$Params } from '../fn/cow/api-cow-id-details-get';
+import { apiCowIdGenealogyGet } from '../fn/cow/api-cow-id-genealogy-get';
+import { ApiCowIdGenealogyGet$Params } from '../fn/cow/api-cow-id-genealogy-get';
+import { apiCowIdGet } from '../fn/cow/api-cow-id-get';
+import { ApiCowIdGet$Params } from '../fn/cow/api-cow-id-get';
+import { apiCowPost } from '../fn/cow/api-cow-post';
+import { ApiCowPost$Params } from '../fn/cow/api-cow-post';
+import { apiCowPut } from '../fn/cow/api-cow-put';
+import { ApiCowPut$Params } from '../fn/cow/api-cow-put';
 import { CowDetailsDto } from '../models/cow-details-dto';
 import { CowDto } from '../models/cow-dto';
 import { CowGenealogyDto } from '../models/cow-genealogy-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class CowService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiCowIdGet
-   */
+  /** Path part for operation `apiCowIdGet()` */
   static readonly ApiCowIdGetPath = '/api/Cow/{id}';
 
   /**
@@ -35,49 +42,23 @@ export class CowService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<CowDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CowDto>;
-      })
-    );
+  apiCowIdGet$Response(params: ApiCowIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<CowDto>> {
+    return apiCowIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<CowDto> {
-
-    return this.apiCowIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<CowDto>) => r.body as CowDto)
+  apiCowIdGet(params: ApiCowIdGet$Params, context?: HttpContext): Observable<CowDto> {
+    return this.apiCowIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CowDto>): CowDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowIdDetailsGet
-   */
+  /** Path part for operation `apiCowIdDetailsGet()` */
   static readonly ApiCowIdDetailsGetPath = '/api/Cow/{id}/details';
 
   /**
@@ -86,49 +67,23 @@ export class CowService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdDetailsGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<CowDetailsDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowIdDetailsGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CowDetailsDto>;
-      })
-    );
+  apiCowIdDetailsGet$Response(params: ApiCowIdDetailsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<CowDetailsDto>> {
+    return apiCowIdDetailsGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowIdDetailsGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdDetailsGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<CowDetailsDto> {
-
-    return this.apiCowIdDetailsGet$Response(params).pipe(
-      map((r: StrictHttpResponse<CowDetailsDto>) => r.body as CowDetailsDto)
+  apiCowIdDetailsGet(params: ApiCowIdDetailsGet$Params, context?: HttpContext): Observable<CowDetailsDto> {
+    return this.apiCowIdDetailsGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CowDetailsDto>): CowDetailsDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowIdGenealogyGet
-   */
+  /** Path part for operation `apiCowIdGenealogyGet()` */
   static readonly ApiCowIdGenealogyGetPath = '/api/Cow/{id}/genealogy';
 
   /**
@@ -137,49 +92,23 @@ export class CowService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdGenealogyGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<CowGenealogyDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowIdGenealogyGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CowGenealogyDto>;
-      })
-    );
+  apiCowIdGenealogyGet$Response(params: ApiCowIdGenealogyGet$Params, context?: HttpContext): Observable<StrictHttpResponse<CowGenealogyDto>> {
+    return apiCowIdGenealogyGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowIdGenealogyGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiCowIdGenealogyGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<CowGenealogyDto> {
-
-    return this.apiCowIdGenealogyGet$Response(params).pipe(
-      map((r: StrictHttpResponse<CowGenealogyDto>) => r.body as CowGenealogyDto)
+  apiCowIdGenealogyGet(params: ApiCowIdGenealogyGet$Params, context?: HttpContext): Observable<CowGenealogyDto> {
+    return this.apiCowIdGenealogyGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CowGenealogyDto>): CowGenealogyDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowGet
-   */
+  /** Path part for operation `apiCowGet()` */
   static readonly ApiCowGetPath = '/api/Cow';
 
   /**
@@ -188,46 +117,23 @@ export class CowService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCowGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<CowDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<CowDto>>;
-      })
-    );
+  apiCowGet$Response(params?: ApiCowGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CowDto>>> {
+    return apiCowGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiCowGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<CowDto>> {
-
-    return this.apiCowGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<CowDto>>) => r.body as Array<CowDto>)
+  apiCowGet(params?: ApiCowGet$Params, context?: HttpContext): Observable<Array<CowDto>> {
+    return this.apiCowGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<CowDto>>): Array<CowDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowPut
-   */
+  /** Path part for operation `apiCowPut()` */
   static readonly ApiCowPutPath = '/api/Cow';
 
   /**
@@ -236,49 +142,23 @@ export class CowService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCowPut$Response(params?: {
-    context?: HttpContext
-    body?: CowDto
-  }
-): Observable<StrictHttpResponse<CowDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CowDto>;
-      })
-    );
+  apiCowPut$Response(params?: ApiCowPut$Params, context?: HttpContext): Observable<StrictHttpResponse<CowDto>> {
+    return apiCowPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCowPut(params?: {
-    context?: HttpContext
-    body?: CowDto
-  }
-): Observable<CowDto> {
-
-    return this.apiCowPut$Response(params).pipe(
-      map((r: StrictHttpResponse<CowDto>) => r.body as CowDto)
+  apiCowPut(params?: ApiCowPut$Params, context?: HttpContext): Observable<CowDto> {
+    return this.apiCowPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CowDto>): CowDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowPost
-   */
+  /** Path part for operation `apiCowPost()` */
   static readonly ApiCowPostPath = '/api/Cow';
 
   /**
@@ -287,49 +167,23 @@ export class CowService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCowPost$Response(params?: {
-    context?: HttpContext
-    body?: CowDto
-  }
-): Observable<StrictHttpResponse<CowDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CowDto>;
-      })
-    );
+  apiCowPost$Response(params?: ApiCowPost$Params, context?: HttpContext): Observable<StrictHttpResponse<CowDto>> {
+    return apiCowPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCowPost(params?: {
-    context?: HttpContext
-    body?: CowDto
-  }
-): Observable<CowDto> {
-
-    return this.apiCowPost$Response(params).pipe(
-      map((r: StrictHttpResponse<CowDto>) => r.body as CowDto)
+  apiCowPost(params?: ApiCowPost$Params, context?: HttpContext): Observable<CowDto> {
+    return this.apiCowPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CowDto>): CowDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiCowDelete
-   */
+  /** Path part for operation `apiCowDelete()` */
   static readonly ApiCowDeletePath = '/api/Cow';
 
   /**
@@ -338,43 +192,19 @@ export class CowService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCowDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CowService.ApiCowDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiCowDelete$Response(params?: ApiCowDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiCowDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiCowDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiCowDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiCowDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiCowDelete(params?: ApiCowDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiCowDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

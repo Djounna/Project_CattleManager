@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface RoleDto {
-  description?: null | string;
+  description?: string | null;
   id?: number;
-  name?: null | string;
+  name?: string | null;
 }

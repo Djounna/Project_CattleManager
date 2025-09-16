@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DateOnly } from './date-only';
+import { DateOnly } from '../models/date-only';
 export interface MilkingDto {
   cancelled?: boolean;
   cowId?: number;

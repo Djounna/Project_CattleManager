@@ -1,30 +1,25 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiStatisticGet } from '../fn/statistic/api-statistic-get';
+import { ApiStatisticGet$Params } from '../fn/statistic/api-statistic-get';
 import { CattleStatisticsDto } from '../models/cattle-statistics-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class StatisticService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiStatisticGet
-   */
+  /** Path part for operation `apiStatisticGet()` */
   static readonly ApiStatisticGetPath = '/api/Statistic';
 
   /**
@@ -33,40 +28,19 @@ export class StatisticService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiStatisticGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<CattleStatisticsDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, StatisticService.ApiStatisticGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CattleStatisticsDto>;
-      })
-    );
+  apiStatisticGet$Response(params?: ApiStatisticGet$Params, context?: HttpContext): Observable<StrictHttpResponse<CattleStatisticsDto>> {
+    return apiStatisticGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiStatisticGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiStatisticGet(params?: {
-    context?: HttpContext
-  }
-): Observable<CattleStatisticsDto> {
-
-    return this.apiStatisticGet$Response(params).pipe(
-      map((r: StrictHttpResponse<CattleStatisticsDto>) => r.body as CattleStatisticsDto)
+  apiStatisticGet(params?: ApiStatisticGet$Params, context?: HttpContext): Observable<CattleStatisticsDto> {
+    return this.apiStatisticGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CattleStatisticsDto>): CattleStatisticsDto => r.body)
     );
   }
 

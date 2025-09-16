@@ -2,6 +2,6 @@
 /* eslint-disable */
 export interface StockDto {
   id?: number;
-  type?: null | string;
+  type?: string | null;
   volume?: number;
 }

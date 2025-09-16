@@ -2,6 +2,6 @@
 /* eslint-disable */
 export interface GroupStatisticDto {
   groupId?: number;
-  groupName?: null | string;
+  groupName?: string | null;
   number?: number;
 }

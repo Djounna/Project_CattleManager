@@ -4,5 +4,5 @@ export interface VaccinationDto {
   cowId?: number;
   date?: string;
   id?: number;
-  name?: null | string;
+  name?: string | null;
 }

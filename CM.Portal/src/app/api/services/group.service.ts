@@ -1,32 +1,36 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
-import { AssignGroupDetailsDto } from '../models/assign-group-details-dto';
+import { apiGroupAssignPost } from '../fn/group/api-group-assign-post';
+import { ApiGroupAssignPost$Params } from '../fn/group/api-group-assign-post';
+import { apiGroupDelete } from '../fn/group/api-group-delete';
+import { ApiGroupDelete$Params } from '../fn/group/api-group-delete';
+import { apiGroupGet } from '../fn/group/api-group-get';
+import { ApiGroupGet$Params } from '../fn/group/api-group-get';
+import { apiGroupIdGet } from '../fn/group/api-group-id-get';
+import { ApiGroupIdGet$Params } from '../fn/group/api-group-id-get';
+import { apiGroupPost } from '../fn/group/api-group-post';
+import { ApiGroupPost$Params } from '../fn/group/api-group-post';
+import { apiGroupPut } from '../fn/group/api-group-put';
+import { ApiGroupPut$Params } from '../fn/group/api-group-put';
 import { GroupDto } from '../models/group-dto';
 import { ProblemDetails } from '../models/problem-details';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class GroupService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiGroupGet
-   */
+  /** Path part for operation `apiGroupGet()` */
   static readonly ApiGroupGetPath = '/api/Group';
 
   /**
@@ -35,46 +39,23 @@ export class GroupService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiGroupGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<GroupDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<GroupDto>>;
-      })
-    );
+  apiGroupGet$Response(params?: ApiGroupGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GroupDto>>> {
+    return apiGroupGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGroupGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<GroupDto>> {
-
-    return this.apiGroupGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<GroupDto>>) => r.body as Array<GroupDto>)
+  apiGroupGet(params?: ApiGroupGet$Params, context?: HttpContext): Observable<Array<GroupDto>> {
+    return this.apiGroupGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<GroupDto>>): Array<GroupDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiGroupPut
-   */
+  /** Path part for operation `apiGroupPut()` */
   static readonly ApiGroupPutPath = '/api/Group';
 
   /**
@@ -83,49 +64,23 @@ export class GroupService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupPut$Response(params?: {
-    context?: HttpContext
-    body?: GroupDto
-  }
-): Observable<StrictHttpResponse<GroupDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GroupDto>;
-      })
-    );
+  apiGroupPut$Response(params?: ApiGroupPut$Params, context?: HttpContext): Observable<StrictHttpResponse<GroupDto>> {
+    return apiGroupPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupPut(params?: {
-    context?: HttpContext
-    body?: GroupDto
-  }
-): Observable<GroupDto> {
-
-    return this.apiGroupPut$Response(params).pipe(
-      map((r: StrictHttpResponse<GroupDto>) => r.body as GroupDto)
+  apiGroupPut(params?: ApiGroupPut$Params, context?: HttpContext): Observable<GroupDto> {
+    return this.apiGroupPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GroupDto>): GroupDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiGroupPost
-   */
+  /** Path part for operation `apiGroupPost()` */
   static readonly ApiGroupPostPath = '/api/Group';
 
   /**
@@ -134,49 +89,23 @@ export class GroupService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupPost$Response(params?: {
-    context?: HttpContext
-    body?: GroupDto
-  }
-): Observable<StrictHttpResponse<GroupDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GroupDto>;
-      })
-    );
+  apiGroupPost$Response(params?: ApiGroupPost$Params, context?: HttpContext): Observable<StrictHttpResponse<GroupDto>> {
+    return apiGroupPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupPost(params?: {
-    context?: HttpContext
-    body?: GroupDto
-  }
-): Observable<GroupDto> {
-
-    return this.apiGroupPost$Response(params).pipe(
-      map((r: StrictHttpResponse<GroupDto>) => r.body as GroupDto)
+  apiGroupPost(params?: ApiGroupPost$Params, context?: HttpContext): Observable<GroupDto> {
+    return this.apiGroupPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GroupDto>): GroupDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiGroupDelete
-   */
+  /** Path part for operation `apiGroupDelete()` */
   static readonly ApiGroupDeletePath = '/api/Group';
 
   /**
@@ -185,49 +114,23 @@ export class GroupService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiGroupDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiGroupDelete$Response(params?: ApiGroupDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiGroupDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGroupDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiGroupDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiGroupDelete(params?: ApiGroupDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiGroupDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiGroupIdGet
-   */
+  /** Path part for operation `apiGroupIdGet()` */
   static readonly ApiGroupIdGetPath = '/api/Group/{id}';
 
   /**
@@ -236,49 +139,23 @@ export class GroupService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiGroupIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<GroupDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GroupDto>;
-      })
-    );
+  apiGroupIdGet$Response(params: ApiGroupIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<GroupDto>> {
+    return apiGroupIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiGroupIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<GroupDto> {
-
-    return this.apiGroupIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<GroupDto>) => r.body as GroupDto)
+  apiGroupIdGet(params: ApiGroupIdGet$Params, context?: HttpContext): Observable<GroupDto> {
+    return this.apiGroupIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GroupDto>): GroupDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiGroupAssignPost
-   */
+  /** Path part for operation `apiGroupAssignPost()` */
   static readonly ApiGroupAssignPostPath = '/api/Group/assign';
 
   /**
@@ -287,43 +164,19 @@ export class GroupService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupAssignPost$Response(params?: {
-    context?: HttpContext
-    body?: AssignGroupDetailsDto
-  }
-): Observable<StrictHttpResponse<ProblemDetails>> {
-
-    const rb = new RequestBuilder(this.rootUrl, GroupService.ApiGroupAssignPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<ProblemDetails>;
-      })
-    );
+  apiGroupAssignPost$Response(params?: ApiGroupAssignPost$Params, context?: HttpContext): Observable<StrictHttpResponse<ProblemDetails>> {
+    return apiGroupAssignPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiGroupAssignPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiGroupAssignPost(params?: {
-    context?: HttpContext
-    body?: AssignGroupDetailsDto
-  }
-): Observable<ProblemDetails> {
-
-    return this.apiGroupAssignPost$Response(params).pipe(
-      map((r: StrictHttpResponse<ProblemDetails>) => r.body as ProblemDetails)
+  apiGroupAssignPost(params?: ApiGroupAssignPost$Params, context?: HttpContext): Observable<ProblemDetails> {
+    return this.apiGroupAssignPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProblemDetails>): ProblemDetails => r.body)
     );
   }
 

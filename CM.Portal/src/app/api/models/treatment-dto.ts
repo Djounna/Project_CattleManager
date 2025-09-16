@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface TreatmentDto {
-  conditionId?: null | number;
+  conditionId?: number | null;
   cowId?: number;
   date?: string;
   id?: number;
-  name?: null | string;
-  type?: null | string;
+  name?: string | null;
+  type?: string | null;
 }

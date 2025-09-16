@@ -1,31 +1,30 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiUserManagementPost } from '../fn/user-management/api-user-management-post';
+import { ApiUserManagementPost$Params } from '../fn/user-management/api-user-management-post';
+import { apiUserManagementPut } from '../fn/user-management/api-user-management-put';
+import { ApiUserManagementPut$Params } from '../fn/user-management/api-user-management-put';
+import { apiUserManagementUserUserIdRolesGet } from '../fn/user-management/api-user-management-user-user-id-roles-get';
+import { ApiUserManagementUserUserIdRolesGet$Params } from '../fn/user-management/api-user-management-user-user-id-roles-get';
 import { RoleDto } from '../models/role-dto';
 import { UserInput } from '../models/user-input';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class UserManagementService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiUserManagementUserUserIdRolesGet
-   */
+  /** Path part for operation `apiUserManagementUserUserIdRolesGet()` */
   static readonly ApiUserManagementUserUserIdRolesGetPath = '/api/UserManagement/user/{userId}/roles';
 
   /**
@@ -34,49 +33,23 @@ export class UserManagementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiUserManagementUserUserIdRolesGet$Response(params: {
-    userId: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<RoleDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UserManagementService.ApiUserManagementUserUserIdRolesGetPath, 'get');
-    if (params) {
-      rb.path('userId', params.userId, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<RoleDto>>;
-      })
-    );
+  apiUserManagementUserUserIdRolesGet$Response(params: ApiUserManagementUserUserIdRolesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<RoleDto>>> {
+    return apiUserManagementUserUserIdRolesGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiUserManagementUserUserIdRolesGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiUserManagementUserUserIdRolesGet(params: {
-    userId: number;
-    context?: HttpContext
-  }
-): Observable<Array<RoleDto>> {
-
-    return this.apiUserManagementUserUserIdRolesGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<RoleDto>>) => r.body as Array<RoleDto>)
+  apiUserManagementUserUserIdRolesGet(params: ApiUserManagementUserUserIdRolesGet$Params, context?: HttpContext): Observable<Array<RoleDto>> {
+    return this.apiUserManagementUserUserIdRolesGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<RoleDto>>): Array<RoleDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiUserManagementPut
-   */
+  /** Path part for operation `apiUserManagementPut()` */
   static readonly ApiUserManagementPutPath = '/api/UserManagement';
 
   /**
@@ -85,49 +58,23 @@ export class UserManagementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiUserManagementPut$Response(params?: {
-    userId?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<RoleDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UserManagementService.ApiUserManagementPutPath, 'put');
-    if (params) {
-      rb.query('userId', params.userId, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<RoleDto>>;
-      })
-    );
+  apiUserManagementPut$Response(params?: ApiUserManagementPut$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<RoleDto>>> {
+    return apiUserManagementPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiUserManagementPut$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiUserManagementPut(params?: {
-    userId?: number;
-    context?: HttpContext
-  }
-): Observable<Array<RoleDto>> {
-
-    return this.apiUserManagementPut$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<RoleDto>>) => r.body as Array<RoleDto>)
+  apiUserManagementPut(params?: ApiUserManagementPut$Params, context?: HttpContext): Observable<Array<RoleDto>> {
+    return this.apiUserManagementPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<RoleDto>>): Array<RoleDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiUserManagementPost
-   */
+  /** Path part for operation `apiUserManagementPost()` */
   static readonly ApiUserManagementPostPath = '/api/UserManagement';
 
   /**
@@ -136,43 +83,19 @@ export class UserManagementService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserManagementPost$Response(params?: {
-    context?: HttpContext
-    body?: UserInput
-  }
-): Observable<StrictHttpResponse<UserInput>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UserManagementService.ApiUserManagementPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<UserInput>;
-      })
-    );
+  apiUserManagementPost$Response(params?: ApiUserManagementPost$Params, context?: HttpContext): Observable<StrictHttpResponse<UserInput>> {
+    return apiUserManagementPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiUserManagementPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUserManagementPost(params?: {
-    context?: HttpContext
-    body?: UserInput
-  }
-): Observable<UserInput> {
-
-    return this.apiUserManagementPost$Response(params).pipe(
-      map((r: StrictHttpResponse<UserInput>) => r.body as UserInput)
+  apiUserManagementPost(params?: ApiUserManagementPost$Params, context?: HttpContext): Observable<UserInput> {
+    return this.apiUserManagementPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserInput>): UserInput => r.body)
     );
   }
 

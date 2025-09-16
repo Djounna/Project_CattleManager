@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface AgeGenderGroupStatisticDto {
-  ageGroupName?: null | string;
-  gender?: null | string;
+  ageGroupName?: string | null;
+  gender?: string | null;
   number?: number;
 }

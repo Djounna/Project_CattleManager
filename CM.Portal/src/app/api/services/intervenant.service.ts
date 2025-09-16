@@ -1,30 +1,33 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiIntervenantDelete } from '../fn/intervenant/api-intervenant-delete';
+import { ApiIntervenantDelete$Params } from '../fn/intervenant/api-intervenant-delete';
+import { apiIntervenantGet } from '../fn/intervenant/api-intervenant-get';
+import { ApiIntervenantGet$Params } from '../fn/intervenant/api-intervenant-get';
+import { apiIntervenantIdGet } from '../fn/intervenant/api-intervenant-id-get';
+import { ApiIntervenantIdGet$Params } from '../fn/intervenant/api-intervenant-id-get';
+import { apiIntervenantPost } from '../fn/intervenant/api-intervenant-post';
+import { ApiIntervenantPost$Params } from '../fn/intervenant/api-intervenant-post';
+import { apiIntervenantPut } from '../fn/intervenant/api-intervenant-put';
+import { ApiIntervenantPut$Params } from '../fn/intervenant/api-intervenant-put';
 import { IntervenantDto } from '../models/intervenant-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class IntervenantService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiIntervenantIdGet
-   */
+  /** Path part for operation `apiIntervenantIdGet()` */
   static readonly ApiIntervenantIdGetPath = '/api/Intervenant/{id}';
 
   /**
@@ -33,49 +36,23 @@ export class IntervenantService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<IntervenantDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, IntervenantService.ApiIntervenantIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<IntervenantDto>;
-      })
-    );
+  apiIntervenantIdGet$Response(params: ApiIntervenantIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<IntervenantDto>> {
+    return apiIntervenantIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiIntervenantIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<IntervenantDto> {
-
-    return this.apiIntervenantIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<IntervenantDto>) => r.body as IntervenantDto)
+  apiIntervenantIdGet(params: ApiIntervenantIdGet$Params, context?: HttpContext): Observable<IntervenantDto> {
+    return this.apiIntervenantIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<IntervenantDto>): IntervenantDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiIntervenantGet
-   */
+  /** Path part for operation `apiIntervenantGet()` */
   static readonly ApiIntervenantGetPath = '/api/Intervenant';
 
   /**
@@ -84,46 +61,23 @@ export class IntervenantService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<IntervenantDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, IntervenantService.ApiIntervenantGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<IntervenantDto>>;
-      })
-    );
+  apiIntervenantGet$Response(params?: ApiIntervenantGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IntervenantDto>>> {
+    return apiIntervenantGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiIntervenantGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<IntervenantDto>> {
-
-    return this.apiIntervenantGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<IntervenantDto>>) => r.body as Array<IntervenantDto>)
+  apiIntervenantGet(params?: ApiIntervenantGet$Params, context?: HttpContext): Observable<Array<IntervenantDto>> {
+    return this.apiIntervenantGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<IntervenantDto>>): Array<IntervenantDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiIntervenantPut
-   */
+  /** Path part for operation `apiIntervenantPut()` */
   static readonly ApiIntervenantPutPath = '/api/Intervenant';
 
   /**
@@ -132,49 +86,23 @@ export class IntervenantService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiIntervenantPut$Response(params?: {
-    context?: HttpContext
-    body?: IntervenantDto
-  }
-): Observable<StrictHttpResponse<IntervenantDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, IntervenantService.ApiIntervenantPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<IntervenantDto>;
-      })
-    );
+  apiIntervenantPut$Response(params?: ApiIntervenantPut$Params, context?: HttpContext): Observable<StrictHttpResponse<IntervenantDto>> {
+    return apiIntervenantPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiIntervenantPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiIntervenantPut(params?: {
-    context?: HttpContext
-    body?: IntervenantDto
-  }
-): Observable<IntervenantDto> {
-
-    return this.apiIntervenantPut$Response(params).pipe(
-      map((r: StrictHttpResponse<IntervenantDto>) => r.body as IntervenantDto)
+  apiIntervenantPut(params?: ApiIntervenantPut$Params, context?: HttpContext): Observable<IntervenantDto> {
+    return this.apiIntervenantPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<IntervenantDto>): IntervenantDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiIntervenantPost
-   */
+  /** Path part for operation `apiIntervenantPost()` */
   static readonly ApiIntervenantPostPath = '/api/Intervenant';
 
   /**
@@ -183,49 +111,23 @@ export class IntervenantService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiIntervenantPost$Response(params?: {
-    context?: HttpContext
-    body?: IntervenantDto
-  }
-): Observable<StrictHttpResponse<IntervenantDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, IntervenantService.ApiIntervenantPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<IntervenantDto>;
-      })
-    );
+  apiIntervenantPost$Response(params?: ApiIntervenantPost$Params, context?: HttpContext): Observable<StrictHttpResponse<IntervenantDto>> {
+    return apiIntervenantPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiIntervenantPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiIntervenantPost(params?: {
-    context?: HttpContext
-    body?: IntervenantDto
-  }
-): Observable<IntervenantDto> {
-
-    return this.apiIntervenantPost$Response(params).pipe(
-      map((r: StrictHttpResponse<IntervenantDto>) => r.body as IntervenantDto)
+  apiIntervenantPost(params?: ApiIntervenantPost$Params, context?: HttpContext): Observable<IntervenantDto> {
+    return this.apiIntervenantPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<IntervenantDto>): IntervenantDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiIntervenantDelete
-   */
+  /** Path part for operation `apiIntervenantDelete()` */
   static readonly ApiIntervenantDeletePath = '/api/Intervenant';
 
   /**
@@ -234,43 +136,19 @@ export class IntervenantService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, IntervenantService.ApiIntervenantDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiIntervenantDelete$Response(params?: ApiIntervenantDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiIntervenantDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiIntervenantDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiIntervenantDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiIntervenantDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiIntervenantDelete(params?: ApiIntervenantDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiIntervenantDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

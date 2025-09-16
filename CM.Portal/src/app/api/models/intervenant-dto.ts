@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface IntervenantDto {
-  coordinates?: null | string;
+  coordinates?: string | null;
   id?: number;
-  name?: null | string;
-  type?: null | string;
+  name?: string | null;
+  type?: string | null;
 }

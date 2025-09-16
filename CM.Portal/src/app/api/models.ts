@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 export { AgeGenderGroupStatisticDto } from './models/age-gender-group-statistic-dto';
 export { AgeGroupStatisticDto } from './models/age-group-statistic-dto';
 export { AlertDto } from './models/alert-dto';
@@ -8,25 +10,30 @@ export { ConditionDto } from './models/condition-dto';
 export { CowDetailsDto } from './models/cow-details-dto';
 export { CowDto } from './models/cow-dto';
 export { CowGenealogyDto } from './models/cow-genealogy-dto';
+export { DailyMilking } from './models/daily-milking';
+export { DailyTasks } from './models/daily-tasks';
+export { DashboardInfoDto } from './models/dashboard-info-dto';
 export { DateOnly } from './models/date-only';
 export { DayOfWeek } from './models/day-of-week';
 export { GestationDto } from './models/gestation-dto';
 export { GroupDetailsDto } from './models/group-details-dto';
 export { GroupDto } from './models/group-dto';
+export { GroupInfo } from './models/group-info';
 export { GroupMoveDto } from './models/group-move-dto';
 export { GroupStatisticDto } from './models/group-statistic-dto';
 export { IntervenantDto } from './models/intervenant-dto';
 export { InterventionDto } from './models/intervention-dto';
 export { JobDetailsDto } from './models/job-details-dto';
 export { JobDto } from './models/job-dto';
-export { MilkProductionDto } from './models/milk-production-dto';
 export { MilkingDto } from './models/milking-dto';
 export { MilkingInputDto } from './models/milking-input-dto';
 export { MilkingInputsDto } from './models/milking-inputs-dto';
 export { MilkingVolumeDto } from './models/milking-volume-dto';
+export { MilkProductionDto } from './models/milk-production-dto';
 export { ParentDto } from './models/parent-dto';
 export { PenDetailsDto } from './models/pen-details-dto';
 export { PenDto } from './models/pen-dto';
+export { PenInfo } from './models/pen-info';
 export { PenMoveDto } from './models/pen-move-dto';
 export { PenStatisticDto } from './models/pen-statistic-dto';
 export { ProblemDetails } from './models/problem-details';

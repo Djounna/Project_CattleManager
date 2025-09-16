@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface PenDto {
-  coordinates?: null | string;
+  coordinates?: string | null;
   id?: number;
-  name?: null | string;
+  name?: string | null;
   size?: number;
 }

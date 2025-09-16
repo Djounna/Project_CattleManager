@@ -1,32 +1,32 @@
 /* tslint:disable */
 /* eslint-disable */
-import { ConditionDto } from './condition-dto';
-import { CowDto } from './cow-dto';
-import { GestationDto } from './gestation-dto';
-import { GroupDto } from './group-dto';
-import { GroupMoveDto } from './group-move-dto';
-import { InterventionDto } from './intervention-dto';
-import { PenDto } from './pen-dto';
-import { PenMoveDto } from './pen-move-dto';
-import { TreatmentDto } from './treatment-dto';
-import { VaccinationDto } from './vaccination-dto';
+import { ConditionDto } from '../models/condition-dto';
+import { CowDto } from '../models/cow-dto';
+import { GestationDto } from '../models/gestation-dto';
+import { GroupDto } from '../models/group-dto';
+import { GroupMoveDto } from '../models/group-move-dto';
+import { InterventionDto } from '../models/intervention-dto';
+import { PenDto } from '../models/pen-dto';
+import { PenMoveDto } from '../models/pen-move-dto';
+import { TreatmentDto } from '../models/treatment-dto';
+import { VaccinationDto } from '../models/vaccination-dto';
 export interface CowDetailsDto {
   birthDate?: string;
-  children?: null | Array<CowDto>;
-  conditions?: null | Array<ConditionDto>;
-  gender?: null | string;
-  gestations?: null | Array<GestationDto>;
+  children?: Array<CowDto> | null;
+  conditions?: Array<ConditionDto> | null;
+  gender?: string | null;
+  gestations?: Array<GestationDto> | null;
   group?: GroupDto;
-  groupMoves?: null | Array<GroupMoveDto>;
+  groupMoves?: Array<GroupMoveDto> | null;
   id?: number;
-  identifier?: null | string;
-  imgLink?: null | string;
-  interventions?: null | Array<InterventionDto>;
+  identifier?: string | null;
+  imgLink?: string | null;
+  interventions?: Array<InterventionDto> | null;
   milkCow?: boolean;
-  name?: null | string;
+  name?: string | null;
   pen?: PenDto;
-  penMoves?: null | Array<PenMoveDto>;
-  race?: null | string;
-  treatments?: null | Array<TreatmentDto>;
-  vaccinations?: null | Array<VaccinationDto>;
+  penMoves?: Array<PenMoveDto> | null;
+  race?: string | null;
+  treatments?: Array<TreatmentDto> | null;
+  vaccinations?: Array<VaccinationDto> | null;
 }

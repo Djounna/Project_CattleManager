@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface GroupDto {
-  description?: null | string;
+  description?: string | null;
   id?: number;
-  imgLink?: null | string;
-  name?: null | string;
+  imgLink?: string | null;
+  name?: string | null;
 }

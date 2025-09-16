@@ -19,6 +19,6 @@ public class GetCowsQueryHandler : IRequestHandler<GetCowsQuery, IList<CowDto>>
 
     public async Task<IList<CowDto>> Handle(GetCowsQuery request, CancellationToken cancellationToken)
     {
-       return _mapper.Map<IList<CowDto>>(_cowRepository.GetList()); // , cancellationToken
+        return _mapper.Map<IList<CowDto>>(_cowRepository.GetList()); // , cancellationToken
     }
 }

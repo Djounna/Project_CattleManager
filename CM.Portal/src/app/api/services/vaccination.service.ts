@@ -1,30 +1,35 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiVaccinationCowIdGet } from '../fn/vaccination/api-vaccination-cow-id-get';
+import { ApiVaccinationCowIdGet$Params } from '../fn/vaccination/api-vaccination-cow-id-get';
+import { apiVaccinationDelete } from '../fn/vaccination/api-vaccination-delete';
+import { ApiVaccinationDelete$Params } from '../fn/vaccination/api-vaccination-delete';
+import { apiVaccinationGet } from '../fn/vaccination/api-vaccination-get';
+import { ApiVaccinationGet$Params } from '../fn/vaccination/api-vaccination-get';
+import { apiVaccinationIdGet } from '../fn/vaccination/api-vaccination-id-get';
+import { ApiVaccinationIdGet$Params } from '../fn/vaccination/api-vaccination-id-get';
+import { apiVaccinationPost } from '../fn/vaccination/api-vaccination-post';
+import { ApiVaccinationPost$Params } from '../fn/vaccination/api-vaccination-post';
+import { apiVaccinationPut } from '../fn/vaccination/api-vaccination-put';
+import { ApiVaccinationPut$Params } from '../fn/vaccination/api-vaccination-put';
 import { VaccinationDto } from '../models/vaccination-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class VaccinationService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiVaccinationIdGet
-   */
+  /** Path part for operation `apiVaccinationIdGet()` */
   static readonly ApiVaccinationIdGetPath = '/api/Vaccination/{id}';
 
   /**
@@ -33,49 +38,23 @@ export class VaccinationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<VaccinationDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<VaccinationDto>;
-      })
-    );
+  apiVaccinationIdGet$Response(params: ApiVaccinationIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<VaccinationDto>> {
+    return apiVaccinationIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<VaccinationDto> {
-
-    return this.apiVaccinationIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<VaccinationDto>) => r.body as VaccinationDto)
+  apiVaccinationIdGet(params: ApiVaccinationIdGet$Params, context?: HttpContext): Observable<VaccinationDto> {
+    return this.apiVaccinationIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<VaccinationDto>): VaccinationDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiVaccinationGet
-   */
+  /** Path part for operation `apiVaccinationGet()` */
   static readonly ApiVaccinationGetPath = '/api/Vaccination';
 
   /**
@@ -84,46 +63,23 @@ export class VaccinationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<VaccinationDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<VaccinationDto>>;
-      })
-    );
+  apiVaccinationGet$Response(params?: ApiVaccinationGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<VaccinationDto>>> {
+    return apiVaccinationGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<VaccinationDto>> {
-
-    return this.apiVaccinationGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<VaccinationDto>>) => r.body as Array<VaccinationDto>)
+  apiVaccinationGet(params?: ApiVaccinationGet$Params, context?: HttpContext): Observable<Array<VaccinationDto>> {
+    return this.apiVaccinationGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<VaccinationDto>>): Array<VaccinationDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiVaccinationPut
-   */
+  /** Path part for operation `apiVaccinationPut()` */
   static readonly ApiVaccinationPutPath = '/api/Vaccination';
 
   /**
@@ -132,49 +88,23 @@ export class VaccinationService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiVaccinationPut$Response(params?: {
-    context?: HttpContext
-    body?: VaccinationDto
-  }
-): Observable<StrictHttpResponse<VaccinationDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<VaccinationDto>;
-      })
-    );
+  apiVaccinationPut$Response(params?: ApiVaccinationPut$Params, context?: HttpContext): Observable<StrictHttpResponse<VaccinationDto>> {
+    return apiVaccinationPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiVaccinationPut(params?: {
-    context?: HttpContext
-    body?: VaccinationDto
-  }
-): Observable<VaccinationDto> {
-
-    return this.apiVaccinationPut$Response(params).pipe(
-      map((r: StrictHttpResponse<VaccinationDto>) => r.body as VaccinationDto)
+  apiVaccinationPut(params?: ApiVaccinationPut$Params, context?: HttpContext): Observable<VaccinationDto> {
+    return this.apiVaccinationPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<VaccinationDto>): VaccinationDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiVaccinationPost
-   */
+  /** Path part for operation `apiVaccinationPost()` */
   static readonly ApiVaccinationPostPath = '/api/Vaccination';
 
   /**
@@ -183,49 +113,23 @@ export class VaccinationService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiVaccinationPost$Response(params?: {
-    context?: HttpContext
-    body?: VaccinationDto
-  }
-): Observable<StrictHttpResponse<VaccinationDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<VaccinationDto>;
-      })
-    );
+  apiVaccinationPost$Response(params?: ApiVaccinationPost$Params, context?: HttpContext): Observable<StrictHttpResponse<VaccinationDto>> {
+    return apiVaccinationPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiVaccinationPost(params?: {
-    context?: HttpContext
-    body?: VaccinationDto
-  }
-): Observable<VaccinationDto> {
-
-    return this.apiVaccinationPost$Response(params).pipe(
-      map((r: StrictHttpResponse<VaccinationDto>) => r.body as VaccinationDto)
+  apiVaccinationPost(params?: ApiVaccinationPost$Params, context?: HttpContext): Observable<VaccinationDto> {
+    return this.apiVaccinationPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<VaccinationDto>): VaccinationDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiVaccinationDelete
-   */
+  /** Path part for operation `apiVaccinationDelete()` */
   static readonly ApiVaccinationDeletePath = '/api/Vaccination';
 
   /**
@@ -234,49 +138,23 @@ export class VaccinationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiVaccinationDelete$Response(params?: ApiVaccinationDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiVaccinationDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiVaccinationDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiVaccinationDelete(params?: ApiVaccinationDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiVaccinationDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiVaccinationCowIdGet
-   */
+  /** Path part for operation `apiVaccinationCowIdGet()` */
   static readonly ApiVaccinationCowIdGetPath = '/api/Vaccination/{cowId}';
 
   /**
@@ -285,43 +163,19 @@ export class VaccinationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationCowIdGet$Response(params: {
-    cowId: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<VaccinationDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, VaccinationService.ApiVaccinationCowIdGetPath, 'get');
-    if (params) {
-      rb.path('cowId', params.cowId, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<VaccinationDto>>;
-      })
-    );
+  apiVaccinationCowIdGet$Response(params: ApiVaccinationCowIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<VaccinationDto>>> {
+    return apiVaccinationCowIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiVaccinationCowIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiVaccinationCowIdGet(params: {
-    cowId: number;
-    context?: HttpContext
-  }
-): Observable<Array<VaccinationDto>> {
-
-    return this.apiVaccinationCowIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<VaccinationDto>>) => r.body as Array<VaccinationDto>)
+  apiVaccinationCowIdGet(params: ApiVaccinationCowIdGet$Params, context?: HttpContext): Observable<Array<VaccinationDto>> {
+    return this.apiVaccinationCowIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<VaccinationDto>>): Array<VaccinationDto> => r.body)
     );
   }
 

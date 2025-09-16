@@ -3,5 +3,5 @@
 export interface PenStatisticDto {
   number?: number;
   penId?: number;
-  penName?: null | string;
+  penName?: string | null;
 }

@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface JobDto {
-  cowId?: null | number;
+  cowId?: number | null;
   date?: string;
-  description?: null | string;
+  description?: string | null;
   id?: number;
-  infos?: null | string;
-  penId?: null | number;
-  status?: null | string;
-  title?: null | string;
+  infos?: string | null;
+  penId?: number | null;
+  status?: string | null;
+  title?: string | null;
 }

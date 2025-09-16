@@ -1,16 +1,16 @@
 /* tslint:disable */
 /* eslint-disable */
-import { CowDto } from './cow-dto';
-import { PenDto } from './pen-dto';
-import { UserDto } from './user-dto';
+import { CowDto } from '../models/cow-dto';
+import { PenDto } from '../models/pen-dto';
+import { UserDto } from '../models/user-dto';
 export interface JobDetailsDto {
   cow?: CowDto;
   date?: string;
-  description?: null | string;
+  description?: string | null;
   id?: number;
-  infos?: null | string;
+  infos?: string | null;
   pen?: PenDto;
-  status?: null | string;
-  title?: null | string;
-  workers?: null | Array<UserDto>;
+  status?: string | null;
+  title?: string | null;
+  workers?: Array<UserDto> | null;
 }

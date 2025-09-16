@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
-import { CowDto } from './cow-dto';
+import { CowDto } from '../models/cow-dto';
 export interface GroupDetailsDto {
-  cows?: null | Array<CowDto>;
-  description?: null | string;
+  cows?: Array<CowDto> | null;
+  description?: string | null;
   id?: number;
-  imgLink?: null | string;
-  name?: null | string;
+  imgLink?: string | null;
+  name?: string | null;
 }

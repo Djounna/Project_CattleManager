@@ -1,6 +1,7 @@
 export { AlertService } from './services/alert.service';
 export { ConditionService } from './services/condition.service';
 export { CowService } from './services/cow.service';
+export { DashboardService } from './services/dashboard.service';
 export { GestationService } from './services/gestation.service';
 export { GroupService } from './services/group.service';
 export { IntervenantService } from './services/intervenant.service';
@@ -11,6 +12,7 @@ export { MilkProductionService } from './services/milk-production.service';
 export { PenService } from './services/pen.service';
 export { StatisticService } from './services/statistic.service';
 export { StockService } from './services/stock.service';
+export { TestService } from './services/test.service';
 export { TreatmentService } from './services/treatment.service';
 export { UserManagementService } from './services/user-management.service';
 export { VaccinationService } from './services/vaccination.service';

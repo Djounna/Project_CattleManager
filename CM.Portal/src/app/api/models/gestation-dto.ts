@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface GestationDto {
-  calvingDate?: null | string;
+  calvingDate?: string | null;
   cowId?: number;
   id?: number;
-  startDate?: null | string;
-  status?: null | string;
   progress?: number;
+  startDate?: string;
+  status?: string | null;
 }

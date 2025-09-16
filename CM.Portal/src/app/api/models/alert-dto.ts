@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface AlertDto {
-  cowId?: null | number;
-  description?: null | string;
+  cowId?: number | null;
+  description?: string | null;
   done?: boolean;
   id?: number;
-  infos?: null | string;
-  level?: null | string;
-  penId?: null | number;
-  title?: null | string;
+  infos?: string | null;
+  level?: string | null;
+  penId?: number | null;
+  title?: string | null;
 }

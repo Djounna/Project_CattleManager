@@ -1,32 +1,36 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
-import { AssignPenDetailsDto } from '../models/assign-pen-details-dto';
+import { apiPenAssignPost } from '../fn/pen/api-pen-assign-post';
+import { ApiPenAssignPost$Params } from '../fn/pen/api-pen-assign-post';
+import { apiPenDelete } from '../fn/pen/api-pen-delete';
+import { ApiPenDelete$Params } from '../fn/pen/api-pen-delete';
+import { apiPenGet } from '../fn/pen/api-pen-get';
+import { ApiPenGet$Params } from '../fn/pen/api-pen-get';
+import { apiPenIdGet } from '../fn/pen/api-pen-id-get';
+import { ApiPenIdGet$Params } from '../fn/pen/api-pen-id-get';
+import { apiPenPost } from '../fn/pen/api-pen-post';
+import { ApiPenPost$Params } from '../fn/pen/api-pen-post';
+import { apiPenPut } from '../fn/pen/api-pen-put';
+import { ApiPenPut$Params } from '../fn/pen/api-pen-put';
 import { PenDto } from '../models/pen-dto';
 import { ProblemDetails } from '../models/problem-details';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class PenService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiPenGet
-   */
+  /** Path part for operation `apiPenGet()` */
   static readonly ApiPenGetPath = '/api/Pen';
 
   /**
@@ -35,46 +39,23 @@ export class PenService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiPenGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<PenDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<PenDto>>;
-      })
-    );
+  apiPenGet$Response(params?: ApiPenGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<PenDto>>> {
+    return apiPenGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiPenGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<PenDto>> {
-
-    return this.apiPenGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<PenDto>>) => r.body as Array<PenDto>)
+  apiPenGet(params?: ApiPenGet$Params, context?: HttpContext): Observable<Array<PenDto>> {
+    return this.apiPenGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<PenDto>>): Array<PenDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiPenPut
-   */
+  /** Path part for operation `apiPenPut()` */
   static readonly ApiPenPutPath = '/api/Pen';
 
   /**
@@ -83,49 +64,23 @@ export class PenService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenPut$Response(params?: {
-    context?: HttpContext
-    body?: PenDto
-  }
-): Observable<StrictHttpResponse<PenDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<PenDto>;
-      })
-    );
+  apiPenPut$Response(params?: ApiPenPut$Params, context?: HttpContext): Observable<StrictHttpResponse<PenDto>> {
+    return apiPenPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenPut(params?: {
-    context?: HttpContext
-    body?: PenDto
-  }
-): Observable<PenDto> {
-
-    return this.apiPenPut$Response(params).pipe(
-      map((r: StrictHttpResponse<PenDto>) => r.body as PenDto)
+  apiPenPut(params?: ApiPenPut$Params, context?: HttpContext): Observable<PenDto> {
+    return this.apiPenPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PenDto>): PenDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiPenPost
-   */
+  /** Path part for operation `apiPenPost()` */
   static readonly ApiPenPostPath = '/api/Pen';
 
   /**
@@ -134,49 +89,23 @@ export class PenService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenPost$Response(params?: {
-    context?: HttpContext
-    body?: PenDto
-  }
-): Observable<StrictHttpResponse<PenDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<PenDto>;
-      })
-    );
+  apiPenPost$Response(params?: ApiPenPost$Params, context?: HttpContext): Observable<StrictHttpResponse<PenDto>> {
+    return apiPenPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenPost(params?: {
-    context?: HttpContext
-    body?: PenDto
-  }
-): Observable<PenDto> {
-
-    return this.apiPenPost$Response(params).pipe(
-      map((r: StrictHttpResponse<PenDto>) => r.body as PenDto)
+  apiPenPost(params?: ApiPenPost$Params, context?: HttpContext): Observable<PenDto> {
+    return this.apiPenPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PenDto>): PenDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiPenDelete
-   */
+  /** Path part for operation `apiPenDelete()` */
   static readonly ApiPenDeletePath = '/api/Pen';
 
   /**
@@ -185,49 +114,23 @@ export class PenService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiPenDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiPenDelete$Response(params?: ApiPenDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiPenDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiPenDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiPenDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiPenDelete(params?: ApiPenDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiPenDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiPenIdGet
-   */
+  /** Path part for operation `apiPenIdGet()` */
   static readonly ApiPenIdGetPath = '/api/Pen/{id}';
 
   /**
@@ -236,49 +139,23 @@ export class PenService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiPenIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<PenDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<PenDto>;
-      })
-    );
+  apiPenIdGet$Response(params: ApiPenIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<PenDto>> {
+    return apiPenIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiPenIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<PenDto> {
-
-    return this.apiPenIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<PenDto>) => r.body as PenDto)
+  apiPenIdGet(params: ApiPenIdGet$Params, context?: HttpContext): Observable<PenDto> {
+    return this.apiPenIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PenDto>): PenDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiPenAssignPost
-   */
+  /** Path part for operation `apiPenAssignPost()` */
   static readonly ApiPenAssignPostPath = '/api/Pen/assign';
 
   /**
@@ -287,43 +164,19 @@ export class PenService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenAssignPost$Response(params?: {
-    context?: HttpContext
-    body?: AssignPenDetailsDto
-  }
-): Observable<StrictHttpResponse<ProblemDetails>> {
-
-    const rb = new RequestBuilder(this.rootUrl, PenService.ApiPenAssignPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<ProblemDetails>;
-      })
-    );
+  apiPenAssignPost$Response(params?: ApiPenAssignPost$Params, context?: HttpContext): Observable<StrictHttpResponse<ProblemDetails>> {
+    return apiPenAssignPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiPenAssignPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiPenAssignPost(params?: {
-    context?: HttpContext
-    body?: AssignPenDetailsDto
-  }
-): Observable<ProblemDetails> {
-
-    return this.apiPenAssignPost$Response(params).pipe(
-      map((r: StrictHttpResponse<ProblemDetails>) => r.body as ProblemDetails)
+  apiPenAssignPost(params?: ApiPenAssignPost$Params, context?: HttpContext): Observable<ProblemDetails> {
+    return this.apiPenAssignPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProblemDetails>): ProblemDetails => r.body)
     );
   }
 

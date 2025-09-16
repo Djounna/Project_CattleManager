@@ -1,30 +1,35 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { apiInterventionCowIdGet } from '../fn/intervention/api-intervention-cow-id-get';
+import { ApiInterventionCowIdGet$Params } from '../fn/intervention/api-intervention-cow-id-get';
+import { apiInterventionDelete } from '../fn/intervention/api-intervention-delete';
+import { ApiInterventionDelete$Params } from '../fn/intervention/api-intervention-delete';
+import { apiInterventionGet } from '../fn/intervention/api-intervention-get';
+import { ApiInterventionGet$Params } from '../fn/intervention/api-intervention-get';
+import { apiInterventionIdGet } from '../fn/intervention/api-intervention-id-get';
+import { ApiInterventionIdGet$Params } from '../fn/intervention/api-intervention-id-get';
+import { apiInterventionPost } from '../fn/intervention/api-intervention-post';
+import { ApiInterventionPost$Params } from '../fn/intervention/api-intervention-post';
+import { apiInterventionPut } from '../fn/intervention/api-intervention-put';
+import { ApiInterventionPut$Params } from '../fn/intervention/api-intervention-put';
 import { InterventionDto } from '../models/intervention-dto';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class InterventionService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation apiInterventionIdGet
-   */
+  /** Path part for operation `apiInterventionIdGet()` */
   static readonly ApiInterventionIdGetPath = '/api/Intervention/{id}';
 
   /**
@@ -33,49 +38,23 @@ export class InterventionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionIdGet$Response(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<InterventionDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionIdGetPath, 'get');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<InterventionDto>;
-      })
-    );
+  apiInterventionIdGet$Response(params: ApiInterventionIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<InterventionDto>> {
+    return apiInterventionIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionIdGet(params: {
-    id: number;
-    context?: HttpContext
-  }
-): Observable<InterventionDto> {
-
-    return this.apiInterventionIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<InterventionDto>) => r.body as InterventionDto)
+  apiInterventionIdGet(params: ApiInterventionIdGet$Params, context?: HttpContext): Observable<InterventionDto> {
+    return this.apiInterventionIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<InterventionDto>): InterventionDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiInterventionGet
-   */
+  /** Path part for operation `apiInterventionGet()` */
   static readonly ApiInterventionGetPath = '/api/Intervention';
 
   /**
@@ -84,46 +63,23 @@ export class InterventionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionGet$Response(params?: {
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<InterventionDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionGetPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<InterventionDto>>;
-      })
-    );
+  apiInterventionGet$Response(params?: ApiInterventionGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<InterventionDto>>> {
+    return apiInterventionGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionGet(params?: {
-    context?: HttpContext
-  }
-): Observable<Array<InterventionDto>> {
-
-    return this.apiInterventionGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<InterventionDto>>) => r.body as Array<InterventionDto>)
+  apiInterventionGet(params?: ApiInterventionGet$Params, context?: HttpContext): Observable<Array<InterventionDto>> {
+    return this.apiInterventionGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<InterventionDto>>): Array<InterventionDto> => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiInterventionPut
-   */
+  /** Path part for operation `apiInterventionPut()` */
   static readonly ApiInterventionPutPath = '/api/Intervention';
 
   /**
@@ -132,49 +88,23 @@ export class InterventionService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiInterventionPut$Response(params?: {
-    context?: HttpContext
-    body?: InterventionDto
-  }
-): Observable<StrictHttpResponse<InterventionDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionPutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<InterventionDto>;
-      })
-    );
+  apiInterventionPut$Response(params?: ApiInterventionPut$Params, context?: HttpContext): Observable<StrictHttpResponse<InterventionDto>> {
+    return apiInterventionPut(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionPut$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiInterventionPut(params?: {
-    context?: HttpContext
-    body?: InterventionDto
-  }
-): Observable<InterventionDto> {
-
-    return this.apiInterventionPut$Response(params).pipe(
-      map((r: StrictHttpResponse<InterventionDto>) => r.body as InterventionDto)
+  apiInterventionPut(params?: ApiInterventionPut$Params, context?: HttpContext): Observable<InterventionDto> {
+    return this.apiInterventionPut$Response(params, context).pipe(
+      map((r: StrictHttpResponse<InterventionDto>): InterventionDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiInterventionPost
-   */
+  /** Path part for operation `apiInterventionPost()` */
   static readonly ApiInterventionPostPath = '/api/Intervention';
 
   /**
@@ -183,49 +113,23 @@ export class InterventionService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiInterventionPost$Response(params?: {
-    context?: HttpContext
-    body?: InterventionDto
-  }
-): Observable<StrictHttpResponse<InterventionDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionPostPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/*+json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<InterventionDto>;
-      })
-    );
+  apiInterventionPost$Response(params?: ApiInterventionPost$Params, context?: HttpContext): Observable<StrictHttpResponse<InterventionDto>> {
+    return apiInterventionPost(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionPost$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiInterventionPost(params?: {
-    context?: HttpContext
-    body?: InterventionDto
-  }
-): Observable<InterventionDto> {
-
-    return this.apiInterventionPost$Response(params).pipe(
-      map((r: StrictHttpResponse<InterventionDto>) => r.body as InterventionDto)
+  apiInterventionPost(params?: ApiInterventionPost$Params, context?: HttpContext): Observable<InterventionDto> {
+    return this.apiInterventionPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<InterventionDto>): InterventionDto => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiInterventionDelete
-   */
+  /** Path part for operation `apiInterventionDelete()` */
   static readonly ApiInterventionDeletePath = '/api/Intervention';
 
   /**
@@ -234,49 +138,23 @@ export class InterventionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionDelete$Response(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionDeletePath, 'delete');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
+  apiInterventionDelete$Response(params?: ApiInterventionDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiInterventionDelete(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionDelete(params?: {
-    id?: number;
-    context?: HttpContext
-  }
-): Observable<void> {
-
-    return this.apiInterventionDelete$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+  apiInterventionDelete(params?: ApiInterventionDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiInterventionDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
-  /**
-   * Path part for operation apiInterventionCowIdGet
-   */
+  /** Path part for operation `apiInterventionCowIdGet()` */
   static readonly ApiInterventionCowIdGetPath = '/api/Intervention/{cowId}';
 
   /**
@@ -285,43 +163,19 @@ export class InterventionService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionCowIdGet$Response(params: {
-    cowId: number;
-    context?: HttpContext
-  }
-): Observable<StrictHttpResponse<Array<InterventionDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InterventionService.ApiInterventionCowIdGetPath, 'get');
-    if (params) {
-      rb.path('cowId', params.cowId, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: params?.context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<InterventionDto>>;
-      })
-    );
+  apiInterventionCowIdGet$Response(params: ApiInterventionCowIdGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<InterventionDto>>> {
+    return apiInterventionCowIdGet(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * This method provides access to only to the response body.
+   * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiInterventionCowIdGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiInterventionCowIdGet(params: {
-    cowId: number;
-    context?: HttpContext
-  }
-): Observable<Array<InterventionDto>> {
-
-    return this.apiInterventionCowIdGet$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<InterventionDto>>) => r.body as Array<InterventionDto>)
+  apiInterventionCowIdGet(params: ApiInterventionCowIdGet$Params, context?: HttpContext): Observable<Array<InterventionDto>> {
+    return this.apiInterventionCowIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<InterventionDto>>): Array<InterventionDto> => r.body)
     );
   }
 

@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DayOfWeek } from './day-of-week';
+import { DayOfWeek } from '../models/day-of-week';
 export interface DateOnly {
   day?: number;
   dayNumber?: number;

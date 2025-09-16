@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import { CowDto } from './cow-dto';
+import { CowDto } from '../models/cow-dto';
 export interface PenDetailsDto {
-  cows?: null | Array<CowDto>;
+  cows?: Array<CowDto> | null;
   id?: number;
-  name?: null | string;
+  name?: string | null;
   size?: number;
 }

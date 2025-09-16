@@ -21,12 +21,20 @@ public class UserContext
                user.FindFirst("email")?.Value;
     }
 
+    public string GetAuth0Id()
+    {
+        var user = _httpContextAccessor.HttpContext?.User;
+        if (user == null) return null;
+
+        return user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+    }
+
     public List<string> GetCurrentUserRoles()
     {
         var user = _httpContextAccessor.HttpContext?.User;
         if (user == null) return new List<string>();
 
-        return user.FindAll("https://your-app.com/roles")
+        return user.FindAll("cattlemanager/roles")
                   .Select(c => c.Value)
                   .ToList();
     }

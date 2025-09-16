@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface ConditionDto {
-  comment?: null | string;
+  comment?: string | null;
   cowId?: number;
-  endDate?: null | string;
+  endDate?: string | null;
   id?: number;
-  name?: null | string;
+  name?: string | null;
   startDate?: string;
-  status?: null | string;
-  type?: null | string;
+  status?: string | null;
+  type?: string | null;
 }

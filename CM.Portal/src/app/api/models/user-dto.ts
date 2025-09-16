@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface UserDto {
-  email?: null | string;
+  email?: string | null;
   id?: number;
-  idAuth?: null | string;
+  idAuth?: string | null;
   roleId?: number;
-  username?: null | string;
+  username?: string | null;
 }

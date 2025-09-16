@@ -7,6 +7,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AlertService } from './services/alert.service';
 import { ConditionService } from './services/condition.service';
 import { CowService } from './services/cow.service';
+import { DashboardService } from './services/dashboard.service';
 import { GestationService } from './services/gestation.service';
 import { GroupService } from './services/group.service';
 import { IntervenantService } from './services/intervenant.service';
@@ -17,6 +18,7 @@ import { MilkProductionService } from './services/milk-production.service';
 import { PenService } from './services/pen.service';
 import { StatisticService } from './services/statistic.service';
 import { StockService } from './services/stock.service';
+import { TestService } from './services/test.service';
 import { TreatmentService } from './services/treatment.service';
 import { UserManagementService } from './services/user-management.service';
 import { VaccinationService } from './services/vaccination.service';
@@ -34,6 +36,7 @@ import { WorkerJobService } from './services/worker-job.service';
     AlertService,
     ConditionService,
     CowService,
+    DashboardService,
     GestationService,
     GroupService,
     IntervenantService,
@@ -44,6 +47,7 @@ import { WorkerJobService } from './services/worker-job.service';
     PenService,
     StatisticService,
     StockService,
+    TestService,
     TreatmentService,
     UserManagementService,
     VaccinationService,

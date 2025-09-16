@@ -2,15 +2,15 @@
 /* eslint-disable */
 export interface CowDto {
   birthDate?: string;
-  fatherId?: null | number;
-  gender?: null | string;
-  groupId?: null | number;
+  fatherId?: number | null;
+  gender?: string | null;
+  groupId?: number | null;
   id?: number;
-  identifier?: null | string;
-  imgLink?: null | string;
+  identifier?: string | null;
+  imgLink?: string | null;
   milkCow?: boolean;
-  motherId?: null | number;
-  name?: null | string;
-  penId?: null | number;
-  race?: null | string;
+  motherId?: number | null;
+  name?: string | null;
+  penId?: number | null;
+  race?: string | null;
 }

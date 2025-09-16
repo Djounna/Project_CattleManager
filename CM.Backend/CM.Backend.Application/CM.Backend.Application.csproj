@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Models\Enums\" />
+    <Folder Include="Services\Dashboard\Commands\" />
+    <Folder Include="Services\Dashboard\Queries\" />
   </ItemGroup>
 
 </Project>
