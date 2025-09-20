@@ -10,7 +10,7 @@ export namespace Cows{
     }
 
     export class Get{
-        static readonly type = '[Cows Get Cow'
+        static readonly type = '[Cows] Get Cow'
         constructor(public id: number){}    
     }
 
