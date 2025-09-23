@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
 import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
-import { GestationDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto } from '../../api/models';
+import { GestationDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto, DashboardInfoDto } from '../../api/models';
 import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
 import { Jobs, Workers } from '../../state/work/work.actions';
@@ -13,6 +13,7 @@ import { MapInfo, MapService } from '../../services/map.service';
 import * as L from 'leaflet';
 import moment from 'moment';
 import { JobDetailsListComponent } from '../../features/work/job-details-list/job-details-list.component';
+import { DashboardState } from '../../state/dashboard/dashboard.store';
 
 @Component({
     selector: 'app-dashboard',
@@ -24,6 +25,8 @@ export class DashboardComponent extends BaseComponent {
 
   @ViewChild('jobList') jobList!: JobDetailsListComponent
 
+  @Select(DashboardState.dashbaordInfo) DashboardInfo$!: Observable<DashboardInfoDto>
+  public DashboardInfo!: DashboardInfoDto;
   @Select(WorkState.jobsDetails) JobsDetails$!: Observable<JobDetailsDto[]>
   @Select(WorkState.currentUserJobsDetails) CurrentUserJobsDetails$!: Observable<JobDetailsDto[]>
   public JobsDetails: JobDetailsDto[] = []
@@ -72,6 +75,16 @@ export class DashboardComponent extends BaseComponent {
         // this.Groups = g;
         // this.GroupDictionnary = gd;
       // })).subscribe();
+
+      this.DashboardInfo$
+      .pipe(
+        takeUntil(this.$OnDestroyed),
+        tap((d) =>{
+          debugger;
+          this.DashboardInfo = d
+        } 
+      ))
+      .subscribe();
 
       this.Workers$
       .pipe(

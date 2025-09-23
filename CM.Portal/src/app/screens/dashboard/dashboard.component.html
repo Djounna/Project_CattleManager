@@ -2,6 +2,112 @@
 
     <div style="display: flex; flex-direction:column; gap: 1rem;">
 
+        <div style="display: flex; flex-direction: row; gap: 3rem; justify-content: space-evenly; padding: 1rem;">
+
+            <div class=info-card #cattle>
+
+                <div class="header">
+                    <span class="img">
+                        <img width="50px"  src="assets\icons\cow_stylized_icon.png"/>
+                    </span>
+                    <span class="title">
+                        Bétail
+                    </span>
+                </div>
+
+                <div class="content">
+                    <div class="content-row">
+                        <span> Nombre : </span>
+                        <span>{{DashboardInfo?.cattleTotal}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> Enclos : </span>
+                        <span>{{DashboardInfo?.penInfos?.length}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> Groupes : </span>
+                        <span>{{DashboardInfo?.groupInfos?.length}}</span>
+                    </div>
+                </div>
+            </div> 
+
+            <div class=info-card #tasks>
+
+                <div class="header">
+                    <span class="img">
+                        <img width="50px"  src="assets\icons\cow_head_stylized_icon.png"/>
+                    </span>
+                    <span class="title">
+                        Tâches
+                    </span>
+                </div>
+
+                <div class="content">
+                    <div class="content-row">
+                        <span> A réaliser : </span>
+                        <span>{{DashboardInfo?.dailyTasks?.totalToDo}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> En cours : </span>
+                        <span>{{DashboardInfo?.dailyTasks?.totalOngoing}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> Terminées : </span>
+                        <span>{{DashboardInfo?.dailyTasks?.totalDone}}</span>
+                    </div>
+                </div>
+            </div> 
+
+            <div class=info-card #milking>
+
+                <div class="header">
+                    <span class="img">
+                        <img width="50px"  src="assets\icons\milking_icon.jpg"/>
+                    </span>
+                    <span class="title">
+                        Traite
+                    </span>
+                </div>
+
+                <div class="content">
+                    <div class="content-row">
+                        <span> Traites à réaliser : </span>
+                        <span>{{DashboardInfo?.dailyMilking?.totalToDo}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> Traites réalisées : </span>
+                        <span>{{DashboardInfo?.dailyMilking?.totalDone}}</span>
+                    </div>
+                    <div class="content-row">
+                        <span> Volume total : </span>
+                        <span>{{DashboardInfo?.dailyMilking?.volume}}</span>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="info-card large" #pens>
+                <div class="header">
+                    <span class="img">
+                        <img width="50px"  src="assets\icons\milking_icon.jpg"/>
+                    </span>
+                    <span class="title">
+                        Enclos
+                    </span>
+                </div>
+
+
+                <div class="content-multi">
+                    @for(pen of DashboardInfo.penInfos; track pen.name){
+                        <div class="content-row">
+                            <span> {{pen.name}} </span>
+                            <span> {{pen.total}}/{{pen.size}}</span>
+                        </div>
+                    }
+                </div>
+            </div> 
+
+        </div>
+
         <p-menubar>
             <ng-template #start>
                 <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">

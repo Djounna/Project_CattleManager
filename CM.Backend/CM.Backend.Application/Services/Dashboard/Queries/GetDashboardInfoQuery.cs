@@ -21,6 +21,7 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
         ICowRepository cowRepository,
         IGroupRepository groupRepository,
         IPenRepository penRepository,
+        IJobRepository jobRepository,
         IMilkingRepository milkingRepository,
         IUserRepository userRepository
         )
@@ -28,6 +29,7 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
         _cowRepository = cowRepository;
         _penRepository = penRepository;
         _groupRepository = groupRepository;
+        _jobRepository = jobRepository;
         _milkingRepository = milkingRepository;
         _userRepository = userRepository;
     }
@@ -40,11 +42,14 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
         if (user == null)
             return null;
 
-        var jobs = request.isWorker ? _jobRepository.GetListByUserByDate(user.Id, date).ToList() : _jobRepository.GetListByDate(date).ToList() ;
+        //var jobs = request.isWorker ? _jobRepository.GetListByUserByDate(user.Id, date).ToList() : _jobRepository.GetListByDate(date).ToList() ;
+        var jobs = _jobRepository.GetListByDate(date).ToList() ;
         if (jobs == null)
             return null;
 
         var dayMilkings = _milkingRepository.GetListByDate(date);
+        var dailyMilkingsDone = dayMilkings.Where(m => m.Volume > 0 || m.Cancelled).Count();
+        var dailyMilkingToDo = _cowRepository.GetList().Where(c => c.MilkCow).Count() - dailyMilkingsDone;
 
         DashboardInfoDto infos = new()
         {
@@ -79,8 +84,9 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
 
             DailyMilking = new DailyMilking
             {
-                TotalDone = dayMilkings.Where(m => m.Volume > 0 || m.Cancelled).Count(),
-                TotalToDo = dayMilkings.Where(m => m.Volume == 0 && !m.Cancelled).Count(),
+                TotalDone = dailyMilkingsDone,
+                //TotalToDo = dayMilkings.Where(m => m.Volume == 0 && !m.Cancelled).Count(),
+                TotalToDo = dailyMilkingToDo,
                 Volume = dayMilkings.Sum(m => m.Volume)
             }
         };

@@ -152,6 +152,7 @@ import { UpdateGroupDialogComponent } from './features/groups/group/update-group
 import { CreatePenDialogComponent } from './features/pens/pen/create-pen-dialog/create-pen-dialog.component';
 import { UpdatePenDialogComponent } from './features/pens/pen/update-pen-dialog/update-pen-dialog.component';
 import { UpdateJobDialogComponent } from './features/work/job/update-job-dialog/update-job-dialog.component';
+import { DashboardState } from './state/dashboard/dashboard.store';
 
 @NgModule({ 
     declarations: 
@@ -273,6 +274,7 @@ import { UpdateJobDialogComponent } from './features/work/job/update-job-dialog/
         //State Mgmt
         NgxsModule.forRoot([UserState, AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
         ApiModule.forRoot({ rootUrl: 'https://localhost:7276' }),
+        NgxsModule.forRoot([UserState, DashboardState, AlertState, CattleState, MilkingState, WorkState, InfrastructureState]),
         // Auth0
         AuthModule.forRoot({
             domain: 'dev-c6lwemo7.us.auth0.com',

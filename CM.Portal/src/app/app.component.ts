@@ -14,6 +14,7 @@ import { MenuService } from './services/menu.service';
 import { Cows, Groups } from './state/cattle/cattle.actions';
 import { Pens } from './state/infrastructure/infrastructure.action';
 import { Workers } from './state/work/work.actions';
+import { DashboardInfo } from './state/dashboard/dashboard.actions';
 
 @Component({
   selector: 'app-root',
@@ -72,6 +73,7 @@ export class AppComponent {
     this.store.dispatch(new Groups.GetAll());
     this.store.dispatch(new Pens.GetAll());
     this.store.dispatch(new Workers.GetAll());
+    this.store.dispatch(new DashboardInfo.Get());
     this.checkAlerts();
   }
 
