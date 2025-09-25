@@ -59,6 +59,38 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
+    /*
+    Future<void> GetDailyMilkings() async{
+      try{
+        List<Milking>? pens = await appContext.clientApi.penApi!.apiPenGet();
+        appContext.setPens(pens);
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+            )
+        );
+      }
+    }
+     */
+
+    Future<void> GetPens() async{
+      try{
+        List<PenDto>? pens = await appContext.clientApi.penApi!.apiPenGet();
+        appContext.setPens(pens);
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+            )
+        );
+      }
+    }
+
     // Check if URL is an ngrok URL
     bool _isNgrokUrl(String? url) {
       if(url == null){
@@ -110,6 +142,8 @@ class _HomePageState extends State<HomePage> {
 
                 await GetCows();
                 await GetWorkerJobs();
+                //await GetDailyMilkings();
+                await GetPens();
 
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(

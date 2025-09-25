@@ -71,7 +71,7 @@ class _JobsPageState extends State<JobsPage> {
     });
 
     return Scaffold(
-        appBar: const TopAppBar(),
+        appBar: TopAppBar(title:'Tâches'),
         drawer: const DrawerContent(),
         body: Column(
           children: [

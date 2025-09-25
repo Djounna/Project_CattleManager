@@ -3,6 +3,7 @@ import 'package:cm_app/Screens/Dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/Jobs/JobsPage.dart';
+import 'CMTheme.dart';
 
 class DrawerContent extends StatelessWidget {
   const DrawerContent({super.key});
@@ -16,7 +17,7 @@ class DrawerContent extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-                color: Colors.lightGreen,
+                color: CMTheme.lightGreen,
             ),
             child: Text('Cattle Manager'),
           ),

@@ -3,9 +3,12 @@ import 'package:cm_app/Screens/Home/HomePage.dart';
 import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'CMTheme.dart';
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const TopAppBar({super.key});
+  TopAppBar({super.key, required this.title, });
+
+  final String title;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -28,7 +31,26 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return AppBar(
-        title: const Text("Cattle Manager"),
+        //title: const Text("Cattle Manager"),
+        title: Row(
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: CMTheme.primaryGreen,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Icons.dashboard,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(title),
+          ],
+        ),
         actions: [
           IconButton(
               icon: const Icon(Icons.logout),

@@ -1,6 +1,7 @@
 import 'package:cm_app/Screens/Cows/CowsPage.dart';
 import 'package:cm_app/Screens/Jobs/JobsPage.dart';
 import 'package:flutter/material.dart';
+import '../../Shared/CMTheme.dart';
 import '../../Shared/DrawerContent.dart';
 import '../../Shared/TopAppBar.dart';
 
@@ -15,9 +16,8 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-
-      appBar: const TopAppBar(),
+      backgroundColor: CMTheme.backgroundColor,
+      appBar: TopAppBar(title:'Dashboard'),
       drawer: const DrawerContent(),
 
       body: Padding(
@@ -27,8 +27,8 @@ class _DashboardPageState extends State<DashboardPage> {
             _buildDashboardCard(
               context,
               title: 'Bétail',
-              icon: Icons.trending_up,
-              color: Colors.green,
+              icon: Icons.list,
+              color: CMTheme.primaryGreen,
               labelValues: [
                 {'label': 'Total Revenue', 'value': '€12,450'},
                 {'label': 'This Month', 'value': '€3,250'},
@@ -40,8 +40,8 @@ class _DashboardPageState extends State<DashboardPage> {
             _buildDashboardCard(
               context,
               title: 'Tâches',
-              icon: Icons.shopping_cart,
-              color: Colors.orange,
+              icon: Icons.list,
+              color: CMTheme.primaryGreen,
               labelValues: [
                 {'label': 'Pending Orders', 'value': '234'},
                 {'label': 'Completed Today', 'value': '45'},
@@ -53,8 +53,8 @@ class _DashboardPageState extends State<DashboardPage> {
             _buildDashboardCard(
               context,
               title: 'Enclos',
-              icon: Icons.people,
-              color: Colors.blue,
+              icon: Icons.cabin,
+              color: CMTheme.primaryGreen,
               labelValues: [
                 {'label': 'Active Users', 'value': '1,248'},
                 {'label': 'New This Week', 'value': '86'},
@@ -79,13 +79,12 @@ class _DashboardPageState extends State<DashboardPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 120,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: CMTheme.lightGreen.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: CMTheme.borderColor.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 6,
               offset: const Offset(0, 3),
@@ -101,10 +100,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 flex: 1,
                 child: Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
+                  /*decoration: BoxDecoration(
                     color: color.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                  ),
+                  ),*/
                   child: Icon(
                     icon,
                     color: color,
@@ -112,7 +111,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
+              //const SizedBox(width: 16),
               // Right side - Title and label/values (2/3)
               Expanded(
                 flex: 2,
@@ -126,7 +125,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: CMTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -140,7 +139,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             item['label'] ?? '',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey[600],
+                              color: CMTheme.textSecondary,
                             ),
                           ),
                           Text(
@@ -148,7 +147,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: CMTheme.textSecondary,
                             ),
                           ),
                         ],

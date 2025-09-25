@@ -7,6 +7,8 @@ import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Shared/CMTheme.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,9 +23,10 @@ class MyApp extends StatelessWidget {
      create: (_) => AppContext(),
      child: MaterialApp(
       title: 'Cattle Manager',
-      theme: ThemeData(
+      theme: CMTheme.theme,
+      /*ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreenAccent),
-      ),
+      ),*/
       home: const HomePage(),
       routes:{
         '/dashboard' : (context) => const DashboardPage(),
