@@ -1,4 +1,5 @@
 import 'package:cm_app/Screens/Cows/CowsPage.dart';
+import 'package:cm_app/Screens/Dashboard/Dashboard.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/Jobs/JobsPage.dart';
@@ -20,12 +21,21 @@ class DrawerContent extends StatelessWidget {
             child: Text('Cattle Manager'),
           ),
           ListTile(
+            title: const Text('Dashboard'),
+            onTap: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardPage()),
+                  ModalRoute.withName('home'));
+            },
+          ),
+          ListTile(
             title: const Text('Tâches'),
             onTap: () {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (context) => const JobsPage()),
-                  ModalRoute.withName('home'));
+                  ModalRoute.withName('dashboard'));
             },
           ),
           ListTile(
@@ -34,7 +44,7 @@ class DrawerContent extends StatelessWidget {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (context) => const CowsPage()),
-                  ModalRoute.withName('home'));
+                  ModalRoute.withName('dashboard'));
             },
           ),
           //ListTile(

@@ -1,4 +1,5 @@
 import 'package:cm_app/Screens/Cows/CowsPage.dart';
+import 'package:cm_app/Screens/Dashboard/Dashboard.dart';
 import 'package:cm_app/Screens/Jobs/JobsPage.dart';
 import 'package:cm_app/Screens/Home/HomePage.dart';
 import 'package:cm_app/Screens/Milkings/MilkingsPage.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes:{
+        '/dashboard' : (context) => const DashboardPage(),
         '/cows' : (context) => const CowsPage(),
         '/jobs' : (context) => const JobsPage(),
         //'/milkings': (context) => const MilkingsPage()
