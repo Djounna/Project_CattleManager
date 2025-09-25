@@ -59,6 +59,31 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
+    // Check if URL is an ngrok URL
+    bool _isNgrokUrl(String? url) {
+      if(url == null){
+        return false;
+      }
+      else{
+        return url.contains('ngrok.io') ||
+            url.contains('ngrok-free.app') ||
+            url.contains('ngrok.app');
+      }
+    }
+
+    // Add ngrok header if needed
+    Map<String, String> _addNgrokHeaders(Map<String, String>? headers, String url) {
+      final Map<String, String> finalHeaders = Map.from(headers ?? {});
+
+      if (_isNgrokUrl(url)) {
+        finalHeaders['ngrok-skip-browser-warning'] = 'true';
+        print('Added ngrok header for URL: $url');
+      }
+
+      return finalHeaders;
+    }
+
+
     return Scaffold(
       body:
       Center(
@@ -75,6 +100,13 @@ class _HomePageState extends State<HomePage> {
                     'authorization',
                     'Bearer ${_credentials!.accessToken}'
                 );
+
+                if (_isNgrokUrl(appContext.clientApi.apiClient?.basePath)){
+                  appContext.clientApi.apiClient?.addDefaultHeader(
+                      'ngrok-skip-browser-warning',
+                      'true'
+                  );
+                }
 
                 await GetCows();
                 await GetWorkerJobs();

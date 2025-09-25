@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 
 class AppContext with ChangeNotifier{
 
-  //Client clientApi = Client("https://localhost:7276");
-  Client clientApi = Client("http://10.0.2.2:5139");
-  //Client clientApi = Client("http://192.168.1.8:5139");
+  //Client clientApi = Client("https://localhost:7276"); // LocalHost
+  //Client clientApi = Client("http://10.0.2.2:5139"); // LocalHost of computer from emulator
+  //Client clientApi = Client("http://192.168.1.8:5139"); // Ip of the computer on the network
+  Client clientApi = Client("https://unreconsidered-gina-unantagonisable.ngrok-free.app"); // ngrok tunnel
   Credentials? _credentials;
   List<CowDto>? _cows;
   CowDetailsDto? _selectedCow;
