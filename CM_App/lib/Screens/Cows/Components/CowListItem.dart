@@ -2,6 +2,8 @@
 import 'package:CM_api/api.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Shared/CMTheme.dart';
+
 class CowListItem extends StatelessWidget {
   const CowListItem({super.key,
     required this.cow,
@@ -31,22 +33,25 @@ class CowListItem extends StatelessWidget {
               child: Container(
                   height: 80,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: CMTheme.surfaceColor,
                     border:Border.all (
-                      color: Colors.blueGrey,
+                      color: CMTheme.borderColor,
 
                     ),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: CMTheme.borderColor.withOpacity(0.5),
                         offset: Offset(4, 4),
                         blurRadius: 8,
                       ),
                     ],
                   ),
                   child: ListTile(
-                      leading: Icon(Icons.info),
+                      leading: Icon(
+                          Icons.info,
+                          color: CMTheme.darkGreen,
+                      ),
                       title: Text(cow.identifier!),
                       subtitle: Text(cow.name!),
                       onTap: () => {onSelect(cow)}
@@ -65,10 +70,13 @@ class CowListItem extends StatelessWidget {
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.orangeAccent,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
+                      borderRadius: BorderRadius.circular(8)
                     )
                   ),
-                  child: const Icon(Icons.alarm)
+                  child: const Icon(
+                      Icons.alarm,
+                    color: CMTheme.lightGreen,
+                  )
               )
           )
         ],

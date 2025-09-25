@@ -6,6 +6,7 @@ import 'package:cm_app/Shared/TopAppBar.dart';
 import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../Shared/CMTheme.dart';
 import '../../Shared/Dialog/Loading_Dialog.dart';
 import '../../Shared/DrawerContent.dart';
 import 'Components/CreateCowAlertDialog.dart';
@@ -156,7 +157,8 @@ class _CowsPageState extends State<CowsPage> {
     });
 
     return Scaffold(
-      appBar: const TopAppBar(),
+      backgroundColor: CMTheme.backgroundColor,
+      appBar: TopAppBar(title:'Bétail'),
       drawer: const DrawerContent(),
       body: Column(
         children: [
