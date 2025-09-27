@@ -2,6 +2,7 @@
 
     <div style="display: flex; flex-direction:column; gap: 1rem;">
 
+        @if(!!DashboardInfo){
         <div style="display: flex; flex-direction: row; gap: 3rem; justify-content: space-evenly; padding: 1rem;">
 
             <div class=info-card #cattle>
@@ -107,6 +108,7 @@
             </div> 
 
         </div>
+        }
 
         <p-menubar>
             <ng-template #start>
@@ -120,18 +122,18 @@
             </ng-template>
         </p-menubar>
 
-        <div class="flex flex-row justify-content-center gap-4">
+        <div class="flex flex-row justify-content-between gap-4">
 
-                <p-panel header="Tâches">
-                    <div class="size-scroll_jobList">
-                        <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                        (onFocusJob)="onFocusPolygon($event)" (onJobUpdated)="SelectDate()"
-                        ></app-job-details-list>
-                    </div>
-                </p-panel>
+            <p-panel header="Tâches" [style]="{'min-width':'1000px'}">
+                <div class="size-scroll_jobList">
+                    <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
+                    (onFocusJob)="onFocusPolygon($event)" (onJobUpdated)="SelectDate()"
+                    ></app-job-details-list>
+                </div>
+            </p-panel>
 
             <div style="display:flex; flex-direction: column; gap: 1rem;">
-                <div *ngIf="Pens.length > 0" style="width: 600px; height: 300px" leaflet 
+                <div *ngIf="Pens.length > 0" style="width: 750px; height: 500px" leaflet 
                     [leafletOptions]="MapInfos.MapOptions"
                     (leafletMapReady)="onMapReady($event)">
                 </div>

@@ -1,19 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../shared/base-component.component';
 import { Select } from '@ngxs/store';
-import { Observable, combineLatest, takeUntil, tap } from 'rxjs';
-import { GestationDto, JobDto, UserDto, GroupDto, PenDto, JobDetailsDto, DashboardInfoDto } from '../../api/models';
+import { Observable, takeUntil, tap } from 'rxjs';
+import { UserDto, GroupDto, PenDto, JobDetailsDto, DashboardInfoDto } from '../../api/models';
 import { WorkState } from '../../state/work/work.store';
 import { CattleState } from '../../state/cattle/cattle.store';
-import { Jobs, Workers } from '../../state/work/work.actions';
-import { Cows, Gestations, Groups } from '../../state/cattle/cattle.actions';
+import { Jobs } from '../../state/work/work.actions';
 import { InfrastructureState } from '../../state/infrastructure/infrastructure.store';
-import { Pens } from '../../state/infrastructure/infrastructure.action';
 import { MapInfo, MapService } from '../../services/map.service';
 import * as L from 'leaflet';
 import moment from 'moment';
 import { JobDetailsListComponent } from '../../features/work/job-details-list/job-details-list.component';
 import { DashboardState } from '../../state/dashboard/dashboard.store';
+import { DashboardInfo } from '../../state/dashboard/dashboard.actions';
 
 @Component({
     selector: 'app-dashboard',
@@ -59,6 +58,7 @@ export class DashboardComponent extends BaseComponent {
   override ngOnInit(): void {
     super.ngOnInit();
     this.getData();
+    this.store.dispatch(new DashboardInfo.Get());
   }
 
   // ngAfterViewInit() {
@@ -182,9 +182,4 @@ export class DashboardComponent extends BaseComponent {
     this.Date = new Date();
     this.SelectDate();
   }
-}
-
-export interface MilkingHistoryData {
-  date: Date,
-  Volume: number,
 }

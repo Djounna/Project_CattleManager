@@ -28,7 +28,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page_base{
     @include flex-column;
     max-height: 100%;
-    margin: 1rem 2rem;
+    margin: 1rem 4rem;
 }
 
 .form_base {

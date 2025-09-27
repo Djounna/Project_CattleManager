@@ -59,10 +59,10 @@
                 </div>
             </div>
 
-        <div class="flex flex-column">
+        <div class="flex flex-column" style="flex:1;">
             <p-panel header="Tâches">
                 <app-job-details-list #jobList [JobsDetails]="JobsDetails" [Workers]="Workers"
-                    [ShowZoomOption]="false" (onJobUpdated)="updateJobs()"
+                    [ShowZoomOption]="false" [rows]="10" (onJobUpdated)="updateJobs()"
                 ></app-job-details-list>
             </p-panel>
         </div>

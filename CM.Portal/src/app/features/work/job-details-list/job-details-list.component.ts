@@ -17,6 +17,7 @@ export class JobDetailsListComponent extends BaseComponent {
   @Output() onJobUpdated: EventEmitter<void> = new EventEmitter<void>()
   @Output() onFocusJob : EventEmitter<JobDetailsDto> = new EventEmitter<JobDetailsDto>();
   @Input() ShowZoomOption: boolean = true;
+  @Input() rows: number = 5;
 
   @ViewChild('dt') dt: any;
   private jobs : JobDetailsDto[] = [];
