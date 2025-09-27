@@ -109,7 +109,6 @@ export class JobDetailsListComponent extends BaseComponent {
   // }
 
   // SetJobOngoing(job: any){
-  //   debugger;
   //   let updatedJob: JobDto = {
   //     ... job,
   //     status : JobStatus.OnGoing
@@ -118,7 +117,6 @@ export class JobDetailsListComponent extends BaseComponent {
   // }
 
   // SetJobDone(job: any){
-  //   debugger;
   //   let updatedJob: JobDto = {
   //     ... job,
   //     status : JobStatus.Done

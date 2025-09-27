@@ -17,6 +17,7 @@ export class AgeBarChartComponent {
     const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
     this.graphData =  {
+        legend: 'Ages',
         labels: value?.ageGroupStatistics?.map(a => a.ageGroupName),
         datasets: [
             {

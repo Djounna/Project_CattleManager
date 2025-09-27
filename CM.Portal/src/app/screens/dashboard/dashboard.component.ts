@@ -80,7 +80,6 @@ export class DashboardComponent extends BaseComponent {
       .pipe(
         takeUntil(this.$OnDestroyed),
         tap((d) =>{
-          debugger;
           this.DashboardInfo = d
         } 
       ))

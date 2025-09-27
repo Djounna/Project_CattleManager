@@ -153,6 +153,7 @@ import { CreatePenDialogComponent } from './features/pens/pen/create-pen-dialog/
 import { UpdatePenDialogComponent } from './features/pens/pen/update-pen-dialog/update-pen-dialog.component';
 import { UpdateJobDialogComponent } from './features/work/job/update-job-dialog/update-job-dialog.component';
 import { DashboardState } from './state/dashboard/dashboard.store';
+import { RacePieChartComponent } from './features/graphs/cattle/race-pie-chart/race-pie-chart.component';
 
 @NgModule({ 
     declarations: 
@@ -192,6 +193,7 @@ import { DashboardState } from './state/dashboard/dashboard.store';
         GroupPieChartComponent,
         PenPieChartComponent,
         AgePieChartComponent,
+        RacePieChartComponent,
         AgeBarChartComponent,
         PenPageComponent,
         LoaderComponent,
