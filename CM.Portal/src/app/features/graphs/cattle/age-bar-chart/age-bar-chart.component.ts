@@ -17,12 +17,18 @@ export class AgeBarChartComponent {
     const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
     this.graphData =  {
-        legend: 'Ages',
-        labels: value?.ageGroupStatistics?.map(a => a.ageGroupName),
+        labels: value?.ageGroupStatistics?.filter(a => a.ageGroupName !== "0").map(a => a.ageGroupName),
         datasets: [
             {
-                data: value?.ageGroupStatistics?.map(a => a.number),
-                backgroundColor: [documentStyle.getPropertyValue('--p-teal-200'), documentStyle.getPropertyValue('--p-teal-400'), documentStyle.getPropertyValue('--p-teal-600'), documentStyle.getPropertyValue('--p-teal-800')],
+                label: 'Femelles',
+                data: value?.ageGenderGroupStatisticsFemale?.map(a => a.number),
+                backgroundColor: [documentStyle.getPropertyValue('--p-teal-200')],
+                hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400')]
+            },
+            {
+                label: 'Mâles',
+                data: value?.ageGenderGroupStatisticsMale?.map(a => a.number),
+                backgroundColor: [documentStyle.getPropertyValue('--p-teal-800')],
                 hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400')]
             }
         ]
@@ -43,6 +49,7 @@ export class AgeBarChartComponent {
           x: {
               ticks: {
                   color: textColorSecondary,
+                  stepSize: 1,
                   font: {
                       weight: 500
                   }
