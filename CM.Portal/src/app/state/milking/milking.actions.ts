@@ -12,6 +12,10 @@ export namespace Milkings{
     export class GetVolumesLastMonth{
         static readonly type ='[Milkings] Get All Milking volumes from the last month'
     }
+    export class GetVolumesRange{
+        static readonly type ='[Milkings] Get All Milking volumes from selected date range'
+        constructor(public startDate : string, public endDate: string){}
+    }
     export class Create{
         static readonly type = '[Milkings] Create Milking'
         constructor(public payload : any){}

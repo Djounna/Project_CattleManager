@@ -1,6 +1,4 @@
-import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { MilkingStateModel } from "./milking.state";
-import { Injectable } from "@angular/core";
+import { Action, Selector, State, StateContext } from "@ngxs/store"; import { MilkingStateModel } from "./milking.state"; import { Injectable } from "@angular/core";
 import { patch, append, updateItem, removeItem } from "@ngxs/store/operators";
 import { tap } from "rxjs";
 import { MilkingDto, MilkProductionDto } from "../../api/models";
@@ -15,6 +13,7 @@ import moment from "moment";
         MonthMilkings: [],
         SelectedCowMonthMilkings: [],
         MonthMilkingVolumes: [],
+        RangeMilkingVolumes: [],
         MilkProductions: []
     }
 })
@@ -41,6 +40,11 @@ export class MilkingState{
     @Selector()
     static milkingVolumesLastMonth(milkingState:MilkingStateModel){
         return milkingState.MonthMilkingVolumes;
+    }
+
+    @Selector()
+    static milkingVolumesRange(milkingState:MilkingStateModel){
+        return milkingState.RangeMilkingVolumes;
     }
 
     @Selector()
@@ -97,6 +101,14 @@ export class MilkingState{
         let end : string = moment(endDate).format('YYYY-MM-DD');
         return this.milkingService.apiMilkingVolumeRangeStartEndGet({start : start, end: end}).pipe(tap(mv=>{
             ctx.patchState({MonthMilkingVolumes : mv});
+            })
+        );
+    }
+
+    @Action(Milkings.GetVolumesRange)
+    getVolumesRange(ctx: StateContext<MilkingStateModel>, action : Milkings.GetVolumesRange){
+        return this.milkingService.apiMilkingVolumeRangeStartEndGet({start : action.startDate, end: action.endDate}).pipe(tap(mv=>{
+            ctx.patchState({RangeMilkingVolumes : mv});
             })
         );
     }

@@ -8,13 +8,29 @@
             <p-card header="Groupes">
                 <app-group-pie-chart [data]="CattleStatistics"></app-group-pie-chart>
             </p-card>
-            <p-card header="Age">
-                <app-age-pie-chart [data]="CattleStatistics"></app-age-pie-chart>
+            <p-card header="Races">
+                <app-race-pie-chart [data]="CattleStatistics"></app-race-pie-chart>
             </p-card>
-            <p-card header="Age">
+            <!-- <p-card header="Ages">
+                <app-age-pie-chart [data]="CattleStatistics"></app-age-pie-chart>
+            </p-card> -->
+            <p-card header="Ages">
                 <app-age-bar-chart [data]="CattleStatistics"></app-age-bar-chart>
             </p-card>
         </div>
+
+        <p-menubar>
+            <ng-template #start>
+                <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
+                    <span>Date:</span>
+                    <p-datepicker [(ngModel)]="StartDate" ></p-datepicker> 
+                    <p-datepicker [(ngModel)]="EndDate" ></p-datepicker> 
+                    <p-button label="Sélectionner" severity="primary" [outlined]="true" styleClass="w-full" (click)="SelectDate()" />
+                </div>
+            </ng-template>
+            <ng-template #end>
+            </ng-template>
+        </p-menubar>
 
         <div class="flex-grow-1">
             <p-card header="Production laitière">
