@@ -39,8 +39,8 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
         var date = DateOnly.FromDateTime(DateTime.Now);
 
         var user = _userRepository.GetUserByIdAuth(request.userAuthId);
-        if (user == null)
-            return null;
+        //if (user == null)
+        //    return null;
 
         //var jobs = request.isWorker ? _jobRepository.GetListByUserByDate(user.Id, date).ToList() : _jobRepository.GetListByDate(date).ToList() ;
         var jobs = _jobRepository.GetListByDate(date).ToList() ;
