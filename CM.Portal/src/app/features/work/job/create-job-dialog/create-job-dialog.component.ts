@@ -1,10 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {FormBuilder} from '@angular/forms';
 import { CowDto, JobDto, PenDto } from '../../../../api/models';
 import { JobStatus } from '../../../../models/enums/workEnums';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BaseComponent } from '../../../../shared/base-component.component';
+import { DialogComponent } from '../../../../shared/dialog-component.component';
 
 @Component({
     selector: 'app-create-job-dialog',
@@ -12,13 +10,9 @@ import { BaseComponent } from '../../../../shared/base-component.component';
     styleUrl: './create-job-dialog.component.scss',
     standalone: false
 })
-export class CreateJobDialogComponent extends BaseComponent{
+export class CreateJobDialogComponent extends DialogComponent{
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig
-  )
+  constructor()
   {
     super();
   }
@@ -30,19 +24,22 @@ export class CreateJobDialogComponent extends BaseComponent{
 
   override ngOnInit(): void {
     super.ngOnInit();
-
     this.data = this.dialogConfig.data;
   }
 
   jobForm = this.formBuilder.group({
-    title:['', Validators.required],
-    description:['', Validators.required],
+    title:['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
+    description:['', [Validators.required, Validators.max(100)]],
     date:[new Date(), Validators.required],
     pen:new FormControl<PenDto | null>(null),
     cow:new FormControl<CowDto | null>(null)
   })
 
   OnCreate(): void {
+    if(this.jobForm?.invalid){
+      return;
+    }
+
     this.newJob = {
       id : 0,
       title : this.jobForm.value.title, 

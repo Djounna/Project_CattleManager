@@ -11,10 +11,20 @@
                     <div class="form-entry-col">
                         <label for="type">Type</label>
                         <input pInputText id="type" formControlName="type" />
+                        @if (this.isInvalid(CreateInterventionForm, 'type')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(CreateInterventionForm, 'type')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="description">Description</label>
                         <input pInputText id="description" formControlName="description" />
+                        @if (this.isInvalid(CreateInterventionForm, 'description')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(CreateInterventionForm, 'description')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="birthdate">Date</label>

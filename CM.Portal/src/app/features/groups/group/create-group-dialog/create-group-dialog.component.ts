@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { GroupDto } from '../../../../api/models';
-import { BaseComponent } from '../../../../shared/base-component.component';
 import { Groups } from '../../../../state/cattle/cattle.actions';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogComponent } from '../../../../shared/dialog-component.component';
 
 @Component({
     selector: 'app-create-group-dialog',
@@ -11,12 +10,9 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
     styleUrl: './create-group-dialog.component.scss',
     standalone: false
 })
-export class CreateGroupDialogComponent extends BaseComponent{
+export class CreateGroupDialogComponent extends DialogComponent{
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-  ){
+  constructor(){
     super();
   }
 
@@ -30,8 +26,8 @@ export class CreateGroupDialogComponent extends BaseComponent{
 
   private initForm(): void{
     this.GroupForm = this.formBuilder.group({
-      name:['', Validators.required],
-      description:['', Validators.required],
+      name:['', [Validators.required, Validators.maxLength(25)]],
+      description:['', [Validators.required, , Validators.maxLength(200)]],
       imgLink:[''],
     })
   }

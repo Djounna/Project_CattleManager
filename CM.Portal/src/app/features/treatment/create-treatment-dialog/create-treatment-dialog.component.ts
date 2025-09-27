@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { FormGroup, Validators } from '@angular/forms';
 import { CowDto, TreatmentDto } from '../../../api/models';
-import { BaseComponent } from '../../../shared/base-component.component';
 import { Treatments } from '../../../state/cattle/cattle.actions';
-import { SelectOption } from '../../../models/interfaces/common';
 import { TreatmentType } from '../../../models/enums/treatment-type';
+import { DialogComponent } from '../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-treatment-dialog',
   standalone: false,
-  
   templateUrl: './create-treatment-dialog.component.html',
   styleUrl: './create-treatment-dialog.component.scss'
 })
-export class CreateTreatmentDialogComponent extends BaseComponent{
+export class CreateTreatmentDialogComponent extends DialogComponent{
 
   public Cow!: CowDto;
   public CreateTreatmentForm!: FormGroup;
@@ -28,10 +25,7 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
   //   }
   // });
 
-  constructor( private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
-  ){
+  constructor(){
     super();
   }
 
@@ -42,7 +36,7 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
     this.Cow = this.dialogConfig.data;
     this.CreateTreatmentForm = this.formBuilder.group({
       identifier: [this.Cow.identifier],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       type: ['', Validators.required],
       date:[new Date(),Validators.required],
     });
@@ -60,7 +54,7 @@ export class CreateTreatmentDialogComponent extends BaseComponent{
 
     this.store.dispatch(new Treatments.Create({ body: this.NewTreatment })).subscribe({
       next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
-      error: () => this.toastError("Une erreur s'est produite")
+      error: () => this.toastError("Une erreur s'est produite lors de l'ajout du traitement")
     });
 
     this.dialogRef.close(this.NewTreatment);

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BaseComponent } from '../../../shared/base-component.component';
+import { FormGroup, Validators } from '@angular/forms';
 import { CowDto, InterventionDto } from '../../../api/models';
 import { Interventions } from '../../../state/cattle/cattle.actions';
+import { DialogComponent } from '../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-intervention-dialog',
@@ -11,15 +10,12 @@ import { Interventions } from '../../../state/cattle/cattle.actions';
   styleUrl: './create-intervention-dialog.component.scss',
   standalone: false,
 })
-export class CreateInterventionDialogComponent extends BaseComponent {
+export class CreateInterventionDialogComponent extends DialogComponent {
   public Cow!: CowDto;
   public CreateInterventionForm!: FormGroup;
   public NewIntervention: InterventionDto | undefined;
 
-  constructor( private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
-  ){
+  constructor(){
     super();
   }
 
@@ -29,8 +25,8 @@ export class CreateInterventionDialogComponent extends BaseComponent {
     this.CreateInterventionForm = this.formBuilder.group({
       // identifier: [this.Cow.identifier, Validators.required],
       // intervenantId: [0], 
-      description: ['', Validators.required], 
-      type: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(200)]], 
+      type: ['', [Validators.required, Validators.maxLength(200)]],
       date:[new Date(),Validators.required],
     });
   }

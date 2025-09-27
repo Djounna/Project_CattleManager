@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../../shared/base-component.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormGroup, Validators } from '@angular/forms';
 import { CowDto, VaccinationDto } from '../../../api/models';
 import { Vaccinations } from '../../../state/cattle/cattle.actions';
+import { DialogComponent } from '../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-vaccination-dialog',
@@ -12,14 +11,12 @@ import { Vaccinations } from '../../../state/cattle/cattle.actions';
   templateUrl: './create-vaccination-dialog.component.html',
   styleUrl: './create-vaccination-dialog.component.scss'
 })
-export class CreateVaccinationDialogComponent extends BaseComponent {
+export class CreateVaccinationDialogComponent extends DialogComponent {
   public Cow!: CowDto;
   public CreateVaccinationForm!: FormGroup;
   public NewVaccination: VaccinationDto | undefined;
 
-  constructor( private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
+  constructor( 
   ){
     super();
   }
@@ -31,7 +28,7 @@ export class CreateVaccinationDialogComponent extends BaseComponent {
     this.CreateVaccinationForm = this.formBuilder.group({
       identifier: [this.Cow.identifier],
       // cowId: [0, Validators.required],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       date:[new Date(),Validators.required],
     });
   }

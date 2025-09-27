@@ -10,6 +10,11 @@
                 <div class="flex flex-column gap-2">
                     <label for="name">Nom</label>
                     <input pInputText id="name" formControlName="name" />
+                    @if (this.isInvalid(CreateVaccinationForm, 'name')){
+                        <p-message severity="error" size="small" variant="simple">
+                            {{getErrorMessage(CreateVaccinationForm, 'name')}}
+                        </p-message>
+                    }
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="date">Date</label>

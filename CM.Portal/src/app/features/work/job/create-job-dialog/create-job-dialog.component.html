@@ -7,10 +7,18 @@
                     <div class="form-entry-col">
                         <label for="title">Titre</label>
                         <input pInputText id="title" formControlName="title" fluid/>
+                        @if (this.isInvalid(jobForm, 'title')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(jobForm, 'title')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="description">Description</label>
-                        <textarea rows="5" cols="30" pInputTextarea formControlName="description" fluid></textarea>
+                        <textarea rows="5" cols="30" pInputTextarea id="description" formControlName="description" fluid></textarea>
+                        @if (this.isInvalid(jobForm, 'description')){
+                            <p-message severity="error" size="small" variant="simple">Champ invalide</p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="date">Date</label>

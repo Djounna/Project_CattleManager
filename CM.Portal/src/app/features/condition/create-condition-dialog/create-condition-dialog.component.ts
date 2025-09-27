@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../../shared/base-component.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { FormGroup, Validators } from '@angular/forms';
 import { CowDto, ConditionDto } from '../../../api/models';
 import { Conditions } from '../../../state/cattle/cattle.actions';
-import { SelectOption } from '../../../models/interfaces/common';
 import { ConditionType } from '../../../models/enums/condition-type';
 import { EventStatus } from '../../../models/enums/event-status';
+import { DialogComponent } from '../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-condition-dialog',
@@ -15,7 +13,7 @@ import { EventStatus } from '../../../models/enums/event-status';
   templateUrl: './create-condition-dialog.component.html',
   styleUrl: './create-condition-dialog.component.scss'
 })
-export class CreateConditionDialogComponent extends BaseComponent{
+export class CreateConditionDialogComponent extends DialogComponent{
 
   public Cow!: CowDto;
   public CreateConditionForm!: FormGroup;
@@ -29,10 +27,7 @@ export class CreateConditionDialogComponent extends BaseComponent{
   //   }
   // });
 
-  constructor( private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
-  ){
+  constructor(){
     super();
   }
 
@@ -42,7 +37,7 @@ export class CreateConditionDialogComponent extends BaseComponent{
     this.Cow = this.dialogConfig.data;
     this.CreateConditionForm = this.formBuilder.group({
       identifier: [this.Cow.identifier],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       type: ['', Validators.required],
       status: ['', Validators.required],
       date:[new Date(),Validators.required],

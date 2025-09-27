@@ -7,14 +7,29 @@
                     <div class="form-entry-col">
                         <label for="firstname">Prénom</label>
                         <input pInputText id="firstname" formControlName="firstname" fluid />
+                        @if (this.isInvalid(createUserForm, 'firstname')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(createUserForm, 'firstname')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="lastname">Nom</label>
                         <input pInputText id="lastname" formControlName="lastname" fluid />
+                        @if (this.isInvalid(createUserForm, 'lastname')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(createUserForm, 'lastname')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="username">Pseudo</label>
                         <input pInputText id="username" formControlName="username" fluid />
+                        @if (this.isInvalid(createUserForm, 'username')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(createUserForm, 'username')}}
+                            </p-message>
+                        }
                     </div>
                 </div>
 
@@ -22,10 +37,20 @@
                     <div class="form-entry-col">
                         <label for="email">Email</label>
                         <input pInputText id="email" formControlName="email" fluid />
+                        @if (this.isInvalid(createUserForm, 'email')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(createUserForm, 'email')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="password">Mot de passe</label>
                         <input pInputText id="password" formControlName="password" fluid />
+                        @if (this.isInvalid(createUserForm, 'password')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(createUserForm, 'password')}}
+                            </p-message>
+                        }
                     </div>
                     <!-- <div class="form-entry-col">
                         <label for="role">Role</label>

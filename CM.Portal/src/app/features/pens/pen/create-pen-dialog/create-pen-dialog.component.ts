@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../../../shared/base-component.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormGroup, Validators } from '@angular/forms';
 import { PenDto } from '../../../../api/models';
 import { Pens } from '../../../../state/infrastructure/infrastructure.action';
+import { DialogComponent } from '../../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-pen-dialog',
@@ -12,12 +11,9 @@ import { Pens } from '../../../../state/infrastructure/infrastructure.action';
   templateUrl: './create-pen-dialog.component.html',
   styleUrl: './create-pen-dialog.component.scss'
 })
-export class CreatePenDialogComponent extends BaseComponent{
+export class CreatePenDialogComponent extends DialogComponent{
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-  ){
+  constructor(){
     super();
   }
 
@@ -31,7 +27,7 @@ export class CreatePenDialogComponent extends BaseComponent{
 
   private initForm(): void{
     this.NewPenForm = this.formBuilder.group({
-      name:['', Validators.required],
+      name:['', [Validators.required, Validators.maxLength(25)]],
       size:[0, Validators.required],
       coordinates:['']
     })

@@ -6,6 +6,11 @@
                     <div class="form-entry-col">
                         <label for="name">Nom</label>
                         <input pInputText id="name" formControlName="name" />
+                        @if (this.isInvalid(NewPenForm, 'name')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(NewPenForm, 'name')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="size">Capacité</label>

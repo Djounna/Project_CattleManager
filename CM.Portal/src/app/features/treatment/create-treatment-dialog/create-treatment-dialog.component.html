@@ -6,6 +6,11 @@
                 <div class="flex flex-column gap-2">
                     <label for="name">Nom</label>
                     <input pInputText id="name" formControlName="name" />
+                    @if (this.isInvalid(CreateTreatmentForm, 'name')){
+                        <p-message severity="error" size="small" variant="simple">
+                            {{getErrorMessage(CreateTreatmentForm, 'name')}}
+                        </p-message>
+                    }
                 </div>
                 <div class="flex flex-column gap-2">
                     <label for="name">Type</label>

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Roles } from '../../../../models/enums/roles';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BaseComponent } from '../../../../shared/base-component.component';
+import { FormGroup, Validators } from '@angular/forms';
 import { SelectOption } from '../../../../models/interfaces/common';
 import { UserInput } from '../../../../api/models';
+import { DialogComponent } from '../../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -12,11 +11,9 @@ import { UserInput } from '../../../../api/models';
   templateUrl: './create-user-dialog.component.html',
   styleUrl: './create-user-dialog.component.scss'
 })
-export class CreateUserDialogComponent extends BaseComponent {
+export class CreateUserDialogComponent extends DialogComponent {
 
-  constructor( private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-  ){
+  constructor(){
     super();
   }
 
@@ -36,11 +33,11 @@ export class CreateUserDialogComponent extends BaseComponent {
 
   private initForm(): void{
     this.createUserForm = this.formBuilder.group({
-      email:['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(25)])],
-      firstname:['', Validators.required],
-      lastname:['', Validators.required],
-      username:['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(25)])],
-      password: ['', Validators.required]
+      email:['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
+      firstname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+      lastname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+      username:['', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]]
     });
   }
 

@@ -7,10 +7,20 @@
                     <div class="form-entry-col">
                         <label for="name">Nom</label>
                         <input pInputText id="name" formControlName="name" />
+                        @if (this.isInvalid(GroupForm, 'name')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(GroupForm, 'name')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="description">Description</label>
                         <textarea rows="5" cols="25" pInputTextarea formControlName="description"></textarea>
+                        @if (this.isInvalid(GroupForm, 'description')){
+                            <p-message severity="error" size="small" variant="simple">
+                                {{getErrorMessage(GroupForm, 'description')}}
+                            </p-message>
+                        }
                     </div>
                     <div class="form-entry-col">
                         <label for="image">Image</label>

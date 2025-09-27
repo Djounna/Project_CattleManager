@@ -57,6 +57,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { TooltipModule } from 'primeng/tooltip';
+import { MessageModule } from 'primeng/message';
 // Material
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -271,6 +272,7 @@ import { RacePieChartComponent } from './features/graphs/cattle/race-pie-chart/r
         BadgeModule,
         OverlayBadgeModule,
         TooltipModule,
+        MessageModule,
         // Routing configuration
         AppRoutingModule,
         //State Mgmt

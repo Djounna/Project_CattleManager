@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../../../shared/base-component.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { Alerts } from '../../../state/alert/alert.action';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AlertDto, CowDto, PenDto } from '../../../api/models';
 import { InfrastructureState } from '../../../state/infrastructure/infrastructure.store';
 import { SelectOption } from '../../../models/interfaces/common';
 import { AlertLevel } from '../../../models/enums/alert-level';
+import { DialogComponent } from '../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-create-alert-dialog',
@@ -15,7 +14,7 @@ import { AlertLevel } from '../../../models/enums/alert-level';
   templateUrl: './create-alert-dialog.component.html',
   styleUrl: './create-alert-dialog.component.scss'
 })
-export class CreateAlertDialogComponent extends BaseComponent{
+export class CreateAlertDialogComponent extends DialogComponent{
   AlertLevels = AlertLevel;
   public Cow: CowDto | undefined;
   public Pen: PenDto | undefined;
@@ -30,11 +29,7 @@ export class CreateAlertDialogComponent extends BaseComponent{
     }
   });
   
-  constructor( 
-    private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
-  ){
+  constructor(){
     super();
   }
   
@@ -55,8 +50,8 @@ export class CreateAlertDialogComponent extends BaseComponent{
       if (this.Cow !== undefined)
       {
         this.createAlertForm = this.formBuilder.group({
-          title:['', Validators.required],
-          description:['', Validators.required],
+          title:['', [Validators.required, Validators.maxLength(50)]],
+          description:['', [Validators.required, Validators.maxLength(200)]],
           level:['', Validators.required],
           cowId:[this.Cow.id],
         });
