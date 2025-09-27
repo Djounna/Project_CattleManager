@@ -59,6 +59,13 @@ public class GetCattleStatisticsQueryhandler: IRequestHandler<GetCattleStatistic
         }).OrderByDescending(a => int.Parse(a.AgeGroupName)).ToList();
         result.AgeGenderGroupStatisticsMale = AgeGroupStatisticListMale;
 
+        List<RaceGroupStatisticDto> RaceGroupStatisticList = cows.GroupBy(c => c.Race, c => c, (race, cow) => new RaceGroupStatisticDto
+        {
+            RaceGroupName = race,
+            Number = cow.Count()
+        }).OrderByDescending(r => r.Number).ToList();
+        result.RaceGroupStatistics = RaceGroupStatisticList;
+
         return result;
     }
 } 

@@ -37,6 +37,7 @@ export { PenInfo } from './models/pen-info';
 export { PenMoveDto } from './models/pen-move-dto';
 export { PenStatisticDto } from './models/pen-statistic-dto';
 export { ProblemDetails } from './models/problem-details';
+export { RaceGroupStatisticDto } from './models/race-group-statistic-dto';
 export { RoleDto } from './models/role-dto';
 export { StockDto } from './models/stock-dto';
 export { TreatmentDto } from './models/treatment-dto';

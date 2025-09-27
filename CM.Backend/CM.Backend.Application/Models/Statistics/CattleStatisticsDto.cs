@@ -6,6 +6,7 @@ public class CattleStatisticsDto
     public List<AgeGroupStatisticDto> AgeGroupStatistics { get; set; } = new List<AgeGroupStatisticDto>();
     public List<AgeGenderGroupStatisticDto> AgeGenderGroupStatisticsFemale { get; set; } = new List<AgeGenderGroupStatisticDto>();
     public List<AgeGenderGroupStatisticDto> AgeGenderGroupStatisticsMale { get; set; } = new List<AgeGenderGroupStatisticDto>();
+    public List<RaceGroupStatisticDto> RaceGroupStatistics { get; set; } = new List<RaceGroupStatisticDto>();
 }
 
 public class GroupStatisticDto
@@ -34,3 +35,10 @@ public class AgeGenderGroupStatisticDto
     public string AgeGroupName { get; set; }
     public int Number { get; set; }
 }
+
+public class RaceGroupStatisticDto
+{
+    public string RaceGroupName { get; set; }
+    public int Number { get; set; }
+}
+
