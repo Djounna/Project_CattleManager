@@ -82,15 +82,35 @@ public class JobController : ControllerBase
     /// Get All Jobs Details By User By Date
     /// </summary>
     /// <returns></returns>
-    [HttpGet, Route("details/{userAuth}/{date}")]
+    [HttpGet, Route("details/{date}")]
     //[Authorize("read:jobs")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    //public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)
     public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string date)
     {
         var userAuthId = _userContext.GetAuth0Id();
         var roles = _userContext.GetCurrentUserRoles();
+
+        return Ok(await _mediator.Send(new GetJobsDetailsByUserByDateQuery(userAuthId, date)));
+    }
+
+    /// <summary>
+    /// Get All Jobs Details By User By Date
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("details/{userAuth}/{date}")]
+    //[Authorize("read:jobs")]
+    [ProducesDefaultResponseType]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<JobDetailsDto>>> GetListDetailsByUserByDate(string userAuth, string date)
+    {
+        var userAuthId = _userContext.GetAuth0Id();
+        var roles = _userContext.GetCurrentUserRoles();
+
+        if(userAuthId == null)
+        {
+            userAuthId = userAuth;
+        }
 
         return Ok(await _mediator.Send(new GetJobsDetailsByUserByDateQuery(userAuthId, date)));
     }
