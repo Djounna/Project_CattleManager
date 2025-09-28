@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { JobDetailsDto, JobDto, UserDto, WorkerJobDto } from '../../../../api/models';
+import { FormGroup, Validators } from '@angular/forms';
+import { JobDetailsDto, JobDto } from '../../../../api/models';
 import { Jobs } from '../../../../state/work/work.actions';
-import { BaseComponent } from '../../../../shared/base-component.component';
 import { JobStatus } from '../../../../models/enums/workEnums';
+import { DialogComponent } from '../../../../shared/dialog-component.component';
 
 @Component({
   selector: 'app-update-job-dialog',
@@ -13,14 +12,11 @@ import { JobStatus } from '../../../../models/enums/workEnums';
   templateUrl: './update-job-dialog.component.html',
   styleUrl: './update-job-dialog.component.scss'
 })
-export class UpdateJobDialogComponent extends BaseComponent {
+export class UpdateJobDialogComponent extends DialogComponent {
 
   public status : string[] = Object.values(JobStatus);
 
   constructor(
-    private formBuilder: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    public dialogConfig: DynamicDialogConfig,
   ){
     super();
   }
