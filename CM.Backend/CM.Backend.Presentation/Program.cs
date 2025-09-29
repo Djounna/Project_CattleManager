@@ -32,6 +32,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
       builder => builder
       .WithOrigins("http://localhost:4200")
+      .WithOrigins("https://unreconsidered-gina-unantagonisable.ngrok-free.app")
       .AllowAnyHeader()
       .AllowAnyMethod()
       .AllowCredentials());
