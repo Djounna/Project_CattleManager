@@ -1,6 +1,7 @@
 import 'package:CM_api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../Shared/CMTheme.dart';
 import '../../Shared/CustomSearchBar.dart';
 import '../../Shared/DrawerContent.dart';
 import '../../Shared/TopAppBar.dart';
@@ -38,7 +39,7 @@ class _JobsPageState extends State<JobsPage> {
     final appContext = Provider.of<AppContext>(context);
     ScrollController _scrollController = ScrollController();
 
-    void onSelect(JobDto job) async {
+    void updateJob(JobDetailsDto job) async {
       appContext.setSelectedJob(job);
       if (appContext.getSelectedJob() != null) {
         showDialog(
@@ -46,10 +47,37 @@ class _JobsPageState extends State<JobsPage> {
             context: context,
             builder: (_) {
               return UpdateJobDialog(
-                  job: appContext.getSelectedCow());
+                  job: appContext.getSelectedJob());
             }
         );
       }
+    }
+
+    Future<void> GetWorkerJobs() async{
+      try{
+        DateTime now = DateTime.now();
+        String dateOnly = now.toIso8601String().split('T').first;
+        List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet(appContext.getCredentials()!.user.sub, dateOnly);
+        //List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet2(dateOnly);
+        appContext.setWorkerJobs(workerJobs);
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+            )
+        );
+      }
+    }
+
+    Future<void> _refreshJobs() async {
+      await GetWorkerJobs(); // Your existing method
+
+      setState(() {
+        jobsList = appContext.getWorkerJobs();
+        filteredJobsList = [...jobsList!];
+      });
     }
 
     // Beginning of logic
@@ -89,25 +117,34 @@ class _JobsPageState extends State<JobsPage> {
                     Padding(
                         padding: const EdgeInsets.all(5.0),
                         child :
-                        ValueListenableBuilder(
-                            valueListenable: search,
-                            builder: (_, search, __){
-                              return filteredJobsList!.isEmpty ? const Text('Aucun résultat') : Scrollbar(
-                                controller: _scrollController,
-                                thumbVisibility : true,
-                                child: ListView.builder(
+                        RefreshIndicator(
+                          onRefresh: _refreshJobs,
+                          color: CMTheme.primaryGreen,
+                          child: ValueListenableBuilder(
+                              valueListenable: search,
+                              builder: (_, search, __){
+                                return filteredJobsList!.isEmpty ? const Text('Aucun résultat') : Scrollbar(
                                   controller: _scrollController,
-                                  shrinkWrap: true,
-                                  itemCount: filteredJobsList!.length,
-                                  prototypeItem: JobListItem(
-                                      job: filteredJobsList!.first
+                                  thumbVisibility : true,
+                                  child: ListView.builder(
+                                    controller: _scrollController,
+                                    shrinkWrap: true,
+                                    itemCount: filteredJobsList!.length,
+                                    prototypeItem: JobListItem(
+                                        job: filteredJobsList!.first,
+                                        onSelect: updateJob,
+
+                                    ),
+                                    itemBuilder: (context, index){
+                                      return JobListItem(
+                                          job: filteredJobsList![index],
+                                          onSelect: updateJob,
+                                      );
+                                    },
                                   ),
-                                  itemBuilder: (context, index){
-                                    return JobListItem(
-                                        job: filteredJobsList![index]); },
-                                ),
-                              );
-                            }
+                                );
+                              }
+                          ),
                         )
                     )
                 )

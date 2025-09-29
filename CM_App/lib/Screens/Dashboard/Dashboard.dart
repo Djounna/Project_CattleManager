@@ -1,9 +1,12 @@
+import 'package:CM_api/api.dart';
 import 'package:cm_app/Screens/Cows/CowsPage.dart';
 import 'package:cm_app/Screens/Jobs/JobsPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../Shared/CMTheme.dart';
 import '../../Shared/DrawerContent.dart';
 import '../../Shared/TopAppBar.dart';
+import '../../app_context.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -13,11 +16,58 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  List<CowDto>? _cows;
+  List<Map<String, String>>? _cowLabelValues;
+  List<PenDto>? _pens;
+  List<Map<String, String>>? _penLabelValues;
+  List<GroupDto>? _groups;
+  List<JobDetailsDto>? _workerJobs;
+  List<Map<String, String>>? _jobLabelValues;
+
   @override
   Widget build(BuildContext context) {
+    final appContext = Provider.of<AppContext>(context);
+
+    if (appContext.getCows() != null && appContext.getPens() != null && appContext.getGroups() != null) {
+      _cows = appContext.getCows();
+      _pens = appContext.getPens();
+      _groups = appContext.getGroups();
+      _cowLabelValues = [
+        {'label': 'Nombre', 'value': _cows?.length.toString() ?? ''},
+        {'label': 'Enclos', 'value': _pens?.length.toString() ?? ''},
+        {'label': 'Groupes', 'value': _groups?.length.toString() ?? ''},
+      ];
+    }
+
+    if (appContext.getWorkerJobs() != null) {
+      _workerJobs = appContext.getWorkerJobs();
+      _jobLabelValues = [
+        {'label': 'A réaliser : ',
+          'value': _workerJobs != null ?
+          _workerJobs!.where((job) => job.status == 'A realiser').length.toString()
+              : '0'},
+        {'label': 'Terminées : ',
+          'value': _workerJobs != null ?
+          _workerJobs!.where((job) => job.status == 'Terminee').length.toString()
+              : '0'},
+        {'label': 'Tâche en cours :',
+          'value': _workerJobs != null && _workerJobs!.isNotEmpty  && _workerJobs!.where((job) => job.status == 'En cours').isNotEmpty ?
+          _workerJobs!.where((job) => job.status == 'En cours').first.title ?? ''
+              : 'Aucune'},
+      ];
+    }
+
+    if (appContext.getPens() != null) {
+      _pens = appContext.getPens();
+      _penLabelValues = _pens?.map((pen) => {
+        'label': '${pen.name ?? "Enclos"} : ',
+        'value': '${pen.size ?? 0} vaches',
+      }).toList() ?? [];
+    }
+
     return Scaffold(
       backgroundColor: CMTheme.backgroundColor,
-      appBar: TopAppBar(title:'Dashboard'),
+      appBar: TopAppBar(title: 'Dashboard'),
       drawer: const DrawerContent(),
 
       body: Padding(
@@ -29,12 +79,8 @@ class _DashboardPageState extends State<DashboardPage> {
               title: 'Bétail',
               icon: Icons.list,
               color: CMTheme.primaryGreen,
-              labelValues: [
-                {'label': 'Total Revenue', 'value': '€12,450'},
-                {'label': 'This Month', 'value': '€3,250'},
-                {'label': 'Growth', 'value': '+15.2%'},
-              ],
-              onTap: () => _navigateToPage(context, 'Bétail'),
+              labelValues: _cowLabelValues ?? []
+              //onTap: () => _navigateToPage(context, 'Bétail'),
             ),
             const SizedBox(height: 16),
             _buildDashboardCard(
@@ -42,12 +88,8 @@ class _DashboardPageState extends State<DashboardPage> {
               title: 'Tâches',
               icon: Icons.list,
               color: CMTheme.primaryGreen,
-              labelValues: [
-                {'label': 'Pending Orders', 'value': '234'},
-                {'label': 'Completed Today', 'value': '45'},
-                {'label': 'Processing', 'value': '12'},
-              ],
-              onTap: () => _navigateToPage(context, 'Orders'),
+              labelValues: _jobLabelValues ?? []
+              //onTap: () => _navigateToPage(context, 'Orders'),
             ),
             const SizedBox(height: 16),
             _buildDashboardCard(
@@ -55,18 +97,15 @@ class _DashboardPageState extends State<DashboardPage> {
               title: 'Enclos',
               icon: Icons.cabin,
               color: CMTheme.primaryGreen,
-              labelValues: [
-                {'label': 'Active Users', 'value': '1,248'},
-                {'label': 'New This Week', 'value': '86'},
-                {'label': 'Retention Rate', 'value': '89.4%'},
-              ],
-              onTap: () => _navigateToPage(context, 'Customers'),
+              labelValues: _penLabelValues ?? []
+              //onTap: () => _navigateToPage(context, 'Customers'),
             ),
           ],
         ),
       ),
     );
   }
+}
 
   Widget _buildDashboardCard(
       BuildContext context, {
@@ -74,10 +113,10 @@ class _DashboardPageState extends State<DashboardPage> {
         required IconData icon,
         required Color color,
         required List<Map<String, String>> labelValues,
-        required VoidCallback onTap,
+        //required VoidCallback onTap,
       }) {
     return GestureDetector(
-      onTap: onTap,
+      //onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: CMTheme.lightGreen.withOpacity(0.1),
@@ -162,166 +201,16 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
-/*
-class _DashboardPageState extends State<DashboardPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
 
-      appBar: const TopAppBar(),
-      drawer: const DrawerContent(),
-
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1.1,
-          children: [
-            _buildDashboardCard(
-              context,
-              title: 'Betail',
-              subtitle: '€12,450',
-              description: 'This month',
-              icon: Icons.task,
-              color: Colors.green,
-              onTap: () => _navigateToPage(context, 'Bétail'),
-            ),
-            _buildDashboardCard(
-              context,
-              title: 'Enclos',
-              subtitle: '234',
-              description: 'Pending orders',
-              icon: Icons.task,
-              color: Colors.orange,
-              onTap: () => _navigateToPage(context, 'Enclos'),
-            ),
-            _buildDashboardCard(
-              context,
-              title: 'Tâches',
-              subtitle: '1,248',
-              description: 'Active users',
-              icon: Icons.task,
-              color: Colors.blue,
-              onTap: () => _navigateToPage(context, 'Tâches'),
-            ),
-            _buildDashboardCard(
-              context,
-              title: 'Traite',
-              subtitle: '156',
-              description: 'In stock',
-              icon: Icons.task,
-              color: Colors.purple,
-              onTap: () => _navigateToPage(context, 'Traite'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDashboardCard2(
-      BuildContext context, {
-        required String title,
-        required String subtitle,
-        required String description,
-        required IconData icon,
-        required Color color,
-        required VoidCallback onTap,
-      }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 6,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                spacing: 20,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(
-                      icon,
-                      color: color,
-                      size: 24,
-                    ),
-                  ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[500],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
- */
-
+  /*
   void _navigateToPage(BuildContext context, String pageName) {
-    // Replace this with your actual navigation logic
-    // Example: Navigator.pushNamed(context, '/sales');
-
-    ScaffoldMessenger.of(context).showSnackBar(
+     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Navigation vers la page $pageName'),
         duration: const Duration(seconds: 1),
         backgroundColor: Colors.blue[700],
       ),
     );
-
     switch (pageName.toLowerCase()) {
       case 'Bétail':
         Navigator.push(context, MaterialPageRoute(builder: (context) => CowsPage()));
@@ -338,3 +227,4 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 }
+*/

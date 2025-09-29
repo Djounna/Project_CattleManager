@@ -1,11 +1,17 @@
 import 'package:CM_api/api.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Shared/CMTheme.dart';
+
 class JobListItem extends StatelessWidget {
-  const JobListItem({super.key, required this.job});
+  const JobListItem({
+    super.key,
+    required this.job,
+    required this.onSelect
+  });
 
   final JobDetailsDto job;
-  //final void Function(JobDto) onSelect;
+  final void Function(JobDetailsDto) onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class JobListItem extends StatelessWidget {
       child: Container(
         height: 80,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: CMTheme.surfaceColor,
           border:Border.all (
             color: Colors.blueGrey,
 
@@ -25,7 +31,7 @@ class JobListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: CMTheme.borderColor.withOpacity(0.5),
               offset: Offset(4, 4),
               blurRadius: 8,
             ),
@@ -35,8 +41,23 @@ class JobListItem extends StatelessWidget {
             leading: Icon(Icons.work),
             title: Text(job.title!),
             subtitle: Text(job.description!),
+            trailing: _getStatusIcon(job.status),
+            onTap: () =>{onSelect(job)},
         ),
       ),
     );
   }
 }
+
+  Widget _getStatusIcon(String? status) {
+    switch(status) {
+      case 'Terminee':
+        return Icon(Icons.done, color: CMTheme.lightGreen);
+      case 'En cours':
+        return Icon(Icons.pending, color: Colors.orange);
+      case 'A realiser':
+        return Icon(Icons.circle_outlined, color: Colors.grey);
+      default:
+        return Icon(Icons.help_outline, color: Colors.grey);
+    }
+  }
