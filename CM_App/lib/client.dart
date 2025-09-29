@@ -11,6 +11,10 @@ class Client{
   JobApi? get jobApi => _jobApi;
   AlertApi? _alertApi;
   AlertApi? get alertApi => _alertApi;
+  PenApi? _penApi;
+  PenApi? get penApi => _penApi;
+  GroupApi? _groupApi;
+  GroupApi? get groupApi => _groupApi;
 
   Client(String path){
     _apiClient = ApiClient(basePath: path);
@@ -18,6 +22,8 @@ class Client{
     _jobApi = JobApi(_apiClient);
     _milkingApi = MilkingApi(_apiClient);
     _alertApi = AlertApi(_apiClient);
+    _penApi = PenApi(_apiClient);
+    _groupApi = GroupApi(_apiClient);
   }
 }
 

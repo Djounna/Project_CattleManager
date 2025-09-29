@@ -1,9 +1,9 @@
 import 'package:CM_api/api.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:cm_app/Screens/Cows/CowsPage.dart';
 import 'package:cm_app/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../Dashboard/Dashboard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
         DateTime now = DateTime.now();
         String dateOnly = now.toIso8601String().split('T').first;
         List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet(_credentials!.user.sub, dateOnly);
+        //List<JobDetailsDto>? workerJobs = await appContext.clientApi.jobApi!.apiJobDetailsUserAuthDateGet2(dateOnly);
         appContext.setWorkerJobs(workerJobs);
       }
       catch(e){
@@ -91,6 +92,21 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
+    Future<void> GetGroups() async{
+      try{
+        List<GroupDto>? groups = await appContext.clientApi.groupApi!.apiGroupGet();
+        appContext.setGroups(groups);
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+            )
+        );
+      }
+    }
+
     // Check if URL is an ngrok URL
     bool _isNgrokUrl(String? url) {
       if(url == null){
@@ -117,42 +133,71 @@ class _HomePageState extends State<HomePage> {
 
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body:
       Center(
-        child: ElevatedButton(
-            onPressed:() async {
-              final credentials =
-              await auth0.webAuthentication(scheme:"cm").login(useHTTPS: true);
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Big title
+            Text(
+              'Cattle Manager',
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+                color: Colors.green[800],
+              ),
+            ),
+            SizedBox(height: 40),
 
-              _credentials = credentials;
-              appContext.setCredentials(_credentials!);
-              if (_credentials!.accessToken != null){
+            // Login button
+            ElevatedButton(
+                onPressed:() async {
+                  final credentials =
+                  await auth0.webAuthentication(scheme:"cm").login(useHTTPS: true);
 
-                appContext.clientApi.apiClient?.addDefaultHeader(
-                    'authorization',
-                    'Bearer ${_credentials!.accessToken}'
-                );
+                  _credentials = credentials;
+                  appContext.setCredentials(_credentials!);
+                  if (_credentials!.accessToken != null){
 
-                if (_isNgrokUrl(appContext.clientApi.apiClient?.basePath)){
-                  appContext.clientApi.apiClient?.addDefaultHeader(
-                      'ngrok-skip-browser-warning',
-                      'true'
-                  );
-                }
+                    appContext.clientApi.apiClient?.addDefaultHeader(
+                        'authorization',
+                        'Bearer ${_credentials!.accessToken}'
+                    );
 
-                await GetCows();
-                await GetWorkerJobs();
-                //await GetDailyMilkings();
-                await GetPens();
+                    if (_isNgrokUrl(appContext.clientApi.apiClient?.basePath)){
+                      appContext.clientApi.apiClient?.addDefaultHeader(
+                          'ngrok-skip-browser-warning',
+                          'true'
+                      );
+                    }
 
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const CowsPage()),
-                    ModalRoute.withName('cows')
-                );
-              }
-            },
-            child: const Text("Log in")
+                    await GetCows();
+                    await GetWorkerJobs();
+                    await GetPens();
+                    await GetGroups();
+                    //await GetDailyMilkings();
+
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const DashboardPage()),
+                        ModalRoute.withName('dashboard')
+                    );
+                  }
+                },
+                child: const Text("Se connecter")
+            ),
+
+            SizedBox(height: 40),
+
+            // Image - replace 'assets/cattle_image.png' with your image path
+            Image.asset(
+              'lib/assets/icons/cow-head-sharp_icon.jpg',
+              width: 200,
+              height: 200,
+              fit: BoxFit.contain,
+            ),
+          ],
         ),
       )
     );

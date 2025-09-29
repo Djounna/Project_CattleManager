@@ -14,9 +14,11 @@ class AppContext with ChangeNotifier{
   CowDetailsDto? _selectedCow;
   List<PenDto>? _pens;
   PenDetailsDto? _selectedPen;
+  List<GroupDto>? _groups;
+  GroupDetailsDto? _selectedGroup;
   List<JobDto>? _jobs;
   List<JobDetailsDto>? _workerJobs;
-  JobDto? _selectedJob;
+  JobDetailsDto? _selectedJob;
   List<MilkingDto>? _milkings;
 
 
@@ -47,19 +49,29 @@ class AppContext with ChangeNotifier{
     _selectedPen = pen;
   }
 
+  getGroups() => _groups;
+  setGroups(List<GroupDto>? groups){
+    _groups = groups;
+  }
+
+  getSelectedGroup() => _selectedGroup;
+  setSelectedGroup(GroupDetailsDto? group) {
+    _selectedGroup = group;
+  }
+
   getJobs() => _jobs;
   setJobs(List<JobDto>? jobs){
     _jobs = jobs;
   }
 
-  getSelectedJob() => _selectedJob;
-  setSelectedJob(JobDto? job) {
-    _selectedJob = job;
-  }
-
   getWorkerJobs() => _workerJobs;
   setWorkerJobs(List<JobDetailsDto>? jobs){
     _workerJobs = jobs;
+  }
+
+  getSelectedJob() => _selectedJob;
+  setSelectedJob(JobDetailsDto? job) {
+    _selectedJob = job;
   }
 
   getMilkings() => _milkings;
@@ -69,8 +81,10 @@ class AppContext with ChangeNotifier{
 
   logout(){
     setCows(null);
-    setMilkings(null);
     setJobs(null);
     setWorkerJobs(null);
+    setPens(null);
+    setGroups(null);
+    setMilkings(null);
   }
 }
