@@ -28,7 +28,7 @@ public class GroupController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [Authorize("read:cows")]
+    //[Authorize("read:cows")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<GroupDto>>> GetList()

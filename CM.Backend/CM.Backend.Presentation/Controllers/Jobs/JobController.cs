@@ -149,7 +149,7 @@ public class JobController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut]
-    [Authorize("read:jobs")]
+    //[Authorize("read:jobs")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<JobDto>> Update([FromBody]JobDto dto)

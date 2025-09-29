@@ -28,7 +28,7 @@ public class PenController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [Authorize("read:infrastructures")]
+    //[Authorize("read:infrastructures")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<PenDto>>> GetList()
