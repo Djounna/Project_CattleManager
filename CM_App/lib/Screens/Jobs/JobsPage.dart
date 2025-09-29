@@ -43,7 +43,7 @@ class _JobsPageState extends State<JobsPage> {
       appContext.setSelectedJob(job);
       if (appContext.getSelectedJob() != null) {
         showDialog(
-            barrierDismissible: false,
+            barrierDismissible: true,
             context: context,
             builder: (_) {
               return UpdateJobDialog(
