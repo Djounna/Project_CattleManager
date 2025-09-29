@@ -70,6 +70,7 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
                 {
                     Name = p.Name,
                     Total = p.Cows.Count,
+                    Size = p.Size 
                 };
             })
             .ToList(),
@@ -78,7 +79,7 @@ public class GetDashboardInfoQueryHandler : IRequestHandler<GetDashboardInfoQuer
             {
                 TotalDone = jobs.Where(t => t.Status == "Terminee").Count(),
                 TotalOngoing = jobs.Where(t => t.Status == "En cours").Count(),
-                TotalToDo = jobs.Where(t => t.Status == "A Realiser").Count(),
+                TotalToDo = jobs.Where(t => t.Status == "A realiser").Count(),
                 TaskStatusList = jobs.ToDictionary(t => t.Title, t => t.Status)
             },
 
