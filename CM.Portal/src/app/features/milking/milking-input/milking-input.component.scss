@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items:center; 
-    gap:1rem;
+    gap:0.9rem;
     padding:0.5rem;
     background-color: white;
     border-radius: 5px;   
@@ -22,6 +22,7 @@
             }
         .identifier{
             font-style: italic;
+            font-size: small;
             }
         }
     }
