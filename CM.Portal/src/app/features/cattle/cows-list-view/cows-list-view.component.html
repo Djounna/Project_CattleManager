@@ -3,6 +3,13 @@
         [value]="filteredCows"
         styleClass="p-datatable-striped"
         [globalFilterFields]="['identifier','name', 'status']"
+        [paginator]="true"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rows]="20"
+        [rowsPerPageOptions]="[10, 20, 50]"
+        [scrollable]="true" 
+        scrollHeight="700px"
         >
 
         <!-- [tableStyle]="{ 'min-width': '50rem'}" -->
