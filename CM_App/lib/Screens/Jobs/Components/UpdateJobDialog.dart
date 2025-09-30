@@ -79,7 +79,7 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
         title: Text('Mettre à jour la tâche'),
         children: [
           SizedBox(
-              height: sizeY/3,
+              height: sizeY/4,
               width: sizeX/2,
               child: Column(
                 mainAxisSize: MainAxisSize.min,

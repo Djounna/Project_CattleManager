@@ -106,10 +106,19 @@ class _JobsPageState extends State<JobsPage> {
             Row(
               children: [
                 Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: CustomSearchBar(onSearch: _onSearch),
-                    )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CustomSearchBar(onSearch: _onSearch),
+                  )
+                ),
+                Container(
+                  padding: const EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.only(right: 20.0),
+                  child: ElevatedButton(
+                      onPressed: () => _refreshJobs(),
+                      child: const Icon(Icons.refresh)
+                  )
+                )
               ],
             ),
             Expanded(
