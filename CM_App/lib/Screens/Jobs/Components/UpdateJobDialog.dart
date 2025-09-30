@@ -46,7 +46,7 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
           id: widget.job.id,
           title : widget.job.title,
           description : widget.job.description,
-          date : widget.job.date,
+          date : widget.job.date!.add(Duration(hours: 3)),
           infos : widget.job.infos,
           //penId : widget.job.pen!.id,
           //cowId : widget.job.cow!.id,
