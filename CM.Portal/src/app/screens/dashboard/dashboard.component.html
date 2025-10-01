@@ -114,7 +114,7 @@
             <ng-template #start>
                 <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
                     <span>Date:</span>
-                    <p-datepicker [(ngModel)]="Date" (onSelect)="SelectDate()"></p-datepicker> 
+                    <p-datepicker [(ngModel)]="Date" dateFormat="dd.mm.yy" (onSelect)="SelectDate()"></p-datepicker> 
                     <p-button label="Aujourd'hui" severity="secondary" [outlined]="true" styleClass="w-full" (click)="SetDateAsToday()" />
                 </div>
             </ng-template>

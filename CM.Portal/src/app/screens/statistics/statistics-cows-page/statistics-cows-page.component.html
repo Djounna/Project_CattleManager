@@ -23,8 +23,8 @@
             <ng-template #start>
                 <div style="display:flex; flex-direction: row; gap:1rem; align-items:center">
                     <span>Date:</span>
-                    <p-datepicker [(ngModel)]="StartDate" ></p-datepicker> 
-                    <p-datepicker [(ngModel)]="EndDate" ></p-datepicker> 
+                    <p-datepicker [(ngModel)]="StartDate" dateFormat="dd.mm.yy"></p-datepicker> 
+                    <p-datepicker [(ngModel)]="EndDate" dateFormat="dd.mm.yy"></p-datepicker> 
                     <p-button label="Sélectionner" severity="primary" [outlined]="true" styleClass="w-full" (click)="SelectDate()" />
                 </div>
             </ng-template>
