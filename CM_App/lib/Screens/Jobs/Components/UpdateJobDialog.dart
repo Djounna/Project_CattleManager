@@ -43,8 +43,8 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
           description : widget.job.description,
           date : widget.job.date!.add(Duration(hours: 3)),
           infos : widget.job.infos,
-          //penId : widget.job.pen!.id,
-          //cowId : widget.job.cow!.id,
+          penId : widget.job.pen != null ? widget.job.pen!.id : null,
+          cowId : widget.job.cow != null ? widget.job.cow!.id : null,
           status: _level
         );
         widget.onClose(jobToUpdate);

@@ -39,8 +39,8 @@ class JobListItem extends StatelessWidget {
         ),
         child: ListTile(
             leading: Icon(Icons.work),
-            title: Text(job.title!),
-            subtitle: Text(job.description!),
+            title: Text(job.title! + ' : ' + job.description!),
+            subtitle: job.pen != null ? Text(job.pen!.name!) : job.cow != null ? Text(job.cow!.name!) : Text(''),
             trailing: _getStatusIcon(job.status),
             onTap: () =>{onSelect(job)},
         ),
