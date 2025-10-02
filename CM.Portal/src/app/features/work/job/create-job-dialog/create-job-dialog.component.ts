@@ -29,7 +29,7 @@ export class CreateJobDialogComponent extends DialogComponent{
 
   jobForm = this.formBuilder.group({
     title:['', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
-    description:['', [Validators.required, Validators.max(100)]],
+    description:['', [Validators.required, Validators.maxLength(100)]],
     date:[new Date(), Validators.required],
     pen:new FormControl<PenDto | null>(null),
     cow:new FormControl<CowDto | null>(null)
