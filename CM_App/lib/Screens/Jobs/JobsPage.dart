@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Shared/CMTheme.dart';
 import '../../Shared/CustomSearchBar.dart';
+import '../../Shared/Dialog/Loading_Dialog.dart';
 import '../../Shared/DrawerContent.dart';
 import '../../Shared/TopAppBar.dart';
 import '../../app_context.dart';
@@ -39,20 +40,6 @@ class _JobsPageState extends State<JobsPage> {
     final appContext = Provider.of<AppContext>(context);
     ScrollController _scrollController = ScrollController();
 
-    void updateJob(JobDetailsDto job) async {
-      appContext.setSelectedJob(job);
-      if (appContext.getSelectedJob() != null) {
-        showDialog(
-            barrierDismissible: true,
-            context: context,
-            builder: (_) {
-              return UpdateJobDialog(
-                  job: appContext.getSelectedJob());
-            }
-        );
-      }
-    }
-
     Future<void> GetWorkerJobs() async{
       try{
         DateTime now = DateTime.now();
@@ -79,6 +66,56 @@ class _JobsPageState extends State<JobsPage> {
         filteredJobsList = [...jobsList!];
       });
     }
+
+    void _updateJob(JobDto jobToUpdate) async{
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (_) {
+            return const LoadingDialog(text: 'Chargement');
+          });
+
+      try {
+
+        await appContext.clientApi.jobApi!.apiJobPut(jobDto: jobToUpdate);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text("La tâche a été modifiée avec succès"),
+                duration: const Duration(seconds :3)
+            )
+        );
+
+        Navigator.of(context).pop();
+        setState(() {
+         _refreshJobs();
+        });
+      }
+      catch(e){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(e.toString()),
+                duration: const Duration(seconds :3)
+            )
+        );
+      }
+    }
+
+
+    void onUpdateJob(JobDetailsDto job) async {
+      appContext.setSelectedJob(job);
+      if (appContext.getSelectedJob() != null) {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (_) {
+              return UpdateJobDialog(
+                  onClose: _updateJob,
+                  job: appContext.getSelectedJob());
+            }
+        );
+      }
+    }
+
 
     // Beginning of logic
     if(appContext.getWorkerJobs()!= null){
@@ -141,13 +178,13 @@ class _JobsPageState extends State<JobsPage> {
                                     itemCount: filteredJobsList!.length,
                                     prototypeItem: JobListItem(
                                         job: filteredJobsList!.first,
-                                        onSelect: updateJob,
+                                        onSelect: onUpdateJob,
 
                                     ),
                                     itemBuilder: (context, index){
                                       return JobListItem(
                                           job: filteredJobsList![index],
-                                          onSelect: updateJob,
+                                          onSelect: onUpdateJob,
                                       );
                                     },
                                   ),

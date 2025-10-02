@@ -8,9 +8,12 @@ import '../../../app_context.dart';
 class UpdateJobDialog extends StatefulWidget {
   const UpdateJobDialog({
     super.key,
-    required this.job});
+    required this.job,
+    required this.onClose
+  });
 
   final JobDetailsDto job;
+  final void Function(JobDto jobDto) onClose;
 
   @override
   State<UpdateJobDialog> createState() => _UpdateJobDialogState();
@@ -33,15 +36,7 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
     final sizeY = MediaQuery.of(context).size.height;
 
     void updateJob() async{
-      showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (_) {
-            return const LoadingDialog(text: 'Chargement');
-          });
-
       try {
-
         JobDto jobToUpdate = JobDto(
           id: widget.job.id,
           title : widget.job.title,
@@ -52,15 +47,7 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
           //cowId : widget.job.cow!.id,
           status: _level
         );
-
-        await appContext.clientApi.jobApi!.apiJobPut(jobDto: jobToUpdate);
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text("La tâche a été modifiée avec succès"),
-                duration: const Duration(seconds :3)
-            )
-        );
-        Navigator.of(context).pop();
+        widget.onClose(jobToUpdate);
         Navigator.of(context).pop();
       }
       catch(e){
@@ -73,7 +60,6 @@ class _UpdateJobDialogState extends State<UpdateJobDialog> {
         );
       }
     }
-
 
     return SimpleDialog(
         title: Text('Mettre à jour la tâche'),
