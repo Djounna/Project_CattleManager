@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { BaseComponent } from '../../../shared/base-component.component';
 import { CattleState } from '../../../state/cattle/cattle.store';
 import { Select } from '@ngxs/store';
@@ -30,6 +30,7 @@ export class CowDetailsComponent extends BaseComponent {
   private route = inject(ActivatedRoute);
   historyService = inject(HistoryService); 
   cowId = 0;
+  private menuInitialized: boolean = false;
   @Select(CattleState.cow) Cow$!: Observable<CowDto>;
   public Cow!: CowDto
   @Select(CattleState.cowDetails) CowDetails$!: Observable<CowDetailsDto>;
@@ -74,8 +75,8 @@ export class CowDetailsComponent extends BaseComponent {
         this.Cow = c;
         this.CowDetails = cd;
         if (this.CowDetails != null) {
-
-          if (this.Cow.gender === 'F') {
+          if (this.Cow.gender === 'F' && !this.menuInitialized) {
+            this.menuInitialized = true;
             this.menuItems.push(
               {
                 label:'Options',
@@ -90,11 +91,13 @@ export class CowDetailsComponent extends BaseComponent {
             );
           }
 
-          this.initMap();
+          if(this.CowDetails.pen != null)
+            this.initMap();
         }
       }),
       takeUntil(this.$OnDestroyed))
       .subscribe({ 
+        next: () => this.cdref.detectChanges(),
         error: (err) => { console.log(err); } 
       });
 
@@ -170,7 +173,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(updatedCow => {
       if(updatedCow != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
       // this.store.dispatch(new Cows.Update({ body: updatedCow })).subscribe({
       //   next: () => this.toastSuccess("L'animal a été modifié avec succès"),
       //   error: () => this.toastError("Une erreur s'est produite")
@@ -188,7 +193,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newIntervention => {
       if(newIntervention != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
       //   this.store.dispatch(new Interventions.Create({ body: newIntervention })).subscribe({
       //     next: () => this.toastSuccess("L'intervention a été créé avec succès"),
       //     error: () => this.toastError("Une erreur s'est produite")
@@ -206,7 +213,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newVaccination => {
       if(newVaccination != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
       //   this.store.dispatch(new Vaccinations.Create({ body: newVaccination })).subscribe({
       //     next: () => this.toastSuccess("La vaccination a été créé avec succès"),
       //     error: () => this.toastError("Une erreur s'est produite")
@@ -224,7 +233,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newGestation => {
       if(newGestation != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
       // this.store.dispatch(new Gestations.Create({ body: newGestation })).subscribe({
       //     next: () => this.toastSuccess("La gestation a été créé avec succès"),
       //     error: () => this.toastError("Une erreur s'est produite")
@@ -242,7 +253,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newCondition => {
       if(newCondition != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
     //   this.store.dispatch(new Conditions.Create({ body: newCondition })).subscribe({
     //     next: () => this.toastSuccess("L'affection a été ajoutée avec succès"),
     //     error: () => this.toastError("Une erreur s'est produite")
@@ -260,7 +273,9 @@ export class CowDetailsComponent extends BaseComponent {
 
     dialogRef.onClose.subscribe(newTreatment => {
       if(newTreatment != null)
-        this.store.dispatch(new CowDetails.Get(this.cowId));
+        setTimeout(() => {
+          this.store.dispatch(new CowDetails.Get(this.cowId));
+        }, 500);
       // this.store.dispatch(new Treatments.Create({ body: newTreatment })).subscribe({
       //   next: () => this.toastSuccess("Le traitement a été ajouté avec succès"),
       //   error: () => this.toastError("Une erreur s'est produite")
