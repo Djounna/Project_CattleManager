@@ -20,6 +20,8 @@ public class CreateJobCommandHandler : IRequestHandler<CreateJobCommand, JobDto>
 
     public async Task<JobDto> Handle(CreateJobCommand request, CancellationToken cancellationToken)
     {
+        request.dto.Date = request.dto.Date.AddHours(3);
+        
         var result = _jobRepository.Create(_mapper.Map<Domain.Jobs.Job>(request.dto));
         _jobRepository.Save();
 
